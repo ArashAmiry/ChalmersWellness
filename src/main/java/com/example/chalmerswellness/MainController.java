@@ -9,12 +9,11 @@ public class MainController extends AnchorPane {
     @FXML Button workoutBtn;
 
 
-    WorkoutViewController workoutViewController;
+    WorkoutViewController workoutViewController = new WorkoutViewController();
     NutritionViewController nutritionViewController = new NutritionViewController();
 
     public MainController(){
 
-        workoutViewController = new WorkoutViewController();
     }
 
     @FXML
