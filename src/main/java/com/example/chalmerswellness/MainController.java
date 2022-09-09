@@ -10,8 +10,10 @@ public class MainController extends AnchorPane {
 
 
     WorkoutViewController workoutViewController;
+    NutritionViewController nutritionViewController = new NutritionViewController();
 
     public MainController(){
+
         workoutViewController = new WorkoutViewController();
     }
 
@@ -21,6 +23,10 @@ public class MainController extends AnchorPane {
         setViewTo(workoutViewController);
     }
 
+   @FXML
+   public void navigateToNutritionView() {
+        setViewTo(nutritionViewController);
+   }
 
     private void setViewTo(AnchorPane pane){
         contentRootAnchorPane.getChildren().clear();

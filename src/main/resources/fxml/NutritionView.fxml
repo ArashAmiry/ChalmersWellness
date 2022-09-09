@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Text?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1460.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1460.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" type="AnchorPane">
    <children>
       <Circle fill="DODGERBLUE" layoutX="743.0" layoutY="278.0" radius="137.0" stroke="BLACK" strokeType="INSIDE" />
       <Text fill="WHITE" layoutX="695.0" layoutY="269.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1800 Kcal Left " textAlignment="CENTER" wrappingWidth="102.79876708984375">
@@ -69,4 +69,4 @@
          </font>
       </Button>
    </children>
-</AnchorPane>
+</fx:root>
