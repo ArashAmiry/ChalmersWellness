@@ -13,7 +13,7 @@ public class WorkoutViewController extends AnchorPane {
     Button workoutBtnNav;
 
     public WorkoutViewController(){
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/workoutPanel.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/WorkoutView.fxml"));
 
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);

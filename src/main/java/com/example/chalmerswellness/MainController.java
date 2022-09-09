@@ -1,20 +1,17 @@
 package com.example.chalmerswellness;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 
-import java.io.IOException;
-
-public class chalmersWellnessController extends AnchorPane {
+public class MainController extends AnchorPane {
     @FXML AnchorPane contentRootAnchorPane;
     @FXML Button workoutBtn;
 
 
     WorkoutViewController workoutViewController;
 
-    public chalmersWellnessController(){
+    public MainController(){
         workoutViewController = new WorkoutViewController();
     }
 
