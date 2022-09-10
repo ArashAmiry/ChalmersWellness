@@ -22,10 +22,22 @@
     -fx-fill: #6e6e6e;
 }
 
-.workoutAtLabel{
+.workoutAtLabel, .calorieLabel{
     -fx-font-family: "Koulen";
+}
+
+.quote{
+    -fx-font-family: "Koulen";
+    -fx-font-size: 15px;
 }
 
 .numbers{
     -fx-font-family: "Train One";
+}
+
+.workout, .calories{
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-background-color: linear-gradient(to top left, #f1f1f1, #ffffff);
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);
 }
