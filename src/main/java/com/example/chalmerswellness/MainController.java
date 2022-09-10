@@ -13,6 +13,8 @@ public class MainController extends AnchorPane {
     NutritionViewController nutritionViewController = new NutritionViewController();
     DashboardViewController dashboardViewController = new DashboardViewController();
 
+    SettingsViewController settingsViewController = new SettingsViewController();
+
     public MainController(){
     }
 
@@ -31,6 +33,8 @@ public class MainController extends AnchorPane {
    public void navigateToNutritionView() {
         setViewTo(nutritionViewController);
    }
+   @FXML
+   public void navigateToSettingsView() { setViewTo(settingsViewController);}
 
     @FXML
     public void navigateToDashboardView() {

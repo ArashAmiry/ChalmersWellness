@@ -37,7 +37,7 @@
                   <Font size="28.0" />
                </font>
             </Button>
-            <Button layoutX="3.0" layoutY="832.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="220.0" styleClass="navButton" text="Settings" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="-3.0" AnchorPane.topAnchor="832.0">
+            <Button layoutX="3.0" layoutY="832.0" mnemonicParsing="false" onMouseClicked="#navigateToSettingsView" prefHeight="57.0" prefWidth="220.0" styleClass="navButton" text="Settings" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="-3.0" AnchorPane.topAnchor="832.0">
                <font>
                   <Font size="28.0" />
                </font>
