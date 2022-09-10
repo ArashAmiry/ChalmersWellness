@@ -1,0 +1,38 @@
+@font-face {
+    font-family: "Koulen";
+    src: url('../font/Koulen/Koulen-Regular.ttf');
+}
+
+@font-face {
+    font-family: "Pacifico";
+    src: url('../font/Pacifico/Pacifico-Regular.ttf');
+}
+
+.navButton{
+    -fx-background-color: linear-gradient(to top left, #C3C3C3, #E9E9E9);
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0);
+    -fx-font-family: "Koulen";
+    -fx-font-size: 32px;
+    -fx-text-alignment: left;
+}
+
+.helloLabel{
+    -fx-font-family: "Pacifico";
+    -fx-font-size: 20px;
+}
+
+.nameLabel{
+    -fx-font-family: "Koulen";
+    -fx-font-size: 30px;
+}
+
+.profileImage{
+
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0);
+}
+
+.navbar{
+    -fx-background-color: #FFFFFF;
+}
