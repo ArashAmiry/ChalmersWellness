@@ -32,6 +32,11 @@ public class MainController extends AnchorPane {
         setViewTo(nutritionViewController);
    }
 
+    @FXML
+    public void navigateToDashboardView() {
+        setViewTo(dashboardViewController);
+    }
+
     private void setViewTo(AnchorPane pane){
         contentRootAnchorPane.getChildren().clear();
         contentRootAnchorPane.getChildren().add(pane);
