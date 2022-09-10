@@ -11,9 +11,14 @@ public class MainController extends AnchorPane {
 
     WorkoutViewController workoutViewController = new WorkoutViewController();
     NutritionViewController nutritionViewController = new NutritionViewController();
+    DashboardViewController dashboardViewController = new DashboardViewController();
 
     public MainController(){
+    }
 
+    @FXML
+    public void initialize(){
+        setViewTo(dashboardViewController);
     }
 
     @FXML
