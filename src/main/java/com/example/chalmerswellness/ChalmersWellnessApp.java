@@ -1,9 +1,11 @@
 package com.example.chalmerswellness;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 
@@ -16,6 +18,14 @@ public class ChalmersWellnessApp extends Application {
         stage.setTitle("Chalmers Wellness");
         stage.setScene(scene);
         stage.show();
+
+        stage.setOnCloseRequest(event -> {
+            try {
+                stop();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     public static void main(String[] args) {

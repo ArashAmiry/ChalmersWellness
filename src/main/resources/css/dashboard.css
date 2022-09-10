@@ -1,0 +1,31 @@
+@font-face {
+    font-family: "Koulen";
+    src: url('../font/Koulen/Koulen-Regular.ttf');
+}
+
+@font-face {
+    font-family: "Train One";
+    src: url('../font/TrainOne/TrainOne-Regular.ttf');
+}
+
+.header{
+    -fx-font-family: "Koulen";
+    -fx-font-size: 30px;
+}
+
+.dashboard{
+    -fx-background-color: #F2F4FF;
+}
+
+.date{
+    -fx-font-family: "Koulen";
+    -fx-fill: #6e6e6e;
+}
+
+.workoutAtLabel{
+    -fx-font-family: "Koulen";
+}
+
+.numbers{
+    -fx-font-family: "Train One";
+}
