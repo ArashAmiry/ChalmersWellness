@@ -16,6 +16,7 @@ public class ChalmersWellnessApp extends Application {
 
         Scene scene = new Scene(fxmlLoader.load(), 1920, 1080);
         stage.setTitle("Chalmers Wellness");
+        stage.setFullScreen(true);
         stage.setScene(scene);
         stage.show();
 
