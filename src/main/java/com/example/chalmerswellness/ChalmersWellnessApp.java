@@ -13,7 +13,7 @@ public class ChalmersWellnessApp extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(ChalmersWellnessApp.class.getResource("/fxml/MainView.fxml"));
 
         Scene scene = new Scene(fxmlLoader.load(), 1920, 1080);
-        stage.setTitle("Hello!");
+        stage.setTitle("Chalmers Wellness");
         stage.setScene(scene);
         stage.show();
     }
