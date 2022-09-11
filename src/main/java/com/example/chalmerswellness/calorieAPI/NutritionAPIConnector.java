@@ -9,7 +9,7 @@ import java.net.URL;
 
 public class NutritionAPIConnector {
 
-    private final String urlString = "https://api.api-ninjas.com/v1/nutrition?query=100g pasta";
+    private final String urlString = "https://api.api-ninjas.com/v1/nutrition?query=pasta";
 
     public String getNutritionAsStringFromAPI(String query){
         BufferedReader reader;
