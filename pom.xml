@@ -12,6 +12,9 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>5.8.1</junit.version>
+
+
+        <jackson.version>2.13.2</jackson.version>
     </properties>
 
     <dependencies>
@@ -69,6 +72,21 @@
             <artifactId>sqlite-jdbc</artifactId>
             <version>3.39.2.1</version>
         </dependency>
+        <dependency>
+            <groupId>com.github.lbovolini</groupId>
+            <artifactId>ObjectMapper</artifactId>
+            <version>0.2.3</version>
+            <scope>compile</scope>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.13.4</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>
