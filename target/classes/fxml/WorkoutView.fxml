@@ -16,7 +16,7 @@
             </Text>
          </children>
       </AnchorPane>
-      <Button fx:id="workoutBtnNav" layoutX="56.0" layoutY="44.0" mnemonicParsing="false" onMouseClicked="#testFunc" prefHeight="51.0" prefWidth="128.0" text="Workout">
+      <Button layoutX="56.0" layoutY="44.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="128.0" text="Workout">
          <font>
             <Font size="18.0" />
          </font>
