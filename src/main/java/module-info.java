@@ -4,7 +4,7 @@ module com.example.chalmerswellness {
 
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
-    requires validatorfx;
+    requires org.json;
 
     opens com.example.chalmerswellness to javafx.fxml;
     exports com.example.chalmerswellness;

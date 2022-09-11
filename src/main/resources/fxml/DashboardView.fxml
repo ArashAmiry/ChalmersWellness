@@ -5,7 +5,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1460.0" styleClass="dashboard" stylesheets="@../css/dashboard.css" type="AnchorPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1460.0" styleClass="dashboard" stylesheets="@../css/dashboard.css" type="AnchorPane" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <AnchorPane layoutX="214.0" layoutY="155.0" prefHeight="200.0" prefWidth="400.0" styleClass="workout">
          <children>
@@ -30,7 +30,7 @@
                </font>
             </Text>
             <Line endX="100.0" layoutY="131.0" startX="498.5" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-            <Text layoutX="16.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="quote" text="&quot;I hate it when I accidentally go to Chipotle and eat a burrito&quot;" />
+            <Text fx:id="dashboardQuote1" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="quote" text="&quot;I hate it when I accidentally go to Chipotle and eat a burrito&quot;" textAlignment="CENTER" wrappingWidth="399.5" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="809.0" layoutY="155.0" prefHeight="200.0" prefWidth="400.0" styleClass="calories">
@@ -51,7 +51,7 @@
                </font>
             </Text>
             <Line endX="100.0" layoutX="-99.0" layoutY="131.0" startX="498.5" />
-            <Text layoutX="87.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="quote" text="&quot;Calories don't count on the weekend&quot;" />
+            <Text fx:id="dashboardQuote2" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="quote" text="&quot;Calories don't count on the weekend&quot;" textAlignment="CENTER" wrappingWidth="399.5" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
          </children>
       </AnchorPane>
       <Text layoutX="250.0" layoutY="514.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="header" text="Activity feed">
