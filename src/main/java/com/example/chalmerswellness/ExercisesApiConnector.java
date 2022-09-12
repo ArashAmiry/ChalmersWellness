@@ -22,7 +22,7 @@ public class ExercisesApiConnector {
         return exercises;
     }
 
-    private List<ExerciseModel> getExercises(int page){
+    public List<ExerciseModel> getExercises(int page){
         List<ExerciseModel> exercises = new ArrayList<>();
 
         for (int i = page; i<page; i++){
