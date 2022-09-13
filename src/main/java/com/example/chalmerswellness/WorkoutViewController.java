@@ -46,17 +46,16 @@ public class WorkoutViewController extends AnchorPane implements Initializable {
 
     void updateSearchResult(List<ExerciseModel> exercises){
         exercisesList.clear();
-
         for (var exercise: exercises) {
             ExerciseSearchItemController exerciseController = new ExerciseSearchItemController(exercise);
             exercisesList.add(exerciseController);
         }
-        noResult();
-        searchListView.getItems().clear();
-        searchListView.getItems().addAll(exercisesList);
+
+        searchListView.getItems().setAll(exercisesList);
+        isNoResult();
     }
 
-    void noResult(){
+    void isNoResult(){
         if(exercisesList.size()>0){
             noResultLabel.visibleProperty().set(false);
         } else {

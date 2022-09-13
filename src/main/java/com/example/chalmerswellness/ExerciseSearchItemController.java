@@ -32,6 +32,6 @@ public class ExerciseSearchItemController extends AnchorPane implements Initiali
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1){
-        exerciseName.textProperty().set(exerciseModel.getName());
+        exerciseName.textProperty().set(exerciseModel.name);
     }
 }
