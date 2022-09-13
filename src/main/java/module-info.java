@@ -4,7 +4,7 @@ module com.example.chalmerswellness {
 
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
-    requires validatorfx;
+    requires org.json;
     requires java.sql;
     requires java.net.http;
     requires com.fasterxml.jackson.databind;
