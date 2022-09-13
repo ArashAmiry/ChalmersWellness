@@ -6,6 +6,8 @@ module com.example.chalmerswellness {
     requires com.dlsc.formsfx;
     requires org.json;
     requires java.sql;
+    requires java.net.http;
+    requires com.fasterxml.jackson.databind;
 
     opens com.example.chalmerswellness to javafx.fxml;
     exports com.example.chalmerswellness;
