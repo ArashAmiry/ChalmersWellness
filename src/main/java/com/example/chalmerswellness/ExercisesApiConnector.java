@@ -25,8 +25,9 @@ public class ExercisesApiConnector {
     public List<ExerciseModel> getExercises(int page){
         List<ExerciseModel> exercises = new ArrayList<>();
 
-        for (int i = page; i<page; i++){
+        for (int i = 0; i<=page; i++){
            JsonNode node = exercisesApiCall("offset", Integer.toString(i));
+
             for (var item: jsonToExerciseModel(node)) {
                 exercises.add(item);
             }
