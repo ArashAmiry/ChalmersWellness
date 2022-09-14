@@ -1,5 +1,6 @@
 package com.example.chalmerswellness;
 
+import com.example.chalmerswellness.calorieAPI.NutritionAPIConnector;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -27,6 +28,9 @@ public class ChalmersWellnessApp extends Application {
                 e.printStackTrace();
             }
         });
+
+        NutritionAPIConnector nac = new NutritionAPIConnector();
+        System.out.println(nac.getNutritionAsStringFromAPI("1 apple"));
     }
 
     public static void main(String[] args) {
