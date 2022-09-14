@@ -14,7 +14,4 @@ public class NutritionModel {
     int fiber;
     int sugar;
 
-    public String getName() { return this.name; }
-    void setName(String name) { this.name = name; }
-
 }

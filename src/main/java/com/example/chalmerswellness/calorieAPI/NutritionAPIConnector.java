@@ -9,7 +9,7 @@ import java.net.URL;
 
 public class NutritionAPIConnector {
 
-    private final String urlString = "https://api.api-ninjas.com/v1/nutrition?query=pasta";
+    private final String urlString = "https://api.api-ninjas.com/v1/nutrition?query=200g+pasta";
 
     public String getNutritionAsStringFromAPI(String query){
         BufferedReader reader;
@@ -21,8 +21,8 @@ public class NutritionAPIConnector {
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestProperty("x-api-key", "w654GbcWJOO5z0zkEac5sYcuRKqNjRBZ5BjDqI50");
             conn.setRequestMethod("GET");
-            conn.setConnectTimeout(1000);
-            conn.setReadTimeout(1000);
+            conn.setConnectTimeout(2000);
+            conn.setReadTimeout(5000);
             conn.connect();
 
             int responseCode = conn.getResponseCode();
