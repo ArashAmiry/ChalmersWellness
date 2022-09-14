@@ -1,6 +1,10 @@
 package com.example.chalmerswellness;
 
 import com.example.chalmerswellness.calorieAPI.NutritionAPIConnector;
+import com.example.chalmerswellness.calorieAPI.NutritionModel;
+import com.example.chalmerswellness.calorieAPI.NutritionTypeAdapter;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -30,7 +34,14 @@ public class ChalmersWellnessApp extends Application {
         });
 
         NutritionAPIConnector nac = new NutritionAPIConnector();
-        System.out.println(nac.getNutritionAsStringFromAPI("1 apple"));
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.registerTypeAdapter(NutritionModel.class, new NutritionTypeAdapter());
+        gsonBuilder.setPrettyPrinting();
+
+        Gson gson = gsonBuilder.create();
+        String nutritionJsonData = nac.getNutritionAsStringFromAPI("1 apple");
+        NutritionModel[] nutrition = gson.fromJson(nutritionJsonData, NutritionModel[].class);
+        System.out.println(nutrition);
     }
 
     public static void main(String[] args) {
