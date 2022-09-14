@@ -18,7 +18,7 @@ public class DashboardViewController extends AnchorPane {
         fxmlLoader.setController(this);
 
         QuotesAPIConnector apiConnector = new QuotesAPIConnector();
-        String motivationalQuote = apiConnector.getRandomQuoteAsStringFromAPI("motivational");
+        /*String motivationalQuote = apiConnector.getRandomQuoteAsStringFromAPI("motivational");
         String athleticQuote = apiConnector.getRandomQuoteAsStringFromAPI("sports&competition");
 
 
@@ -29,5 +29,7 @@ public class DashboardViewController extends AnchorPane {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
+
+         */
     }
 }

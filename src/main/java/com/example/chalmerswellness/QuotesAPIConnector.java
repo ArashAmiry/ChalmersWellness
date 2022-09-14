@@ -41,11 +41,17 @@ public class QuotesAPIConnector {
         }
         return null;
     }
+
+
+
+
     public static String parse(String responseBody) {
 
         JSONObject album = new JSONObject(responseBody);
         String quote = album.getString("content");
         return quote;
     }
+
+
 
 }
