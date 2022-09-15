@@ -22,8 +22,8 @@ public class WorkoutViewController extends AnchorPane implements Initializable {
     ExercisesApiConnector apiConnector;
     ObservableList<ExerciseSearchItemController> exercisesList = FXCollections.observableArrayList();
     @FXML public ListView<ExerciseSearchItemController> searchListView;
-    @FXML public TextField searchField;
-    @FXML public Label noResultLabel;
+
+    @FXML public AnchorPane anchorPaneSearch;
 
     public WorkoutViewController(){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/WorkoutView.fxml"));
@@ -38,34 +38,23 @@ public class WorkoutViewController extends AnchorPane implements Initializable {
         }
     }
 
-    @FXML
-    void searchExercise(ActionEvent event){
-        var exercises = apiConnector.searchForExercises(searchField.getText().replaceAll("\\s+",""));
-        updateSearchResult(exercises);
-    }
-
     void updateSearchResult(List<ExerciseModel> exercises){
         exercisesList.clear();
         for (var exercise: exercises) {
             ExerciseSearchItemController exerciseController = new ExerciseSearchItemController(exercise);
             exercisesList.add(exerciseController);
         }
-
-        searchListView.getItems().setAll(exercisesList);
-        isNoResult();
     }
 
-    void isNoResult(){
-        if(exercisesList.size()>0){
-            noResultLabel.visibleProperty().set(false);
-        } else {
-            noResultLabel.visibleProperty().set(true);
-        }
-    }
+
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1){
-        var exercises = apiConnector.getExercises(0);
-        updateSearchResult(exercises);
+        //var exercises = apiConnector.getExercises(0);
+        //updateSearchResult(exercises);
+
+
+        ExerciseSearchController esController = new ExerciseSearchController();
+        anchorPaneSearch.getChildren().add(esController);
     }
 }
