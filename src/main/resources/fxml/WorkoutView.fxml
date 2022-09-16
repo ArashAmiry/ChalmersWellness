@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1460.0" type="AnchorPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="WorkoutController">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1460.0" type="AnchorPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <AnchorPane fx:id="mainContent" layoutX="14.0" layoutY="102.0" prefHeight="812.0" prefWidth="1063.0" style="-fx-background-color: grey;" />
       <Button layoutX="14.0" layoutY="43.0" mnemonicParsing="false" onMouseClicked="#openWorkoutTab" prefHeight="51.0" prefWidth="128.0" text="Workout">
