@@ -13,7 +13,7 @@ public class Nutrition {
         gsonBuilder.setPrettyPrinting();
         Gson gson = gsonBuilder.create();
 
-        String nutritionJsonString = apiConnector.getNutritionAsStringFromAPI("apple");
+        String nutritionJsonString = apiConnector.getNutritionAsStringFromAPI(query);
         NutritionModel[] nutrition = gson.fromJson(nutritionJsonString, NutritionModel[].class);
         return nutrition[0];
     }

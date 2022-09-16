@@ -20,9 +20,9 @@ public class ChalmersWellnessApp extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ChalmersWellnessApp.class.getResource("/fxml/MainView.fxml"));
 
-        Scene scene = new Scene(fxmlLoader.load(), 192, 108);
+        Scene scene = new Scene(fxmlLoader.load(), 1920, 1080);
         stage.setTitle("Chalmers Wellness");
-        stage.setFullScreen(false);
+        stage.setFullScreen(true);
         stage.setScene(scene);
         stage.show();
 
@@ -34,8 +34,6 @@ public class ChalmersWellnessApp extends Application {
             }
         });
 
-        Nutrition nutrition = new Nutrition();
-        NutritionModel pasta = nutrition.createNutritionModelFor("pasta");
     }
 
     public static void main(String[] args) {
