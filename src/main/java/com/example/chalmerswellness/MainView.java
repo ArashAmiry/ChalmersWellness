@@ -4,18 +4,17 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 
-public class MainController extends AnchorPane {
+public class MainView extends AnchorPane {
     @FXML AnchorPane contentRootAnchorPane;
     @FXML Button workoutBtn;
 
-
-    WorkoutViewController workoutViewController = new WorkoutViewController();
+    WorkoutController workoutView = new WorkoutController();
     NutritionViewController nutritionViewController = new NutritionViewController();
     DashboardViewController dashboardViewController = new DashboardViewController();
 
     SettingsViewController settingsViewController = new SettingsViewController();
 
-    public MainController(){
+    public MainView(){
     }
 
     @FXML
@@ -24,9 +23,8 @@ public class MainController extends AnchorPane {
     }
 
     @FXML
-    public void clickMe() {
-        workoutBtn.textProperty().set("ssss");
-        setViewTo(workoutViewController);
+    public void navigateToWorkout() {
+        setViewTo(workoutView);
     }
 
    @FXML

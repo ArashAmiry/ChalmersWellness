@@ -6,27 +6,25 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import org.controlsfx.control.action.Action;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class WorkoutViewController extends AnchorPane implements Initializable {
+public class ExerciseSearchController extends AnchorPane implements Initializable {
     ExercisesApiConnector apiConnector;
     ObservableList<ExerciseSearchItemController> exercisesList = FXCollections.observableArrayList();
-    @FXML public ListView<ExerciseSearchItemController> searchListView;
     @FXML public TextField searchField;
     @FXML public Label noResultLabel;
+    @FXML public ListView<ExerciseSearchItemController> searchListView;
 
-    public WorkoutViewController(){
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/WorkoutView.fxml"));
+    public ExerciseSearchController(){
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/ExerciseSearchView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
         apiConnector = new ExercisesApiConnector();
@@ -38,22 +36,22 @@ public class WorkoutViewController extends AnchorPane implements Initializable {
         }
     }
 
-    @FXML
-    void searchExercise(ActionEvent event){
-        var exercises = apiConnector.searchForExercises(searchField.getText().replaceAll("\\s+",""));
-        updateSearchResult(exercises);
-    }
-
     void updateSearchResult(List<ExerciseModel> exercises){
         exercisesList.clear();
         for (var exercise: exercises) {
             ExerciseSearchItemController exerciseController = new ExerciseSearchItemController(exercise);
             exercisesList.add(exerciseController);
         }
-
         searchListView.getItems().setAll(exercisesList);
         isNoResult();
     }
+
+    @FXML
+    void searchExercise(ActionEvent event){
+        var exercises = apiConnector.searchForExercises(searchField.getText().replaceAll("\\s+","+"));
+        updateSearchResult(exercises);
+    }
+
 
     void isNoResult(){
         if(exercisesList.size()>0){
