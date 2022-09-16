@@ -12,6 +12,6 @@ public class Workout {
         this.exercises = exerciseList;
     }
     public Workout(){
-        this.workoutName = "Empty Workout";
+        this.workoutName = "Empty";
     }
 }
