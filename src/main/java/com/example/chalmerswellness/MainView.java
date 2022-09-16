@@ -4,18 +4,17 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 
-public class MainController extends AnchorPane {
+public class MainView extends AnchorPane {
     @FXML AnchorPane contentRootAnchorPane;
     @FXML Button workoutBtn;
 
-
-    WorkoutView workoutView = new WorkoutView();
+    WorkoutController workoutView = new WorkoutController();
     NutritionViewController nutritionViewController = new NutritionViewController();
     DashboardViewController dashboardViewController = new DashboardViewController();
 
     SettingsViewController settingsViewController = new SettingsViewController();
 
-    public MainController(){
+    public MainView(){
     }
 
     @FXML

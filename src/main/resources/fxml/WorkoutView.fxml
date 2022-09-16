@@ -3,30 +3,21 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1460.0" type="AnchorPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1460.0" type="AnchorPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="WorkoutController">
    <children>
-      <AnchorPane layoutX="14.0" layoutY="102.0" prefHeight="812.0" prefWidth="1063.0" style="-fx-background-color: grey;">
-         <children>
-            <Text layoutX="14.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Today's Workout">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Text>
-         </children>
-      </AnchorPane>
-      <Button layoutX="14.0" layoutY="43.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="128.0" text="Workout">
+      <AnchorPane fx:id="mainContent" layoutX="14.0" layoutY="102.0" prefHeight="812.0" prefWidth="1063.0" style="-fx-background-color: grey;" />
+      <Button layoutX="14.0" layoutY="43.0" mnemonicParsing="false" onMouseClicked="#openWorkoutTab" prefHeight="51.0" prefWidth="128.0" text="Workout">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button layoutX="160.0" layoutY="43.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="178.0" text="Create Workout">
+      <Button layoutX="160.0" layoutY="43.0" mnemonicParsing="false" onMouseClicked="#openCreateWorkoutTab" prefHeight="51.0" prefWidth="178.0" text="Create Workout">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button layoutX="354.0" layoutY="43.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="178.0" text="Manage Workouts">
+      <Button layoutX="354.0" layoutY="43.0" mnemonicParsing="false" onMouseClicked="#openMangeWorkoutTab" prefHeight="51.0" prefWidth="178.0" text="Manage Workouts">
          <font>
             <Font size="18.0" />
          </font>
