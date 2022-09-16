@@ -11,6 +11,8 @@ import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 public class ExercisesApiConnector {
     public ExercisesApiConnector(){
@@ -54,6 +56,33 @@ public class ExercisesApiConnector {
 
         return exercises;
     }
+
+    private List<ExerciseModel> jsonToExerciseModelGSON(JsonNode node) {
+        List<ExerciseModel> exercises = new ArrayList<>();
+
+
+        GsonBuilder builder = new GsonBuilder();
+        builder.setPrettyPrinting();
+        Gson gson = builder.create();
+
+        ExerciseModel student = gson.fromJson("sadasdasdads", ExerciseModel.class);
+       /* ObjectMapper mapper = new ObjectMapper();
+        try{
+            for (var item : node) {
+                ExerciseModel toValue = mapper.treeToValue(item, ExerciseModel.class);
+                exercises.add(toValue);
+            }
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+
+        */
+
+        return exercises;
+    }
+
+
+
 
     private JsonNode exercisesApiCall(String searchType, String query){
         JsonNode node;
