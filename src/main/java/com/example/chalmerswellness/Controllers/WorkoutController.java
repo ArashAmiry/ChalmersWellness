@@ -1,10 +1,10 @@
-package com.example.chalmerswellness;
+package com.example.chalmerswellness.Controllers;
 
+import com.example.chalmerswellness.Models.WorkoutModel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.net.URL;
@@ -12,16 +12,25 @@ import java.util.ResourceBundle;
 
 public class WorkoutController extends AnchorPane implements Initializable {
 
+    private WorkoutModel workoutModel;
     @FXML public AnchorPane anchorPaneSearch;
     @FXML public AnchorPane mainContent;
 
+    TodayWorkoutController todayWorkoutView;
+    ExerciseSearchController esController;
 
     public WorkoutController(){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/WorkoutView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 
+        workoutModel = new WorkoutModel();
+
         //TodayWorkoutView
+        todayWorkoutView = new TodayWorkoutController(workoutModel);
+        esController = new ExerciseSearchController(workoutModel);
+
+
         //CreateWorkoutView
         //ManageWorkoutView
 
@@ -34,12 +43,13 @@ public class WorkoutController extends AnchorPane implements Initializable {
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1){
-        ExerciseSearchController esController = new ExerciseSearchController();
-        anchorPaneSearch.getChildren().add(esController);
+        openWorkoutTab();
     }
 
     @FXML void openWorkoutTab(){
-        //setTabTo(workoutTab);
+        anchorPaneSearch.getChildren().add(esController);
+
+        setTabTo(todayWorkoutView);
         //todayWorkout.textProperty().set("Workout Tab");
     }
 
@@ -53,11 +63,11 @@ public class WorkoutController extends AnchorPane implements Initializable {
     }
 
 
-    /*
+
     private void setTabTo(AnchorPane pane){
         mainContent.getChildren().clear();
         mainContent.getChildren().add(pane);
-    }*/
+    }
 
 
 }
