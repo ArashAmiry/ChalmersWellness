@@ -27,7 +27,7 @@
                   <Font size="28.0" />
                </font>
             </Button>
-            <Button fx:id="workoutBtn" layoutX="-7.0" layoutY="611.0" mnemonicParsing="false" onMouseClicked="#clickMe" prefHeight="57.0" prefWidth="220.0" styleClass="navButton" text="Workout" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="611.0">
+            <Button fx:id="workoutBtn" layoutX="-7.0" layoutY="611.0" mnemonicParsing="false" onMouseClicked="#navigateToWorkout" prefHeight="57.0" prefWidth="220.0" styleClass="navButton" text="Workout" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="611.0">
                <font>
                   <Font size="28.0" />
                </font>

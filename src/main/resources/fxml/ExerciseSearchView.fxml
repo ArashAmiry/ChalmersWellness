@@ -7,11 +7,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<fx:root prefHeight="812.0" prefWidth="330.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" type="AnchorPane">
+<fx:root prefHeight="812.0" prefWidth="330.0" type="AnchorPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ListView fx:id="searchListView" layoutY="29.0" prefHeight="783.0" prefWidth="330.0" />
-      <TextField layoutY="1.0" prefHeight="26.0" prefWidth="260.0" promptText="Search for exercise" />
-      <Button layoutX="278.0" layoutY="1.0" mnemonicParsing="false" text="Search" />
+      <TextField fx:id="searchField" layoutY="1.0" prefHeight="26.0" prefWidth="260.0" promptText="Search for exercise" />
+      <Button layoutX="278.0" layoutY="1.0" mnemonicParsing="false" onAction="#searchExercise" text="Search" />
       <Label fx:id="noResultLabel" alignment="CENTER" layoutX="48.0" layoutY="222.0" prefHeight="35.0" prefWidth="234.0" text="No Results...">
          <font>
             <Font size="24.0" />

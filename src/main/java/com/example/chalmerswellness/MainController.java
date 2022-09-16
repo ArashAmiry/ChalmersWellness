@@ -9,7 +9,7 @@ public class MainController extends AnchorPane {
     @FXML Button workoutBtn;
 
 
-    WorkoutViewController workoutViewController = new WorkoutViewController();
+    WorkoutView workoutView = new WorkoutView();
     NutritionViewController nutritionViewController = new NutritionViewController();
     DashboardViewController dashboardViewController = new DashboardViewController();
 
@@ -24,9 +24,8 @@ public class MainController extends AnchorPane {
     }
 
     @FXML
-    public void clickMe() {
-        workoutBtn.textProperty().set("ssss");
-        setViewTo(workoutViewController);
+    public void navigateToWorkout() {
+        setViewTo(workoutView);
     }
 
    @FXML

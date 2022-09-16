@@ -16,6 +16,8 @@ public class ExercisesApiConnector {
     }
 
     public List<ExerciseModel> searchForExercises(String query) {
+        String split = query;
+
         JsonNode node = exercisesApiCall("name", query);
         List<ExerciseModel> exercises = jsonToExerciseModel(node);
 
