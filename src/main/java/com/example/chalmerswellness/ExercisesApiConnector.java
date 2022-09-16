@@ -57,15 +57,15 @@ public class ExercisesApiConnector {
         return exercises;
     }
 
-    private List<ExerciseModel> jsonToExerciseModelGSON(JsonNode node) {
-        List<ExerciseModel> exercises = new ArrayList<>();
+    private List<Exercise> jsonToExerciseModelGSON(JsonNode node) {
+        List<Exercise> exercises = new ArrayList<>();
 
 
         GsonBuilder builder = new GsonBuilder();
         builder.setPrettyPrinting();
         Gson gson = builder.create();
 
-        ExerciseModel student = gson.fromJson("sadasdasdads", ExerciseModel.class);
+        Exercise student = gson.fromJson("sadasdasdads", Exercise.class);
        /* ObjectMapper mapper = new ObjectMapper();
         try{
             for (var item : node) {
