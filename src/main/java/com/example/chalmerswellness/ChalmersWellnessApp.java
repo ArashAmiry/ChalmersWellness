@@ -1,5 +1,6 @@
 package com.example.chalmerswellness;
 
+import com.example.chalmerswellness.calorieAPI.Nutrition;
 import com.example.chalmerswellness.calorieAPI.NutritionAPIConnector;
 import com.example.chalmerswellness.calorieAPI.NutritionModel;
 import com.example.chalmerswellness.calorieAPI.NutritionTypeAdapter;
@@ -19,9 +20,9 @@ public class ChalmersWellnessApp extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ChalmersWellnessApp.class.getResource("/fxml/MainView.fxml"));
 
-        Scene scene = new Scene(fxmlLoader.load(), 1920, 1080);
+        Scene scene = new Scene(fxmlLoader.load(), 192, 108);
         stage.setTitle("Chalmers Wellness");
-        stage.setFullScreen(true);
+        stage.setFullScreen(false);
         stage.setScene(scene);
         stage.show();
 
@@ -33,15 +34,8 @@ public class ChalmersWellnessApp extends Application {
             }
         });
 
-        NutritionAPIConnector nac = new NutritionAPIConnector();
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        gsonBuilder.registerTypeAdapter(NutritionModel.class, new NutritionTypeAdapter());
-        gsonBuilder.setPrettyPrinting();
-
-        Gson gson = gsonBuilder.create();
-        String nutritionJsonData = nac.getNutritionAsStringFromAPI("1 apple");
-        NutritionModel[] nutrition = gson.fromJson(nutritionJsonData, NutritionModel[].class);
-        System.out.println(nutrition);
+        Nutrition nutrition = new Nutrition();
+        NutritionModel pasta = nutrition.createNutritionModelFor("pasta");
     }
 
     public static void main(String[] args) {
