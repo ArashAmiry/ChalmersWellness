@@ -1,5 +1,6 @@
 package com.example.chalmerswellness.Controllers;
 
+import com.example.chalmerswellness.DataService;
 import com.example.chalmerswellness.Models.WorkoutModel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,7 +24,6 @@ public class WorkoutController extends AnchorPane implements Initializable {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/WorkoutView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
-
         workoutModel = new WorkoutModel();
 
         //TodayWorkoutView
@@ -33,6 +33,10 @@ public class WorkoutController extends AnchorPane implements Initializable {
 
         //CreateWorkoutView
         //ManageWorkoutView
+
+        //TODO Remove
+        DataService dataService = new DataService();
+
 
         try {
             fxmlLoader.load();
