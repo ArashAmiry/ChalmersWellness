@@ -10,11 +10,13 @@ public class Nutrition {
         NutritionAPIConnector apiConnector = new NutritionAPIConnector();
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.registerTypeAdapter(NutritionModel.class, new NutritionTypeAdapter());
+
         gsonBuilder.setPrettyPrinting();
         Gson gson = gsonBuilder.create();
 
         String nutritionJsonString = apiConnector.getNutritionAsStringFromAPI(query);
         NutritionModel[] nutrition = gson.fromJson(nutritionJsonString, NutritionModel[].class);
+
         return nutrition[0];
     }
 }
