@@ -1,0 +1,16 @@
+com\example\chalmerswellness\QuotesAPIConnector.class
+com\example\chalmerswellness\calorieAPI\Nutrition.class
+com\example\chalmerswellness\calorieAPI\NutritionAPIConnector.class
+com\example\chalmerswellness\DataService.class
+module-info.class
+com\example\chalmerswellness\calorieAPI\NutritionModel.class
+com\example\chalmerswellness\ChalmersWellnessApp.class
+com\example\chalmerswellness\WorkoutViewController.class
+com\example\chalmerswellness\calorieAPI\NutritionTypeAdapter.class
+com\example\chalmerswellness\NutritionViewController.class
+com\example\chalmerswellness\ExerciseSearchItemController.class
+com\example\chalmerswellness\SettingsViewController.class
+com\example\chalmerswellness\MainController.class
+com\example\chalmerswellness\DashboardViewController.class
+com\example\chalmerswellness\ExerciseModel.class
+com\example\chalmerswellness\ExercisesApiConnector.class
