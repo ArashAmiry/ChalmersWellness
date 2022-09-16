@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class TodayWorkoutController extends AnchorPane implements Observer {
-    private ObservableList<ExerciseSearchItemController> exercisesList = FXCollections.observableArrayList();
+    private ObservableList<ExerciseItemController> exercisesList = FXCollections.observableArrayList();
     private WorkoutModel model;
     @FXML public ListView exerciseList;
     @FXML public Label noResult;
@@ -42,7 +42,7 @@ public class TodayWorkoutController extends AnchorPane implements Observer {
         exercisesList.clear();
 
         for (var exercise: exercises) {
-            ExerciseSearchItemController exerciseController = new ExerciseSearchItemController(exercise, model);
+            ExerciseItemController exerciseController = new ExerciseItemController(exercise, model);
             exercisesList.add(exerciseController);
         }
         exerciseList.getItems().setAll(exercisesList);
