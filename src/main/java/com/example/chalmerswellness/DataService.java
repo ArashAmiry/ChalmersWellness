@@ -14,14 +14,17 @@ public class DataService {
     //private Connection conn;
     public DataService(){
         createNewDatabase("testDb");
-        createNewTable();
 
+
+        createWorkoutTable();
 
         List< Exercise > exerciseList = new ArrayList<>();
         exerciseList.add(new Exercise("DumbbellCurls", "FeelsStrongMan", "bicep", "dumbbells", "Extremly difficult", "bara kör"));
         exerciseList.add(new Exercise("asdasd", "asdashghhhhh", "bicep", "dumbbells", "Extremly difficult", "bara kör"));
         exerciseList.add(new Exercise("qwewqeqwe", "wrewer", "bicep", "dumbbells", "Extremly difficult", "bara kör"));
         Workout workout = new Workout("PushPull", exerciseList);
+
+
         insertWorkout(workout);
 
 
@@ -32,12 +35,12 @@ public class DataService {
         insert(workout);
     }
     public void insert(Workout workout) {
-        String sql = "INSERT INTO workouts(workout.getWorkoutName(), workout.getExercises()) VALUES(?,?)";
+        String sql = "INSERT INTO workouts(workoutName) VALUES(?)";
+
 
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-                pstmt.setString(1, workoutName);
-                pstmt.setInt(2, exercises);
+                pstmt.setString(1, workout.getWorkoutName());
                 pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -77,20 +80,19 @@ public class DataService {
         }
     }
 
-    private static void createNewTable() {
+    private void createWorkoutTable() {
         String url = "jdbc:sqlite:C://sqlite/db/testDb.db";
 
         String sql = "CREATE TABLE IF NOT EXISTS workouts (\n"
                 + "	id integer PRIMARY KEY,\n"
                 + "	workoutName text NOT NULL,\n"
-                + "	exercises integer\n"
+                + "	date Timestamp DATETIME DEFAULT CURRENT_TIMESTAMP\n"
                 + ");";
-
-
 
         try (Connection conn = DriverManager.getConnection(url);
              Statement stmt = conn.createStatement()) {
-                stmt.execute(sql);
+            // create a new table
+            stmt.execute(sql);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
