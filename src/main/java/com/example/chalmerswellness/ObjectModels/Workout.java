@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Workout {
-    String workoutName;
+    private String workoutName;
     private List<Exercise> exercises = new ArrayList<>();
 
     public Workout(String name, List<Exercise> exerciseList){
@@ -13,5 +13,13 @@ public class Workout {
     }
     public Workout(){
         this.workoutName = "Empty";
+    }
+
+    public String getWorkoutName(){
+        return workoutName;
+    }
+
+    public List<Exercise> getExercises(){
+        return exercises;
     }
 }

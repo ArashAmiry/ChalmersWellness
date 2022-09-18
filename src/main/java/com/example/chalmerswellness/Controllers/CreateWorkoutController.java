@@ -19,7 +19,7 @@ import java.util.List;
 public class CreateWorkoutController extends AnchorPane implements Observer {
     private ObservableList<ExerciseSearchItemController> exercisesList = FXCollections.observableArrayList();
     private WorkoutModel model;
-    @FXML public ListView exerciseList;
+    @FXML public AnchorPane mainContent;
     @FXML public Label noResult;
 
 
@@ -45,7 +45,7 @@ public class CreateWorkoutController extends AnchorPane implements Observer {
             ExerciseSearchItemController exerciseController = new ExerciseSearchItemController(exercise, model);
             exercisesList.add(exerciseController);
         }
-        exerciseList.getItems().setAll(exercisesList);
+        mainContent.getChildren().setAll(exercisesList);
         isNoResult();
     }
 
