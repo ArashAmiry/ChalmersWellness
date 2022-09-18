@@ -30,6 +30,8 @@ public class DataService {
         exerciseList2.add(new Exercise("lifting weights", "wrewer", "bicep", "dumbbells", "Extremly difficult", "bara kör"));
         Workout workout2 = new Workout("Dumb Workout", exerciseList);
         insertWorkout(workout2);
+
+        removeWorkout(2);
     }
 
 
@@ -49,12 +51,9 @@ public class DataService {
                 Workout workout = new Workout(workoutName, exercises);
                 workouts.add(workout);
             }
-
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
 
         return workouts;
     }
@@ -70,11 +69,25 @@ public class DataService {
                 ResultSet rs  = pstmt.executeQuery();
             while (rs.next()) {
                 var exerciseName = rs.getString("exerciseName");
+                var exerciseType = rs.getString("exerciseName");
+                var exerciseMuscle = rs.getString("exerciseName");
+                var exerciseEquipment = rs.getString("exerciseName");
+                var exerciseDifficulty = rs.getString("exerciseName");
+                var exerciseinstructions = rs.getString("exerciseName");
+
+/*
+                public String name;
+                public String type;
+                public String muscle;
+                public String equipment;
+                public String difficulty;
+                public String instructions;
+
+ */
 
                 Exercise exercise = new Exercise(exerciseName, "", "", "", "", "");
                 exercises.add(exercise);
             }
-
         }
 
         return exercises;
@@ -119,7 +132,36 @@ public class DataService {
     }
 
 
+    public void removeWorkout(int workoutId) {
+        String sql = "DELETE FROM workouts WHERE id = ?";
 
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, workoutId);
+            pstmt.executeUpdate();
+
+            removeExercises(workoutId);
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    private void removeExercises(int workoutId) {
+        String sql = "DELETE FROM exercises WHERE workoutId = ?";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setInt(1, workoutId);
+                pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void updateWorkout(int workoutId, List<Exercise> exercises){
+        //TODO Add Functionality
+    }
 
     private Connection connect() {
         String url = "jdbc:sqlite:"+dbPath+".db";
