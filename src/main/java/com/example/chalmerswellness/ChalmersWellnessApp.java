@@ -1,13 +1,18 @@
 package com.example.chalmerswellness;
 
+import com.example.chalmerswellness.ObjectModels.Exercise;
+import com.example.chalmerswellness.ObjectModels.Workout;
 import com.example.chalmerswellness.calorieAPI.Food;
 import com.example.chalmerswellness.calorieAPI.FoodNutritionModel;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ChalmersWellnessApp extends Application {
     @Override
@@ -27,7 +32,14 @@ public class ChalmersWellnessApp extends Application {
                 e.printStackTrace();
             }
         });
-        
+
+        Exercise e = new Exercise("name", "type", "muscle", "equipment", "difficulty", "instructions");
+        List<Exercise> listOfExercises = new ArrayList<>();
+        listOfExercises.add(e);
+
+        Workout workout = new Workout("name", listOfExercises);
+        DataService dataService = new DataService();
+        dataService.insertWorkout(workout);
     }
 
     public static void main(String[] args) {

@@ -15,6 +15,7 @@ public class DataService {
         createNewDatabase("testDb");
         createWorkoutTable();
         createExercisesTable();
+        createNutritionTable();
     }
 
     public List<Workout> getWorkouts(){
@@ -220,6 +221,30 @@ public class DataService {
         try (Connection conn = connect(dbPath);
              Statement stmt = conn.createStatement()) {
                 stmt.execute(sql);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void createNutritionTable() {
+        String sql = "CREATE TABLE IF NOT EXISTS nutrition (\n"
+                + "	id INTEGER PRIMARY KEY,\n"
+                + "	mealName text NOT NULL,\n"
+                + "	calories DOUBLE NOT NULL,\n"
+                + "	servingSize DOUBLE NOT NULL,\n"
+                + "	fatTotal DOUBLE NOT NULL,\n"
+                + "	fatSaturated DOUBLE NOT NULL,\n"
+                + "	protein DOUBLE NOT NULL,\n"
+                + "	sodium DOUBLE NOT NULL,\n"
+                + "	cholesterol DOUBLE NOT NULL,\n"
+                + "	carbohydrates DOUBLE NOT NULL,\n"
+                + "	fiber DOUBLE NOT NULL,\n"
+                + "	sugar DOUBLE NOT NULL\n"
+                + ");";
+
+        try (Connection conn = connect(dbPath);
+             Statement stmt = conn.createStatement()) {
+            stmt.execute(sql);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
