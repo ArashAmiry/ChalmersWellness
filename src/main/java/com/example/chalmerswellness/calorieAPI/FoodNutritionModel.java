@@ -71,5 +71,49 @@ public class FoodNutritionModel {
         return name;
     }
 
+    public double getCalories() {
+        return calories;
+    }
+
+    public double getServingSize() {
+        return servingSize;
+    }
+
+    public double getFatTotal() {
+        return fatTotal;
+    }
+
+    public double getFatSaturated() {
+        return fatSaturated;
+    }
+
+    public double getProtein() {
+        return protein;
+    }
+
+    public double getSodium() {
+        return sodium;
+    }
+
+    public double getPotassium() {
+        return potassium;
+    }
+
+    public double getCholesterol() {
+        return cholesterol;
+    }
+
+    public double getCarbohydrates() {
+        return carbohydrates;
+    }
+
+    public double getFiber() {
+        return fiber;
+    }
+
+    public double getSugar() {
+        return sugar;
+    }
+
     public int getId(){return id;}
 }

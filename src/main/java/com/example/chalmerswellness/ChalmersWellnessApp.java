@@ -37,9 +37,13 @@ public class ChalmersWellnessApp extends Application {
         List<Exercise> listOfExercises = new ArrayList<>();
         listOfExercises.add(e);
 
-        Workout workout = new Workout("name", listOfExercises);
+        Workout workout = new Workout("name1", listOfExercises);
         DataService dataService = new DataService();
         dataService.insertWorkout(workout);
+
+        Food food = new Food();
+        FoodNutritionModel fnm = food.createNutritionModelFor("apple");
+        dataService.insertNutrition(fnm);
     }
 
     public static void main(String[] args) {
