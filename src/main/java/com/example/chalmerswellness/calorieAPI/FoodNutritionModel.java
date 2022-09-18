@@ -18,6 +18,7 @@ public class FoodNutritionModel {
     void setId(int id){
         this.id = id;
     }
+
     void setCalories(double calories) {
         this.calories = calories;
     }
@@ -69,5 +70,6 @@ public class FoodNutritionModel {
     public String getName() {
         return name;
     }
+
     public int getId(){return id;}
 }

@@ -27,12 +27,7 @@ public class ChalmersWellnessApp extends Application {
                 e.printStackTrace();
             }
         });
-
-        UserNutritionTracker tracker = new UserNutritionTracker();
-        Food food = new Food();
-        FoodNutritionModel meal = food.createNutritionModelFor("apple");
-        tracker.addMeal(1, meal);
-        tracker.removeMeal(meal);
+        
     }
 
     public static void main(String[] args) {
