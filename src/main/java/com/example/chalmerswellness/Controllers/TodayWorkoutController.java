@@ -21,11 +21,14 @@ public class TodayWorkoutController extends AnchorPane implements Observer {
     private WorkoutModel model;
     @FXML public ListView exerciseList;
     @FXML public Label noResult;
-
+    AddSetsController addSetsController;
 
     public TodayWorkoutController(WorkoutModel workoutModel){
         this.model = workoutModel;
         workoutModel.subscribe(this);
+
+        //addSetsController = new AddSetsController(model);
+
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/ExerciseListView.fxml"));
         fxmlLoader.setRoot(this);
@@ -42,9 +45,10 @@ public class TodayWorkoutController extends AnchorPane implements Observer {
         exercisesList.clear();
 
         for (var exercise: exercises) {
-            ExerciseItemController exerciseController = new ExerciseItemController(exercise, model);
+            ExerciseItemController exerciseController = new ExerciseItemController(exercise, model, (AnchorPane) this.getParent());
             exercisesList.add(exerciseController);
         }
+
         exerciseList.getItems().setAll(exercisesList);
         isNoResult();
     }
@@ -61,7 +65,6 @@ public class TodayWorkoutController extends AnchorPane implements Observer {
     public void update(Observable observable) {
         model = (WorkoutModel) observable;
         var exercises = model.getAddedExercises();
-
         updateExerciseList(exercises);
     }
 }

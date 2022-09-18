@@ -2,10 +2,12 @@ package com.example.chalmerswellness.Controllers;
 
 import com.example.chalmerswellness.Models.WorkoutModel;
 import com.example.chalmerswellness.ObjectModels.Exercise;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
@@ -16,13 +18,15 @@ public class ExerciseItemController extends AnchorPane implements Initializable{
 
     private WorkoutModel model;
     private Exercise exercise;
+    private AnchorPane anchorPane;
 
     @FXML
     Label exerciseName;
 
-    public ExerciseItemController(Exercise exercise, WorkoutModel model){
+    public ExerciseItemController(Exercise exercise, WorkoutModel model, AnchorPane anchorPane){
         this.exercise = exercise;
         this.model = model;
+        this.anchorPane = anchorPane;
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/ExerciseListItem.fxml"));
         fxmlLoader.setRoot(this);
@@ -41,7 +45,13 @@ public class ExerciseItemController extends AnchorPane implements Initializable{
     }
 
 
-    @FXML public void removeFromWorkout(){
+    @FXML
+    private void removeFromWorkout(){
         model.removeExercise(exercise);
+    }
+
+    @FXML private void openSetsWindow(){
+        AddSetsController addSetsController = new AddSetsController(model, anchorPane);
+        anchorPane.getChildren().add(addSetsController);
     }
 }
