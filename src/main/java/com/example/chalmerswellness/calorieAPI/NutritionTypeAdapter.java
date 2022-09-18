@@ -6,54 +6,54 @@ import com.google.gson.stream.JsonWriter;
 
 import java.io.IOException;
 
-public class NutritionTypeAdapter extends TypeAdapter<NutritionModel> {
+public class NutritionTypeAdapter extends TypeAdapter<FoodNutritionModel> {
     @Override
-    public void write(JsonWriter jsonWriter, NutritionModel nutritionModel) throws IOException {
+    public void write(JsonWriter jsonWriter, FoodNutritionModel foodNutritionModel) throws IOException {
 
     }
 
     @Override
-    public NutritionModel read(JsonReader jsonReader) throws IOException {
-        final NutritionModel nutritionModel = new NutritionModel();
+    public FoodNutritionModel read(JsonReader jsonReader) throws IOException {
+        final FoodNutritionModel foodNutritionModel = new FoodNutritionModel();
 
         jsonReader.beginObject();
         while(jsonReader.hasNext()){
             switch (jsonReader.nextName()){
                 case "name":
-                    nutritionModel.setName(jsonReader.nextString());
+                    foodNutritionModel.setName(jsonReader.nextString());
                     break;
                 case "calories":
-                    nutritionModel.setCalories(jsonReader.nextDouble());
+                    foodNutritionModel.setCalories(jsonReader.nextDouble());
                     break;
                 case "serving_size_g":
-                    nutritionModel.setServingSize(jsonReader.nextDouble());
+                    foodNutritionModel.setServingSize(jsonReader.nextDouble());
                     break;
                 case "fat_total_g":
-                    nutritionModel.setFatTotal(jsonReader.nextDouble());
+                    foodNutritionModel.setFatTotal(jsonReader.nextDouble());
                     break;
                 case "fat_saturated_g":
-                    nutritionModel.setFatSaturated(jsonReader.nextDouble());
+                    foodNutritionModel.setFatSaturated(jsonReader.nextDouble());
                     break;
                 case "protein_g":
-                    nutritionModel.setProtein(jsonReader.nextDouble());
+                    foodNutritionModel.setProtein(jsonReader.nextDouble());
                     break;
                 case "sodium_mg":
-                    nutritionModel.setSodium(jsonReader.nextDouble());
+                    foodNutritionModel.setSodium(jsonReader.nextDouble());
                     break;
                 case "potassium_mg":
-                    nutritionModel.setPotassium(jsonReader.nextDouble());
+                    foodNutritionModel.setPotassium(jsonReader.nextDouble());
                     break;
                 case "cholesterol_mg":
-                    nutritionModel.setCholesterol(jsonReader.nextDouble());
+                    foodNutritionModel.setCholesterol(jsonReader.nextDouble());
                     break;
                 case "carbohydrates_total_g":
-                    nutritionModel.setCarbohydrates(jsonReader.nextDouble());
+                    foodNutritionModel.setCarbohydrates(jsonReader.nextDouble());
                     break;
                 case "fiber_g":
-                    nutritionModel.setFiber(jsonReader.nextDouble());
+                    foodNutritionModel.setFiber(jsonReader.nextDouble());
                     break;
                 case "sugar_g":
-                    nutritionModel.setSugar(jsonReader.nextDouble());
+                    foodNutritionModel.setSugar(jsonReader.nextDouble());
                     break;
 
                 default:
@@ -63,6 +63,6 @@ public class NutritionTypeAdapter extends TypeAdapter<NutritionModel> {
 
         jsonReader.endObject();
 
-        return nutritionModel;
+        return foodNutritionModel;
     }
 }

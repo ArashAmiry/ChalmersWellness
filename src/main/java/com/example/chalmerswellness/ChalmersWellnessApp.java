@@ -1,17 +1,11 @@
 package com.example.chalmerswellness;
 
-import com.example.chalmerswellness.calorieAPI.Nutrition;
-import com.example.chalmerswellness.calorieAPI.NutritionAPIConnector;
-import com.example.chalmerswellness.calorieAPI.NutritionModel;
-import com.example.chalmerswellness.calorieAPI.NutritionTypeAdapter;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.example.chalmerswellness.calorieAPI.Food;
+import com.example.chalmerswellness.calorieAPI.FoodNutritionModel;
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 
@@ -34,6 +28,11 @@ public class ChalmersWellnessApp extends Application {
             }
         });
 
+        UserNutritionTracker tracker = new UserNutritionTracker();
+        Food food = new Food();
+        FoodNutritionModel meal = food.createNutritionModelFor("apple");
+        tracker.addMeal(1, meal);
+        tracker.removeMeal(meal);
     }
 
     public static void main(String[] args) {

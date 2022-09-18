@@ -1,6 +1,7 @@
 package com.example.chalmerswellness.calorieAPI;
 
-public class NutritionModel {
+public class FoodNutritionModel {
+    private int id;
     private String name;
     private double calories;
     private double servingSize;
@@ -14,6 +15,9 @@ public class NutritionModel {
     private double fiber;
     private double sugar;
 
+    void setId(int id){
+        this.id = id;
+    }
     void setCalories(double calories) {
         this.calories = calories;
     }
@@ -65,4 +69,5 @@ public class NutritionModel {
     public String getName() {
         return name;
     }
+    public int getId(){return id;}
 }
