@@ -13,32 +13,15 @@ public class DataService {
     private String dbPath = "C:\\sqlite\\db\\";
     public DataService(){
         createNewDatabase("testDb");
-
         createWorkoutTable();
         createExercisesTable();
-
-        List< Exercise > exerciseList = new ArrayList<>();
-        exerciseList.add(new Exercise("DumbbellCurls", "FeelsStrongMan", "bicep", "dumbbells", "Extremly difficult", "bara kör"));
-        exerciseList.add(new Exercise("BenchPress", "asdashghhhhh", "bicep", "dumbbells", "Extremly difficult", "bara kör"));
-        exerciseList.add(new Exercise("Deadlift", "wrewer", "bicep", "dumbbells", "Extremly difficult", "bara kör"));
-        Workout workout = new Workout("PushPull", exerciseList);
-        insertWorkout(workout);
-
-        List< Exercise > exerciseList2 = new ArrayList<>();
-        exerciseList2.add(new Exercise("OtherExercise", "FeelsStrongMan", "bicep", "dumbbells", "Extremly difficult", "bara kör"));
-        exerciseList2.add(new Exercise("Dumbbellcurl", "asdashghhhhh", "bicep", "dumbbells", "Extremly difficult", "bara kör"));
-        exerciseList2.add(new Exercise("lifting weights", "wrewer", "bicep", "dumbbells", "Extremly difficult", "bara kör"));
-        Workout workout2 = new Workout("Dumb Workout", exerciseList);
-        insertWorkout(workout2);
-
     }
-
 
     public List<Workout> getWorkouts(){
         String sql = "SELECT * FROM workouts";
         List<Workout> workouts = new ArrayList<>();
 
-        try (Connection conn = this.connect();
+        try (Connection conn = this.connect(dbPath);
              Statement stmt  = conn.createStatement();
              ResultSet rs    = stmt.executeQuery(sql)){
 
@@ -61,7 +44,7 @@ public class DataService {
         String sql = "SELECT id, exerciseName, exerciseType, exerciseMuscle, exerciseEquipment, exerciseDifficulty, exerciseInstructions, workoutId FROM exercises WHERE workoutId = ?";
 
         List<Exercise> exercises = new ArrayList<>();
-        try (Connection conn = this.connect();
+        try (Connection conn = this.connect(dbPath);
              PreparedStatement pstmt  = conn.prepareStatement(sql)){
                 pstmt.setInt(1,workoutId);
 
@@ -86,7 +69,7 @@ public class DataService {
     public void insertWorkout(Workout workout) {
         String sql = "INSERT INTO workouts(workoutName) VALUES(?)";
 
-        try (Connection conn = this.connect();
+        try (Connection conn = connect(dbPath);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, workout.getWorkoutName());
             pstmt.executeUpdate();
@@ -106,7 +89,7 @@ public class DataService {
 
     private void insertWorkoutExercises(List<Exercise> exercises, int id) {
         String sql = "INSERT INTO exercises(exerciseName, exerciseType, exerciseMuscle, exerciseEquipment, exerciseDifficulty, exerciseInstructions, workoutId) VALUES(?,?,?,?,?,?,?)";
-        try (Connection conn = this.connect();
+        try (Connection conn = connect(dbPath);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             for (Exercise exercise : exercises) {
@@ -125,11 +108,10 @@ public class DataService {
         }
     }
 
-
     public void removeWorkout(int workoutId) {
         String sql = "DELETE FROM workouts WHERE id = ?";
 
-        try (Connection conn = this.connect();
+        try (Connection conn = this.connect(dbPath);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, workoutId);
             pstmt.executeUpdate();
@@ -143,7 +125,7 @@ public class DataService {
     private void removeExercises(int workoutId) {
         String sql = "DELETE FROM exercises WHERE workoutId = ?";
 
-        try (Connection conn = this.connect();
+        try (Connection conn = this.connect(dbPath);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setInt(1, workoutId);
                 pstmt.executeUpdate();
@@ -153,11 +135,32 @@ public class DataService {
         }
     }
 
-    private void updateWorkout(int workoutId, List<Exercise> exercises){
+    /*
+    private void updateWorkout(int workoutId, Workout workout){
         //TODO Add Functionality
-    }
+        String sql = "UPDATE workouts SET workoutName WHERE workoutId = ?";
 
-    private Connection connect() {
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, workoutId);
+            pstmt.setInt(2, work);
+            pstmt.executeUpdate();
+
+            ResultSet rs = pstmt.getGeneratedKeys();
+            int generatedKey = 0;
+            if (rs.next()) {
+                generatedKey = rs.getInt(1);
+            }
+
+            insertWorkoutExercises(workout.getExercises(), generatedKey);
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+     */
+
+    private static Connection connect(String dbPath) {
         String url = "jdbc:sqlite:"+dbPath+".db";
         Connection conn = null;
         try {
@@ -177,7 +180,8 @@ public class DataService {
 
         try {
             Class.forName("org.sqlite.JDBC");
-            Connection conn = connect();if (conn != null) {
+            Connection conn = connect(dbPath);
+            if (conn != null) {
                 DatabaseMetaData meta = conn.getMetaData();
                 System.out.println("The driver name is " + meta.getDriverName());
                 System.out.println("A new database has been created.");
@@ -193,7 +197,7 @@ public class DataService {
                 + "	workoutName text NOT NULL UNIQUE\n"
                 + ");";
 
-        try (Connection conn = connect();
+        try (Connection conn = connect(dbPath);
              Statement stmt = conn.createStatement()) {
                 stmt.execute(sql);
         } catch (SQLException e) {
@@ -213,7 +217,7 @@ public class DataService {
                 + "	workoutId INTEGER NOT NULL\n"
                 + ");";
 
-        try (Connection conn = connect();
+        try (Connection conn = connect(dbPath);
              Statement stmt = conn.createStatement()) {
                 stmt.execute(sql);
         } catch (SQLException e) {
