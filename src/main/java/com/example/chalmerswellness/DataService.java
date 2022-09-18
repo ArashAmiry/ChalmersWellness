@@ -31,7 +31,6 @@ public class DataService {
         Workout workout2 = new Workout("Dumb Workout", exerciseList);
         insertWorkout(workout2);
 
-        removeWorkout(2);
     }
 
 
@@ -59,7 +58,7 @@ public class DataService {
     }
 
     public List<Exercise> getWorkoutExercises(int workoutId) throws SQLException {
-        String sql = "SELECT id, exerciseName, workoutId FROM exercises WHERE workoutId = ?";
+        String sql = "SELECT id, exerciseName, exerciseType, exerciseMuscle, exerciseEquipment, exerciseDifficulty, exerciseInstructions, workoutId FROM exercises WHERE workoutId = ?";
 
         List<Exercise> exercises = new ArrayList<>();
         try (Connection conn = this.connect();
@@ -69,23 +68,13 @@ public class DataService {
                 ResultSet rs  = pstmt.executeQuery();
             while (rs.next()) {
                 var exerciseName = rs.getString("exerciseName");
-                var exerciseType = rs.getString("exerciseName");
-                var exerciseMuscle = rs.getString("exerciseName");
-                var exerciseEquipment = rs.getString("exerciseName");
-                var exerciseDifficulty = rs.getString("exerciseName");
-                var exerciseinstructions = rs.getString("exerciseName");
+                var type = rs.getString("exerciseType");
+                var muscle = rs.getString("exerciseMuscle");
+                var equipment = rs.getString("exerciseEquipment");
+                var difficulty = rs.getString("exerciseDifficulty");
+                var instructions = rs.getString("exerciseInstructions");
 
-/*
-                public String name;
-                public String type;
-                public String muscle;
-                public String equipment;
-                public String difficulty;
-                public String instructions;
-
- */
-
-                Exercise exercise = new Exercise(exerciseName, "", "", "", "", "");
+                Exercise exercise = new Exercise(exerciseName, type, muscle, equipment, difficulty, instructions);
                 exercises.add(exercise);
             }
         }
@@ -116,13 +105,18 @@ public class DataService {
     }
 
     private void insertWorkoutExercises(List<Exercise> exercises, int id) {
-        String sql = "INSERT INTO exercises(exerciseName, workoutId) VALUES(?,?)";
+        String sql = "INSERT INTO exercises(exerciseName, exerciseType, exerciseMuscle, exerciseEquipment, exerciseDifficulty, exerciseInstructions, workoutId) VALUES(?,?,?,?,?,?,?)";
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            for (var element : exercises) {
-                pstmt.setString(1, element.name);
-                pstmt.setInt(2, id);
+            for (Exercise exercise : exercises) {
+                pstmt.setString(1, exercise.name);
+                pstmt.setString(2, exercise.type);
+                pstmt.setString(3, exercise.muscle);
+                pstmt.setString(4, exercise.equipment);
+                pstmt.setString(5, exercise.difficulty);
+                pstmt.setString(6, exercise.instructions);
+                pstmt.setInt(7, id);
                 pstmt.executeUpdate();
             }
 
@@ -176,14 +170,14 @@ public class DataService {
 
     private void createNewDatabase(String fileName) {
         File sqliteFolder = new File(dbPath);
+        dbPath += fileName;
+
         if(!sqliteFolder.exists())
             sqliteFolder.mkdirs();
 
-        dbPath += fileName;
         try {
             Class.forName("org.sqlite.JDBC");
-            Connection conn = connect();
-            if (conn != null) {
+            Connection conn = connect();if (conn != null) {
                 DatabaseMetaData meta = conn.getMetaData();
                 System.out.println("The driver name is " + meta.getDriverName());
                 System.out.println("A new database has been created.");
@@ -196,8 +190,7 @@ public class DataService {
     private void createWorkoutTable() {
         String sql = "CREATE TABLE IF NOT EXISTS workouts (\n"
                 + "	id integer PRIMARY KEY,\n"
-                + "	workoutName text NOT NULL UNIQUE,\n"
-                + "	date Timestamp DATETIME DEFAULT CURRENT_TIMESTAMP\n"
+                + "	workoutName text NOT NULL UNIQUE\n"
                 + ");";
 
         try (Connection conn = connect();
@@ -212,8 +205,12 @@ public class DataService {
         String sql = "CREATE TABLE IF NOT EXISTS exercises (\n"
                 + "	id INTEGER PRIMARY KEY,\n"
                 + "	exerciseName text NOT NULL,\n"
-                + "	workoutId INTEGER NOT NULL,\n"
-                + "	date Timestamp DATETIME DEFAULT CURRENT_TIMESTAMP\n"
+                + "	exerciseType text NOT NULL,\n"
+                + "	exerciseMuscle text NOT NULL,\n"
+                + "	exerciseEquipment text NOT NULL,\n"
+                + "	exerciseDifficulty text NOT NULL,\n"
+                + "	exerciseInstructions text NOT NULL,\n"
+                + "	workoutId INTEGER NOT NULL\n"
                 + ");";
 
         try (Connection conn = connect();
