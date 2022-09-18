@@ -6,12 +6,17 @@
 
 <fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="300.0" type="AnchorPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label fx:id="exerciseName" layoutX="14.0" layoutY="-1.0" prefHeight="50.0" prefWidth="238.0" text="Deadlift">
+      <Label fx:id="exerciseName" layoutX="14.0" layoutY="-1.0" prefHeight="50.0" prefWidth="222.0" text="Deadlift">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="exerciseName1" layoutX="265.0" prefHeight="50.0" prefWidth="34.0" text="+">
+      <Label fx:id="exerciseName1" layoutX="277.0" onMouseClicked="#addToWorkout" prefHeight="50.0" prefWidth="22.0" text="+">
+         <font>
+            <Font size="27.0" />
+         </font>
+      </Label>
+      <Label fx:id="exerciseName11" layoutX="255.0" onMouseClicked="#removeFromWorkout" prefHeight="50.0" prefWidth="22.0" text="-">
          <font>
             <Font size="27.0" />
          </font>
