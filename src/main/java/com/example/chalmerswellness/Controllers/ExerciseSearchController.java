@@ -1,5 +1,8 @@
-package com.example.chalmerswellness;
+package com.example.chalmerswellness.Controllers;
 
+import com.example.chalmerswellness.Models.WorkoutModel;
+import com.example.chalmerswellness.ObjectModels.Exercise;
+import com.example.chalmerswellness.ExercisesApiConnector;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,13 +20,15 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class ExerciseSearchController extends AnchorPane implements Initializable {
-    ExercisesApiConnector apiConnector;
+    private WorkoutModel model;
+    private ExercisesApiConnector apiConnector;
     ObservableList<ExerciseSearchItemController> exercisesList = FXCollections.observableArrayList();
     @FXML public TextField searchField;
     @FXML public Label noResultLabel;
     @FXML public ListView<ExerciseSearchItemController> searchListView;
 
-    public ExerciseSearchController(){
+    public ExerciseSearchController(WorkoutModel model){
+        this.model = model;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/ExerciseSearchView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -36,10 +41,10 @@ public class ExerciseSearchController extends AnchorPane implements Initializabl
         }
     }
 
-    void updateSearchResult(List<ExerciseModel> exercises){
+    void updateSearchResult(List<Exercise> exercises){
         exercisesList.clear();
         for (var exercise: exercises) {
-            ExerciseSearchItemController exerciseController = new ExerciseSearchItemController(exercise);
+            ExerciseSearchItemController exerciseController = new ExerciseSearchItemController(exercise, model);
             exercisesList.add(exerciseController);
         }
         searchListView.getItems().setAll(exercisesList);

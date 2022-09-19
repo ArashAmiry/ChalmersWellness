@@ -6,6 +6,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
+
+import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -17,17 +19,17 @@ public class ExercisesApiConnector {
 
     }
 
-    public List<ExerciseModel> searchForExercises(String query) {
+    public List<Exercise> searchForExercises(String query) {
         String split = query;
 
         JsonNode node = exercisesApiCall("name", query);
-        List<ExerciseModel> exercises = jsonToExerciseModel(node);
+        List<Exercise> exercises = jsonToExerciseModel(node);
 
         return exercises;
     }
 
-    public List<ExerciseModel> getExercises(int page){
-        List<ExerciseModel> exercises = new ArrayList<>();
+    public List<Exercise> getExercises(int page){
+        List<Exercise> exercises = new ArrayList<>();
 
         for (int i = 0; i<=page; i++){
            JsonNode node = exercisesApiCall("offset", Integer.toString(i));
@@ -40,12 +42,12 @@ public class ExercisesApiConnector {
         return exercises;
     }
 
-    private List<ExerciseModel> jsonToExerciseModel(JsonNode node) {
-        List<ExerciseModel> exercises = new ArrayList<>();
+    private List<Exercise> jsonToExerciseModel(JsonNode node) {
+        List<Exercise> exercises = new ArrayList<>();
         ObjectMapper mapper = new ObjectMapper();
         try{
             for (var item : node) {
-                ExerciseModel toValue = mapper.treeToValue(item, ExerciseModel.class);
+                Exercise toValue = mapper.treeToValue(item, Exercise.class);
                 exercises.add(toValue);
             }
         } catch (JsonProcessingException e) {
@@ -55,15 +57,15 @@ public class ExercisesApiConnector {
         return exercises;
     }
 
-    private List<ExerciseModel> jsonToExerciseModelGSON(JsonNode node) {
-        List<ExerciseModel> exercises = new ArrayList<>();
+    private List<Exercise> jsonToExerciseModelGSON(JsonNode node) {
+        List<Exercise> exercises = new ArrayList<>();
 
 
         GsonBuilder builder = new GsonBuilder();
         builder.setPrettyPrinting();
         Gson gson = builder.create();
 
-        ExerciseModel student = gson.fromJson("sadasdasdads", ExerciseModel.class);
+        Exercise student = gson.fromJson("sadasdasdads", Exercise.class);
        /* ObjectMapper mapper = new ObjectMapper();
         try{
             for (var item : node) {
