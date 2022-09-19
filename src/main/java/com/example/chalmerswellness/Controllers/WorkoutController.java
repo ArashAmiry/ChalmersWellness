@@ -51,7 +51,10 @@ public class WorkoutController extends AnchorPane implements Initializable {
     }
 
     @FXML void openWorkoutTab(){
-        anchorPaneSearch.getChildren().add(esController);
+        if(anchorPaneSearch.getChildren().isEmpty()) {
+            anchorPaneSearch.getChildren().add(esController);
+        }
+
 
         setTabTo(todayWorkoutView);
         //todayWorkout.textProperty().set("Workout Tab");
