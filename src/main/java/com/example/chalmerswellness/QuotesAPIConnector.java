@@ -41,7 +41,6 @@ public class QuotesAPIConnector {
         return null;
     }
     private static String getQuote(String responseBody) {
-
         JSONObject album = new JSONObject(responseBody);
         return album.getString("content");
     }
