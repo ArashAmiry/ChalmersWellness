@@ -1,7 +1,5 @@
 package com.example.chalmerswellness.calorieAPI;
 
-import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -46,6 +44,7 @@ public class NutritionAPIConnector {
     }
 
     private HttpURLConnection connectToApi(String query) throws IOException {
+        query = query.replaceAll("\\s+", "+");
         URL url = new URL(urlString + query);
 
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
