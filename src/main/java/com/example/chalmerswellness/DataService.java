@@ -7,6 +7,8 @@ import com.example.chalmerswellness.ObjectModels.Workout;
 
 import java.io.File;
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +19,13 @@ public class DataService {
         createWorkoutTable();
         createExercisesTable();
         createExerciseItemTable();
+
+
+        //ExercisesApiConnector connector = new ExercisesApiConnector();
+        //var testExercises = connector.getExercises(1);
+        createMyExercisesTable();
+        //List<Exercise> test = new ArrayList<>();
+        //insertExercises(testExercises);
     }
 
     public List<Workout> getWorkouts(){
@@ -231,9 +240,9 @@ public class DataService {
     //TODO add connection to a exercise
     private void createExerciseItemTable() {
         String sql = "CREATE TABLE IF NOT EXISTS exerciseItems (\n"
-                + "	id INTEGER PRIMARY KEY\n"
+                + "	id INTEGER PRIMARY KEY,\n"
                // + "	exerciseId INTEGER,\n"
-                //+ "	Timestamp DATETIME\n"
+                + " date TEXT\n"
                 + ");";
 
         try (Connection conn = connect(dbPath);
@@ -244,13 +253,94 @@ public class DataService {
         }
     }
 
-    //TODO give id to exercise
-    public ExerciseItem insertExerciseItem(Exercise exercise) {
-        String sql = "INSERT INTO exerciseItems VALUES(?)";
+    private void createMyExercisesTable() {
+        String sql = "CREATE TABLE IF NOT EXISTS MyExercises (\n"
+                + "	id INTEGER PRIMARY KEY,\n"
+                + "	exerciseName text NOT NULL,\n"
+                + "	exerciseType text NOT NULL,\n"
+                + "	exerciseMuscle text NOT NULL,\n"
+                + "	exerciseEquipment text NOT NULL,\n"
+                + "	exerciseDifficulty text NOT NULL,\n"
+                + "	exerciseInstructions text NOT NULL\n"
+                + ");";
+
+        try (Connection conn = connect(dbPath);
+             Statement stmt = conn.createStatement()) {
+            stmt.execute(sql);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    //TODO REMOVE LATER, Temporary solution to progress
+    public void insertExercises(List<Exercise> exercises) {
+        String sql = "INSERT INTO MyExercises(exerciseName, exerciseType, exerciseMuscle, exerciseEquipment, exerciseDifficulty, exerciseInstructions) VALUES(?,?,?,?,?,?)";
+
+        /*
+        List<Exercise> testList = new ArrayList<>();
+        Exercise test = new Exercise("Namn", "Typ", "annat", "Typ", "annat", "Typ");
+        testList.add(test);
+
+         */
+
 
         try (Connection conn = connect(dbPath);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-                //pstmt.setInt(1, exercise);
+
+            for (Exercise exercise : exercises) {
+                pstmt.setString(1, exercise.name);
+                pstmt.setString(2, exercise.type);
+                pstmt.setString(3, exercise.muscle);
+                pstmt.setString(4, exercise.equipment);
+                pstmt.setString(5, exercise.difficulty);
+                pstmt.setString(6, exercise.instructions);
+                pstmt.executeUpdate();
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+
+    public List<Exercise> getMyExercises(){
+        String sql = "SELECT * FROM MyExercises";
+        List<Exercise> exercises = new ArrayList<>();
+
+        try (Connection conn = this.connect(dbPath);
+             Statement stmt  = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)){
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("exerciseName");
+                String type = rs.getString("exerciseType");
+                String muscle = rs.getString("exerciseMuscle");
+                String equipment = rs.getString("exerciseEquipment");
+                String difficulty = rs.getString("exerciseDifficulty");
+                String instructions = rs.getString("exerciseInstructions");
+
+
+
+               Exercise exercise = new Exercise(name, type, muscle, equipment, difficulty, instructions);
+                exercises.add(exercise);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return exercises;
+    }
+
+    //TODO give id to exercise
+    public ExerciseItem insertExerciseItem(Exercise exercise) {
+        String sql = "INSERT INTO exerciseItems VALUES(?,?)";
+
+        String date = LocalDate.now().toString();
+
+        try (Connection conn = connect(dbPath);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setString(2, date);
             pstmt.executeUpdate();
 
             ResultSet rs = pstmt.getGeneratedKeys();
@@ -259,10 +349,7 @@ public class DataService {
                 generatedKey = rs.getInt(1);
             }
 
-
             return new ExerciseItem(generatedKey,exercise);
-
-
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

@@ -39,7 +39,7 @@ public class AddSetsController extends AnchorPane implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        addSetsLabel.textProperty().set("Add Sets To " + exerciseItem.getId());
+        addSetsLabel.textProperty().set("Add Sets To " + exerciseItem.name + exerciseItem.getId());
     }
 
     @FXML private void close(){

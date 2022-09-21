@@ -1,5 +1,6 @@
 package com.example.chalmerswellness.Controllers;
 
+import com.example.chalmerswellness.DataService;
 import com.example.chalmerswellness.Models.WorkoutModel;
 import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.ExercisesApiConnector;
@@ -27,12 +28,16 @@ public class ExerciseSearchController extends AnchorPane implements Initializabl
     @FXML public Label noResultLabel;
     @FXML public ListView<ExerciseSearchItemController> searchListView;
 
+    private DataService db;
+
     public ExerciseSearchController(WorkoutModel model){
         this.model = model;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/ExerciseSearchView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
         apiConnector = new ExercisesApiConnector();
+
+        db = new DataService();
 
         try {
             fxmlLoader.load();
@@ -53,7 +58,10 @@ public class ExerciseSearchController extends AnchorPane implements Initializabl
 
     @FXML
     void searchExercise(ActionEvent event){
-        var exercises = apiConnector.searchForExercises(searchField.getText().replaceAll("\\s+","+"));
+        //var exercises = apiConnector.searchForExercises(searchField.getText().replaceAll("\\s+","+"));
+        var exercises = db.getMyExercises();
+
+
         updateSearchResult(exercises);
     }
 
