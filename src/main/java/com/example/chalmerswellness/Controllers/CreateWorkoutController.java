@@ -77,6 +77,8 @@ public class CreateWorkoutController extends AnchorPane implements Observer {
 
     @FXML public void saveWorkout(){
         dataService.insertWorkout(createWorkoutObject(exercisesList));
+        mainContent.getItems().clear();
+        workoutNameField.deleteText(0,workoutNameField.getText().length());
     }
 
     @Override
