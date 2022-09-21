@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -22,11 +23,12 @@ import java.util.List;
 
 public class CreateWorkoutController extends AnchorPane implements Observer {
     private ObservableList<ExerciseSearchItemController> exercisesList = FXCollections.observableArrayList();
-    private DataService dataService;
+    private DataService dataService = new DataService();
     private WorkoutModel model;
-    @FXML public AnchorPane mainContent;
+    @FXML public ListView mainContent;
     @FXML public Label noResult;
     @FXML TextField workoutNameField;
+
 
 
     public CreateWorkoutController(WorkoutModel workoutModel){
@@ -51,7 +53,7 @@ public class CreateWorkoutController extends AnchorPane implements Observer {
             ExerciseSearchItemController exerciseController = new ExerciseSearchItemController(exercise, model);
             exercisesList.add(exerciseController);
         }
-        mainContent.getChildren().setAll(exercisesList);
+        mainContent.getItems().setAll(exercisesList);
         isNoResult();
     }
 
