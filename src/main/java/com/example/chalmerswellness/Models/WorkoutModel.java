@@ -13,7 +13,6 @@ public class WorkoutModel implements Observable {
     private List<Observer> observers = new ArrayList<>();
     private DataService db;
 
-
     public WorkoutModel(){
         db = new DataService();
     }
@@ -28,11 +27,10 @@ public class WorkoutModel implements Observable {
         notifyObservers();
     }
 
-    public void removeLater(){
-        var t = getExerciseItems();
-
-        for (var item: t) {
-            addedExercises.add(item);
+    public void addExerciseDb(){
+        var exerciseItems = getTodayExerciseItems();
+        for (var exercise: exerciseItems) {
+            addedExercises.add(exercise);
         }
         notifyObservers();
     }
@@ -41,14 +39,13 @@ public class WorkoutModel implements Observable {
         return db.getMyExercises();
     }
 
-    public List<ExerciseItem> getExerciseItems(){
+    public List<ExerciseItem> getTodayExerciseItems(){
         return db.getTodayExerciseItems();
     }
     public void removeExercise(Exercise exercise){
         addedExercises.remove(exercise);
         notifyObservers();
     }
-
 
     @Override
     public void notifyObservers() {
@@ -61,6 +58,4 @@ public class WorkoutModel implements Observable {
     public void subscribe(Observer observer) {
         observers.add(observer);
     }
-
-
 }

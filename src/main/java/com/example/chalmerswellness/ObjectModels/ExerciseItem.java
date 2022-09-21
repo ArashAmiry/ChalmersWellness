@@ -4,7 +4,6 @@ public class ExerciseItem extends Exercise{
 
     private int id;
 
-    //TODO fxml connection
     private double weight;
     private int sets;
     private int reps;

@@ -24,9 +24,8 @@ import java.util.ResourceBundle;
 public class TodayWorkoutController extends AnchorPane implements Observer, Initializable {
     private ObservableList<ExerciseItemController> exercisesList = FXCollections.observableArrayList();
     private WorkoutModel model;
-    @FXML public ListView exerciseList;
-    @FXML public Label noResult;
-    AddSetsController addSetsController;
+    @FXML private ListView exerciseList;
+    @FXML private Label noResult;
 
     public TodayWorkoutController(WorkoutModel workoutModel){
         this.model = workoutModel;
@@ -35,7 +34,6 @@ public class TodayWorkoutController extends AnchorPane implements Observer, Init
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/ExerciseListView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
-
         try {
             fxmlLoader.load();
         } catch (IOException exception) {
@@ -43,11 +41,11 @@ public class TodayWorkoutController extends AnchorPane implements Observer, Init
         }
     }
 
-    void updateExerciseList(List<ExerciseItem> exercises){
+    private void updateExerciseList(List<ExerciseItem> exercises){
         exercisesList.clear();
 
         for (var exercise: exercises) {
-            ExerciseItemController exerciseController = new ExerciseItemController(exercise, model, (AnchorPane) this.getParent());
+            ExerciseItemController exerciseController = new ExerciseItemController(exercise, model, this);
             exercisesList.add(exerciseController);
         }
 
@@ -55,9 +53,7 @@ public class TodayWorkoutController extends AnchorPane implements Observer, Init
         isNoResult();
     }
 
-
-
-    void isNoResult(){
+    private void isNoResult(){
         if(exercisesList.size() > 0){
             noResult.setVisible(false);
         } else{
@@ -74,6 +70,6 @@ public class TodayWorkoutController extends AnchorPane implements Observer, Init
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        model.removeLater();
+        model.addExerciseDb();
     }
 }
