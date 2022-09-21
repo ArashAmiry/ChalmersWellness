@@ -28,11 +28,11 @@ public class NutritionFoodItemController extends AnchorPane implements Initializ
     @FXML
     Text saturatedFatGrams;
     @FXML
-    Text cholesterolGrams;
+    Text cholesterolMilligrams;
     @FXML
-    Text sodiumGrams;
+    Text sodiumMilligrams;
     @FXML
-    Text potassiumGrams;
+    Text potassiumMilligrams;
     @FXML
     Text totalCarbohydrateGrams;
     @FXML
@@ -74,13 +74,13 @@ public class NutritionFoodItemController extends AnchorPane implements Initializ
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         foodItemText.textProperty().set(nutritionModel.getName());
-        caloriesPerServing.textProperty().set(nutritionModel.getCalories() + "g");
+        caloriesPerServing.textProperty().set(String.valueOf(nutritionModel.getCalories()));
         servingSizeGrams.textProperty().set(nutritionModel.getServingSize() + "g");
         totalFatGrams.textProperty().set(nutritionModel.getFatTotal() + "g");
         saturatedFatGrams.textProperty().set(nutritionModel.getFatSaturated() + "g");
-        cholesterolGrams.textProperty().set(nutritionModel.getCholesterol() + "g");
-        sodiumGrams.textProperty().set(nutritionModel.getSodium() + "g");
-        potassiumGrams.textProperty().set(nutritionModel.getPotassium() + "g");
+        cholesterolMilligrams.textProperty().set(nutritionModel.getCholesterol() + "mg");
+        sodiumMilligrams.textProperty().set(nutritionModel.getSodium() + "mg");
+        potassiumMilligrams.textProperty().set(nutritionModel.getPotassium() + "mg");
         totalCarbohydrateGrams.textProperty().set(nutritionModel.getCarbohydrates() + "g");
         dietaryFiberGrams.textProperty().set(nutritionModel.getFiber() + "g");
         totalSugarsGrams.textProperty().set(nutritionModel.getSugar() + "g");

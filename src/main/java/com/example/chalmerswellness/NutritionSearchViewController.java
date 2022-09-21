@@ -43,7 +43,6 @@ public class NutritionSearchViewController extends AnchorPane {
     @FXML
     private void searchForFoodItem(ActionEvent event) {
         nutritionModel = nutrition.createNutritionModelFor(searchField.getText());
-        System.out.println(nutritionModel.getCalories());
         rootPane.getChildren().setAll(new NutritionFoodItemController(nutritionModel, modalPanel));
     }
 
