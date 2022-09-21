@@ -79,7 +79,7 @@ public class NutritionFoodItemController extends AnchorPane implements Initializ
         totalFatGrams.textProperty().set(nutritionModel.getFatTotal() + "g");
         saturatedFatGrams.textProperty().set(nutritionModel.getFatSaturated() + "g");
         cholesterolGrams.textProperty().set(nutritionModel.getCholesterol() + "g");
-        sodiumGrams.textProperty().set(nutritionModel.getPotassium() + "g");
+        sodiumGrams.textProperty().set(nutritionModel.getSodium() + "g");
         potassiumGrams.textProperty().set(nutritionModel.getPotassium() + "g");
         totalCarbohydrateGrams.textProperty().set(nutritionModel.getCarbohydrates() + "g");
         dietaryFiberGrams.textProperty().set(nutritionModel.getFiber() + "g");
