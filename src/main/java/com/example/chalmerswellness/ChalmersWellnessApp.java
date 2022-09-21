@@ -41,8 +41,12 @@ public class ChalmersWellnessApp extends Application {
         dataService.insertWorkout(workout);
 
         FoodFacade foodFacade = new FoodFacade();
-        Food fnm = foodFacade.createFood("apple");
-        dataService.insertNutrition(fnm);
+
+        Food[] fnm = foodFacade.getFood("apple+fries");
+        System.out.println("jhe");
+        //dataService.insertNutrition(fnm);
+
+
     }
 
     public static void main(String[] args) {
