@@ -18,4 +18,6 @@ module com.example.chalmerswellness {
     opens com.example.chalmerswellness.Models to javafx.fxml;
     exports com.example.chalmerswellness.ObjectModels;
     opens com.example.chalmerswellness.ObjectModels to javafx.fxml;
+    exports com.example.chalmerswellness.calorieAPI;
+    opens com.example.chalmerswellness.calorieAPI to javafx.fxml;
 }

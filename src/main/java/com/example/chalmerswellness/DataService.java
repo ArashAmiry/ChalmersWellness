@@ -3,7 +3,7 @@ package com.example.chalmerswellness;
 
 import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.ObjectModels.Workout;
-import com.example.chalmerswellness.calorieAPI.FoodNutritionModel;
+import com.example.chalmerswellness.calorieAPI.Food;
 
 import java.io.File;
 import java.sql.*;
@@ -137,14 +137,14 @@ public class DataService {
         }
     }
 
-    public void insertNutrition(FoodNutritionModel nutritionModel) {
+    public void insertNutrition(Food nutritionModel) {
         String sql = "INSERT INTO nutrition(mealName, calories, servingSize, fatTotal, fatSaturated, protein, sodium, cholesterol, carbohydrates, fiber, sugar) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
         try (Connection conn = connect(dbPath);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, nutritionModel.getName());
-            pstmt.setDouble(2, nutritionModel.getCalories());
-            pstmt.setDouble(3, nutritionModel.getServingSize());
+            /*pstmt.setDouble(2, nutritionModel.getCalories());*/
+            /*pstmt.setDouble(3, nutritionModel.getServingSize());
             pstmt.setDouble(4, nutritionModel.getFatTotal());
             pstmt.setDouble(5, nutritionModel.getFatSaturated());
             pstmt.setDouble(6, nutritionModel.getProtein());
@@ -152,7 +152,7 @@ public class DataService {
             pstmt.setDouble(8, nutritionModel.getCholesterol());
             pstmt.setDouble(9, nutritionModel.getCarbohydrates());
             pstmt.setDouble(10, nutritionModel.getFiber());
-            pstmt.setDouble(11, nutritionModel.getSugar());
+            pstmt.setDouble(11, nutritionModel.getSugar());*/
             pstmt.executeUpdate();
 
         } catch (SQLException e) {

@@ -6,63 +6,66 @@ import com.google.gson.stream.JsonWriter;
 
 import java.io.IOException;
 
-public class NutritionTypeAdapter extends TypeAdapter<FoodNutritionModel> {
+public class NutritionTypeAdapter extends TypeAdapter<Food> {
     @Override
-    public void write(JsonWriter jsonWriter, FoodNutritionModel foodNutritionModel) throws IOException {
+    public void write(JsonWriter jsonWriter, Food food) throws IOException {
 
     }
 
     @Override
-    public FoodNutritionModel read(JsonReader jsonReader) throws IOException {
-        final FoodNutritionModel foodNutritionModel = new FoodNutritionModel();
+    public Food read(JsonReader jsonReader) throws IOException {
+        /*final Food food = new Food();
 
         jsonReader.beginObject();
         while(jsonReader.hasNext()){
             switch (jsonReader.nextName()){
                 case "name":
-                    foodNutritionModel.setName(jsonReader.nextString());
+                    food.setName(jsonReader.nextString());
                     break;
                 case "calories":
-                    foodNutritionModel.setCalories(jsonReader.nextDouble());
-                    break;
-                case "serving_size_g":
-                    foodNutritionModel.setServingSize(jsonReader.nextDouble());
+                    food.setCalories(jsonReader.nextDouble());
+                    break;*/
+                /*case "serving_size_g":
+                    food.setServingSize(jsonReader.nextDouble());
                     break;
                 case "fat_total_g":
-                    foodNutritionModel.setFatTotal(jsonReader.nextDouble());
+                    food.setFatTotal(jsonReader.nextDouble());
                     break;
                 case "fat_saturated_g":
-                    foodNutritionModel.setFatSaturated(jsonReader.nextDouble());
+                    food.setFatSaturated(jsonReader.nextDouble());
                     break;
                 case "protein_g":
-                    foodNutritionModel.setProtein(jsonReader.nextDouble());
+                    food.setProtein(jsonReader.nextDouble());
                     break;
                 case "sodium_mg":
-                    foodNutritionModel.setSodium(jsonReader.nextDouble());
+                    food.setSodium(jsonReader.nextDouble());
                     break;
                 case "potassium_mg":
-                    foodNutritionModel.setPotassium(jsonReader.nextDouble());
+                    food.setPotassium(jsonReader.nextDouble());
                     break;
                 case "cholesterol_mg":
-                    foodNutritionModel.setCholesterol(jsonReader.nextDouble());
+                    food.setCholesterol(jsonReader.nextDouble());
                     break;
                 case "carbohydrates_total_g":
-                    foodNutritionModel.setCarbohydrates(jsonReader.nextDouble());
+                    food.setCarbohydrates(jsonReader.nextDouble());
                     break;
                 case "fiber_g":
-                    foodNutritionModel.setFiber(jsonReader.nextDouble());
+                    food.setFiber(jsonReader.nextDouble());
                     break;
                 case "sugar_g":
-                    foodNutritionModel.setSugar(jsonReader.nextDouble());
-                    break;
+                    food.setSugar(jsonReader.nextDouble());
+                    break;*/
 
-                default:
+                /*default:
                     jsonReader.skipValue();
             }
         }
 
         jsonReader.endObject();
 
-        return foodNutritionModel;
+        return food;*/
+
+        Food food = new Food();
+        return food;
     }
 }

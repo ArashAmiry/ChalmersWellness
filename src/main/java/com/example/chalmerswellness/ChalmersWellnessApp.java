@@ -3,11 +3,10 @@ package com.example.chalmerswellness;
 import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.ObjectModels.Workout;
 import com.example.chalmerswellness.calorieAPI.Food;
-import com.example.chalmerswellness.calorieAPI.FoodNutritionModel;
+import com.example.chalmerswellness.calorieAPI.FoodFacade;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.chart.PieChart;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -19,9 +18,9 @@ public class ChalmersWellnessApp extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ChalmersWellnessApp.class.getResource("/fxml/MainView.fxml"));
 
-        Scene scene = new Scene(fxmlLoader.load(), 1920, 1080);
+        Scene scene = new Scene(fxmlLoader.load(), 192, 108);
         stage.setTitle("Chalmers Wellness");
-        stage.setFullScreen(true);
+        stage.setFullScreen(false);
         stage.setScene(scene);
         stage.show();
 
@@ -41,8 +40,8 @@ public class ChalmersWellnessApp extends Application {
         DataService dataService = new DataService();
         dataService.insertWorkout(workout);
 
-        Food food = new Food();
-        FoodNutritionModel fnm = food.createNutritionModelFor("apple");
+        FoodFacade foodFacade = new FoodFacade();
+        Food fnm = foodFacade.createFood("apple");
         dataService.insertNutrition(fnm);
     }
 
