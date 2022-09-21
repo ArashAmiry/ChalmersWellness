@@ -12,7 +12,7 @@
           <AnchorPane fx:id="mainContent" minHeight="0.0" minWidth="0.0" prefHeight="655.0" prefWidth="970.0" />
         </content>
       </ScrollPane>
-      <Button fx:id="saveWorkoutButton" layoutX="900.0" layoutY="750.0" mnemonicParsing="false" text="Save Workout" textFill="#2bd31f" />
+      <Button fx:id="saveWorkoutButton" layoutX="900.0" layoutY="750.0" mnemonicParsing="false" onMouseClicked="saveWorkout" text="Save Workout" textFill="#2bd31f" />
       <TextField fx:id="workoutNameField" layoutX="14.0" layoutY="44.0" promptText="Workout name" />
       <AnchorPane fx:id="anchorPaneSearch" layoutX="1069.0" layoutY="11.0" prefHeight="812.0" prefWidth="330.0" />
    </children>
