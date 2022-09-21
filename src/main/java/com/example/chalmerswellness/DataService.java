@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataService {
-    private String dbPath = "C:\\sqlite\\db\\";
+    private String dbPath = "home\\sqlite\\db\\";
     public DataService(){
         createNewDatabase("testDb");
         createWorkoutTable();
