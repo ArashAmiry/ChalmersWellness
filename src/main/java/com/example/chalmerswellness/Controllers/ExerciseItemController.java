@@ -2,6 +2,7 @@ package com.example.chalmerswellness.Controllers;
 
 import com.example.chalmerswellness.Models.WorkoutModel;
 import com.example.chalmerswellness.ObjectModels.Exercise;
+import com.example.chalmerswellness.ObjectModels.ExerciseItem;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,13 +18,13 @@ import java.util.ResourceBundle;
 public class ExerciseItemController extends AnchorPane implements Initializable{
 
     private WorkoutModel model;
-    private Exercise exercise;
+    private ExerciseItem exercise;
     private AnchorPane anchorPane;
 
     @FXML
     Label exerciseName;
 
-    public ExerciseItemController(Exercise exercise, WorkoutModel model, AnchorPane anchorPane){
+    public ExerciseItemController(ExerciseItem exercise, WorkoutModel model, AnchorPane anchorPane){
         this.exercise = exercise;
         this.model = model;
         this.anchorPane = anchorPane;
@@ -51,7 +52,7 @@ public class ExerciseItemController extends AnchorPane implements Initializable{
     }
 
     @FXML private void openSetsWindow(){
-        AddSetsController addSetsController = new AddSetsController(model, anchorPane);
+        AddSetsController addSetsController = new AddSetsController(model, exercise, anchorPane);
         anchorPane.getChildren().add(addSetsController);
     }
 }

@@ -2,6 +2,7 @@ package com.example.chalmerswellness;
 
 
 import com.example.chalmerswellness.ObjectModels.Exercise;
+import com.example.chalmerswellness.ObjectModels.ExerciseItem;
 import com.example.chalmerswellness.ObjectModels.Workout;
 
 import java.io.File;
@@ -15,6 +16,7 @@ public class DataService {
         createNewDatabase("testDb");
         createWorkoutTable();
         createExercisesTable();
+        createExerciseItemTable();
     }
 
     public List<Workout> getWorkouts(){
@@ -223,5 +225,44 @@ public class DataService {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+
+    //TODO add connection to a exercise
+    private void createExerciseItemTable() {
+        String sql = "CREATE TABLE IF NOT EXISTS exerciseItems (\n"
+                + "	id INTEGER PRIMARY KEY\n"
+                + ");";
+
+        try (Connection conn = connect(dbPath);
+             Statement stmt = conn.createStatement()) {
+            stmt.execute(sql);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public ExerciseItem insertExerciseItem(Exercise exercise) {
+        String sql = "INSERT INTO exerciseItems VALUES(?)";
+
+
+        try (Connection conn = connect(dbPath);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.executeUpdate();
+
+            ResultSet rs = pstmt.getGeneratedKeys();
+            int generatedKey = 0;
+            if (rs.next()) {
+                generatedKey = rs.getInt(1);
+            }
+
+
+            return new ExerciseItem(generatedKey,exercise);
+
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
     }
 }

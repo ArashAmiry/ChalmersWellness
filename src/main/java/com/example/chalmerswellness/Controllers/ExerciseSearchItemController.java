@@ -1,5 +1,6 @@
 package com.example.chalmerswellness.Controllers;
 
+import com.example.chalmerswellness.DataService;
 import com.example.chalmerswellness.Models.WorkoutModel;
 import com.example.chalmerswellness.ObjectModels.Exercise;
 import javafx.fxml.FXML;
@@ -41,6 +42,8 @@ public class ExerciseSearchItemController extends AnchorPane implements Initiali
 
     @FXML public void addToWorkout(){
         model.addExercise(exercise);
+
+
     }
 
     @FXML public void removeFromWorkout(){
