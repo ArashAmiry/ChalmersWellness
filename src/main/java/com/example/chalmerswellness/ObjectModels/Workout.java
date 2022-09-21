@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Workout {
+    private int id;
     private String workoutName;
     private List<Exercise> exercises = new ArrayList<>();
 
@@ -15,11 +16,11 @@ public class Workout {
         this.workoutName = "Empty";
     }
 
-    public String getWorkoutName(){
+    public String getWorkoutName() {
         return workoutName;
     }
 
-    public List<Exercise> getExercises(){
+    public List<Exercise> getExercises() {
         return exercises;
     }
 }

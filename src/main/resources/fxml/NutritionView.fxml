@@ -6,8 +6,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1460.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" type="AnchorPane">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1460.0" type="AnchorPane" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Circle fill="DODGERBLUE" layoutX="743.0" layoutY="278.0" radius="137.0" stroke="BLACK" strokeType="INSIDE" />
       <Text fill="WHITE" layoutX="695.0" layoutY="269.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1800 Kcal Left " textAlignment="CENTER" wrappingWidth="102.79876708984375">
@@ -48,7 +47,7 @@
             <Font size="13.0" />
          </font>
       </Text>
-      <Button layoutX="249.0" layoutY="605.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="440.0" text="Add breakfast">
+      <Button layoutX="249.0" layoutY="605.0" mnemonicParsing="false" onAction="#loadNutritionSearchView" prefHeight="86.0" prefWidth="440.0" text="Add breakfast">
          <font>
             <Font size="20.0" />
          </font>
@@ -68,5 +67,6 @@
             <Font size="20.0" />
          </font>
       </Button>
+      <AnchorPane fx:id="modalPanel" layoutX="394.0" layoutY="62.0" prefHeight="700.0" prefWidth="700.0" />
    </children>
 </fx:root>
