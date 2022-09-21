@@ -232,6 +232,8 @@ public class DataService {
     private void createExerciseItemTable() {
         String sql = "CREATE TABLE IF NOT EXISTS exerciseItems (\n"
                 + "	id INTEGER PRIMARY KEY\n"
+               // + "	exerciseId INTEGER,\n"
+                //+ "	Timestamp DATETIME\n"
                 + ");";
 
         try (Connection conn = connect(dbPath);
@@ -242,12 +244,13 @@ public class DataService {
         }
     }
 
+    //TODO give id to exercise
     public ExerciseItem insertExerciseItem(Exercise exercise) {
         String sql = "INSERT INTO exerciseItems VALUES(?)";
 
-
         try (Connection conn = connect(dbPath);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                //pstmt.setInt(1, exercise);
             pstmt.executeUpdate();
 
             ResultSet rs = pstmt.getGeneratedKeys();
