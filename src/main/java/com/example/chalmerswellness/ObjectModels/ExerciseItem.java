@@ -11,7 +11,7 @@ public class ExerciseItem extends Exercise{
 
 
     public ExerciseItem(int id, Exercise exercise) {
-        super(exercise.name, exercise.type, exercise.muscle, exercise.equipment, exercise.difficulty, exercise.instructions);
+        super(id, exercise.name, exercise.type, exercise.muscle, exercise.equipment, exercise.difficulty, exercise.instructions);
         this.id = id;
     }
 

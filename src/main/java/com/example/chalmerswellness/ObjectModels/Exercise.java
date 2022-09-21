@@ -1,6 +1,7 @@
 package com.example.chalmerswellness.ObjectModels;
 
 public class Exercise {
+    public int id;
     public String name;
     public String type;
     public String muscle;
@@ -8,7 +9,8 @@ public class Exercise {
     public String difficulty;
     public String instructions;
 
-    public Exercise(String name, String type, String muscle, String equipment, String difficulty, String instructions){
+    public Exercise(int id, String name, String type, String muscle, String equipment, String difficulty, String instructions){
+        this.id = id;
         this.name = name;
         this.type = type;
         this.muscle = muscle;
@@ -19,5 +21,9 @@ public class Exercise {
 
     public Exercise(){
 
+    }
+
+    public int getId() {
+        return id;
     }
 }

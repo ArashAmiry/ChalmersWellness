@@ -14,7 +14,8 @@ import java.util.List;
 
 public class DataService {
     private String dbPath = "C:\\sqlite\\db\\";
-    public DataService(){
+
+    public DataService() {
         createNewDatabase("testDb");
         createWorkoutTable();
         createExercisesTable();
@@ -28,13 +29,13 @@ public class DataService {
         //insertExercises(testExercises);
     }
 
-    public List<Workout> getWorkouts(){
+    public List<Workout> getWorkouts() {
         String sql = "SELECT * FROM workouts";
         List<Workout> workouts = new ArrayList<>();
 
         try (Connection conn = this.connect(dbPath);
-             Statement stmt  = conn.createStatement();
-             ResultSet rs    = stmt.executeQuery(sql)){
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
                 int id = rs.getInt("id");
@@ -56,11 +57,12 @@ public class DataService {
 
         List<Exercise> exercises = new ArrayList<>();
         try (Connection conn = this.connect(dbPath);
-             PreparedStatement pstmt  = conn.prepareStatement(sql)){
-                pstmt.setInt(1,workoutId);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, workoutId);
 
-                ResultSet rs  = pstmt.executeQuery();
+            ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
+                var id = rs.getInt("id");
                 var exerciseName = rs.getString("exerciseName");
                 var type = rs.getString("exerciseType");
                 var muscle = rs.getString("exerciseMuscle");
@@ -68,7 +70,7 @@ public class DataService {
                 var difficulty = rs.getString("exerciseDifficulty");
                 var instructions = rs.getString("exerciseInstructions");
 
-                Exercise exercise = new Exercise(exerciseName, type, muscle, equipment, difficulty, instructions);
+                Exercise exercise = new Exercise(id, exerciseName, type, muscle, equipment, difficulty, instructions);
                 exercises.add(exercise);
             }
         }
@@ -133,13 +135,14 @@ public class DataService {
             System.out.println(e.getMessage());
         }
     }
+
     private void removeExercises(int workoutId) {
         String sql = "DELETE FROM exercises WHERE workoutId = ?";
 
         try (Connection conn = this.connect(dbPath);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-                pstmt.setInt(1, workoutId);
-                pstmt.executeUpdate();
+            pstmt.setInt(1, workoutId);
+            pstmt.executeUpdate();
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -172,7 +175,7 @@ public class DataService {
      */
 
     private static Connection connect(String dbPath) {
-        String url = "jdbc:sqlite:"+dbPath+".db";
+        String url = "jdbc:sqlite:" + dbPath + ".db";
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url);
@@ -186,7 +189,7 @@ public class DataService {
         File sqliteFolder = new File(dbPath);
         dbPath += fileName;
 
-        if(!sqliteFolder.exists())
+        if (!sqliteFolder.exists())
             sqliteFolder.mkdirs();
 
         try {
@@ -210,7 +213,7 @@ public class DataService {
 
         try (Connection conn = connect(dbPath);
              Statement stmt = conn.createStatement()) {
-                stmt.execute(sql);
+            stmt.execute(sql);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -230,7 +233,7 @@ public class DataService {
 
         try (Connection conn = connect(dbPath);
              Statement stmt = conn.createStatement()) {
-                stmt.execute(sql);
+            stmt.execute(sql);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -241,7 +244,7 @@ public class DataService {
     private void createExerciseItemTable() {
         String sql = "CREATE TABLE IF NOT EXISTS exerciseItems (\n"
                 + "	id INTEGER PRIMARY KEY,\n"
-               // + "	exerciseId INTEGER,\n"
+                + "	exerciseId INTEGER,\n"
                 + " date TEXT\n"
                 + ");";
 
@@ -303,13 +306,13 @@ public class DataService {
     }
 
 
-    public List<Exercise> getMyExercises(){
+    public List<Exercise> getMyExercises() {
         String sql = "SELECT * FROM MyExercises";
         List<Exercise> exercises = new ArrayList<>();
 
         try (Connection conn = this.connect(dbPath);
-             Statement stmt  = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)){
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
                 int id = rs.getInt("id");
@@ -320,9 +323,7 @@ public class DataService {
                 String difficulty = rs.getString("exerciseDifficulty");
                 String instructions = rs.getString("exerciseInstructions");
 
-
-
-               Exercise exercise = new Exercise(name, type, muscle, equipment, difficulty, instructions);
+                Exercise exercise = new Exercise(id, name, type, muscle, equipment, difficulty, instructions);
                 exercises.add(exercise);
             }
         } catch (SQLException e) {
@@ -332,15 +333,73 @@ public class DataService {
         return exercises;
     }
 
+    public ExerciseItem getMyExercise(int id) throws SQLException {
+        String sql = "SELECT id, exerciseName, exerciseType, exerciseMuscle, exerciseEquipment, exerciseDifficulty, exerciseInstructions FROM MyExercises WHERE id = ?";
+        ExerciseItem exerciseItem;
+
+        try (Connection conn = this.connect(dbPath);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setInt(1, id);
+
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                var exerciseId = rs.getInt("id");
+                var exerciseName = rs.getString("exerciseName");
+                var type = rs.getString("exerciseType");
+                var muscle = rs.getString("exerciseMuscle");
+                var equipment = rs.getString("exerciseEquipment");
+                var difficulty = rs.getString("exerciseDifficulty");
+                var instructions = rs.getString("exerciseInstructions");
+
+                Exercise exercise = new Exercise(id, exerciseName, type, muscle, equipment, difficulty, instructions);
+                exerciseItem = new ExerciseItem(id, exercise);
+                return exerciseItem;
+
+            }
+            return null;
+        }
+    }
+
+    public List<ExerciseItem> getTodayExerciseItems() {
+        String todayDate = LocalDate.now().toString();
+
+        String sql = "SELECT exerciseId FROM exerciseItems WHERE date = ?";
+        List<ExerciseItem> exercises = new ArrayList<>();
+
+        try (Connection conn = this.connect(dbPath);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, todayDate);
+            pstmt.executeQuery();
+
+            //TODO find exerciseId mapped
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                var exerciseId = rs.getInt("exerciseId");
+                //TODO search with exerciseId
+                ExerciseItem exercise = getMyExercise(exerciseId);
+                exercises.add(exercise);
+                //exercises.add(exercise);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return exercises;
+    }
+
+
     //TODO give id to exercise
     public ExerciseItem insertExerciseItem(Exercise exercise) {
-        String sql = "INSERT INTO exerciseItems VALUES(?,?)";
+        String sql = "INSERT INTO exerciseItems VALUES(?,?,?)";
 
         String date = LocalDate.now().toString();
 
         try (Connection conn = connect(dbPath);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-                pstmt.setString(2, date);
+                //pstmt.setInt(1, exercise.getId());
+                pstmt.setInt(2, exercise.getId());
+                pstmt.setString(3, date);
             pstmt.executeUpdate();
 
             ResultSet rs = pstmt.getGeneratedKeys();

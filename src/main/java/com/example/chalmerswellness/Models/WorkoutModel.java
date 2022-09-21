@@ -23,18 +23,27 @@ public class WorkoutModel implements Observable {
     }
 
     public void addExercise(Exercise exercise){
-        //TODO skapa i databas
-        DataService db = new DataService();
         var exerciseItem = db.insertExerciseItem(exercise);
-
         addedExercises.add(exerciseItem);
-
-
-
-
         notifyObservers();
     }
 
+    public void removeLater(){
+        var t = getExerciseItems();
+
+        for (var item: t) {
+            addedExercises.add(item);
+        }
+        notifyObservers();
+    }
+
+    public List<Exercise> getMyExercises(){
+        return db.getMyExercises();
+    }
+
+    public List<ExerciseItem> getExerciseItems(){
+        return db.getTodayExerciseItems();
+    }
     public void removeExercise(Exercise exercise){
         addedExercises.remove(exercise);
         notifyObservers();

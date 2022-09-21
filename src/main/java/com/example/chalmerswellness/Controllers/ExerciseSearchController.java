@@ -28,16 +28,12 @@ public class ExerciseSearchController extends AnchorPane implements Initializabl
     @FXML public Label noResultLabel;
     @FXML public ListView<ExerciseSearchItemController> searchListView;
 
-    private DataService db;
-
     public ExerciseSearchController(WorkoutModel model){
         this.model = model;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/ExerciseSearchView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
         apiConnector = new ExercisesApiConnector();
-
-        db = new DataService();
 
         try {
             fxmlLoader.load();
@@ -59,8 +55,8 @@ public class ExerciseSearchController extends AnchorPane implements Initializabl
     @FXML
     void searchExercise(ActionEvent event){
         //var exercises = apiConnector.searchForExercises(searchField.getText().replaceAll("\\s+","+"));
-        var exercises = db.getMyExercises();
-
+        var exercises = model.getMyExercises();
+        //TODO Add Search method functionality
 
         updateSearchResult(exercises);
     }
@@ -76,7 +72,8 @@ public class ExerciseSearchController extends AnchorPane implements Initializabl
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1){
-        var exercises = apiConnector.getExercises(0);
+        //var exercises = apiConnector.getExercises(0);
+        var exercises = model.getMyExercises();
         updateSearchResult(exercises);
     }
 }
