@@ -67,7 +67,7 @@ public class CreateWorkoutController extends AnchorPane implements Observer {
 
 
     private Workout createWorkoutObject(ObservableList<ExerciseSearchItemController> exercises){
-        String workoutName = workoutNameField.getText().toString();
+        String workoutName = workoutNameField.getText();
         List<Exercise> workoutExercises = new ArrayList<>();
         for (var exercise: exercises) {
             workoutExercises.add(exercise.getExercise());
@@ -76,9 +76,19 @@ public class CreateWorkoutController extends AnchorPane implements Observer {
     }
 
     @FXML public void saveWorkout(){
-        dataService.insertWorkout(createWorkoutObject(exercisesList));
-        mainContent.getItems().clear();
+        Workout workoutObject = createWorkoutObject(exercisesList);
+        dataService.insertWorkout(workoutObject);
+        clearWorkoutListView();
+        model.addWorkout(workoutObject);
+
+    }
+
+    private void clearWorkoutListView(){
         workoutNameField.deleteText(0,workoutNameField.getText().length());
+        mainContent.getItems().setAll();
+        for (var exercise : exercisesList){
+            model.removeExercise(exercise.getExercise());
+        }
     }
 
     @Override

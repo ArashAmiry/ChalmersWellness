@@ -1,5 +1,6 @@
 package com.example.chalmerswellness.Controllers;
 
+import com.example.chalmerswellness.DataService;
 import com.example.chalmerswellness.Models.WorkoutModel;
 import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.ObjectModels.Workout;
@@ -19,9 +20,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ManageWorkoutController extends AnchorPane implements Observer {
-    private List<WorkoutItemController> workoutsList = new ArrayList<>();
+    private ObservableList<ExerciseSearchItemController> exercisesList = FXCollections.observableArrayList();
+    private ObservableList<WorkoutItemController> workoutsList = FXCollections.observableArrayList();
+
+    private DataService dataservice = new DataService();
     private WorkoutModel model;
-    @FXML public ListView exerciseList;
+    @FXML public ListView workoutList;
     @FXML public Label noResult;
 
 
@@ -38,32 +42,49 @@ public class ManageWorkoutController extends AnchorPane implements Observer {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
+        populateWorkoutList();
     }
 
-    void updateExerciseList(List<Exercise> exercises){
-        //exercisesList.clear();
+    void populateWorkoutList(){
+        for (var workout : dataservice.getWorkouts()){
+            workoutsList.add(new WorkoutItemController(workout));
+        }
+        workoutList.getItems().setAll(workoutsList);
+    }
+    /*void updateExerciseList(List<Exercise> exercises){
+        exercisesList.clear();
 
         for (var exercise: exercises) {
             ExerciseSearchItemController exerciseController = new ExerciseSearchItemController(exercise, model);
-            //exercisesList.add(exerciseController);
+            exercisesList.add(exerciseController);
         }
-        //exerciseList.getItems().setAll(exercisesList);
+        workoutList.getItems().setAll(exercisesList);
+        isNoResult();
+    }*/
+
+    void updateWorkoutList(List<Workout> workouts){
+        workoutsList.clear();
+        for (var workout : workouts){
+            workoutsList.add(new WorkoutItemController(workout));
+        }
+        workoutList.getItems().setAll(workoutsList);
         isNoResult();
     }
 
     void isNoResult(){
-        /*if(exercisesList.size() > 0){
+        if(exercisesList.size() > 0){
             noResult.setVisible(false);
         } else{
             noResult.setVisible(true);
-        }*/
+        }
     }
 
     @Override
     public void update(Observable observable) {
         model = (WorkoutModel) observable;
         var exercises = model.getAddedExercises();
-
-        updateExerciseList(exercises);
+        var workouts = model.getSavedWorkouts();
+        //updateExerciseList(exercises);
+        updateWorkoutList(workouts);
     }
 }
