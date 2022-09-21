@@ -101,17 +101,17 @@
          </font>
       </Text>
       <Line endX="40.0" layoutX="400.0" layoutY="647.0" startX="-100.0" />
-      <Text fx:id="cholesterolGrams" layoutX="379.0" layoutY="621.0" strokeType="OUTSIDE" strokeWidth="0.0" text="99g">
+      <Text fx:id="cholesterolMilligrams" layoutX="379.0" layoutY="621.0" strokeType="OUTSIDE" strokeWidth="0.0" text="99g">
          <font>
             <Font size="15.0" />
          </font>
       </Text>
-      <Text fx:id="sodiumGrams" layoutX="355.0" layoutY="642.0" strokeType="OUTSIDE" strokeWidth="0.0" text="99g">
+      <Text fx:id="sodiumMilligrams" layoutX="355.0" layoutY="642.0" strokeType="OUTSIDE" strokeWidth="0.0" text="99g">
          <font>
             <Font size="15.0" />
          </font>
       </Text>
-      <Text fx:id="potassiumGrams" layoutX="370.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="99g">
+      <Text fx:id="potassiumMilligrams" layoutX="370.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="99g">
          <font>
             <Font size="15.0" />
          </font>
