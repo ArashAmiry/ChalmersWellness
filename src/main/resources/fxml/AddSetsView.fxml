@@ -15,7 +15,7 @@
                   <Font size="26.0" />
                </font>
             </Label>
-            <ListView fx:id="setsList" layoutX="16.0" layoutY="52.0" prefHeight="272.0" prefWidth="730.0" />
+            <ListView fx:id="setsListView" layoutX="16.0" layoutY="52.0" prefHeight="272.0" prefWidth="730.0" />
             <Button layoutX="16.0" layoutY="325.0" mnemonicParsing="false" onMouseClicked="#addSet" prefHeight="38.0" prefWidth="730.0" text="Add Set">
                <font>
                   <Font size="24.0" />

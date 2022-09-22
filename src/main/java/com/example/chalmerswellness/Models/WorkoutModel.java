@@ -11,6 +11,7 @@ import java.util.List;
 
 public class WorkoutModel implements Observable {
     private List<ExerciseItem> addedExercises = new ArrayList<>();
+    private List<ExerciseItemSet> addedSets = new ArrayList<>();
     private List<Observer> observers = new ArrayList<>();
     private DataService db;
 
@@ -38,6 +39,10 @@ public class WorkoutModel implements Observable {
 
     public void addSet(ExerciseItemSet set){
         db.insertExerciseSet(set);
+    }
+
+    public List<ExerciseItemSet> getSets(int exerciseItemId){
+        return db.getExerciseSets(exerciseItemId);
     }
 
     public List<Exercise> getMyExercises(){

@@ -1,7 +1,6 @@
 package com.example.chalmerswellness.Controllers;
 
-import com.example.chalmerswellness.Models.WorkoutModel;
-import com.example.chalmerswellness.ObjectModels.Exercise;
+import com.example.chalmerswellness.ObjectModels.ExerciseItemSet;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -10,14 +9,20 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
-public class ExerciseSet extends AnchorPane {
+public class ExerciseItemSetController extends AnchorPane implements Initializable {
 
     @FXML
     Label exerciseName;
+    private ExerciseItemSet exerciseItemSet;
 
-    public ExerciseSet(){
+    @FXML private Label weightLabel;
+    @FXML private Label reps;
+
+    public ExerciseItemSetController(ExerciseItemSet set){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/ExerciseSet.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -29,5 +34,9 @@ public class ExerciseSet extends AnchorPane {
         }
     }
 
-
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        weightLabel.textProperty().set(String.valueOf(exerciseItemSet.getWeight()));
+        reps.textProperty().set(String.valueOf(exerciseItemSet.getReps()));
+    }
 }

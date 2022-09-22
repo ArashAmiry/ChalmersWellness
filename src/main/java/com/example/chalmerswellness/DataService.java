@@ -1,7 +1,6 @@
 package com.example.chalmerswellness;
 
 
-import com.example.chalmerswellness.Controllers.ExerciseSet;
 import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.ObjectModels.ExerciseItem;
 import com.example.chalmerswellness.ObjectModels.ExerciseItemSet;
@@ -407,17 +406,41 @@ public class DataService {
             System.out.println(e.getMessage());
         }
 
+        //TODO remove type or no?
         return null;
     }
 
 
+
+    public List<ExerciseItemSet> getExerciseSets(int exerciseItemId) {
+        String sql = "SELECT id,exerciseItemId, weight, reps FROM ExerciseSets WHERE exerciseItemId = ?";
+        List<ExerciseItemSet> sets = new ArrayList<>();
+
+        try (Connection conn = this.connect(dbPath);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setInt(1, exerciseItemId);
+                pstmt.executeQuery();
+
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                var id = rs.getInt("exerciseItemId");
+                double weight = rs.getDouble("weight");
+                int reps = rs.getInt("reps");
+                ExerciseItemSet set = new ExerciseItemSet(id, weight, reps);
+                sets.add(set);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return sets;
+    }
 
     private void createExerciseSetsTable() {
         String sql = "CREATE TABLE IF NOT EXISTS ExerciseSets (\n"
                 + "	id INTEGER PRIMARY KEY,\n"
                 + "	exerciseItemId INTEGER NOT NULL,\n"
                 + "	weight DOUBLE NOT NULL,\n"
-                + "	reps DOUBLE NOT NULL\n"
+                + "	reps INTEGER NOT NULL\n"
                 + ");";
 
         try (Connection conn = connect(dbPath);
@@ -427,7 +450,4 @@ public class DataService {
             System.out.println(e.getMessage());
         }
     }
-
-
-
 }
