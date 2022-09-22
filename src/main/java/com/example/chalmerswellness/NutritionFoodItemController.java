@@ -1,7 +1,7 @@
 package com.example.chalmerswellness;
 
-import com.example.chalmerswellness.calorieAPI.Nutrition;
-import com.example.chalmerswellness.calorieAPI.NutritionModel;
+import com.example.chalmerswellness.calorieAPI.Food;
+import com.example.chalmerswellness.calorieAPI.FoodFacade;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -52,15 +52,15 @@ public class NutritionFoodItemController extends AnchorPane implements Initializ
     AnchorPane modalPanel;
 
 
-    Nutrition nutrition = new Nutrition();
-    NutritionModel nutritionModel = new NutritionModel();
+    FoodFacade foodFacade = new FoodFacade();
+    Food food = new Food();
 
-    public NutritionFoodItemController(NutritionModel foodItem, AnchorPane pane){
+    public NutritionFoodItemController(Food foodItem, AnchorPane pane){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/NutritionFoodItemView.fxml"));
 
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
-        nutritionModel = foodItem;
+        food = foodItem;
         modalPanel = pane;
 
         try {
@@ -73,18 +73,18 @@ public class NutritionFoodItemController extends AnchorPane implements Initializ
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        foodItemText.textProperty().set(nutritionModel.getName());
-        caloriesPerServing.textProperty().set(String.valueOf(nutritionModel.getCalories()));
-        servingSizeGrams.textProperty().set(nutritionModel.getServingSize() + "g");
-        totalFatGrams.textProperty().set(nutritionModel.getFatTotal() + "g");
-        saturatedFatGrams.textProperty().set(nutritionModel.getFatSaturated() + "g");
-        cholesterolMilligrams.textProperty().set(nutritionModel.getCholesterol() + "mg");
-        sodiumMilligrams.textProperty().set(nutritionModel.getSodium() + "mg");
-        potassiumMilligrams.textProperty().set(nutritionModel.getPotassium() + "mg");
-        totalCarbohydrateGrams.textProperty().set(nutritionModel.getCarbohydrates() + "g");
-        dietaryFiberGrams.textProperty().set(nutritionModel.getFiber() + "g");
-        totalSugarsGrams.textProperty().set(nutritionModel.getSugar() + "g");
-        totalProteinGrams.textProperty().set(nutritionModel.getProtein() + "g");
+        foodItemText.textProperty().set(food.getName());
+        caloriesPerServing.textProperty().set(String.valueOf(food.getCalories()));
+        servingSizeGrams.textProperty().set(food.getServingSize() + "g");
+        totalFatGrams.textProperty().set(food.getFatTotal() + "g");
+        saturatedFatGrams.textProperty().set(food.getFatSaturated() + "g");
+        cholesterolMilligrams.textProperty().set(food.getCholesterol() + "mg");
+        sodiumMilligrams.textProperty().set(food.getSodium() + "mg");
+        potassiumMilligrams.textProperty().set(food.getPotassium() + "mg");
+        totalCarbohydrateGrams.textProperty().set(food.getCarbohydrates() + "g");
+        dietaryFiberGrams.textProperty().set(food.getFiber() + "g");
+        totalSugarsGrams.textProperty().set(food.getSugar() + "g");
+        totalProteinGrams.textProperty().set(food.getProtein() + "g");
     }
 
     @FXML

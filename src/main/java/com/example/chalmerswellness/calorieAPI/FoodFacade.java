@@ -9,11 +9,10 @@ public class FoodFacade {
 
     public Food createFood(String foodName) throws JsonProcessingException {
         Food food = getFood(foodName)[0];
-
         return food;
     }
 
-    public Food[] getFood(String foodName) throws JsonProcessingException {
+    private Food[] getFood(String foodName) throws JsonProcessingException {
         //Try catch here... potentially...
         String nutritionJsonString = apiConnector.getNutritionAsStringFromAPI(foodName);
         Food[] food = objectMapper.readValue(nutritionJsonString, Food[].class);
@@ -22,6 +21,6 @@ public class FoodFacade {
 
     public boolean isFoodExisting(String foodName) throws JsonProcessingException {
         Food[] food = getFood(foodName);
-        return food.length != 0;
+        return food.length == 1;
     }
 }

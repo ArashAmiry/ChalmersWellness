@@ -42,7 +42,7 @@ public class ChalmersWellnessApp extends Application {
 
         FoodFacade foodFacade = new FoodFacade();
 
-        Food[] fnm = foodFacade.getFood("apple+fries");
+        Food fnm = foodFacade.createFood("apple");
         System.out.println("jhe");
         //dataService.insertNutrition(fnm);
 

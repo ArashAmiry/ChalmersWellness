@@ -1,7 +1,8 @@
 package com.example.chalmerswellness;
 
-import com.example.chalmerswellness.calorieAPI.Nutrition;
-import com.example.chalmerswellness.calorieAPI.NutritionModel;
+import com.example.chalmerswellness.calorieAPI.Food;
+import com.example.chalmerswellness.calorieAPI.FoodFacade;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,8 +21,8 @@ public class NutritionSearchViewController extends AnchorPane {
 
     @FXML
     AnchorPane modalPanel;
-    Nutrition nutrition = new Nutrition();
-    NutritionModel nutritionModel = new NutritionModel();
+    FoodFacade foodFacade = new FoodFacade();
+    Food food = new Food();
 
 
     public NutritionSearchViewController(AnchorPane pane){
@@ -42,8 +43,20 @@ public class NutritionSearchViewController extends AnchorPane {
 
     @FXML
     private void searchForFoodItem(ActionEvent event) {
-        nutritionModel = nutrition.createNutritionModelFor(searchField.getText());
-        rootPane.getChildren().setAll(new NutritionFoodItemController(nutritionModel, modalPanel));
+        String foodName = searchField.getText();
+
+        try {
+            if (foodFacade.isFoodExisting(foodName)){
+                food = foodFacade.createFood(foodName);
+                rootPane.getChildren().setAll(new NutritionFoodItemController(food, modalPanel));
+            }
+            else {
+                searchField.promptTextProperty().set("No food with that name was found.");
+            }
+        } catch (JsonProcessingException exception){
+            searchField.promptTextProperty().set("Server could not process food, please try again");
+        }
+
     }
 
     @FXML
