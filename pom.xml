@@ -102,6 +102,11 @@
             <artifactId>medusa</artifactId>
             <version>17.1.5</version>
         </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-base</artifactId>
+            <version>18.0.2</version>
+        </dependency>
 
     </dependencies>
 
