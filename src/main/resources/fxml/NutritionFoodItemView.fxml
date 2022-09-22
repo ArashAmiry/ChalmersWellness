@@ -24,7 +24,7 @@
          </font>
       </Text>
       <TextField fx:id="foodItemGrams" layoutX="271.0" layoutY="293.0" />
-      <Button id="addFoodButton" layoutX="196.0" layoutY="444.0" mnemonicParsing="false" onMouseClicked="#addFoodEaten" prefHeight="60.0" prefWidth="300.0" text="Add food" />
+      <Button id="addFoodButton" fx:id="addFoodButton" layoutX="196.0" layoutY="444.0" mnemonicParsing="false" onMouseClicked="#addFoodEaten" prefHeight="60.0" prefWidth="300.0" text="Add food" />
       <Text layoutX="78.0" layoutY="644.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Calories">
          <font>
             <Font size="22.0" />

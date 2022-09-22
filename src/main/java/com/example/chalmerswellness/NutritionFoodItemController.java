@@ -47,10 +47,10 @@ public class NutritionFoodItemController extends AnchorPane implements Initializ
     Button addFoodButton;
     @FXML
     AnchorPane rootPane;
-
     @FXML
     AnchorPane modalPanel;
 
+    DataService dataService = new DataService();
 
     FoodFacade foodFacade = new FoodFacade();
     Food food = new Food();
@@ -89,7 +89,24 @@ public class NutritionFoodItemController extends AnchorPane implements Initializ
 
     @FXML
     private void addFoodEaten(MouseEvent mouseEvent) {
+        dataService.insertNutrition(food);
+        rootPane.getChildren().setAll(new NutritionSearchViewController(modalPanel));
+    }
 
+    private boolean validateAmountGrams(){
+        String grams = foodItemGrams.getText();
+        if (grams == null) {
+            return false;
+        }
+        try {
+            double parsedGrams = Double.parseDouble(grams);
+            if (parsedGrams <= 0 ){
+                throw new NumberFormatException();
+            }
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
     }
 
     @FXML
