@@ -36,7 +36,7 @@ public class WorkoutController extends AnchorPane implements Initializable {
         //CreateWorkoutView
         createWorkoutView = new CreateWorkoutController(workoutModel);
         //ManageWorkoutView
-        //manageWorkoutView = new ManageWorkoutController(workoutModel);
+        manageWorkoutView = new ManageWorkoutController(workoutModel);
 
         //TODO Remove
         DataService dataService = new DataService();
@@ -72,7 +72,7 @@ public class WorkoutController extends AnchorPane implements Initializable {
     //TODO change to MVC
     @FXML void openManageWorkoutTab(){
         //todayWorkoutView.textProperty().set("ManageWorkout Tab");
-        setTabTo(new ManageWorkoutController(workoutModel));
+        setTabTo(manageWorkoutView);
     }
 
 

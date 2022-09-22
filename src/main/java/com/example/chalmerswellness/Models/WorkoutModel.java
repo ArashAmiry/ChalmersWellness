@@ -58,5 +58,4 @@ public class WorkoutModel implements Observable {
         observers.add(observer);
     }
 
-
 }
