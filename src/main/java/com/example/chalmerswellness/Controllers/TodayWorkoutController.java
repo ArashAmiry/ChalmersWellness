@@ -45,8 +45,7 @@ public class TodayWorkoutController extends AnchorPane implements Observer, Init
         exercisesList.clear();
 
         for (var exercise: exercises) {
-            ExerciseItemController exerciseController = new ExerciseItemController(exercise, model, this);
-            exercisesList.add(exerciseController);
+            exercisesList.add(new ExerciseItemController(exercise, model, this));
         }
 
         exerciseList.getItems().setAll(exercisesList);
