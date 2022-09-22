@@ -339,7 +339,6 @@ public class DataService {
                 var instructions = rs.getString("exerciseInstructions");
 
                 exercise = new Exercise(id, exerciseName, type, muscle, equipment, difficulty, instructions);
-                // exerciseItem = new ExerciseItem(id, exercise);
             }
             return exercise;
         }
@@ -356,17 +355,13 @@ public class DataService {
                 pstmt.setString(1, todayDate);
                 pstmt.executeQuery();
 
-
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 var id = rs.getInt("id");
                 var exerciseId = rs.getInt("exerciseId");
                 Exercise exercise = getMyExercise(exerciseId);
-
-
-
-               ExerciseItem exerciseItem = new ExerciseItem(id, exercise);
-               exercises.add(exerciseItem);
+                ExerciseItem exerciseItem = new ExerciseItem(id, exercise);
+                exercises.add(exerciseItem);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
