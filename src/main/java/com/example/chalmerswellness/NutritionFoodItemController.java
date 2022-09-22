@@ -89,8 +89,13 @@ public class NutritionFoodItemController extends AnchorPane implements Initializ
 
     @FXML
     private void addFoodEaten(MouseEvent mouseEvent) {
-        dataService.insertNutrition(food);
-        rootPane.getChildren().setAll(new NutritionSearchViewController(modalPanel));
+        if (validateAmountGrams()){
+            dataService.insertNutrition(food);
+            rootPane.getChildren().setAll(new NutritionSearchViewController(modalPanel));
+        }
+        else {
+            foodItemGrams.textProperty().set("Please enter a positive number");
+        }
     }
 
     private boolean validateAmountGrams(){
