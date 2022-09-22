@@ -321,15 +321,15 @@ public class DataService {
         return exercises;
     }
 
-    public ExerciseItem getMyExercise(int id) throws SQLException {
+    public Exercise getMyExercise(int id) throws SQLException {
         String sql = "SELECT id, exerciseName, exerciseType, exerciseMuscle, exerciseEquipment, exerciseDifficulty, exerciseInstructions FROM MyExercises WHERE id = ?";
-        ExerciseItem exerciseItem = null;
 
         try (Connection conn = this.connect(dbPath);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-                pstmt.setInt(1, id);
+            pstmt.setInt(1, id);
 
             ResultSet rs = pstmt.executeQuery();
+            Exercise exercise = null;
             while (rs.next()) {
                 var exerciseName = rs.getString("exerciseName");
                 var type = rs.getString("exerciseType");
@@ -338,29 +338,35 @@ public class DataService {
                 var difficulty = rs.getString("exerciseDifficulty");
                 var instructions = rs.getString("exerciseInstructions");
 
-                Exercise exercise = new Exercise(id, exerciseName, type, muscle, equipment, difficulty, instructions);
-                exerciseItem = new ExerciseItem(id, exercise);
+                exercise = new Exercise(id, exerciseName, type, muscle, equipment, difficulty, instructions);
+                // exerciseItem = new ExerciseItem(id, exercise);
             }
-            return exerciseItem;
+            return exercise;
         }
     }
 
     public List<ExerciseItem> getTodayExerciseItems() {
         String todayDate = LocalDate.now().toString();
 
-        String sql = "SELECT exerciseId FROM exerciseItems WHERE date = ?";
+        String sql = "SELECT id, exerciseId FROM exerciseItems WHERE date = ?";
         List<ExerciseItem> exercises = new ArrayList<>();
 
         try (Connection conn = this.connect(dbPath);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, todayDate);
-            pstmt.executeQuery();
+                pstmt.setString(1, todayDate);
+                pstmt.executeQuery();
+
 
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
+                var id = rs.getInt("id");
                 var exerciseId = rs.getInt("exerciseId");
-                ExerciseItem exercise = getMyExercise(exerciseId);
-                exercises.add(exercise);
+                Exercise exercise = getMyExercise(exerciseId);
+
+
+
+               ExerciseItem exerciseItem = new ExerciseItem(id, exercise);
+               exercises.add(exerciseItem);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
