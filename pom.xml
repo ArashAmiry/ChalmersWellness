@@ -102,6 +102,16 @@
             <artifactId>medusa</artifactId>
             <version>17.1.5</version>
         </dependency>
+        <dependency>
+            <groupId>eu.hansolo</groupId>
+            <artifactId>toolbox</artifactId>
+            <version>17.0.33</version>
+        </dependency>
+        <dependency>
+            <groupId>eu.hansolo</groupId>
+            <artifactId>toolboxfx</artifactId>
+            <version>17.0.31</version>
+        </dependency>
 
     </dependencies>
 
