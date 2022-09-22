@@ -3,6 +3,7 @@ package com.example.chalmerswellness.Models;
 import com.example.chalmerswellness.DataService;
 import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.ObjectModels.ExerciseItem;
+import com.example.chalmerswellness.ObjectModels.ExerciseItemSet;
 import com.example.chalmerswellness.Observable;
 import com.example.chalmerswellness.Observer;
 import java.util.ArrayList;
@@ -33,6 +34,10 @@ public class WorkoutModel implements Observable {
             addedExercises.add(exercise);
         }
         notifyObservers();
+    }
+
+    public void addSet(ExerciseItemSet set){
+        db.insertExerciseSet(set);
     }
 
     public List<Exercise> getMyExercises(){

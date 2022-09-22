@@ -2,6 +2,7 @@ package com.example.chalmerswellness.Controllers;
 
 import com.example.chalmerswellness.Models.WorkoutModel;
 import com.example.chalmerswellness.ObjectModels.ExerciseItem;
+import com.example.chalmerswellness.ObjectModels.ExerciseItemSet;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -35,6 +36,11 @@ public class AddSetsController extends AnchorPane implements Initializable {
             throw new RuntimeException(exception);
         }
 
+    }
+
+    @FXML private void addSet(){
+        ExerciseItemSet set = new ExerciseItemSet(exerciseItem.getId(), 0, 0);
+        model.addSet(set);
     }
 
     @Override

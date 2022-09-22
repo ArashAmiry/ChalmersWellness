@@ -1,14 +1,15 @@
 package com.example.chalmerswellness;
 
 
+import com.example.chalmerswellness.Controllers.ExerciseSet;
 import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.ObjectModels.ExerciseItem;
+import com.example.chalmerswellness.ObjectModels.ExerciseItemSet;
 import com.example.chalmerswellness.ObjectModels.Workout;
 
 import java.io.File;
 import java.sql.*;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class DataService {
         createWorkoutTable();
         createExercisesTable();
         createExerciseItemTable();
+        createExerciseSetsTable();
 
         //ExercisesApiConnector connector = new ExercisesApiConnector();
         //var testExercises = connector.getExercises(1);
@@ -390,4 +392,42 @@ public class DataService {
 
         return new ExerciseItem(generatedKey,exercise);
     }
+
+
+    public ExerciseItemSet insertExerciseSet(ExerciseItemSet set) {
+        String sql = "INSERT INTO ExerciseSets VALUES(?,?,?,?)";
+
+        try (Connection conn = connect(dbPath);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setInt(2, set.getId());
+                pstmt.setDouble(3, set.getWeight());
+                pstmt.setDouble(4, set.getReps());
+                pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return null;
+    }
+
+
+
+    private void createExerciseSetsTable() {
+        String sql = "CREATE TABLE IF NOT EXISTS ExerciseSets (\n"
+                + "	id INTEGER PRIMARY KEY,\n"
+                + "	exerciseItemId INTEGER NOT NULL,\n"
+                + "	weight DOUBLE NOT NULL,\n"
+                + "	reps DOUBLE NOT NULL\n"
+                + ");";
+
+        try (Connection conn = connect(dbPath);
+             Statement stmt = conn.createStatement()) {
+            stmt.execute(sql);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+
+
 }
