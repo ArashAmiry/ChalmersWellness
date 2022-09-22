@@ -2,6 +2,7 @@ package com.example.chalmerswellness.Controllers;
 
 import com.example.chalmerswellness.Models.WorkoutModel;
 import com.example.chalmerswellness.ObjectModels.Exercise;
+import com.example.chalmerswellness.ObjectModels.Workout;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -11,19 +12,16 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ExerciseSearchItemController extends AnchorPane implements Initializable{
+public class WorkoutItemController extends AnchorPane implements Initializable{
 
-    private WorkoutModel model;
-    private Exercise exercise;
-
+    private Workout workoutItem;
     @FXML
-    Label exerciseName;
+    Label workoutNameLabel;
 
-    public ExerciseSearchItemController(Exercise exercise, WorkoutModel model){
-        this.exercise = exercise;
-        this.model = model;
+    public WorkoutItemController(Workout workout){
+        this.workoutItem = workout;
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/ExerciseSearchItem.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/WorkoutItem.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 
@@ -36,18 +34,7 @@ public class ExerciseSearchItemController extends AnchorPane implements Initiali
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1){
-        exerciseName.textProperty().set(exercise.name);
+        workoutNameLabel.textProperty().set(workoutItem.getWorkoutName());
     }
 
-    @FXML public void addToWorkout(){
-        model.addExercise(exercise);
-    }
-
-    @FXML public void removeFromWorkout(){
-        model.removeExercise(exercise);
-    }
-
-    public Exercise getExercise(){
-        return this.exercise;
-    }
 }
