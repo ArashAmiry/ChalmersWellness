@@ -51,6 +51,7 @@ public class NutritionSearchViewController extends AnchorPane {
                 rootPane.getChildren().setAll(new NutritionFoodItemController(food, modalPanel));
             }
             else {
+                searchField.clear();
                 searchField.promptTextProperty().set("No food with that name was found.");
             }
         } catch (JsonProcessingException exception){

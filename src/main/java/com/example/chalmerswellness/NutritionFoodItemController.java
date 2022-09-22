@@ -73,7 +73,7 @@ public class NutritionFoodItemController extends AnchorPane implements Initializ
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        foodItemText.textProperty().set(food.getName());
+        foodItemText.textProperty().set(food.getName().substring(0, 1).toUpperCase() + food.getName().substring(1));
         caloriesPerServing.textProperty().set(String.valueOf(food.getCalories()));
         servingSizeGrams.textProperty().set(food.getServingSize() + "g");
         totalFatGrams.textProperty().set(food.getFatTotal() + "g");
