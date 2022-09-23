@@ -51,7 +51,7 @@ public class ManageWorkoutController extends AnchorPane implements Observer {
         }
         workoutList.getItems().setAll(workoutsList);
     }
-    /*void updateExerciseList(List<Exercise> exercises){
+    void updateExerciseList(List<Exercise> exercises){
         exercisesList.clear();
 
         for (var exercise: exercises) {
@@ -59,8 +59,7 @@ public class ManageWorkoutController extends AnchorPane implements Observer {
             exercisesList.add(exerciseController);
         }
         workoutList.getItems().setAll(exercisesList);
-        isNoResult();
-    }*/
+    }
 
     void updateWorkoutList(List<Workout> workouts){
         workoutsList.clear();
@@ -68,23 +67,13 @@ public class ManageWorkoutController extends AnchorPane implements Observer {
             workoutsList.add(new WorkoutItemController(workout));
         }
         workoutList.getItems().setAll(workoutsList);
-        isNoResult();
     }
 
-    void isNoResult(){
-        if(exercisesList.size() > 0){
-            noResult.setVisible(false);
-        } else{
-            noResult.setVisible(true);
-        }
-    }
 
     @Override
     public void update(Observable observable) {
         model = (WorkoutModel) observable;
         var exercises = model.getAddedExercises();
-        var workouts = model.getSavedWorkouts();
-        //updateExerciseList(exercises);
-        updateWorkoutList(workouts);
+        updateExerciseList(exercises);
     }
 }

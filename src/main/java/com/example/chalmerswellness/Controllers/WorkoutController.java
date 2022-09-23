@@ -2,6 +2,8 @@ package com.example.chalmerswellness.Controllers;
 
 import com.example.chalmerswellness.DataService;
 import com.example.chalmerswellness.Models.WorkoutModel;
+import com.example.chalmerswellness.Observable;
+import com.example.chalmerswellness.Observer;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -11,7 +13,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class WorkoutController extends AnchorPane implements Initializable {
+public class WorkoutController extends AnchorPane implements Initializable, Observer {
 
     private WorkoutModel workoutModel;
     @FXML public AnchorPane anchorPaneSearch;
@@ -26,6 +28,7 @@ public class WorkoutController extends AnchorPane implements Initializable {
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
         workoutModel = new WorkoutModel();
+        workoutModel.subscribe(this);
 
         //TodayWorkoutView
         todayWorkoutView = new TodayWorkoutController(workoutModel);
@@ -69,7 +72,6 @@ public class WorkoutController extends AnchorPane implements Initializable {
         setTabTo(createWorkoutView);
     }
 
-    //TODO change to MVC
     @FXML void openManageWorkoutTab(){
         //todayWorkoutView.textProperty().set("ManageWorkout Tab");
         setTabTo(manageWorkoutView);
@@ -83,4 +85,8 @@ public class WorkoutController extends AnchorPane implements Initializable {
     }
 
 
+    @Override
+    public void update(Observable observable) {
+        manageWorkoutView.updateWorkoutList(workoutModel.getSavedWorkouts());
+    }
 }

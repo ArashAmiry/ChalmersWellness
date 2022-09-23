@@ -77,18 +77,13 @@ public class CreateWorkoutController extends AnchorPane implements Observer {
 
     @FXML public void saveWorkout(){
         Workout workoutObject = createWorkoutObject(exercisesList);
-        dataService.insertWorkout(workoutObject);
-        clearWorkoutListView();
         model.addWorkout(workoutObject);
-
+        clearWorkoutListView();
     }
 
     private void clearWorkoutListView(){
         workoutNameField.deleteText(0,workoutNameField.getText().length());
-        mainContent.getItems().setAll();
-        for (var exercise : exercisesList){
-            model.removeExercise(exercise.getExercise());
-        }
+        model.removeAllExercises();
     }
 
     @Override

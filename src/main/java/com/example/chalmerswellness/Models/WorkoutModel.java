@@ -1,5 +1,6 @@
 package com.example.chalmerswellness.Models;
 
+import com.example.chalmerswellness.DataService;
 import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.ObjectModels.Workout;
 import com.example.chalmerswellness.Observable;
@@ -8,8 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WorkoutModel implements Observable {
+
+    private DataService dataService = new DataService();
     private List<Exercise> addedExercises = new ArrayList<>();
-    private List<Workout> savedWorkouts = new ArrayList<>();
+    //private List<Workout> savedWorkouts = new ArrayList<>();
     private List<Observer> observers = new ArrayList<>();
 
 
@@ -18,7 +21,7 @@ public class WorkoutModel implements Observable {
     }
 
     public List<Workout> getSavedWorkouts(){
-        return savedWorkouts;
+        return dataService.getWorkouts();
     }
 
     public List<Exercise> getAddedExercises() {
@@ -36,12 +39,21 @@ public class WorkoutModel implements Observable {
     }
 
     public void addWorkout(Workout workout){
-        savedWorkouts.add(workout);
-        notifyObservers();
+        dataService.insertWorkout(workout);
+        //notifyObservers();
+    }
+
+    public void foo(Workout workout){
+        dataService.insertWorkout(workout);
     }
 
     public void removeWorkout(Workout workout){
-        savedWorkouts.remove(workout);
+        //savedWorkouts.remove(workout);
+        notifyObservers();
+    }
+
+    public void removeAllExercises(){
+        addedExercises.clear();
         notifyObservers();
     }
 
