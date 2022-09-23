@@ -11,7 +11,6 @@ import java.util.List;
 
 public class WorkoutModel implements Observable {
     private List<ExerciseItem> addedExercises = new ArrayList<>();
-    private List<ExerciseItemSet> addedSets = new ArrayList<>();
     private List<Observer> observers = new ArrayList<>();
     private DataService db;
 

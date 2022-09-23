@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
@@ -18,12 +19,14 @@ public class ExerciseItemSetController extends AnchorPane implements Initializab
     @FXML
     Label exerciseName;
     private ExerciseItemSet exerciseItemSet;
+    @FXML private Label setLabel;
+    @FXML private TextField weightField;
+    @FXML private TextField repsField;
+    private int setNumber;
 
-    @FXML private Label weightLabel;
-    @FXML private Label repsLabel;
-
-    public ExerciseItemSetController(ExerciseItemSet exerciseItemSet){
+    public ExerciseItemSetController(ExerciseItemSet exerciseItemSet, int setNumber){
         this.exerciseItemSet = exerciseItemSet;
+        this.setNumber = setNumber;
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/ExerciseSet.fxml"));
         fxmlLoader.setRoot(this);
@@ -38,7 +41,8 @@ public class ExerciseItemSetController extends AnchorPane implements Initializab
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        weightLabel.textProperty().set(String.valueOf(exerciseItemSet.getWeight()));
-        repsLabel.textProperty().set(String.valueOf(exerciseItemSet.getReps()));
+        setLabel.textProperty().set("Set " + setNumber);
+        weightField.textProperty().set(String.valueOf(exerciseItemSet.getWeight()));
+        repsField.textProperty().set(String.valueOf(exerciseItemSet.getReps()));
     }
 }

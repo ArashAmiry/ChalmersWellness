@@ -59,9 +59,11 @@ public class AddSetsController extends AnchorPane implements Initializable {
     private void updateSets(){
         var sets = model.getSets(exerciseItem.getId());
         setsList.clear();
+        int setNumber = 1;
         for (var set: sets) {
-            ExerciseItemSetController setsController = new ExerciseItemSetController(set);
+            ExerciseItemSetController setsController = new ExerciseItemSetController(set, setNumber);
             setsList.add(setsController);
+            setNumber++;
         }
         setsListView.getItems().setAll(setsList);
     }
