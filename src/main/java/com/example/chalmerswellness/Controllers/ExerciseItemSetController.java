@@ -20,9 +20,11 @@ public class ExerciseItemSetController extends AnchorPane implements Initializab
     private ExerciseItemSet exerciseItemSet;
 
     @FXML private Label weightLabel;
-    @FXML private Label reps;
+    @FXML private Label repsLabel;
 
-    public ExerciseItemSetController(ExerciseItemSet set){
+    public ExerciseItemSetController(ExerciseItemSet exerciseItemSet){
+        this.exerciseItemSet = exerciseItemSet;
+
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/ExerciseSet.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -37,6 +39,6 @@ public class ExerciseItemSetController extends AnchorPane implements Initializab
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         weightLabel.textProperty().set(String.valueOf(exerciseItemSet.getWeight()));
-        reps.textProperty().set(String.valueOf(exerciseItemSet.getReps()));
+        repsLabel.textProperty().set(String.valueOf(exerciseItemSet.getReps()));
     }
 }

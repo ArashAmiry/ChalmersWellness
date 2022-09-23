@@ -39,6 +39,7 @@ public class WorkoutModel implements Observable {
 
     public void addSet(ExerciseItemSet set){
         db.insertExerciseSet(set);
+        notifyObservers();
     }
 
     public List<ExerciseItemSet> getSets(int exerciseItemId){

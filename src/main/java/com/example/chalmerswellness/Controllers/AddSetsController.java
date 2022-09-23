@@ -4,6 +4,8 @@ import com.example.chalmerswellness.Models.WorkoutModel;
 import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.ObjectModels.ExerciseItem;
 import com.example.chalmerswellness.ObjectModels.ExerciseItemSet;
+import com.example.chalmerswellness.Observable;
+import com.example.chalmerswellness.Observer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
@@ -24,7 +26,7 @@ public class AddSetsController extends AnchorPane implements Initializable {
     private AnchorPane anchorPane;
 
     @FXML private Label addSetsLabel;
-    @FXML private ListView<ExerciseItemSetController> setsListView;
+    @FXML private ListView setsListView;
     ObservableList<ExerciseItemSetController> setsList = FXCollections.observableArrayList();
 
     public AddSetsController(WorkoutModel model, ExerciseItem exerciseItem, AnchorPane anchorPane) {
@@ -40,26 +42,28 @@ public class AddSetsController extends AnchorPane implements Initializable {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
+    }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        updateSets();
+        addSetsLabel.textProperty().set("Add Sets To " + exerciseItem.name + exerciseItem.getId());
     }
 
     @FXML private void addSet(){
         ExerciseItemSet set = new ExerciseItemSet(exerciseItem.getId(), 0, 0);
         model.addSet(set);
+        updateSets();
     }
 
-    private void updateSets(List<ExerciseItemSet> sets){
+    private void updateSets(){
+        var sets = model.getSets(exerciseItem.getId());
         setsList.clear();
         for (var set: sets) {
             ExerciseItemSetController setsController = new ExerciseItemSetController(set);
             setsList.add(setsController);
         }
         setsListView.getItems().setAll(setsList);
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        addSetsLabel.textProperty().set("Add Sets To " + exerciseItem.name + exerciseItem.getId());
     }
 
     @FXML private void close(){
@@ -69,5 +73,4 @@ public class AddSetsController extends AnchorPane implements Initializable {
     @FXML public void mouseTrap(Event event){
         event.consume();
     }
-
 }
