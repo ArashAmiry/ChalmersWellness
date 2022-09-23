@@ -2,13 +2,10 @@ package com.example.chalmerswellness.Controllers;
 
 import com.example.chalmerswellness.Models.WorkoutModel;
 import com.example.chalmerswellness.ObjectModels.Exercise;
-import com.example.chalmerswellness.ObjectModels.ExerciseItem;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
@@ -18,13 +15,13 @@ import java.util.ResourceBundle;
 public class ExerciseItemController extends AnchorPane implements Initializable{
 
     private WorkoutModel model;
-    private ExerciseItem exercise;
+    private Exercise exercise;
     private AnchorPane anchorPane;
 
     @FXML
     Label exerciseName;
 
-    public ExerciseItemController(ExerciseItem exercise, WorkoutModel model, AnchorPane anchorPane){
+    public ExerciseItemController(Exercise exercise, WorkoutModel model, AnchorPane anchorPane){
         this.exercise = exercise;
         this.model = model;
         this.anchorPane = anchorPane;

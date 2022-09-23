@@ -2,18 +2,13 @@ package com.example.chalmerswellness;
 
 
 import com.example.chalmerswellness.ObjectModels.Exercise;
-import com.example.chalmerswellness.ObjectModels.ExerciseItem;
 import com.example.chalmerswellness.ObjectModels.ExerciseItemSet;
 import com.example.chalmerswellness.ObjectModels.Workout;
 
-import java.io.File;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.*;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toMap;
 
 public class DataService {
@@ -357,11 +352,11 @@ public class DataService {
         }
     }
 
-    public List<ExerciseItem> getTodayExerciseItems() {
+    public List<Exercise> getTodayExerciseItems() {
         String todayDate = LocalDate.now().toString();
 
         String sql = "SELECT id, exerciseId FROM exerciseItems WHERE date = ?";
-        List<ExerciseItem> exercises = new ArrayList<>();
+        List<Exercise> exercises = new ArrayList<>();
 
         try (Connection conn = this.connect(dbPath);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -373,7 +368,7 @@ public class DataService {
                 var id = rs.getInt("id");
                 var exerciseId = rs.getInt("exerciseId");
                 Exercise exercise = getMyExercise(exerciseId);
-                ExerciseItem exerciseItem = new ExerciseItem(id, exercise);
+                Exercise exerciseItem = new Exercise(id, exercise.name, exercise.type, exercise.muscle, exercise.equipment, exercise.difficulty, exercise.instructions);
                 exercises.add(exerciseItem);
             }
         } catch (SQLException e) {
@@ -382,7 +377,7 @@ public class DataService {
         return exercises;
     }
 
-    public ExerciseItem insertExerciseItem(Exercise exercise) {
+    public Exercise insertExerciseItem(Exercise exercise) {
         String sql = "INSERT INTO exerciseItems VALUES(?,?,?)";
         String date = LocalDate.now().toString();
         int generatedKey = 0;
@@ -401,9 +396,8 @@ public class DataService {
             System.out.println(e.getMessage());
         }
 
-        return new ExerciseItem(generatedKey,exercise);
+        return new Exercise(generatedKey,exercise.name, exercise.type, exercise.muscle, exercise.equipment, exercise.difficulty, exercise.instructions);
     }
-
 
     public ExerciseItemSet insertExerciseSet(ExerciseItemSet set) {
         String sql = "INSERT INTO ExerciseSets VALUES(?,?,?,?)";

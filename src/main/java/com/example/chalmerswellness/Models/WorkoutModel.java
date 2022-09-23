@@ -2,7 +2,6 @@ package com.example.chalmerswellness.Models;
 
 import com.example.chalmerswellness.DataService;
 import com.example.chalmerswellness.ObjectModels.Exercise;
-import com.example.chalmerswellness.ObjectModels.ExerciseItem;
 import com.example.chalmerswellness.ObjectModels.ExerciseItemSet;
 import com.example.chalmerswellness.Observable;
 import com.example.chalmerswellness.Observer;
@@ -10,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WorkoutModel implements Observable {
-    private List<ExerciseItem> addedExercises = new ArrayList<>();
+    private List<Exercise> addedExercises = new ArrayList<>();
     private List<Observer> observers = new ArrayList<>();
     private DataService db;
 
@@ -18,7 +17,7 @@ public class WorkoutModel implements Observable {
         db = new DataService();
     }
 
-    public List<ExerciseItem> getAddedExercises() {
+    public List<Exercise> getAddedExercises() {
         return addedExercises;
     }
 
@@ -49,7 +48,7 @@ public class WorkoutModel implements Observable {
         return db.getMyExercises();
     }
 
-    public List<ExerciseItem> getTodayExerciseItems(){
+    public List<Exercise> getTodayExerciseItems(){
         return db.getTodayExerciseItems();
     }
     public void removeExercise(Exercise exercise){

@@ -2,10 +2,7 @@ package com.example.chalmerswellness.Controllers;
 
 import com.example.chalmerswellness.Models.WorkoutModel;
 import com.example.chalmerswellness.ObjectModels.Exercise;
-import com.example.chalmerswellness.ObjectModels.ExerciseItem;
 import com.example.chalmerswellness.ObjectModels.ExerciseItemSet;
-import com.example.chalmerswellness.Observable;
-import com.example.chalmerswellness.Observer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
@@ -17,19 +14,18 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class AddSetsController extends AnchorPane implements Initializable {
     private WorkoutModel model;
-    private ExerciseItem exerciseItem;
+    private Exercise exerciseItem;
     private AnchorPane anchorPane;
 
     @FXML private Label addSetsLabel;
     @FXML private ListView setsListView;
     ObservableList<ExerciseItemSetController> setsList = FXCollections.observableArrayList();
 
-    public AddSetsController(WorkoutModel model, ExerciseItem exerciseItem, AnchorPane anchorPane) {
+    public AddSetsController(WorkoutModel model, Exercise exerciseItem, AnchorPane anchorPane) {
         this.model = model;
         this.exerciseItem = exerciseItem;
         this.anchorPane = anchorPane;
