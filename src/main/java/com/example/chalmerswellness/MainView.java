@@ -1,5 +1,6 @@
 package com.example.chalmerswellness;
 
+import com.example.chalmerswellness.Controllers.ManageWorkoutController;
 import com.example.chalmerswellness.Controllers.WorkoutController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

@@ -22,7 +22,7 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <Button layoutX="354.0" layoutY="43.0" mnemonicParsing="false" onMouseClicked="#openMangeWorkoutTab" prefHeight="51.0" prefWidth="178.0" text="Manage Workouts">
+      <Button layoutX="354.0" layoutY="43.0" mnemonicParsing="false" onMouseClicked="#openManageWorkoutTab" prefHeight="51.0" prefWidth="178.0" text="Manage Workouts">
          <font>
             <Font size="18.0" />
          </font>

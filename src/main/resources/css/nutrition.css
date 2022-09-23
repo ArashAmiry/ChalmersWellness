@@ -1,0 +1,15 @@
+@font-face {
+    font-family: "Poppins";
+    src: url('../font/Poppins/Poppins-Medium.ttf');
+}
+
+
+#addFoodButton {
+    -fx-background-radius: 50;
+    -fx-background-color: #E0E0E0;
+}
+
+.circleText {
+    -fx-font-family: Poppins;
+    -fx-font-size: 35;
+}

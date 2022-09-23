@@ -27,7 +27,7 @@ public class DataService {
         //createExerciseSetsTable();
     }
 
-    public List<Workout> getWorkouts() {
+    public List<Workout> getWorkouts(){
         String sql = "SELECT * FROM workouts";
         List<Workout> workouts = new ArrayList<>();
 
@@ -139,8 +139,8 @@ public class DataService {
 
         try (Connection conn = this.connect(dbPath);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, workoutId);
-            pstmt.executeUpdate();
+                pstmt.setInt(1, workoutId);
+                pstmt.executeUpdate();
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -182,13 +182,13 @@ public class DataService {
         }
         return conn;
     }
-    //TODO should remove when no longer necessary
 
+    //TODO should remove when no longer necessary
     /*private void createNewDatabase(String fileName) {
         File sqliteFolder = new File(dbPath);
         dbPath += fileName;
 
-        if (!sqliteFolder.exists())
+        if(!sqliteFolder.exists())
             sqliteFolder.mkdirs();
 
         try {
@@ -204,8 +204,8 @@ public class DataService {
         }
     }
      */
-    //TODO should remove when no longer necessary
 
+    //TODO should remove when no longer necessary
     /*
     private void createWorkoutTable() {
         String sql = "CREATE TABLE IF NOT EXISTS workouts (\n"
@@ -215,14 +215,14 @@ public class DataService {
 
         try (Connection conn = connect(dbPath);
              Statement stmt = conn.createStatement()) {
-            stmt.execute(sql);
+                stmt.execute(sql);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
      */
-    //TODO should remove when no longer necessary
 
+    //TODO should remove when no longer necessary
     /*
     private void createExercisesTable() {
         String sql = "CREATE TABLE IF NOT EXISTS exercises (\n"
@@ -244,8 +244,8 @@ public class DataService {
         }
     }
      */
-    //TODO should remove when no longer necessary
 
+    //TODO should remove when no longer necessary
     /*
     private void createExerciseItemTable() {
         String sql = "CREATE TABLE IF NOT EXISTS exerciseItems (\n"
