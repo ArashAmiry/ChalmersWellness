@@ -56,6 +56,11 @@ public class AddSetsController extends AnchorPane implements Initializable {
         updateSets();
     }
 
+    @FXML private void saveSets(){
+        //TODO add code
+
+    }
+
     private void updateSets(){
         var sets = model.getSets(exerciseItem.getId());
         setsList.clear();
