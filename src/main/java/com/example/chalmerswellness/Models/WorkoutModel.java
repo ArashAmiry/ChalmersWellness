@@ -57,6 +57,10 @@ public class WorkoutModel implements Observable {
         notifyObservers();
     }
 
+    public void removeAllExercises(){
+        addedExercises.clear();
+        notifyObservers();
+    }
 
     @Override
     public void notifyObservers() {
