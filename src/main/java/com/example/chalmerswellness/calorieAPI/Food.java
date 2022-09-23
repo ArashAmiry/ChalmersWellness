@@ -31,6 +31,12 @@ public class Food {
 
     }
 
+    public Food(int id, String foodName, double calories){
+        this.id = id;
+        this.name = foodName;
+        this.calories = calories;
+    }
+
 
     public int getId() {
         return id;

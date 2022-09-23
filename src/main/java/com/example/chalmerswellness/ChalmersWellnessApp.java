@@ -36,7 +36,7 @@ public class ChalmersWellnessApp extends Application {
 
 
         DataService dataService = new DataService();
-
+        List<Food> food = dataService.getTodaysNutrition(Meal.BREAKFAST);
     }
 
     public static void main(String[] args) {

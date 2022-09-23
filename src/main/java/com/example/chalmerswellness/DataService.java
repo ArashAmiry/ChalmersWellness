@@ -164,6 +164,32 @@ public class DataService {
         }
     }
 
+    public List<Food> getTodaysNutrition(Meal meal){
+        String sql = "SELECT * FROM nutrition WHERE mealOfDay = ? AND dateOfInsert = CURRENT_DATE";
+        List<Food> foods = new ArrayList<>();
+
+        try (Connection conn = this.connect(dbPath);
+             PreparedStatement pstmt  = conn.prepareStatement(sql)){
+             pstmt.setString(1, String.valueOf(meal));
+
+             ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String mealName = rs.getString("mealName");
+                double calories = rs.getInt("calories");
+
+                Food food = new Food(id, mealName, calories);
+                foods.add(food);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return foods;
+    }
+
     /*
     private void updateWorkout(int workoutId, Workout workout){
         //TODO Add Functionality
