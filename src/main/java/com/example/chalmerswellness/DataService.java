@@ -4,10 +4,13 @@ package com.example.chalmerswellness;
 import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.ObjectModels.Workout;
 import com.example.chalmerswellness.calorieAPI.Food;
+import com.example.chalmerswellness.calorieAPI.Meal;
 
 import java.io.File;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class DataService {
@@ -137,12 +140,12 @@ public class DataService {
         }
     }
 
-    public void insertNutrition(Food nutritionModel) {
-        String sql = "INSERT INTO nutrition(mealName, calories, servingSize, fatTotal, fatSaturated, protein, sodium, cholesterol, carbohydrates, fiber, sugar) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+    public void insertNutrition(Food nutritionModel, Meal meal) {
+        String sql = "INSERT INTO nutrition(mealName, calories, servingSize, fatTotal, fatSaturated, protein, sodium, cholesterol, carbohydrates, fiber, sugar, mealOfDay) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
         try (Connection conn = connect(dbPath);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setString(1, nutritionModel.getName());
+            pstmt.setString(1, nutritionModel.getName().substring(0, 1).toUpperCase() + nutritionModel.getName().substring(1));
             pstmt.setDouble(2, nutritionModel.getCalories());
             pstmt.setDouble(3, nutritionModel.getServingSize());
             pstmt.setDouble(4, nutritionModel.getFatTotal());
@@ -153,6 +156,7 @@ public class DataService {
             pstmt.setDouble(9, nutritionModel.getCarbohydrates());
             pstmt.setDouble(10, nutritionModel.getFiber());
             pstmt.setDouble(11, nutritionModel.getSugar());
+            pstmt.setString(12, String.valueOf(meal));
             pstmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -263,7 +267,9 @@ public class DataService {
                 + "	cholesterol DOUBLE NOT NULL,\n"
                 + "	carbohydrates DOUBLE NOT NULL,\n"
                 + "	fiber DOUBLE NOT NULL,\n"
-                + "	sugar DOUBLE NOT NULL\n"
+                + "	sugar DOUBLE NOT NULL,\n"
+                + " dateOfInsert DATE DEFAULT CURRENT_DATE,\n"
+                + " mealOfDay text NOT NULL \n"
                 + ");";
 
         try (Connection conn = connect(dbPath);

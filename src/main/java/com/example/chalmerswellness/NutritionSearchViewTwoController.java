@@ -2,36 +2,44 @@ package com.example.chalmerswellness;
 
 import com.example.chalmerswellness.calorieAPI.Food;
 import com.example.chalmerswellness.calorieAPI.FoodFacade;
+import com.example.chalmerswellness.calorieAPI.Meal;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 
-public class NutritionSearchViewController extends AnchorPane {
+public class NutritionSearchViewTwoController extends ScrollPane {
+
+    Meal meal;
+    FoodFacade foodFacade = new FoodFacade();
+    Food food = new Food();
 
     @FXML
     TextField searchField;
     @FXML
+    AnchorPane modalPanel;
+    @FXML
     AnchorPane rootPane;
 
-    @FXML
-    AnchorPane modalPanel;
-    FoodFacade foodFacade = new FoodFacade();
-    Food food = new Food();
 
-
-    public NutritionSearchViewController(AnchorPane pane){
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/NutritionSearchView.fxml"));
+    public NutritionSearchViewTwoController(AnchorPane pane, Meal meal){
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/NutritionSearchViewTwo.fxml"));
 
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 
+        this.setPannable(false);
+        this.setHbarPolicy(ScrollBarPolicy.NEVER);
+        this.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
+
         modalPanel = pane;
+        this.meal = meal;
 
         try {
             fxmlLoader.load();
@@ -48,7 +56,8 @@ public class NutritionSearchViewController extends AnchorPane {
         try {
             if (foodFacade.isFoodExisting(foodName)){
                 food = foodFacade.createFood(foodName);
-                //rootPane.getChildren().setAll(new NutritionFoodItemController(food, modalPanel));
+                rootPane.getChildren().setAll(new NutritionFoodItemController(food, modalPanel, meal));
+                this.setVbarPolicy(ScrollBarPolicy.NEVER);
             }
             else {
                 searchField.clear();
@@ -65,9 +74,4 @@ public class NutritionSearchViewController extends AnchorPane {
         modalPanel.getChildren().clear();
         modalPanel.setDisable(true);
     }
-
-
-
-
-
 }

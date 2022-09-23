@@ -4,6 +4,7 @@ import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.ObjectModels.Workout;
 import com.example.chalmerswellness.calorieAPI.Food;
 import com.example.chalmerswellness.calorieAPI.FoodFacade;
+import com.example.chalmerswellness.calorieAPI.Meal;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -32,20 +33,9 @@ public class ChalmersWellnessApp extends Application {
             }
         });
 
-        Exercise e = new Exercise("name", "type", "muscle", "equipment", "difficulty", "instructions");
-        List<Exercise> listOfExercises = new ArrayList<>();
-        listOfExercises.add(e);
 
-        Workout workout = new Workout("name1", listOfExercises);
+
         DataService dataService = new DataService();
-        dataService.insertWorkout(workout);
-
-        FoodFacade foodFacade = new FoodFacade();
-
-        Food fnm = foodFacade.createFood("apple");
-        System.out.println("jhe");
-        //dataService.insertNutrition(fnm);
-
 
     }
 

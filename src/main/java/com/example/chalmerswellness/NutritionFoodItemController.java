@@ -2,6 +2,8 @@ package com.example.chalmerswellness;
 
 import com.example.chalmerswellness.calorieAPI.Food;
 import com.example.chalmerswellness.calorieAPI.FoodFacade;
+import com.example.chalmerswellness.calorieAPI.Meal;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -52,14 +54,16 @@ public class NutritionFoodItemController extends AnchorPane implements Initializ
 
     DataService dataService = new DataService();
 
+    Meal meal;
     FoodFacade foodFacade = new FoodFacade();
-    Food food = new Food();
+    Food food;
 
-    public NutritionFoodItemController(Food foodItem, AnchorPane pane){
+    public NutritionFoodItemController(Food foodItem, AnchorPane pane, Meal meal){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/NutritionFoodItemView.fxml"));
 
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
+        this.meal = meal;
         food = foodItem;
         modalPanel = pane;
 
@@ -88,10 +92,10 @@ public class NutritionFoodItemController extends AnchorPane implements Initializ
     }
 
     @FXML
-    private void addFoodEaten(MouseEvent mouseEvent) {
+    private void addFoodEaten(MouseEvent mouseEvent) throws JsonProcessingException {
         if (validateAmountGrams()){
-            dataService.insertNutrition(food);
-            rootPane.getChildren().setAll(new NutritionSearchViewController(modalPanel));
+            dataService.insertNutrition(foodFacade.createFood(foodItemGrams.getText() + "g " + food.getName()), meal);
+            rootPane.getChildren().setAll(new NutritionSearchViewTwoController(modalPanel, meal));
         }
         else {
             foodItemGrams.textProperty().set("Please enter a positive number");
