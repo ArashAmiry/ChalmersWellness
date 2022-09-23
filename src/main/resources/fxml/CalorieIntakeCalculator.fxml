@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1460.0" type="AnchorPane" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Text layoutX="354.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Calorie Intake Calculator">
+         <font>
+            <Font size="70.0" />
+         </font>
+      </Text>
+      <RadioButton fx:id="radioButtonMale" layoutX="386.0" layoutY="196.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="320.0" text="Male">
+         <font>
+            <Font size="40.0" />
+         </font>
+      </RadioButton>
+      <RadioButton fx:id="radioButtonFemale" layoutX="759.0" layoutY="195.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="320.0" text="Female">
+         <font>
+            <Font size="40.0" />
+         </font>
+      </RadioButton>
+      <TextField fx:id="ageTextField" layoutX="388.0" layoutY="281.0" prefHeight="61.0" prefWidth="220.0" promptText="Age">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="weightTextField" layoutX="626.0" layoutY="281.0" prefHeight="61.0" prefWidth="220.0" promptText="Weight">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="heightTextField" layoutX="863.0" layoutY="281.0" prefHeight="61.0" prefWidth="220.0" promptText="Height">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </TextField>
+      <Text layoutX="388.0" layoutY="400.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Activity level">
+         <font>
+            <Font size="40.0" />
+         </font>
+      </Text>
+      <ChoiceBox fx:id="activityChoiceBox" layoutX="388.0" layoutY="421.0" prefHeight="40.0" prefWidth="302.0" />
+      <Button layoutX="629.0" layoutY="742.0" mnemonicParsing="false" onMouseClicked="#calculateCalorieIntake" prefHeight="80.0" prefWidth="227.0" text="Calculate">
+         <font>
+            <Font size="34.0" />
+         </font>
+      </Button>
+      <TextField fx:id="weightGoalTextField" layoutX="388.0" layoutY="529.0" prefHeight="61.0" prefWidth="220.0" promptText="Weight goal">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </TextField>
+      <Text layoutX="388.0" layoutY="513.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Weight goal">
+         <font>
+            <Font size="40.0" />
+         </font>
+      </Text>
+      <Text layoutX="388.0" layoutY="640.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pace">
+         <font>
+            <Font size="40.0" />
+         </font>
+      </Text>
+      <RadioButton fx:id="radioButtonSlowPace" layoutX="388.0" layoutY="664.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="170.0" text="Slow">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </RadioButton>
+      <RadioButton fx:id="radioButtonMediumPace" layoutX="579.0" layoutY="664.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="196.0" text="Medium">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </RadioButton>
+      <RadioButton fx:id="radioButtonFastPace" layoutX="816.0" layoutY="661.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="240.0" text="Fast">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </RadioButton>
+      <Text fx:id="calorieIntakeText" layoutX="374.0" layoutY="894.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recommended daily intake" textAlignment="CENTER" wrappingWidth="745.682373046875">
+         <font>
+            <Font size="40.0" />
+         </font>
+      </Text>
+      <Text fx:id="recommendedCalorieIntake" layoutX="484.0" layoutY="944.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="517.3333435058593">
+         <font>
+            <Font size="35.0" />
+         </font>
+      </Text>
+   </children>
+</fx:root>

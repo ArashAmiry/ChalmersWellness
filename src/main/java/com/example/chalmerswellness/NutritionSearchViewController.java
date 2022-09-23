@@ -14,14 +14,14 @@ import java.io.IOException;
 public class NutritionSearchViewController extends AnchorPane {
 
     @FXML
-    TextField searchField;
+    private TextField searchField;
     @FXML
-    AnchorPane rootPane;
+    private AnchorPane rootPane;
 
     @FXML
-    AnchorPane modalPanel;
-    Nutrition nutrition = new Nutrition();
-    NutritionModel nutritionModel = new NutritionModel();
+    private AnchorPane modalPanel;
+    private Nutrition nutrition = new Nutrition();
+    private NutritionModel nutritionModel = new NutritionModel();
 
 
     public NutritionSearchViewController(AnchorPane pane){
@@ -51,9 +51,5 @@ public class NutritionSearchViewController extends AnchorPane {
         modalPanel.getChildren().clear();
         modalPanel.setDisable(true);
     }
-
-
-
-
 
 }

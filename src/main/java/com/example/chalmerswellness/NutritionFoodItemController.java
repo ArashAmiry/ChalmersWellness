@@ -18,42 +18,42 @@ import java.util.ResourceBundle;
 public class NutritionFoodItemController extends AnchorPane implements Initializable {
 
     @FXML
-    Text foodItemText;
+    private Text foodItemText;
     @FXML
-    Text caloriesPerServing;
+    private Text caloriesPerServing;
     @FXML
-    Text servingSizeGrams;
+    private Text servingSizeGrams;
     @FXML
-    Text totalFatGrams;
+    private Text totalFatGrams;
     @FXML
-    Text saturatedFatGrams;
+    private Text saturatedFatGrams;
     @FXML
-    Text cholesterolMilligrams;
+    private Text cholesterolMilligrams;
     @FXML
-    Text sodiumMilligrams;
+    private Text sodiumMilligrams;
     @FXML
-    Text potassiumMilligrams;
+    private Text potassiumMilligrams;
     @FXML
-    Text totalCarbohydrateGrams;
+    private Text totalCarbohydrateGrams;
     @FXML
-    Text dietaryFiberGrams;
+    private Text dietaryFiberGrams;
     @FXML
-    Text totalSugarsGrams;
+    private Text totalSugarsGrams;
     @FXML
-    Text totalProteinGrams;
+    private Text totalProteinGrams;
     @FXML
-    TextField foodItemGrams;
+    private TextField foodItemGrams;
     @FXML
-    Button addFoodButton;
+    private Button addFoodButton;
     @FXML
     AnchorPane rootPane;
 
     @FXML
-    AnchorPane modalPanel;
+    private AnchorPane modalPanel;
 
 
-    Nutrition nutrition = new Nutrition();
-    NutritionModel nutritionModel = new NutritionModel();
+    private Nutrition nutrition = new Nutrition();
+    private NutritionModel nutritionModel = new NutritionModel();
 
     public NutritionFoodItemController(NutritionModel foodItem, AnchorPane pane){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/NutritionFoodItemView.fxml"));
