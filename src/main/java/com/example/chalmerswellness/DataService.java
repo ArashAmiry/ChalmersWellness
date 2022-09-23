@@ -9,24 +9,22 @@ import com.example.chalmerswellness.ObjectModels.Workout;
 import java.io.File;
 import java.sql.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.toMap;
 
 public class DataService {
-    private String dbPath = "C:\\sqlite\\db\\";
+    private String dbPath = "src/main/resources/ChalmersWellness.db";
 
     public DataService() {
-        createNewDatabase("testDb");
-        createWorkoutTable();
-        createExercisesTable();
-        createExerciseItemTable();
-        createExerciseSetsTable();
-
-        //ExercisesApiConnector connector = new ExercisesApiConnector();
-        //var testExercises = connector.getExercises(1);
-        createMyExercisesTable();
-        //List<Exercise> test = new ArrayList<>();
-        //insertMyExercises(testExercises);
+        //createNewDatabase("newDatabase");
+        //createWorkoutTable();
+        //createExercisesTable();
+        //createExerciseItemTable();
+        //createExerciseSetsTable();
     }
 
     public List<Workout> getWorkouts() {
@@ -175,7 +173,7 @@ public class DataService {
      */
 
     private static Connection connect(String dbPath) {
-        String url = "jdbc:sqlite:" + dbPath + ".db";
+        String url = "jdbc:sqlite:" + dbPath;
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url);
@@ -184,8 +182,9 @@ public class DataService {
         }
         return conn;
     }
+    //TODO should remove when no longer necessary
 
-    private void createNewDatabase(String fileName) {
+    /*private void createNewDatabase(String fileName) {
         File sqliteFolder = new File(dbPath);
         dbPath += fileName;
 
@@ -204,7 +203,10 @@ public class DataService {
             System.out.println(e.getMessage());
         }
     }
+     */
+    //TODO should remove when no longer necessary
 
+    /*
     private void createWorkoutTable() {
         String sql = "CREATE TABLE IF NOT EXISTS workouts (\n"
                 + "	id integer PRIMARY KEY,\n"
@@ -218,7 +220,10 @@ public class DataService {
             System.out.println(e.getMessage());
         }
     }
+     */
+    //TODO should remove when no longer necessary
 
+    /*
     private void createExercisesTable() {
         String sql = "CREATE TABLE IF NOT EXISTS exercises (\n"
                 + "	id INTEGER PRIMARY KEY,\n"
@@ -238,7 +243,10 @@ public class DataService {
             System.out.println(e.getMessage());
         }
     }
+     */
+    //TODO should remove when no longer necessary
 
+    /*
     private void createExerciseItemTable() {
         String sql = "CREATE TABLE IF NOT EXISTS exerciseItems (\n"
                 + "	id INTEGER PRIMARY KEY,\n"
@@ -253,7 +261,10 @@ public class DataService {
             System.out.println(e.getMessage());
         }
     }
+     */
+    //TODO should remove when no longer necessary
 
+    /*
     private void createMyExercisesTable() {
         String sql = "CREATE TABLE IF NOT EXISTS MyExercises (\n"
                 + "	id INTEGER PRIMARY KEY,\n"
@@ -272,6 +283,7 @@ public class DataService {
             System.out.println(e.getMessage());
         }
     }
+     */
 
     public void insertMyExercises(List<Exercise> exercises) {
         String sql = "INSERT INTO MyExercises(exerciseName, exerciseType, exerciseMuscle, exerciseEquipment, exerciseDifficulty, exerciseInstructions) VALUES(?,?,?,?,?,?)";
@@ -435,6 +447,8 @@ public class DataService {
         return sets;
     }
 
+    //TODO should remove when no longer necessary
+    /*
     private void createExerciseSetsTable() {
         String sql = "CREATE TABLE IF NOT EXISTS ExerciseSets (\n"
                 + "	id INTEGER PRIMARY KEY,\n"
@@ -450,4 +464,5 @@ public class DataService {
             System.out.println(e.getMessage());
         }
     }
+     */
 }
