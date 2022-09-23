@@ -26,7 +26,6 @@ public class CreateWorkoutController extends AnchorPane implements Observer {
     private DataService dataService = new DataService();
     private WorkoutModel model;
     @FXML public ListView mainContent;
-    @FXML public Label noResult;
     @FXML TextField workoutNameField;
 
 
@@ -54,17 +53,7 @@ public class CreateWorkoutController extends AnchorPane implements Observer {
             exercisesList.add(exerciseController);
         }
         mainContent.getItems().setAll(exercisesList);
-        isNoResult();
     }
-
-    void isNoResult(){
-        if(exercisesList.size() > 0){
-            noResult.setVisible(false);
-        } else{
-            noResult.setVisible(true);
-        }
-    }
-
 
     private Workout createWorkoutObject(ObservableList<ExerciseSearchItemController> exercises){
         String workoutName = workoutNameField.getText().toString();

@@ -38,10 +38,6 @@ public class WorkoutController extends AnchorPane implements Initializable {
         //ManageWorkoutView
         manageWorkoutView = new ManageWorkoutController(workoutModel);
 
-        //TODO Remove
-        DataService dataService = new DataService();
-
-
         try {
             fxmlLoader.load();
         } catch (IOException exception) {
