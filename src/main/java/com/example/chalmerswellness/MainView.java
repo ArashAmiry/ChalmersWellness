@@ -1,6 +1,9 @@
 package com.example.chalmerswellness;
 
-import com.example.chalmerswellness.Controllers.WorkoutController;
+import com.example.chalmerswellness.Controllers.Dashboard.DashboardViewController;
+import com.example.chalmerswellness.Controllers.Nutrition.NutritionViewController;
+import com.example.chalmerswellness.Controllers.Settings.SettingsViewController;
+import com.example.chalmerswellness.Controllers.Workout.WorkoutController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
@@ -32,11 +35,7 @@ public class MainView extends AnchorPane {
 
    @FXML
    public void navigateToNutritionView() {
-        if (!Profile.getInstance().hasCalculatedCalorieIntake()) {
-            setViewTo(calorieIntakeCalculatorController);
-        } else {
-            setViewTo(nutritionViewController);
-        }
+        setViewTo(nutritionViewController);
    }
    @FXML
    public void navigateToSettingsView() { setViewTo(settingsViewController);}
