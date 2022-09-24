@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class DataService {
-    private String dbPath = "src/main/resources/ChalmersWellness.db";
+    private final String dbPath = "src/main/resources/ChalmersWellness.db";
 
     public DataService() {
 
@@ -91,12 +91,12 @@ public class DataService {
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             for (Exercise exercise : exercises) {
-                pstmt.setString(1, exercise.name);
-                pstmt.setString(2, exercise.type);
-                pstmt.setString(3, exercise.muscle);
-                pstmt.setString(4, exercise.equipment);
-                pstmt.setString(5, exercise.difficulty);
-                pstmt.setString(6, exercise.instructions);
+                pstmt.setString(1, exercise.getName());
+                pstmt.setString(2, exercise.getType());
+                pstmt.setString(3, exercise.getMuscle());
+                pstmt.setString(4, exercise.getEquipment());
+                pstmt.setString(5, exercise.getDifficulty());
+                pstmt.setString(6, exercise.getInstructions());
                 pstmt.setInt(7, id);
                 pstmt.executeUpdate();
             }
@@ -134,31 +134,6 @@ public class DataService {
         }
     }
 
-    /*
-    private void updateWorkout(int workoutId, Workout workout){
-        //TODO Add Functionality
-        String sql = "UPDATE workouts SET workoutName WHERE workoutId = ?";
-
-        try (Connection conn = this.connect();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, workoutId);
-            pstmt.setInt(2, work);
-            pstmt.executeUpdate();
-
-            ResultSet rs = pstmt.getGeneratedKeys();
-            int generatedKey = 0;
-            if (rs.next()) {
-                generatedKey = rs.getInt(1);
-            }
-
-            insertWorkoutExercises(workout.getExercises(), generatedKey);
-
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-     */
-
     private static Connection connect(String dbPath) {
         String url = "jdbc:sqlite:" + dbPath;
         Connection conn = null;
@@ -177,12 +152,12 @@ public class DataService {
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             for (Exercise exercise : exercises) {
-                pstmt.setString(1, exercise.name);
-                pstmt.setString(2, exercise.type);
-                pstmt.setString(3, exercise.muscle);
-                pstmt.setString(4, exercise.equipment);
-                pstmt.setString(5, exercise.difficulty);
-                pstmt.setString(6, exercise.instructions);
+                pstmt.setString(1, exercise.getName());
+                pstmt.setString(2, exercise.getType());
+                pstmt.setString(3, exercise.getMuscle());
+                pstmt.setString(4, exercise.getEquipment());
+                pstmt.setString(5, exercise.getDifficulty());
+                pstmt.setString(6, exercise.getInstructions());
                 pstmt.executeUpdate();
             }
 
@@ -218,8 +193,8 @@ public class DataService {
         return exercises;
     }
 
-    public Exercise getMyExercise(int id) throws SQLException {
-        String sql = "SELECT id, exerciseName, exerciseType, exerciseMuscle, exerciseEquipment, exerciseDifficulty, exerciseInstructions FROM MyExercises WHERE id = ?";
+    private Exercise getMyExercise(int id) throws SQLException {
+        String sql = "SELECT * FROM MyExercises WHERE id = ?";
 
         try (Connection conn = this.connect(dbPath);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -254,11 +229,9 @@ public class DataService {
 
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                var id = rs.getInt("id");
                 var exerciseId = rs.getInt("exerciseId");
                 Exercise exercise = getMyExercise(exerciseId);
-                Exercise exerciseItem = new Exercise(id, exercise.name, exercise.type, exercise.muscle, exercise.equipment, exercise.difficulty, exercise.instructions);
-                exercises.add(exerciseItem);
+                exercises.add(exercise);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -275,7 +248,7 @@ public class DataService {
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setInt(2, exercise.getId());
                 pstmt.setString(3, date);
-            pstmt.executeUpdate();
+                pstmt.executeUpdate();
 
             ResultSet rs = pstmt.getGeneratedKeys();
             if (rs.next()) {
@@ -285,7 +258,7 @@ public class DataService {
             System.out.println(e.getMessage());
         }
 
-        return new Exercise(generatedKey,exercise.name, exercise.type, exercise.muscle, exercise.equipment, exercise.difficulty, exercise.instructions);
+        return new Exercise(generatedKey, exercise);
     }
 
     public void insertExerciseSet(ExerciseItemSet set) {

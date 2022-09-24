@@ -11,7 +11,7 @@ import java.util.List;
 public class WorkoutModel implements Observable {
     private List<Exercise> addedExercises = new ArrayList<>();
     private List<Observer> observers = new ArrayList<>();
-    private DataService db;
+    private final DataService db;
 
     public WorkoutModel(){
         db = new DataService();
@@ -29,9 +29,7 @@ public class WorkoutModel implements Observable {
 
     public void addExerciseDb(){
         var exerciseItems = getTodayExerciseItems();
-        for (var exercise: exerciseItems) {
-            addedExercises.add(exercise);
-        }
+        addedExercises.addAll(exerciseItems);
         notifyObservers();
     }
 

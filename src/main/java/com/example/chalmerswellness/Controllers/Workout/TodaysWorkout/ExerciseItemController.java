@@ -13,9 +13,9 @@ import java.util.ResourceBundle;
 
 public class ExerciseItemController extends AnchorPane implements Initializable{
 
-    private WorkoutModel model;
-    private Exercise exercise;
-    private AnchorPane anchorPane;
+    private final WorkoutModel model;
+    private final Exercise exercise;
+    private final AnchorPane anchorPane;
 
     @FXML
     Label exerciseName;
@@ -38,9 +38,8 @@ public class ExerciseItemController extends AnchorPane implements Initializable{
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1){
-        exerciseName.textProperty().set(exercise.name);
+        exerciseName.textProperty().set(exercise.getName());
     }
-
 
     @FXML
     private void removeFromWorkout(){

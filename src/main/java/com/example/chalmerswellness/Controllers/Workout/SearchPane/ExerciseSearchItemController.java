@@ -13,8 +13,8 @@ import java.util.ResourceBundle;
 
 public class ExerciseSearchItemController extends AnchorPane implements Initializable{
 
-    private WorkoutModel model;
-    private Exercise exercise;
+    private final WorkoutModel model;
+    private final Exercise exercise;
 
     @FXML
     Label exerciseName;
@@ -36,7 +36,7 @@ public class ExerciseSearchItemController extends AnchorPane implements Initiali
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1){
-        exerciseName.textProperty().set(exercise.name);
+        exerciseName.textProperty().set(exercise.getName());
     }
 
     @FXML public void addToWorkout(){

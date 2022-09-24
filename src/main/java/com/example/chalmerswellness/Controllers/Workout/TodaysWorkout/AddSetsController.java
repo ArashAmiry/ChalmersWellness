@@ -17,9 +17,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AddSetsController extends AnchorPane implements Initializable {
-    private WorkoutModel model;
-    private Exercise exercise;
-    private AnchorPane anchorPane;
+    private final WorkoutModel model;
+    private final Exercise exercise;
+    private final AnchorPane anchorPane;
     ObservableList<ExerciseItemSetController> setsList = FXCollections.observableArrayList();
     @FXML private ListView setsListView;
     @FXML private Label addSetsLabel;
@@ -41,7 +41,7 @@ public class AddSetsController extends AnchorPane implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        addSetsLabel.textProperty().set("Add Sets To " + exercise.name);
+        addSetsLabel.textProperty().set("Add Sets To " + exercise.getName());
         updateSets();
     }
 

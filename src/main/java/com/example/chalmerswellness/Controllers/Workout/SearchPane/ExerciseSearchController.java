@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class ExerciseSearchController extends AnchorPane implements Initializable {
-    private WorkoutModel model;
+    private final WorkoutModel model;
     @FXML public TextField searchField;
     @FXML public ListView<ExerciseSearchItemController> searchListView;
     @FXML public Label noResultLabel;
@@ -51,7 +51,7 @@ public class ExerciseSearchController extends AnchorPane implements Initializabl
         String input = searchField.getText().toLowerCase().replaceAll("\\s+","");
         List<Exercise> searchResult = new ArrayList<>();
         for (var exercise: exercises) {
-            if(exercise.name.toLowerCase().replaceAll("\\s+","").contains(input))
+            if(exercise.getName().toLowerCase().replaceAll("\\s+","").contains(input))
                 searchResult.add(exercise);
         }
 
@@ -59,11 +59,7 @@ public class ExerciseSearchController extends AnchorPane implements Initializabl
     }
 
     void isNoResult(){
-        if(searchListView.getItems().size()>0){
-            noResultLabel.visibleProperty().set(false);
-        } else {
-            noResultLabel.visibleProperty().set(true);
-        }
+        noResultLabel.visibleProperty().set(searchListView.getItems().size() <= 0);
     }
 
     @Override
