@@ -13,7 +13,7 @@ import java.util.List;
 public class FoodFacade implements Observable {
     private final ObjectMapper objectMapper = new ObjectMapper();
     private final NutritionAPIConnector apiConnector = new NutritionAPIConnector();
-    private List<Observer> observers = new ArrayList<>();
+    private static List<Observer> observers = new ArrayList<>();
 
     public Food createFood(String foodName) throws JsonProcessingException {
         Food food = getFood(foodName)[0];
