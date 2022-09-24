@@ -2,23 +2,39 @@
 
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="53.0" prefWidth="366.0" type="AnchorPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="706.0" type="AnchorPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label fx:id="setLabel" layoutX="14.0" layoutY="18.0" prefHeight="18.0" prefWidth="42.0" text="Set 1" />
-      <TextField fx:id="weightField" alignment="CENTER" layoutX="63.0" layoutY="14.0" prefHeight="26.0" prefWidth="35.0" />
-      <TextField fx:id="repsField" layoutX="152.0" layoutY="15.0" prefHeight="26.0" prefWidth="24.0" />
-      <Label layoutX="179.0" layoutY="14.0" prefHeight="27.0" prefWidth="42.0" text="reps">
+      <Label fx:id="setLabel" layoutX="13.0" prefHeight="51.0" prefWidth="76.0" text="Set 1">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="24.0" />
+         </font></Label>
+      <TextField fx:id="weightField" alignment="CENTER" layoutX="114.0" layoutY="7.0" prefHeight="21.0" prefWidth="54.0">
+         <font>
+            <Font size="16.0" />
+         </font></TextField>
+      <TextField fx:id="repsField" layoutX="231.0" layoutY="7.0" prefHeight="23.0" prefWidth="35.0">
+         <font>
+            <Font size="16.0" />
+         </font></TextField>
+      <Label layoutX="271.0" layoutY="13.0" prefHeight="27.0" prefWidth="42.0" text="reps" AnchorPane.leftAnchor="271.0">
+         <font>
+            <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="101.0" layoutY="13.0" prefHeight="27.0" prefWidth="37.0" text="kg">
+      <Label layoutX="173.0" layoutY="13.0" prefHeight="27.0" prefWidth="37.0" text="kg">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="18.0" />
          </font>
       </Label>
+      <ImageView fitHeight="34.0" fitWidth="35.0" layoutX="671.0" layoutY="10.0" onMouseClicked="#removeSet" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/icons8-trash-48.png" />
+         </image>
+      </ImageView>
    </children>
 </fx:root>

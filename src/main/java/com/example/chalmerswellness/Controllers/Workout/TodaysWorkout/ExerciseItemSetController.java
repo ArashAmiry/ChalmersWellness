@@ -1,5 +1,6 @@
 package com.example.chalmerswellness.Controllers.Workout.TodaysWorkout;
 
+import com.example.chalmerswellness.Models.WorkoutModel;
 import com.example.chalmerswellness.ObjectModels.ExerciseItemSet;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +14,7 @@ import java.util.ResourceBundle;
 
 public class ExerciseItemSetController extends AnchorPane implements Initializable {
 
+    private WorkoutModel model;
     @FXML
     Label exerciseName;
     private ExerciseItemSet exerciseItemSet;
@@ -21,7 +23,8 @@ public class ExerciseItemSetController extends AnchorPane implements Initializab
     @FXML private TextField repsField;
     private int setNumber;
 
-    public ExerciseItemSetController(ExerciseItemSet exerciseItemSet, int setNumber){
+    public ExerciseItemSetController(WorkoutModel model, ExerciseItemSet exerciseItemSet, int setNumber){
+        this.model = model;
         this.exerciseItemSet = exerciseItemSet;
         this.setNumber = setNumber;
 
@@ -46,5 +49,11 @@ public class ExerciseItemSetController extends AnchorPane implements Initializab
     public void setValues(){
         exerciseItemSet.setWeight(Double.parseDouble(weightField.textProperty().getValue()));
         exerciseItemSet.setReps(Integer.parseInt(repsField.textProperty().getValue()));
+    }
+
+    @FXML private void removeSet(){
+        //TODO Works? add setId
+        //setId isnt unique to set
+        model.removeSet(exerciseItemSet.getId());
     }
 }

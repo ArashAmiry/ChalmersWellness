@@ -44,6 +44,11 @@ public class WorkoutModel implements Observable {
         db.insertSets(setId, sets);
     }
 
+    public void removeSet(int setId){
+        db.removeSet(setId);
+        notifyObservers();
+    }
+
     public List<ExerciseItemSet> getSets(int exerciseItemId){
         sets = db.getExerciseSets(exerciseItemId);
 
