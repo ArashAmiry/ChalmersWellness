@@ -22,4 +22,12 @@ public class ExerciseItemSet {
     public int getReps() {
         return reps;
     }
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+
+    public void setReps(int reps) {
+        this.reps = reps;
+    }
+
 }

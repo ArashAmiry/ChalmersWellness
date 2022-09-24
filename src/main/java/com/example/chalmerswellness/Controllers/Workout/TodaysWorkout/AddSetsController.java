@@ -14,6 +14,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class AddSetsController extends AnchorPane implements Initializable {
@@ -54,6 +55,11 @@ public class AddSetsController extends AnchorPane implements Initializable {
     @FXML private void saveSets(){
         //TODO add code
 
+        for (var item: setsList) {
+            item.setValues();
+        }
+
+        model.saveSets(exercise.getId());
     }
 
     private void updateSets(){

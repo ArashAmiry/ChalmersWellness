@@ -12,6 +12,7 @@ public class WorkoutModel implements Observable {
     private List<Exercise> addedExercises = new ArrayList<>();
     private List<Observer> observers = new ArrayList<>();
     private final DataService db;
+    private List<ExerciseItemSet> sets = new ArrayList<>();
 
     public WorkoutModel(){
         db = new DataService();
@@ -34,12 +35,20 @@ public class WorkoutModel implements Observable {
     }
 
     public void addSet(ExerciseItemSet set){
+        sets.add(set);
         db.insertExerciseSet(set);
         notifyObservers();
     }
 
+    public void saveSets(int setId){
+        db.insertSets(setId, sets);
+    }
+
     public List<ExerciseItemSet> getSets(int exerciseItemId){
-        return db.getExerciseSets(exerciseItemId);
+        sets = db.getExerciseSets(exerciseItemId);
+
+        notifyObservers();
+        return sets;
     }
 
     public List<Exercise> getMyExercises(){

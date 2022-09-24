@@ -275,6 +275,51 @@ public class DataService {
         }
     }
 
+    public void insertSets(int exerciseId, List<ExerciseItemSet> sets){
+        String sql = "INSERT INTO ExerciseSets VALUES(?,?,?,?)";
+        removeSets(exerciseId);
+
+        try (Connection conn = connect(dbPath);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            for (ExerciseItemSet set : sets) {
+                pstmt.setInt(2, exerciseId);
+                pstmt.setDouble(3, set.getWeight());
+                pstmt.setInt(4, set.getReps());
+                pstmt.executeUpdate();
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void removeSets(int exerciseId){
+        String sql = "DELETE FROM ExerciseSets WHERE exerciseItemId = ?";
+
+        try (Connection conn = this.connect(dbPath);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setInt(1, exerciseId);
+                pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void removeSet(int setId) {
+        String sql = "DELETE FROM ExerciseSets WHERE id = ?";
+
+        try (Connection conn = this.connect(dbPath);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setInt(1, setId);
+                pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+
     public List<ExerciseItemSet> getExerciseSets(int exerciseItemId) {
         String sql = "SELECT id,exerciseItemId, weight, reps FROM ExerciseSets WHERE exerciseItemId = ?";
         List<ExerciseItemSet> sets = new ArrayList<>();
