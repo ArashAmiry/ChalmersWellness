@@ -1,4 +1,4 @@
-package com.example.chalmerswellness;
+package com.example.chalmerswellness.Interfaces;
 
 public interface Observable {
     void notifyObservers();

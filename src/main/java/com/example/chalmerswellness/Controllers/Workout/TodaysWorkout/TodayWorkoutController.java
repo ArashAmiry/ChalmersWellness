@@ -1,11 +1,9 @@
-package com.example.chalmerswellness.Controllers;
+package com.example.chalmerswellness.Controllers.Workout.TodaysWorkout;
 
 import com.example.chalmerswellness.Models.WorkoutModel;
 import com.example.chalmerswellness.ObjectModels.Exercise;
-import com.example.chalmerswellness.Observable;
-import com.example.chalmerswellness.Observer;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import com.example.chalmerswellness.Interfaces.Observable;
+import com.example.chalmerswellness.Interfaces.Observer;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -18,7 +16,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class TodayWorkoutController extends AnchorPane implements Observer, Initializable {
-    private ObservableList<ExerciseItemController> exercisesList = FXCollections.observableArrayList();
     private WorkoutModel model;
     @FXML private ListView exerciseList;
     @FXML private Label noResult;
@@ -38,18 +35,15 @@ public class TodayWorkoutController extends AnchorPane implements Observer, Init
     }
 
     private void updateExerciseList(List<Exercise> exercises){
-        exercisesList.clear();
-
+        exerciseList.getItems().clear();
         for (var exercise: exercises) {
-            exercisesList.add(new ExerciseItemController(exercise, model, this));
+            exerciseList.getItems().add(new ExerciseItemController(exercise, model, this));
         }
-
-        exerciseList.getItems().setAll(exercisesList);
         isNoResult();
     }
 
     private void isNoResult(){
-        if(exercisesList.size() > 0){
+        if(exerciseList.getItems().size() > 0){
             noResult.setVisible(false);
         } else{
             noResult.setVisible(true);

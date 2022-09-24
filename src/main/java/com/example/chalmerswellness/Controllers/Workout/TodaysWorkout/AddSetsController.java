@@ -1,4 +1,4 @@
-package com.example.chalmerswellness.Controllers;
+package com.example.chalmerswellness.Controllers.Workout.TodaysWorkout;
 
 import com.example.chalmerswellness.Models.WorkoutModel;
 import com.example.chalmerswellness.ObjectModels.Exercise;
@@ -17,17 +17,16 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AddSetsController extends AnchorPane implements Initializable {
-    private WorkoutModel model;
-    private Exercise exerciseItem;
-    private AnchorPane anchorPane;
-
-    @FXML private Label addSetsLabel;
-    @FXML private ListView setsListView;
+    private final WorkoutModel model;
+    private final Exercise exercise;
+    private final AnchorPane anchorPane;
     ObservableList<ExerciseItemSetController> setsList = FXCollections.observableArrayList();
+    @FXML private ListView setsListView;
+    @FXML private Label addSetsLabel;
 
-    public AddSetsController(WorkoutModel model, Exercise exerciseItem, AnchorPane anchorPane) {
+    public AddSetsController(WorkoutModel model, Exercise exercise, AnchorPane anchorPane) {
         this.model = model;
-        this.exerciseItem = exerciseItem;
+        this.exercise = exercise;
         this.anchorPane = anchorPane;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/AddSetsView.fxml"));
         fxmlLoader.setRoot(this);
@@ -42,12 +41,12 @@ public class AddSetsController extends AnchorPane implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        addSetsLabel.textProperty().set("Add Sets To " + exercise.getName());
         updateSets();
-        addSetsLabel.textProperty().set("Add Sets To " + exerciseItem.name + exerciseItem.getId());
     }
 
     @FXML private void addSet(){
-        ExerciseItemSet set = new ExerciseItemSet(exerciseItem.getId(), 0, 0);
+        ExerciseItemSet set = new ExerciseItemSet(exercise.getId(), 0, 0);
         model.addSet(set);
         updateSets();
     }
@@ -58,7 +57,7 @@ public class AddSetsController extends AnchorPane implements Initializable {
     }
 
     private void updateSets(){
-        var sets = model.getSets(exerciseItem.getId());
+        var sets = model.getSets(exercise.getId());
         setsList.clear();
         int setNumber = 1;
         for (var set: sets) {

@@ -1,17 +1,17 @@
 package com.example.chalmerswellness.Models;
 
-import com.example.chalmerswellness.DataService;
+import com.example.chalmerswellness.Services.DataService;
 import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.ObjectModels.ExerciseItemSet;
-import com.example.chalmerswellness.Observable;
-import com.example.chalmerswellness.Observer;
+import com.example.chalmerswellness.Interfaces.Observable;
+import com.example.chalmerswellness.Interfaces.Observer;
 import java.util.ArrayList;
 import java.util.List;
 
 public class WorkoutModel implements Observable {
     private List<Exercise> addedExercises = new ArrayList<>();
     private List<Observer> observers = new ArrayList<>();
-    private DataService db;
+    private final DataService db;
 
     public WorkoutModel(){
         db = new DataService();
@@ -29,9 +29,7 @@ public class WorkoutModel implements Observable {
 
     public void addExerciseDb(){
         var exerciseItems = getTodayExerciseItems();
-        for (var exercise: exerciseItems) {
-            addedExercises.add(exercise);
-        }
+        addedExercises.addAll(exerciseItems);
         notifyObservers();
     }
 
