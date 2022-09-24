@@ -1,7 +1,9 @@
 package com.example.chalmerswellness;
 
-import com.example.chalmerswellness.Controllers.ManageWorkoutController;
-import com.example.chalmerswellness.Controllers.WorkoutController;
+import com.example.chalmerswellness.Controllers.Dashboard.DashboardViewController;
+import com.example.chalmerswellness.Controllers.Nutrition.NutritionViewController;
+import com.example.chalmerswellness.Controllers.Settings.SettingsViewController;
+import com.example.chalmerswellness.Controllers.Workout.WorkoutController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;

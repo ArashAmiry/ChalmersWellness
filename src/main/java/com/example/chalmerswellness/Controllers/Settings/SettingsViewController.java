@@ -1,4 +1,4 @@
-package com.example.chalmerswellness;
+package com.example.chalmerswellness.Controllers.Settings;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

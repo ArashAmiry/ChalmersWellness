@@ -1,4 +1,4 @@
-package com.example.chalmerswellness;
+package com.example.chalmerswellness.Controllers.Dashboard;
 
 import org.json.JSONObject;
 

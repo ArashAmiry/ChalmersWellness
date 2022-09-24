@@ -1,10 +1,10 @@
 package com.example.chalmerswellness.Models;
 
-import com.example.chalmerswellness.DataService;
+import com.example.chalmerswellness.Services.DataService;
 import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.ObjectModels.ExerciseItemSet;
-import com.example.chalmerswellness.Observable;
-import com.example.chalmerswellness.Observer;
+import com.example.chalmerswellness.Interfaces.Observable;
+import com.example.chalmerswellness.Interfaces.Observer;
 import java.util.ArrayList;
 import java.util.List;
 

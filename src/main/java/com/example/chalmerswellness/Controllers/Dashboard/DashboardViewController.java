@@ -1,5 +1,6 @@
-package com.example.chalmerswellness;
+package com.example.chalmerswellness.Controllers.Dashboard;
 
+import com.example.chalmerswellness.Controllers.Dashboard.QuotesAPIConnector;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;

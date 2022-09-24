@@ -1,6 +1,7 @@
-package com.example.chalmerswellness.Controllers;
+package com.example.chalmerswellness.Controllers.Workout;
 
-import com.example.chalmerswellness.DataService;
+import com.example.chalmerswellness.Controllers.Workout.SearchPane.ExerciseSearchController;
+import com.example.chalmerswellness.Controllers.Workout.TodaysWorkout.TodayWorkoutController;
 import com.example.chalmerswellness.Models.WorkoutModel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

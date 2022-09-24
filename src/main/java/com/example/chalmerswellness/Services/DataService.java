@@ -1,25 +1,17 @@
-package com.example.chalmerswellness;
-
+package com.example.chalmerswellness.Services;
 
 import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.ObjectModels.ExerciseItemSet;
 import com.example.chalmerswellness.ObjectModels.Workout;
-
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.*;
-
-import static java.util.stream.Collectors.toMap;
 
 public class DataService {
     private String dbPath = "src/main/resources/ChalmersWellness.db";
 
     public DataService() {
-        //createNewDatabase("newDatabase");
-        //createWorkoutTable();
-        //createExercisesTable();
-        //createExerciseItemTable();
-        //createExerciseSetsTable();
+
     }
 
     public List<Workout> getWorkouts(){
@@ -178,108 +170,6 @@ public class DataService {
         return conn;
     }
 
-    //TODO should remove when no longer necessary
-    /*private void createNewDatabase(String fileName) {
-        File sqliteFolder = new File(dbPath);
-        dbPath += fileName;
-
-        if(!sqliteFolder.exists())
-            sqliteFolder.mkdirs();
-
-        try {
-            Class.forName("org.sqlite.JDBC");
-            Connection conn = connect(dbPath);
-            if (conn != null) {
-                DatabaseMetaData meta = conn.getMetaData();
-                System.out.println("The driver name is " + meta.getDriverName());
-                System.out.println("A new database has been created.");
-            }
-        } catch (SQLException | ClassNotFoundException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-     */
-
-    //TODO should remove when no longer necessary
-    /*
-    private void createWorkoutTable() {
-        String sql = "CREATE TABLE IF NOT EXISTS workouts (\n"
-                + "	id integer PRIMARY KEY,\n"
-                + "	workoutName text NOT NULL UNIQUE\n"
-                + ");";
-
-        try (Connection conn = connect(dbPath);
-             Statement stmt = conn.createStatement()) {
-                stmt.execute(sql);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-     */
-
-    //TODO should remove when no longer necessary
-    /*
-    private void createExercisesTable() {
-        String sql = "CREATE TABLE IF NOT EXISTS exercises (\n"
-                + "	id INTEGER PRIMARY KEY,\n"
-                + "	exerciseName text NOT NULL,\n"
-                + "	exerciseType text NOT NULL,\n"
-                + "	exerciseMuscle text NOT NULL,\n"
-                + "	exerciseEquipment text NOT NULL,\n"
-                + "	exerciseDifficulty text NOT NULL,\n"
-                + "	exerciseInstructions text NOT NULL,\n"
-                + "	workoutId INTEGER NOT NULL\n"
-                + ");";
-
-        try (Connection conn = connect(dbPath);
-             Statement stmt = conn.createStatement()) {
-            stmt.execute(sql);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-     */
-
-    //TODO should remove when no longer necessary
-    /*
-    private void createExerciseItemTable() {
-        String sql = "CREATE TABLE IF NOT EXISTS exerciseItems (\n"
-                + "	id INTEGER PRIMARY KEY,\n"
-                + "	exerciseId INTEGER,\n"
-                + " date TEXT\n"
-                + ");";
-
-        try (Connection conn = connect(dbPath);
-             Statement stmt = conn.createStatement()) {
-            stmt.execute(sql);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-     */
-    //TODO should remove when no longer necessary
-
-    /*
-    private void createMyExercisesTable() {
-        String sql = "CREATE TABLE IF NOT EXISTS MyExercises (\n"
-                + "	id INTEGER PRIMARY KEY,\n"
-                + "	exerciseName text NOT NULL,\n"
-                + "	exerciseType text NOT NULL,\n"
-                + "	exerciseMuscle text NOT NULL,\n"
-                + "	exerciseEquipment text NOT NULL,\n"
-                + "	exerciseDifficulty text NOT NULL,\n"
-                + "	exerciseInstructions text NOT NULL\n"
-                + ");";
-
-        try (Connection conn = connect(dbPath);
-             Statement stmt = conn.createStatement()) {
-            stmt.execute(sql);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-     */
-
     public void insertMyExercises(List<Exercise> exercises) {
         String sql = "INSERT INTO MyExercises(exerciseName, exerciseType, exerciseMuscle, exerciseEquipment, exerciseDifficulty, exerciseInstructions) VALUES(?,?,?,?,?,?)";
 
@@ -300,7 +190,6 @@ public class DataService {
             System.out.println(e.getMessage());
         }
     }
-
 
     public List<Exercise> getMyExercises() {
         String sql = "SELECT * FROM MyExercises";
@@ -399,7 +288,7 @@ public class DataService {
         return new Exercise(generatedKey,exercise.name, exercise.type, exercise.muscle, exercise.equipment, exercise.difficulty, exercise.instructions);
     }
 
-    public ExerciseItemSet insertExerciseSet(ExerciseItemSet set) {
+    public void insertExerciseSet(ExerciseItemSet set) {
         String sql = "INSERT INTO ExerciseSets VALUES(?,?,?,?)";
 
         try (Connection conn = connect(dbPath);
@@ -411,12 +300,7 @@ public class DataService {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-
-        //TODO remove type or no?
-        return null;
     }
-
-
 
     public List<ExerciseItemSet> getExerciseSets(int exerciseItemId) {
         String sql = "SELECT id,exerciseItemId, weight, reps FROM ExerciseSets WHERE exerciseItemId = ?";
@@ -440,23 +324,4 @@ public class DataService {
         }
         return sets;
     }
-
-    //TODO should remove when no longer necessary
-    /*
-    private void createExerciseSetsTable() {
-        String sql = "CREATE TABLE IF NOT EXISTS ExerciseSets (\n"
-                + "	id INTEGER PRIMARY KEY,\n"
-                + "	exerciseItemId INTEGER NOT NULL,\n"
-                + "	weight DOUBLE NOT NULL,\n"
-                + "	reps INTEGER NOT NULL\n"
-                + ");";
-
-        try (Connection conn = connect(dbPath);
-             Statement stmt = conn.createStatement()) {
-            stmt.execute(sql);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-     */
 }

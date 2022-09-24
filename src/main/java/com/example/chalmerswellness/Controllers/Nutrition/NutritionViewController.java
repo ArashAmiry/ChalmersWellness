@@ -1,4 +1,4 @@
-package com.example.chalmerswellness;
+package com.example.chalmerswellness.Controllers.Nutrition;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

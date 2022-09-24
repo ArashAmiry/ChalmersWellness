@@ -1,17 +1,14 @@
-package com.example.chalmerswellness.Controllers;
+package com.example.chalmerswellness.Controllers.Workout;
 
+import com.example.chalmerswellness.Controllers.Workout.SearchPane.ExerciseSearchItemController;
 import com.example.chalmerswellness.Models.WorkoutModel;
 import com.example.chalmerswellness.ObjectModels.Exercise;
-import com.example.chalmerswellness.ObjectModels.Workout;
-import com.example.chalmerswellness.Observable;
-import com.example.chalmerswellness.Observer;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import com.example.chalmerswellness.Interfaces.Observable;
+import com.example.chalmerswellness.Interfaces.Observer;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
