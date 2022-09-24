@@ -1,12 +1,21 @@
 package com.example.chalmerswellness;
 
+import com.example.chalmerswellness.calorieAPI.Food;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 
 public class FoodItemController extends AnchorPane {
-    public FoodItemController(){
+
+    @FXML
+    Label foodName;
+    @FXML
+    Label calories;
+
+    public FoodItemController(Food food){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/FoodItem.fxml"));
 
         fxmlLoader.setRoot(this);
@@ -18,5 +27,7 @@ public class FoodItemController extends AnchorPane {
             throw new RuntimeException(exception);
         }
 
+        foodName.setText(food.getName());
+        calories.setText(food.getCalories() + " kcal");
     }
 }

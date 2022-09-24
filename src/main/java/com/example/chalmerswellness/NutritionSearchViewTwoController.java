@@ -11,14 +11,17 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.util.List;
 
 public class NutritionSearchViewTwoController extends ScrollPane {
 
     Meal meal;
     FoodFacade foodFacade = new FoodFacade();
     Food food = new Food();
+    DataService dataService = new DataService();
 
     @FXML
     TextField searchField;
@@ -26,7 +29,8 @@ public class NutritionSearchViewTwoController extends ScrollPane {
     AnchorPane modalPanel;
     @FXML
     AnchorPane rootPane;
-
+    @FXML
+    VBox meals;
 
     public NutritionSearchViewTwoController(AnchorPane pane, Meal meal){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/NutritionSearchViewTwo.fxml"));
@@ -47,6 +51,10 @@ public class NutritionSearchViewTwoController extends ScrollPane {
             throw new RuntimeException(exception);
         }
 
+        List<Food> foods = dataService.getTodaysNutrition(meal);
+        for (Food food: foods) {
+            meals.getChildren().add(new FoodItemController(food));
+        }
     }
 
     @FXML

@@ -20,7 +20,7 @@
                   <Image url="@../img/closebutton.png" />
                </image>
             </ImageView>
-            <VBox layoutX="42.0" layoutY="207.0" prefHeight="458.0" prefWidth="600.0" />
+            <VBox fx:id="meals" layoutX="42.0" layoutY="207.0" prefHeight="458.0" prefWidth="600.0" />
             <Label layoutX="42.0" layoutY="152.0" prefHeight="17.0" prefWidth="247.0" text="Breakfast" />
          </children>
       </AnchorPane>
