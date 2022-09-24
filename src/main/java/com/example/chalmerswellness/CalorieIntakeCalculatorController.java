@@ -13,9 +13,11 @@ import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
-public class CalorieIntakeCalculatorController extends AnchorPane implements Initializable {
+public class CalorieIntakeCalculatorController extends AnchorPane implements Initializable, Observable {
 
     final private Profile profile = Profile.getInstance();
     @FXML
@@ -37,13 +39,7 @@ public class CalorieIntakeCalculatorController extends AnchorPane implements Ini
     private TextField ageTextField, weightTextField, weightGoalTextField, heightTextField;
     private ToggleGroup gender = new ToggleGroup();
     private ToggleGroup paceGroup = new ToggleGroup();
-    private int pace;
-    private double weight;
-    private double height;
-    private int age;
-    private double activityLevel;
-    private boolean isMale;
-    private int recommendedCalorieIntake;
+    private static List<Observer> observers = new ArrayList<>();
 
 
     public CalorieIntakeCalculatorController(){
@@ -65,32 +61,48 @@ public class CalorieIntakeCalculatorController extends AnchorPane implements Ini
         radioButtonFemale.setToggleGroup(gender);
         radioButtonMale.setUserData(true);
         radioButtonFemale.setUserData(false);
+
         radioButtonSlowPace.setToggleGroup(paceGroup);
         radioButtonMediumPace.setToggleGroup(paceGroup);
         radioButtonFastPace.setToggleGroup(paceGroup);
         radioButtonSlowPace.setUserData(250);
         radioButtonMediumPace.setUserData(500);
         radioButtonFastPace.setUserData(1000);
+
         activityChoiceBox.getItems().addAll(activityLevels);
     }
 
     @FXML
     private void calculateCalorieIntake(MouseEvent mouseEvent) {
         profile.setWeightGoal(Integer.parseInt(weightGoalTextField.getText()));
-        weight = Double.parseDouble(weightTextField.getText());
-        height = Double.parseDouble(heightTextField.getText());
-        age = Integer.parseInt(ageTextField.getText());
-        pace = (int) paceGroup.getSelectedToggle().getUserData();
+        double weight = Double.parseDouble(weightTextField.getText());
+        double height = Double.parseDouble(heightTextField.getText());
+        int age = Integer.parseInt(ageTextField.getText());
+        int pace = (int) paceGroup.getSelectedToggle().getUserData();
         if (Integer.parseInt(weightGoalTextField.getText()) - weight < 0) {
             pace = -pace;
         }
-        isMale = (boolean) gender.getSelectedToggle().getUserData();
-        activityLevel = activityChoiceBox.getValue();
-        recommendedCalorieIntake = CalorieCalculator.calculateCalorieIntake(isMale, weight, height, age, activityLevel, pace);
-        calorieIntakeText.setText(String.valueOf(recommendedCalorieIntake));
+        boolean isMale = (boolean) gender.getSelectedToggle().getUserData();
+        double activityLevel = activityChoiceBox.getValue();
+
+        int calorieIntake = CalorieCalculator.calculateCalorieIntake(isMale, weight, height, age, activityLevel, pace);
+        calorieIntakeText.setText("Your recommended calorie intake is " + calorieIntake + " calories per day.");
+        calorieIntakeText.setVisible(true);
+
         profile.setHasCalculatedCalorieIntake(true);
-        profile.setCalorieGoal(recommendedCalorieIntake);
+        profile.setCalorieGoal(calorieIntake);
+        notifyObservers(); // Update calorie progress bar
+    }
+
+    @Override
+    public void notifyObservers() {
+        for (var observer: observers) {
+            observer.update(this);
+        }
     }
 
 
+    public void subscribe(Observer observer) {
+        observers.add(observer);
+    }
 }

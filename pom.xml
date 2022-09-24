@@ -74,45 +74,22 @@
             <artifactId>sqlite-jdbc</artifactId>
             <version>3.39.2.1</version>
         </dependency>
-
-
         <dependency>
             <groupId>com.github.lbovolini</groupId>
             <artifactId>ObjectMapper</artifactId>
             <version>0.2.3</version>
             <scope>compile</scope>
         </dependency>
-
-
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>2.13.4</version>
         </dependency>
-
-
-        <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.9.1</version>
         </dependency>
-        <dependency>
-            <groupId>eu.hansolo</groupId>
-            <artifactId>medusa</artifactId>
-            <version>17.1.5</version>
-        </dependency>
-        <dependency>
-            <groupId>eu.hansolo</groupId>
-            <artifactId>toolbox</artifactId>
-            <version>17.0.33</version>
-        </dependency>
-        <dependency>
-            <groupId>eu.hansolo</groupId>
-            <artifactId>toolboxfx</artifactId>
-            <version>17.0.31</version>
-        </dependency>
-
     </dependencies>
 
 

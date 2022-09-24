@@ -8,7 +8,6 @@ module com.example.chalmerswellness {
     requires com.google.gson;
     requires com.fasterxml.jackson.databind;
     requires org.json;
-    /*requires eu.hansolo.medusa;*/
     opens com.example.chalmerswellness to javafx.fxml;
     exports com.example.chalmerswellness;
     exports com.example.chalmerswellness.Controllers;

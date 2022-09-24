@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class NutritionViewController extends AnchorPane implements Initializable {
+public class NutritionViewController extends AnchorPane implements Initializable, Observer {
 
     @FXML
     private AnchorPane modalPanel;
@@ -22,7 +22,7 @@ public class NutritionViewController extends AnchorPane implements Initializable
     private Text progressBarText;
     private final Profile profile = Profile.getInstance();
 
-    public NutritionViewController(){
+    public NutritionViewController() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/NutritionView.fxml"));
 
         fxmlLoader.setRoot(this);
@@ -35,12 +35,14 @@ public class NutritionViewController extends AnchorPane implements Initializable
         }
 
     }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        progressBarText.setText(String.valueOf(profile.calorieGoal() - profile.caloriesConsumed()) + " Kcal Left");
+        progressBarText.setText(profile.calorieGoal() - profile.caloriesConsumed() + " Kcal Left");
         progressBar.setProgress((double) profile.caloriesConsumed() / profile.calorieGoal());
+        CalorieIntakeCalculatorController calorieIntakeCalculatorController = new CalorieIntakeCalculatorController();
+        calorieIntakeCalculatorController.subscribe(this);
     }
-
     private void loadCalorieIntakeCalculatorView() {
 
     }
@@ -51,4 +53,10 @@ public class NutritionViewController extends AnchorPane implements Initializable
         modalPanel.setDisable(false);
     }
 
+
+    @Override
+    public void update(Observable observable) {
+        progressBarText.setText(profile.calorieGoal() - profile.caloriesConsumed() + " Kcal Left");
+        progressBar.setProgress((double) profile.caloriesConsumed() / profile.calorieGoal());
+    }
 }
