@@ -164,6 +164,21 @@ public class DataService {
         }
     }
 
+    public void removeNutrition(int foodId){
+        String sql = "DELETE FROM nutrition WHERE id = ?";
+
+        try (Connection conn = this.connect(dbPath);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, foodId);
+            pstmt.executeUpdate();
+
+            removeExercises(foodId);
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     public List<Food> getTodaysNutrition(Meal meal){
         String sql = "SELECT * FROM nutrition WHERE mealOfDay = ? AND dateOfInsert = CURRENT_DATE";
         List<Food> foods = new ArrayList<>();

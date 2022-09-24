@@ -16,12 +16,13 @@ import javafx.scene.layout.VBox;
 import java.io.IOException;
 import java.util.List;
 
-public class NutritionSearchViewTwoController extends ScrollPane {
+public class NutritionSearchViewTwoController extends ScrollPane implements Observer{
 
     Meal meal;
     FoodFacade foodFacade = new FoodFacade();
     Food food = new Food();
     DataService dataService = new DataService();
+    List<Food> foods;
 
     @FXML
     TextField searchField;
@@ -44,6 +45,7 @@ public class NutritionSearchViewTwoController extends ScrollPane {
 
         modalPanel = pane;
         this.meal = meal;
+        foodFacade.subscribe(this);
 
         try {
             fxmlLoader.load();
@@ -51,7 +53,12 @@ public class NutritionSearchViewTwoController extends ScrollPane {
             throw new RuntimeException(exception);
         }
 
-        List<Food> foods = dataService.getTodaysNutrition(meal);
+        populateMealList();
+    }
+
+    private void populateMealList() {
+        meals.getChildren().clear();
+        foods = dataService.getTodaysNutrition(meal);
         for (Food food: foods) {
             meals.getChildren().add(new FoodItemController(food));
         }
@@ -81,5 +88,10 @@ public class NutritionSearchViewTwoController extends ScrollPane {
     private void closeWindow(MouseEvent mouseEvent) {
         modalPanel.getChildren().clear();
         modalPanel.setDisable(true);
+    }
+
+    @Override
+    public void update(Observable observable) {
+        populateMealList();
     }
 }

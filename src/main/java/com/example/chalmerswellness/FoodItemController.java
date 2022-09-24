@@ -1,25 +1,35 @@
 package com.example.chalmerswellness;
 
 import com.example.chalmerswellness.calorieAPI.Food;
+import com.example.chalmerswellness.calorieAPI.FoodFacade;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 
-public class FoodItemController extends AnchorPane {
+public class FoodItemController extends AnchorPane{
+
+    Food food;
 
     @FXML
     Label foodName;
     @FXML
     Label calories;
+    @FXML
+    ImageView removeItem;
+
+    private static DataService dataService = new DataService();
 
     public FoodItemController(Food food){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/FoodItem.fxml"));
 
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
+
+        this.food = food;
 
         try {
             fxmlLoader.load();
@@ -30,4 +40,11 @@ public class FoodItemController extends AnchorPane {
         foodName.setText(food.getName());
         calories.setText(food.getCalories() + " kcal");
     }
+
+    @FXML
+    private void removeFoodItem(){
+        FoodFacade foodFacade = new FoodFacade();
+        foodFacade.removeFood(food.getId());
+    }
+
 }
