@@ -35,7 +35,11 @@ public class MainView extends AnchorPane {
 
    @FXML
    public void navigateToNutritionView() {
-        setViewTo(nutritionViewController);
+        if (!Profile.getInstance().hasCalculatedCalorieIntake()) {
+            setViewTo(calorieIntakeCalculatorController);
+        } else {
+            setViewTo(nutritionViewController);
+        }
    }
    @FXML
    public void navigateToSettingsView() { setViewTo(settingsViewController);}

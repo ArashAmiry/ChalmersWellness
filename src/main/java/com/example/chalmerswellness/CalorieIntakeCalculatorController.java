@@ -1,5 +1,7 @@
 package com.example.chalmerswellness;
 
+import com.example.chalmerswellness.Interfaces.Observable;
+import com.example.chalmerswellness.Interfaces.Observer;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;

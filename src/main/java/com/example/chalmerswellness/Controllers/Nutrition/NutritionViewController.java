@@ -1,5 +1,9 @@
 package com.example.chalmerswellness.Controllers.Nutrition;
 
+import com.example.chalmerswellness.CalorieIntakeCalculatorController;
+import com.example.chalmerswellness.Interfaces.Observable;
+import com.example.chalmerswellness.Interfaces.Observer;
+import com.example.chalmerswellness.Profile;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
