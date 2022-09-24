@@ -91,7 +91,7 @@ public class CalorieIntakeCalculatorController extends AnchorPane implements Ini
 
         profile.setHasCalculatedCalorieIntake(true);
         profile.setCalorieGoal(calorieIntake);
-        notifyObservers(); // Update calorie progress bar
+        notifyObservers(); // Update calorie progress bar text
     }
 
     @Override

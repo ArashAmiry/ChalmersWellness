@@ -17,6 +17,8 @@ public class NutritionViewController extends AnchorPane implements Initializable
     @FXML
     private AnchorPane modalPanel;
     @FXML
+    private AnchorPane rootPane;
+    @FXML
     private ProgressBar progressBar;
     @FXML
     private Text progressBarText;
@@ -43,16 +45,11 @@ public class NutritionViewController extends AnchorPane implements Initializable
         CalorieIntakeCalculatorController calorieIntakeCalculatorController = new CalorieIntakeCalculatorController();
         calorieIntakeCalculatorController.subscribe(this);
     }
-    private void loadCalorieIntakeCalculatorView() {
-
-    }
 
     @FXML
     private void loadNutritionSearchView(ActionEvent event) throws IOException {
-        modalPanel.getChildren().add(new NutritionSearchViewController(modalPanel));
-        modalPanel.setDisable(false);
+        rootPane.getChildren().add(new NutritionSearchViewController(rootPane));
     }
-
 
     @Override
     public void update(Observable observable) {

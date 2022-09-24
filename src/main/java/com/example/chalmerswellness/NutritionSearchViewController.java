@@ -16,10 +16,7 @@ public class NutritionSearchViewController extends AnchorPane {
     @FXML
     private TextField searchField;
     @FXML
-    private AnchorPane rootPane;
-
-    @FXML
-    private AnchorPane modalPanel;
+    private AnchorPane parentPane;
     private Nutrition nutrition = new Nutrition();
     private NutritionModel nutritionModel = new NutritionModel();
 
@@ -30,7 +27,7 @@ public class NutritionSearchViewController extends AnchorPane {
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 
-        modalPanel = pane;
+        parentPane = pane;
 
         try {
             fxmlLoader.load();
@@ -43,13 +40,13 @@ public class NutritionSearchViewController extends AnchorPane {
     @FXML
     private void searchForFoodItem(ActionEvent event) {
         nutritionModel = nutrition.createNutritionModelFor(searchField.getText());
-        rootPane.getChildren().setAll(new NutritionFoodItemController(nutritionModel, modalPanel));
+        parentPane.getChildren().remove(this);
+        parentPane.getChildren().add(new NutritionFoodItemController(nutritionModel, parentPane));
     }
 
     @FXML
     private void closeWindow(MouseEvent mouseEvent) {
-        modalPanel.getChildren().clear();
-        modalPanel.setDisable(true);
+        parentPane.getChildren().remove(this);
     }
 
 }

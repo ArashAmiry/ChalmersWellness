@@ -46,10 +46,7 @@ public class NutritionFoodItemController extends AnchorPane implements Initializ
     @FXML
     private Button addFoodButton;
     @FXML
-    AnchorPane rootPane;
-
-    @FXML
-    private AnchorPane modalPanel;
+    private AnchorPane parentPane;
 
 
     private Nutrition nutrition = new Nutrition();
@@ -60,8 +57,10 @@ public class NutritionFoodItemController extends AnchorPane implements Initializ
 
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
+
         nutritionModel = foodItem;
-        modalPanel = pane;
+        parentPane = pane;
+
 
         try {
             fxmlLoader.load();
@@ -94,8 +93,7 @@ public class NutritionFoodItemController extends AnchorPane implements Initializ
 
     @FXML
     private void closeWindow(MouseEvent mouseEvent) {
-        modalPanel.getChildren().clear();
-        modalPanel.setDisable(true);
+        parentPane.getChildren().remove(this);
     }
 
 
