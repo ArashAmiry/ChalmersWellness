@@ -15,8 +15,7 @@ import java.util.ResourceBundle;
 public class ExerciseItemSetController extends AnchorPane implements Initializable {
 
     private WorkoutModel model;
-    @FXML
-    Label exerciseName;
+    @FXML private Label exerciseName;
     private ExerciseItemSet exerciseItemSet;
     @FXML private Label setLabel;
     @FXML private TextField weightField;

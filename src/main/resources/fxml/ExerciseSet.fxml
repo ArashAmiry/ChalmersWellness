@@ -13,11 +13,11 @@
          <font>
             <Font name="System Bold" size="24.0" />
          </font></Label>
-      <TextField fx:id="weightField" alignment="CENTER" layoutX="114.0" layoutY="7.0" prefHeight="21.0" prefWidth="54.0">
+      <TextField fx:id="weightField" alignment="CENTER" layoutX="107.0" layoutY="7.0" prefHeight="37.0" prefWidth="61.0">
          <font>
             <Font size="16.0" />
          </font></TextField>
-      <TextField fx:id="repsField" layoutX="231.0" layoutY="7.0" prefHeight="23.0" prefWidth="35.0">
+      <TextField fx:id="repsField" alignment="CENTER" layoutX="212.0" layoutY="7.0" prefHeight="38.0" prefWidth="54.0">
          <font>
             <Font size="16.0" />
          </font></TextField>

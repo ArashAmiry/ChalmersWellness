@@ -63,6 +63,7 @@ public class WorkoutModel implements Observable {
     }
     public void removeExercise(Exercise exercise){
         db.removeExerciseItem(exercise);
+        addedExercises.remove(exercise);
         notifyObservers();
     }
 
