@@ -1,7 +1,10 @@
 package com.example.chalmerswellness.Controllers.Nutrition;
 
-import com.example.chalmerswellness.calorieAPI.Nutrition;
-import com.example.chalmerswellness.calorieAPI.NutritionModel;
+import com.example.chalmerswellness.Services.DataService;
+import com.example.chalmerswellness.calorieAPI.Food;
+import com.example.chalmerswellness.calorieAPI.FoodFacade;
+import com.example.chalmerswellness.calorieAPI.Meal;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -46,21 +49,29 @@ public class NutritionFoodItemController extends AnchorPane implements Initializ
     @FXML
     private Button addFoodButton;
     @FXML
-    private final AnchorPane parentPane;
+
+    private AnchorPane parentPane;
+    @FXML
+    private AnchorPane rootPane;
 
 
-    private final Nutrition nutrition = new Nutrition();
-    private NutritionModel nutritionModel = new NutritionModel();
+    DataService dataService = new DataService();
+    Meal meal;
+    FoodFacade foodFacade = new FoodFacade();
+    Food food;
+    AnchorPane modalPanel;
+    NutritionSearchViewController nutritionSearchViewController;
 
-    public NutritionFoodItemController(NutritionModel foodItem, AnchorPane pane){
+
+    public NutritionFoodItemController(Food foodItem, AnchorPane pane, Meal meal){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/NutritionFoodItemView.fxml"));
 
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 
-        nutritionModel = foodItem;
-        parentPane = pane;
-
+        this.meal = meal;
+        this.food = foodItem;
+        this.parentPane = pane;
 
         try {
             fxmlLoader.load();
@@ -72,28 +83,53 @@ public class NutritionFoodItemController extends AnchorPane implements Initializ
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        foodItemText.textProperty().set(nutritionModel.getName());
-        caloriesPerServing.textProperty().set(String.valueOf(nutritionModel.getCalories()));
-        servingSizeGrams.textProperty().set(nutritionModel.getServingSize() + "g");
-        totalFatGrams.textProperty().set(nutritionModel.getFatTotal() + "g");
-        saturatedFatGrams.textProperty().set(nutritionModel.getFatSaturated() + "g");
-        cholesterolMilligrams.textProperty().set(nutritionModel.getCholesterol() + "mg");
-        sodiumMilligrams.textProperty().set(nutritionModel.getSodium() + "mg");
-        potassiumMilligrams.textProperty().set(nutritionModel.getPotassium() + "mg");
-        totalCarbohydrateGrams.textProperty().set(nutritionModel.getCarbohydrates() + "g");
-        dietaryFiberGrams.textProperty().set(nutritionModel.getFiber() + "g");
-        totalSugarsGrams.textProperty().set(nutritionModel.getSugar() + "g");
-        totalProteinGrams.textProperty().set(nutritionModel.getProtein() + "g");
+        foodItemText.textProperty().set(food.getName().substring(0, 1).toUpperCase() + food.getName().substring(1));
+        caloriesPerServing.textProperty().set(String.valueOf(food.getCalories()));
+        servingSizeGrams.textProperty().set(food.getServingSize() + "g");
+        totalFatGrams.textProperty().set(food.getFatTotal() + "g");
+        saturatedFatGrams.textProperty().set(food.getFatSaturated() + "g");
+        cholesterolMilligrams.textProperty().set(food.getCholesterol() + "mg");
+        sodiumMilligrams.textProperty().set(food.getSodium() + "mg");
+        potassiumMilligrams.textProperty().set(food.getPotassium() + "mg");
+        totalCarbohydrateGrams.textProperty().set(food.getCarbohydrates() + "g");
+        dietaryFiberGrams.textProperty().set(food.getFiber() + "g");
+        totalSugarsGrams.textProperty().set(food.getSugar() + "g");
+        totalProteinGrams.textProperty().set(food.getProtein() + "g");
     }
 
     @FXML
-    private void addFoodEaten(MouseEvent mouseEvent) {
+    private void addFoodEaten(MouseEvent mouseEvent) throws JsonProcessingException {
+        if (validateAmountGrams()){
+            dataService.insertNutrition(foodFacade.createFood(foodItemGrams.getText() + "g " + food.getName()), meal);
+            //parentPane.getChildren().setAll(new NutritionSearchViewController(parentPane, meal));
+            parentPane.getChildren().remove(this);
+            parentPane.getChildren().add(new NutritionSearchViewController(parentPane, meal));
+        }
+        else {
+            foodItemGrams.clear();
+            foodItemGrams.setPromptText("Please enter a positive number");
+        }
+    }
 
+    private boolean validateAmountGrams(){
+        String grams = foodItemGrams.getText();
+        if (grams == null) {
+            return false;
+        }
+        try {
+            double parsedGrams = Double.parseDouble(grams);
+            if (parsedGrams <= 0 ){
+                throw new NumberFormatException();
+            }
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
     }
 
     @FXML
     private void closeWindow(MouseEvent mouseEvent) {
-        parentPane.getChildren().remove(this);
+        parentPane.getChildren().remove(nutritionSearchViewController);
     }
 
 
