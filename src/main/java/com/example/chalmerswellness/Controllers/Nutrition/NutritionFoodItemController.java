@@ -46,10 +46,10 @@ public class NutritionFoodItemController extends AnchorPane implements Initializ
     @FXML
     private Button addFoodButton;
     @FXML
-    private AnchorPane parentPane;
+    private final AnchorPane parentPane;
 
 
-    private Nutrition nutrition = new Nutrition();
+    private final Nutrition nutrition = new Nutrition();
     private NutritionModel nutritionModel = new NutritionModel();
 
     public NutritionFoodItemController(NutritionModel foodItem, AnchorPane pane){

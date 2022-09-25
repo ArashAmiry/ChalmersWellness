@@ -16,8 +16,8 @@ public class NutritionSearchViewController extends AnchorPane {
     @FXML
     private TextField searchField;
     @FXML
-    private AnchorPane parentPane;
-    private Nutrition nutrition = new Nutrition();
+    private final AnchorPane parentPane;
+    private final Nutrition nutrition = new Nutrition();
     private NutritionModel nutritionModel = new NutritionModel();
 
 
