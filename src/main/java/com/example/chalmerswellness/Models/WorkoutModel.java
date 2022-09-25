@@ -51,8 +51,6 @@ public class WorkoutModel implements Observable {
 
     public List<ExerciseItemSet> getSets(int exerciseItemId){
         sets = db.getExerciseSets(exerciseItemId);
-
-        notifyObservers();
         return sets;
     }
 
@@ -64,7 +62,7 @@ public class WorkoutModel implements Observable {
         return db.getTodayExerciseItems();
     }
     public void removeExercise(Exercise exercise){
-        addedExercises.remove(exercise);
+        db.removeExerciseItem(exercise);
         notifyObservers();
     }
 

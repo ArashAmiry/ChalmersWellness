@@ -261,6 +261,18 @@ public class DataService {
         return new Exercise(generatedKey, exercise);
     }
 
+    public void removeExerciseItem(Exercise exercise) {
+        String sql = "DELETE FROM exerciseItems WHERE id = ?";
+        removeSets(exercise.getId());
+
+        try (Connection conn = connect(dbPath);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, exercise.getId());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
     public void insertExerciseSet(ExerciseItemSet set) {
         String sql = "INSERT INTO ExerciseSets VALUES(?,?,?,?)";
 
@@ -319,7 +331,6 @@ public class DataService {
         }
     }
 
-
     public List<ExerciseItemSet> getExerciseSets(int exerciseItemId) {
         String sql = "SELECT id,exerciseItemId, weight, reps FROM ExerciseSets WHERE exerciseItemId = ?";
         List<ExerciseItemSet> sets = new ArrayList<>();
@@ -331,7 +342,7 @@ public class DataService {
 
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                var id = rs.getInt("exerciseItemId");
+                var id = rs.getInt("id");
                 double weight = rs.getDouble("weight");
                 int reps = rs.getInt("reps");
                 ExerciseItemSet set = new ExerciseItemSet(id, weight, reps);

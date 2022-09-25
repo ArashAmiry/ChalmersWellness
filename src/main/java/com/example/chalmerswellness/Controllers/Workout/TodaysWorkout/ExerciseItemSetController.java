@@ -52,8 +52,6 @@ public class ExerciseItemSetController extends AnchorPane implements Initializab
     }
 
     @FXML private void removeSet(){
-        //TODO Works? add setId
-        //setId isnt unique to set
         model.removeSet(exerciseItemSet.getId());
     }
 }
