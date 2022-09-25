@@ -1,5 +1,6 @@
 package com.example.chalmerswellness.Controllers.Nutrition;
 
+import com.example.chalmerswellness.Services.DataService;
 import com.example.chalmerswellness.calorieAPI.Food;
 import com.example.chalmerswellness.calorieAPI.FoodFacade;
 import com.example.chalmerswellness.calorieAPI.Meal;
@@ -49,22 +50,26 @@ public class NutritionFoodItemController extends AnchorPane implements Initializ
     private Button addFoodButton;
     @FXML
     private AnchorPane parentPane;
+    @FXML
+    private AnchorPane rootPane;
 
 
     DataService dataService = new DataService();
-
     Meal meal;
     FoodFacade foodFacade = new FoodFacade();
     Food food;
+    AnchorPane modalPanel;
+    NutritionSearchViewController nutritionSearchViewController;
 
     public NutritionFoodItemController(Food foodItem, AnchorPane pane, Meal meal){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/NutritionFoodItemView.fxml"));
 
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
+
         this.meal = meal;
-        food = foodItem;
-        parentPane = pane;
+        this.food = foodItem;
+        this.parentPane = pane;
 
         try {
             fxmlLoader.load();
@@ -94,7 +99,9 @@ public class NutritionFoodItemController extends AnchorPane implements Initializ
     private void addFoodEaten(MouseEvent mouseEvent) throws JsonProcessingException {
         if (validateAmountGrams()){
             dataService.insertNutrition(foodFacade.createFood(foodItemGrams.getText() + "g " + food.getName()), meal);
-            rootPane.getChildren().setAll(new NutritionSearchViewController(modalPanel, meal));
+            //parentPane.getChildren().setAll(new NutritionSearchViewController(parentPane, meal));
+            parentPane.getChildren().remove(this);
+            parentPane.getChildren().add(new NutritionSearchViewController(parentPane, meal));
         }
         else {
             foodItemGrams.clear();
@@ -120,7 +127,7 @@ public class NutritionFoodItemController extends AnchorPane implements Initializ
 
     @FXML
     private void closeWindow(MouseEvent mouseEvent) {
-        parentPane.getChildren().remove(this);
+        parentPane.getChildren().remove(nutritionSearchViewController);
     }
 
 

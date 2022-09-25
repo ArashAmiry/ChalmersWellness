@@ -2,6 +2,7 @@ package com.example.chalmerswellness;
 
 import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.ObjectModels.Workout;
+import com.example.chalmerswellness.Services.DataService;
 import com.example.chalmerswellness.calorieAPI.Food;
 import com.example.chalmerswellness.calorieAPI.FoodFacade;
 import com.example.chalmerswellness.calorieAPI.Meal;
@@ -33,10 +34,6 @@ public class ChalmersWellnessApp extends Application {
             }
         });
 
-
-
-        DataService dataService = new DataService();
-        List<Food> food = dataService.getTodaysNutrition(Meal.BREAKFAST);
     }
 
     public static void main(String[] args) {

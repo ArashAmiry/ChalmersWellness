@@ -10,10 +10,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<fx:root prefHeight="1080.0" prefWidth="1460.0" style="-fx-background-color: rgbA(0,0,0,0.8);" type="AnchorPane" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="1080.0" prefWidth="1460.0" style="-fx-background-color: rgbA(0,0,0,0.8);" stylesheets="@../css/searchfood.css" type="AnchorPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane fx:id="rootPane" layoutX="394.0" layoutY="63.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" style="-fx-background-color: white;" stylesheets="@../css/nutrition.css">
+      <AnchorPane fx:id="rootPane" layoutX="380.0" layoutY="116.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" style="-fx-background-color: white;" stylesheets="@../css/nutrition.css">
          <children>
             <Text layoutX="79.0" layoutY="563.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nutrition Facts">
                <font>

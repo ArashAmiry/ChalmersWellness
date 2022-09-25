@@ -1,5 +1,9 @@
 package com.example.chalmerswellness.Controllers.Nutrition;
 
+import com.example.chalmerswellness.FoodItemController;
+import com.example.chalmerswellness.Interfaces.Observable;
+import com.example.chalmerswellness.Interfaces.Observer;
+import com.example.chalmerswellness.Services.DataService;
 import com.example.chalmerswellness.calorieAPI.Food;
 import com.example.chalmerswellness.calorieAPI.FoodFacade;
 import com.example.chalmerswellness.calorieAPI.Meal;
@@ -17,7 +21,7 @@ import javafx.scene.layout.VBox;
 import java.io.IOException;
 import java.util.List;
 
-public class NutritionSearchViewController extends ScrollPane implements Observer{
+public class NutritionSearchViewController extends AnchorPane implements Observer {
 
     Meal meal;
     FoodFacade foodFacade = new FoodFacade();
@@ -32,6 +36,8 @@ public class NutritionSearchViewController extends ScrollPane implements Observe
     @FXML
     private AnchorPane parentPane;
     @FXML
+    private AnchorPane rootPane;
+    @FXML
     VBox meals;
 
     public NutritionSearchViewController(AnchorPane pane, Meal meal){
@@ -40,11 +46,6 @@ public class NutritionSearchViewController extends ScrollPane implements Observe
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 
-        this.setPannable(false);
-        this.setHbarPolicy(ScrollBarPolicy.NEVER);
-        this.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
-
-        modalPanel = pane;
         this.meal = meal;
         foodFacade.subscribe(this);
         parentPane = pane;
@@ -69,16 +70,13 @@ public class NutritionSearchViewController extends ScrollPane implements Observe
 
     @FXML
     private void searchForFoodItem(ActionEvent event) {
-        parentPane.getChildren().remove(this);
-        parentPane.getChildren().add(new NutritionFoodItemController(nutritionModel, parentPane));
-
         String foodName = searchField.getText();
 
         try {
             if (foodFacade.isFoodExisting(foodName)){
                 food = foodFacade.createFood(foodName);
-                rootPane.getChildren().setAll(new NutritionFoodItemController(food, modalPanel, meal));
-                this.setVbarPolicy(ScrollBarPolicy.NEVER);
+                parentPane.getChildren().remove(this);
+                parentPane.getChildren().add(new NutritionFoodItemController(food, parentPane, meal));
             }
             else {
                 searchField.clear();
