@@ -26,8 +26,6 @@ public class CreateWorkoutController extends AnchorPane implements Observer {
     @FXML public ListView mainContent;
     @FXML TextField workoutNameField;
 
-
-
     public CreateWorkoutController(WorkoutModel workoutModel){
         this.model = workoutModel;
         workoutModel.subscribe(this);
