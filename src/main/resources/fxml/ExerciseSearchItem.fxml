@@ -11,12 +11,7 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="exerciseName1" layoutX="277.0" onMouseClicked="#addToWorkout" prefHeight="50.0" prefWidth="22.0" text="+">
-         <font>
-            <Font size="27.0" />
-         </font>
-      </Label>
-      <Label fx:id="exerciseName11" layoutX="255.0" onMouseClicked="#removeFromWorkout" prefHeight="50.0" prefWidth="22.0" text="-">
+      <Label layoutX="263.0" onMouseClicked="#addToWorkout" prefHeight="50.0" prefWidth="36.0" text="+">
          <font>
             <Font size="27.0" />
          </font>
