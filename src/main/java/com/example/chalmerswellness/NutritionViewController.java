@@ -33,7 +33,7 @@ public class NutritionViewController extends AnchorPane implements Initializable
     public void initialize(URL url, ResourceBundle resourceBundle) {
         modalPanel.setDisable(true);
     }
-    @FXML
+
     private void loadNutritionSearchView(Meal meal) {
         modalPanel.getChildren().add(new NutritionSearchViewTwoController(modalPanel, meal));
         modalPanel.setDisable(false);
@@ -43,5 +43,21 @@ public class NutritionViewController extends AnchorPane implements Initializable
     private void loadBreakfastSearchView(){
         loadNutritionSearchView(Meal.BREAKFAST);
     }
+
+    @FXML
+    private void loadLunchSearchView(){
+        loadNutritionSearchView(Meal.LUNCH);
+    }
+
+    @FXML
+    private void loadDinnerSearchView(){
+        loadNutritionSearchView(Meal.DINNER);
+    }
+
+    @FXML
+    private void loadSnackSearchView(){
+        loadNutritionSearchView(Meal.SNACK);
+    }
+
 
 }

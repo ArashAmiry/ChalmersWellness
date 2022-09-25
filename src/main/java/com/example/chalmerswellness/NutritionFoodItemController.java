@@ -98,7 +98,8 @@ public class NutritionFoodItemController extends AnchorPane implements Initializ
             rootPane.getChildren().setAll(new NutritionSearchViewTwoController(modalPanel, meal));
         }
         else {
-            foodItemGrams.textProperty().set("Please enter a positive number");
+            foodItemGrams.clear();
+            foodItemGrams.setPromptText("Please enter a positive number");
         }
     }
 

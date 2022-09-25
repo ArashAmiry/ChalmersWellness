@@ -52,17 +52,17 @@
             <Font size="20.0" />
          </font>
       </Button>
-      <Button layoutX="803.0" layoutY="605.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="440.0" text="Add lunch">
+      <Button layoutX="803.0" layoutY="605.0" mnemonicParsing="false" onMouseClicked="#loadLunchSearchView" prefHeight="86.0" prefWidth="440.0" text="Add lunch">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button layoutX="249.0" layoutY="799.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="440.0" text="Add dinner">
+      <Button layoutX="249.0" layoutY="799.0" mnemonicParsing="false" onMouseClicked="#loadDinnerSearchView" prefHeight="86.0" prefWidth="440.0" text="Add dinner">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button layoutX="803.0" layoutY="799.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="440.0" text="Add snack">
+      <Button layoutX="803.0" layoutY="799.0" mnemonicParsing="false" onMouseClicked="#loadSnackSearchView" prefHeight="86.0" prefWidth="440.0" text="Add snack">
          <font>
             <Font size="20.0" />
          </font>

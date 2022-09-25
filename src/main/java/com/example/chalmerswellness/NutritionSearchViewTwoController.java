@@ -7,6 +7,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -24,6 +25,8 @@ public class NutritionSearchViewTwoController extends ScrollPane implements Obse
     DataService dataService = new DataService();
     List<Food> foods;
 
+    @FXML
+    Label mealOfDay;
     @FXML
     TextField searchField;
     @FXML
@@ -54,6 +57,7 @@ public class NutritionSearchViewTwoController extends ScrollPane implements Obse
         }
 
         populateMealList();
+        mealOfDay.setText(String.valueOf(meal));
     }
 
     private void populateMealList() {

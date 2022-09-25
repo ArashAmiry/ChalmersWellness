@@ -18,10 +18,6 @@ public class FoodItemController extends AnchorPane{
     Label foodName;
     @FXML
     Label calories;
-    @FXML
-    ImageView removeItem;
-
-    private static DataService dataService = new DataService();
 
     public FoodItemController(Food food){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/FoodItem.fxml"));
