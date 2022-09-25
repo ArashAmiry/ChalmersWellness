@@ -1,5 +1,6 @@
 package com.example.chalmerswellness.Controllers.Workout.TodaysWorkout;
 
+import com.example.chalmerswellness.Models.WorkoutModel;
 import com.example.chalmerswellness.ObjectModels.ExerciseItemSet;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,15 +14,16 @@ import java.util.ResourceBundle;
 
 public class ExerciseItemSetController extends AnchorPane implements Initializable {
 
-    @FXML
-    Label exerciseName;
+    private WorkoutModel model;
+    @FXML private Label exerciseName;
     private ExerciseItemSet exerciseItemSet;
     @FXML private Label setLabel;
     @FXML private TextField weightField;
     @FXML private TextField repsField;
     private int setNumber;
 
-    public ExerciseItemSetController(ExerciseItemSet exerciseItemSet, int setNumber){
+    public ExerciseItemSetController(WorkoutModel model, ExerciseItemSet exerciseItemSet, int setNumber){
+        this.model = model;
         this.exerciseItemSet = exerciseItemSet;
         this.setNumber = setNumber;
 
@@ -41,5 +43,14 @@ public class ExerciseItemSetController extends AnchorPane implements Initializab
         setLabel.textProperty().set("Set " + setNumber);
         weightField.textProperty().set(String.valueOf(exerciseItemSet.getWeight()));
         repsField.textProperty().set(String.valueOf(exerciseItemSet.getReps()));
+    }
+
+    public void setValues(){
+        exerciseItemSet.setWeight(Double.parseDouble(weightField.textProperty().getValue()));
+        exerciseItemSet.setReps(Integer.parseInt(repsField.textProperty().getValue()));
+    }
+
+    @FXML private void removeSet(){
+        model.removeSet(exerciseItemSet.getId());
     }
 }
