@@ -49,6 +49,7 @@ public class NutritionFoodItemController extends AnchorPane implements Initializ
     @FXML
     private Button addFoodButton;
     @FXML
+
     private AnchorPane parentPane;
     @FXML
     private AnchorPane rootPane;
@@ -60,6 +61,7 @@ public class NutritionFoodItemController extends AnchorPane implements Initializ
     Food food;
     AnchorPane modalPanel;
     NutritionSearchViewController nutritionSearchViewController;
+
 
     public NutritionFoodItemController(Food foodItem, AnchorPane pane, Meal meal){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/NutritionFoodItemView.fxml"));

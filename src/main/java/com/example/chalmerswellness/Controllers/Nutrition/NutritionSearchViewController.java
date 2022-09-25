@@ -34,11 +34,13 @@ public class NutritionSearchViewController extends AnchorPane implements Observe
     @FXML
     private TextField searchField;
     @FXML
+
     private AnchorPane parentPane;
     @FXML
     private AnchorPane rootPane;
     @FXML
     VBox meals;
+
 
     public NutritionSearchViewController(AnchorPane pane, Meal meal){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/NutritionSearchView.fxml"));
