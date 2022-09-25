@@ -1,7 +1,5 @@
 package com.example.chalmerswellness.Controllers.Workout.TodaysWorkout;
 
-import com.example.chalmerswellness.Interfaces.Observable;
-import com.example.chalmerswellness.Interfaces.Observer;
 import com.example.chalmerswellness.Models.WorkoutModel;
 import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.ObjectModels.ExerciseItemSet;
@@ -16,11 +14,10 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
-public class AddSetsController extends AnchorPane implements Initializable, Observer {
-    private WorkoutModel model;
+public class AddSetsController extends AnchorPane implements Initializable {
+    private final WorkoutModel model;
     private final Exercise exercise;
     private final AnchorPane anchorPane;
     ObservableList<ExerciseItemSetController> setsList = FXCollections.observableArrayList();
@@ -29,8 +26,6 @@ public class AddSetsController extends AnchorPane implements Initializable, Obse
 
     public AddSetsController(WorkoutModel model, Exercise exercise, AnchorPane anchorPane) {
         this.model = model;
-        model.subscribe(this);
-
         this.exercise = exercise;
         this.anchorPane = anchorPane;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/AddSetsView.fxml"));
@@ -57,11 +52,8 @@ public class AddSetsController extends AnchorPane implements Initializable, Obse
     }
 
     @FXML private void saveSets(){
-        for (var item: setsList) {
-            item.setValues();
-        }
+        //TODO add code
 
-        model.saveSets(exercise.getId());
     }
 
     private void updateSets(){
@@ -69,7 +61,7 @@ public class AddSetsController extends AnchorPane implements Initializable, Obse
         setsList.clear();
         int setNumber = 1;
         for (var set: sets) {
-            ExerciseItemSetController setsController = new ExerciseItemSetController(model, set, setNumber);
+            ExerciseItemSetController setsController = new ExerciseItemSetController(set, setNumber);
             setsList.add(setsController);
             setNumber++;
         }
@@ -82,11 +74,5 @@ public class AddSetsController extends AnchorPane implements Initializable, Obse
 
     @FXML public void mouseTrap(Event event){
         event.consume();
-    }
-
-    @Override
-    public void update(Observable observable) {
-        this.model = (WorkoutModel) observable;
-        updateSets();
     }
 }

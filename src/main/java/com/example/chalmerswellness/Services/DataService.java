@@ -261,18 +261,6 @@ public class DataService {
         return new Exercise(generatedKey, exercise);
     }
 
-    public void removeExerciseItem(Exercise exercise) {
-        String sql = "DELETE FROM exerciseItems WHERE id = ?";
-        removeSets(exercise.getId());
-
-        try (Connection conn = connect(dbPath);
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, exercise.getId());
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
     public void insertExerciseSet(ExerciseItemSet set) {
         String sql = "INSERT INTO ExerciseSets VALUES(?,?,?,?)";
 
@@ -282,50 +270,6 @@ public class DataService {
                 pstmt.setDouble(3, set.getWeight());
                 pstmt.setDouble(4, set.getReps());
                 pstmt.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    public void insertSets(int exerciseId, List<ExerciseItemSet> sets){
-        String sql = "INSERT INTO ExerciseSets VALUES(?,?,?,?)";
-        removeSets(exerciseId);
-
-        try (Connection conn = connect(dbPath);
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            for (ExerciseItemSet set : sets) {
-                pstmt.setInt(2, exerciseId);
-                pstmt.setDouble(3, set.getWeight());
-                pstmt.setInt(4, set.getReps());
-                pstmt.executeUpdate();
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    public void removeSets(int exerciseId){
-        String sql = "DELETE FROM ExerciseSets WHERE exerciseItemId = ?";
-
-        try (Connection conn = this.connect(dbPath);
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-                pstmt.setInt(1, exerciseId);
-                pstmt.executeUpdate();
-
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    public void removeSet(int setId) {
-        String sql = "DELETE FROM ExerciseSets WHERE id = ?";
-
-        try (Connection conn = this.connect(dbPath);
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-                pstmt.setInt(1, setId);
-                pstmt.executeUpdate();
-
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -342,7 +286,7 @@ public class DataService {
 
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                var id = rs.getInt("id");
+                var id = rs.getInt("exerciseItemId");
                 double weight = rs.getDouble("weight");
                 int reps = rs.getInt("reps");
                 ExerciseItemSet set = new ExerciseItemSet(id, weight, reps);

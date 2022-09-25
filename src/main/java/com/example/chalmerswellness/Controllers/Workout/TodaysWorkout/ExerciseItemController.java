@@ -17,8 +17,6 @@ public class ExerciseItemController extends AnchorPane implements Initializable{
     private final Exercise exercise;
     private final AnchorPane anchorPane;
 
-    @FXML private Label setsAmount;
-
     @FXML
     Label exerciseName;
 
@@ -41,7 +39,6 @@ public class ExerciseItemController extends AnchorPane implements Initializable{
     @Override
     public void initialize(URL arg0, ResourceBundle arg1){
         exerciseName.textProperty().set(exercise.getName());
-        setsAmount.textProperty().set("Sets " + model.getSets(exercise.getId()).size());
     }
 
     @FXML
