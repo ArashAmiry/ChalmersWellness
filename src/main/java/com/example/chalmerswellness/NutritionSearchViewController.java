@@ -2,36 +2,53 @@ package com.example.chalmerswellness;
 
 import com.example.chalmerswellness.calorieAPI.Food;
 import com.example.chalmerswellness.calorieAPI.FoodFacade;
+import com.example.chalmerswellness.calorieAPI.Meal;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.util.List;
 
-public class NutritionSearchViewController extends AnchorPane {
+public class NutritionSearchViewController extends ScrollPane implements Observer{
 
+    Meal meal;
+    FoodFacade foodFacade = new FoodFacade();
+    Food food = new Food();
+    DataService dataService = new DataService();
+    List<Food> foods;
+
+    @FXML
+    Label mealOfDay;
     @FXML
     TextField searchField;
     @FXML
-    AnchorPane rootPane;
-
-    @FXML
     AnchorPane modalPanel;
-    FoodFacade foodFacade = new FoodFacade();
-    Food food = new Food();
+    @FXML
+    AnchorPane rootPane;
+    @FXML
+    VBox meals;
 
-
-    public NutritionSearchViewController(AnchorPane pane){
+    public NutritionSearchViewController(AnchorPane pane, Meal meal){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/NutritionSearchView.fxml"));
 
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 
+        this.setPannable(false);
+        this.setHbarPolicy(ScrollBarPolicy.NEVER);
+        this.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
+
         modalPanel = pane;
+        this.meal = meal;
+        foodFacade.subscribe(this);
 
         try {
             fxmlLoader.load();
@@ -39,6 +56,16 @@ public class NutritionSearchViewController extends AnchorPane {
             throw new RuntimeException(exception);
         }
 
+        populateMealList();
+        mealOfDay.setText(String.valueOf(meal));
+    }
+
+    private void populateMealList() {
+        meals.getChildren().clear();
+        foods = dataService.getTodaysNutrition(meal);
+        for (Food food: foods) {
+            meals.getChildren().add(new FoodItemController(food));
+        }
     }
 
     @FXML
@@ -48,7 +75,8 @@ public class NutritionSearchViewController extends AnchorPane {
         try {
             if (foodFacade.isFoodExisting(foodName)){
                 food = foodFacade.createFood(foodName);
-                //rootPane.getChildren().setAll(new NutritionFoodItemController(food, modalPanel));
+                rootPane.getChildren().setAll(new NutritionFoodItemController(food, modalPanel, meal));
+                this.setVbarPolicy(ScrollBarPolicy.NEVER);
             }
             else {
                 searchField.clear();
@@ -66,8 +94,8 @@ public class NutritionSearchViewController extends AnchorPane {
         modalPanel.setDisable(true);
     }
 
-
-
-
-
+    @Override
+    public void update(Observable observable) {
+        populateMealList();
+    }
 }

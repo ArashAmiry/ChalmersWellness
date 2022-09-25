@@ -95,7 +95,7 @@ public class NutritionFoodItemController extends AnchorPane implements Initializ
     private void addFoodEaten(MouseEvent mouseEvent) throws JsonProcessingException {
         if (validateAmountGrams()){
             dataService.insertNutrition(foodFacade.createFood(foodItemGrams.getText() + "g " + food.getName()), meal);
-            rootPane.getChildren().setAll(new NutritionSearchViewTwoController(modalPanel, meal));
+            rootPane.getChildren().setAll(new NutritionSearchViewController(modalPanel, meal));
         }
         else {
             foodItemGrams.clear();

@@ -1,7 +1,6 @@
 package com.example.chalmerswellness;
 
 import com.example.chalmerswellness.calorieAPI.Meal;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -35,7 +34,7 @@ public class NutritionViewController extends AnchorPane implements Initializable
     }
 
     private void loadNutritionSearchView(Meal meal) {
-        modalPanel.getChildren().add(new NutritionSearchViewTwoController(modalPanel, meal));
+        modalPanel.getChildren().add(new NutritionSearchViewController(modalPanel, meal));
         modalPanel.setDisable(false);
     }
 
