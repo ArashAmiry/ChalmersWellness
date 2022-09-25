@@ -14,6 +14,8 @@ public class MainView extends AnchorPane {
 
     WorkoutController workoutView = new WorkoutController();
     NutritionViewController nutritionViewController = new NutritionViewController();
+
+    CalorieIntakeCalculatorController calorieIntakeCalculatorController = new CalorieIntakeCalculatorController();
     DashboardViewController dashboardViewController = new DashboardViewController();
 
     SettingsViewController settingsViewController = new SettingsViewController();
@@ -33,7 +35,11 @@ public class MainView extends AnchorPane {
 
    @FXML
    public void navigateToNutritionView() {
-        setViewTo(nutritionViewController);
+        if (!Profile.getInstance().hasCalculatedCalorieIntake()) {
+            setViewTo(calorieIntakeCalculatorController);
+        } else {
+            setViewTo(nutritionViewController);
+        }
    }
    @FXML
    public void navigateToSettingsView() { setViewTo(settingsViewController);}

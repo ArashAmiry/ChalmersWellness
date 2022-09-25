@@ -14,14 +14,11 @@ import java.io.IOException;
 public class NutritionSearchViewController extends AnchorPane {
 
     @FXML
-    TextField searchField;
+    private TextField searchField;
     @FXML
-    AnchorPane rootPane;
-
-    @FXML
-    AnchorPane modalPanel;
-    Nutrition nutrition = new Nutrition();
-    NutritionModel nutritionModel = new NutritionModel();
+    private AnchorPane parentPane;
+    private Nutrition nutrition = new Nutrition();
+    private NutritionModel nutritionModel = new NutritionModel();
 
 
     public NutritionSearchViewController(AnchorPane pane){
@@ -30,7 +27,7 @@ public class NutritionSearchViewController extends AnchorPane {
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 
-        modalPanel = pane;
+        parentPane = pane;
 
         try {
             fxmlLoader.load();
@@ -43,17 +40,13 @@ public class NutritionSearchViewController extends AnchorPane {
     @FXML
     private void searchForFoodItem(ActionEvent event) {
         nutritionModel = nutrition.createNutritionModelFor(searchField.getText());
-        rootPane.getChildren().setAll(new NutritionFoodItemController(nutritionModel, modalPanel));
+        parentPane.getChildren().remove(this);
+        parentPane.getChildren().add(new NutritionFoodItemController(nutritionModel, parentPane));
     }
 
     @FXML
     private void closeWindow(MouseEvent mouseEvent) {
-        modalPanel.getChildren().clear();
-        modalPanel.setDisable(true);
+        parentPane.getChildren().remove(this);
     }
-
-
-
-
 
 }

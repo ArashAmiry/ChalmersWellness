@@ -3,10 +3,12 @@ module com.example.chalmerswellness {
     requires com.dlsc.formsfx;
     requires java.sql;
     requires java.net.http;
+    requires javafx.graphics;
+    requires javafx.controls;
+    requires javafx.fxml;
+    requires com.google.gson;
     requires com.fasterxml.jackson.databind;
     requires org.json;
-    requires com.google.gson;
-    requires javafx.fxml;
 
     opens com.example.chalmerswellness to javafx.fxml;
     exports com.example.chalmerswellness;
