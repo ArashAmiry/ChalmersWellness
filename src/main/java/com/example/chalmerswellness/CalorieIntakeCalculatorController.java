@@ -5,7 +5,7 @@ import com.example.chalmerswellness.Interfaces.Observer;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
@@ -15,9 +15,7 @@ import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class CalorieIntakeCalculatorController extends AnchorPane implements Initializable, Observable {
 
@@ -32,9 +30,15 @@ public class CalorieIntakeCalculatorController extends AnchorPane implements Ini
     private RadioButton radioButtonMediumPace;
     @FXML
     private RadioButton radioButtonFastPace;
+    LinkedHashMap<String, Double> activityLevels  = new LinkedHashMap<>() {{
+        put("Sedentary", 1.2);
+        put("Lightly active", 1.375);
+        put("Moderately active", 1.55);
+        put("Active", 1.725);
+        put("Very active", 1.9);
+    }};
     @FXML
-    private ChoiceBox<Double> activityChoiceBox;
-    private Double[] activityLevels = {1.2, 1.375, 1.55, 1.725, 1.9};
+    private ComboBox<String> activityComboBox;
     @FXML
     private Text calorieIntakeText;
     @FXML
@@ -71,7 +75,10 @@ public class CalorieIntakeCalculatorController extends AnchorPane implements Ini
         radioButtonMediumPace.setUserData(500);
         radioButtonFastPace.setUserData(1000);
 
-        activityChoiceBox.getItems().addAll(activityLevels);
+        for (Map.Entry<String, Double> entry : activityLevels.entrySet()) {
+            String key = entry.getKey();
+            activityComboBox.getItems().add(key);
+        }
     }
 
     @FXML
@@ -85,7 +92,7 @@ public class CalorieIntakeCalculatorController extends AnchorPane implements Ini
             pace = -pace;
         }
         boolean isMale = (boolean) gender.getSelectedToggle().getUserData();
-        double activityLevel = activityChoiceBox.getValue();
+        double activityLevel = activityLevels.get(activityComboBox.getValue());
 
         int calorieIntake = CalorieCalculator.calculateCalorieIntake(isMale, weight, height, age, activityLevel, pace);
         calorieIntakeText.setText("Your recommended calorie intake is " + calorieIntake + " calories per day.");
@@ -93,7 +100,7 @@ public class CalorieIntakeCalculatorController extends AnchorPane implements Ini
 
         profile.setHasCalculatedCalorieIntake(true);
         profile.setCalorieGoal(calorieIntake);
-        notifyObservers(); // Update calorie progress bar text
+        notifyObservers(); // Update calorie progress
     }
 
     @Override

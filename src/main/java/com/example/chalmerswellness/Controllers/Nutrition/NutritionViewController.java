@@ -4,6 +4,7 @@ import com.example.chalmerswellness.CalorieIntakeCalculatorController;
 import com.example.chalmerswellness.Interfaces.Observable;
 import com.example.chalmerswellness.Interfaces.Observer;
 import com.example.chalmerswellness.Profile;
+import com.example.chalmerswellness.calorieAPI.Meal;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -50,9 +51,29 @@ public class NutritionViewController extends AnchorPane implements Initializable
         calorieIntakeCalculatorController.subscribe(this);
     }
 
+    private void loadNutritionSearchView(Meal meal) {
+        rootPane.getChildren().add(new NutritionSearchViewController(rootPane, meal));
+        rootPane.setDisable(false);
+    }
+
     @FXML
-    private void loadNutritionSearchView(ActionEvent event) throws IOException {
-        rootPane.getChildren().add(new NutritionSearchViewController(rootPane));
+    private void loadBreakfastSearchView(){
+        loadNutritionSearchView(Meal.BREAKFAST);
+    }
+
+    @FXML
+    private void loadLunchSearchView(){
+        loadNutritionSearchView(Meal.LUNCH);
+    }
+
+    @FXML
+    private void loadDinnerSearchView(){
+        loadNutritionSearchView(Meal.DINNER);
+    }
+
+    @FXML
+    private void loadSnackSearchView(){
+        loadNutritionSearchView(Meal.SNACK);
     }
 
     @Override

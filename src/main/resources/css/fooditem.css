@@ -1,0 +1,20 @@
+@font-face {
+    font-family: "Koulen";
+    src: url('../font/Koulen/Koulen-Regular.ttf');
+}
+
+.box{
+    -fx-border-style: solid;
+    -fx-border-color: #cacaca;
+}
+
+.foodName{
+    -fx-font-family: Koulen;
+    -fx-font-size: 20px;
+}
+
+.calories{
+    -fx-font-family: Koulen;
+    -fx-font-size: 13px;
+    -fx-text-fill: #4c4c4c;
+}
