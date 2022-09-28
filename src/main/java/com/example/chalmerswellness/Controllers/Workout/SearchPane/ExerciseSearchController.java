@@ -2,7 +2,6 @@ package com.example.chalmerswellness.Controllers.Workout.SearchPane;
 
 import com.example.chalmerswellness.Models.WorkoutModel;
 import com.example.chalmerswellness.ObjectModels.Exercise;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -12,7 +11,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -35,6 +33,11 @@ public class ExerciseSearchController extends AnchorPane implements Initializabl
         }
     }
 
+    @Override
+    public void initialize(URL arg0, ResourceBundle arg1){
+        searchExercise();
+    }
+
     void updateSearchResult(List<Exercise> exercises){
         searchListView.getItems().clear();
         for (var exercise: exercises) {
@@ -44,27 +47,14 @@ public class ExerciseSearchController extends AnchorPane implements Initializabl
         isNoResult();
     }
 
-    //TODO should use model to getexercises instead
     @FXML
-    void searchExercise(ActionEvent event){
-        var exercises = model.getMyExercises();
-        String input = searchField.getText().toLowerCase().replaceAll("\\s+","");
-        List<Exercise> searchResult = new ArrayList<>();
-        for (var exercise: exercises) {
-            if(exercise.getName().toLowerCase().replaceAll("\\s+","").contains(input))
-                searchResult.add(exercise);
-        }
-
+    void searchExercise(){
+        String input = searchField.getText();
+        var searchResult = model.searchExercises(input);
         updateSearchResult(searchResult);
     }
 
     void isNoResult(){
         noResultLabel.visibleProperty().set(searchListView.getItems().size() <= 0);
-    }
-
-    @Override
-    public void initialize(URL arg0, ResourceBundle arg1){
-        var exercises = model.getMyExercises();
-        updateSearchResult(exercises);
     }
 }

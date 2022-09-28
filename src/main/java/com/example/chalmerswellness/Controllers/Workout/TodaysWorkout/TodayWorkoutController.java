@@ -43,11 +43,7 @@ public class TodayWorkoutController extends AnchorPane implements Observer, Init
     }
 
     private void isNoResult(){
-        if(exerciseList.getItems().size() > 0){
-            noResult.setVisible(false);
-        } else{
-            noResult.setVisible(true);
-        }
+        noResult.visibleProperty().set(exerciseList.getItems().size() <= 0);
     }
 
     @Override
@@ -59,6 +55,6 @@ public class TodayWorkoutController extends AnchorPane implements Observer, Init
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        model.addExerciseDb();
+        model.getTodaysExercises();
     }
 }

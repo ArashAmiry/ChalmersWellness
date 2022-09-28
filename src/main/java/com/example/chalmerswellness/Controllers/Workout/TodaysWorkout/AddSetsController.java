@@ -46,9 +46,10 @@ public class AddSetsController extends AnchorPane implements Initializable, Obse
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        addSetsLabel.textProperty().set("Add Sets To " + exercise.getName());
+        setTitle();
         updateSets();
     }
+
 
     @FXML private void addSet(){
         ExerciseItemSet set = new ExerciseItemSet(exercise.getId(), 0, 0);
@@ -65,8 +66,8 @@ public class AddSetsController extends AnchorPane implements Initializable, Obse
     }
 
     private void updateSets(){
-        var sets = model.getSets(exercise.getId());
         setsList.clear();
+        var sets = model.getSets(exercise.getId());
         int setNumber = 1;
         for (var set: sets) {
             ExerciseItemSetController setsController = new ExerciseItemSetController(model, set, setNumber);
@@ -76,6 +77,12 @@ public class AddSetsController extends AnchorPane implements Initializable, Obse
         setsListView.getItems().setAll(setsList);
     }
 
+    @Override
+    public void update(Observable observable) {
+        this.model = (WorkoutModel) observable;
+        updateSets();
+    }
+
     @FXML private void close(){
         anchorPane.getChildren().remove(this);
     }
@@ -83,10 +90,7 @@ public class AddSetsController extends AnchorPane implements Initializable, Obse
     @FXML public void mouseTrap(Event event){
         event.consume();
     }
-
-    @Override
-    public void update(Observable observable) {
-        this.model = (WorkoutModel) observable;
-        updateSets();
+    private void setTitle(){
+        addSetsLabel.textProperty().set("Add Sets To " + exercise.getName());
     }
 }

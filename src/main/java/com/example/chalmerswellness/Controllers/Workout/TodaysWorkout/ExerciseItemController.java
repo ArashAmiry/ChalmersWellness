@@ -40,6 +40,10 @@ public class ExerciseItemController extends AnchorPane implements Initializable{
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1){
+        setInfo();
+    }
+
+    private void setInfo(){
         exerciseName.textProperty().set(exercise.getName());
         setsAmount.textProperty().set("Sets " + model.getSets(exercise.getId()).size());
     }

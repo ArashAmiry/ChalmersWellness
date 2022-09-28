@@ -15,12 +15,12 @@ import java.util.ResourceBundle;
 public class ExerciseItemSetController extends AnchorPane implements Initializable {
 
     private WorkoutModel model;
-    @FXML private Label exerciseName;
     private ExerciseItemSet exerciseItemSet;
+    private int setNumber;
+    @FXML private Label exerciseName;
     @FXML private Label setLabel;
     @FXML private TextField weightField;
     @FXML private TextField repsField;
-    private int setNumber;
 
     public ExerciseItemSetController(WorkoutModel model, ExerciseItemSet exerciseItemSet, int setNumber){
         this.model = model;
@@ -40,9 +40,7 @@ public class ExerciseItemSetController extends AnchorPane implements Initializab
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        setLabel.textProperty().set("Set " + setNumber);
-        weightField.textProperty().set(String.valueOf(exerciseItemSet.getWeight()));
-        repsField.textProperty().set(String.valueOf(exerciseItemSet.getReps()));
+        setInfo();
     }
 
     public void setValues(){
@@ -52,5 +50,11 @@ public class ExerciseItemSetController extends AnchorPane implements Initializab
 
     @FXML private void removeSet(){
         model.removeSet(exerciseItemSet.getId());
+    }
+
+    private void setInfo(){
+        setLabel.textProperty().set("Set " + setNumber);
+        weightField.textProperty().set(String.valueOf(exerciseItemSet.getWeight()));
+        repsField.textProperty().set(String.valueOf(exerciseItemSet.getReps()));
     }
 }

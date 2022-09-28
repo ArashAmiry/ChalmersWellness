@@ -13,9 +13,11 @@ public class WorkoutModel implements Observable {
     private List<Observer> observers = new ArrayList<>();
     private final DataService db;
     private List<ExerciseItemSet> sets = new ArrayList<>();
+    private List<Exercise> exercises = new ArrayList<>();
 
     public WorkoutModel(){
         db = new DataService();
+        exercises = getMyExercises();
     }
 
     public List<Exercise> getAddedExercises() {
@@ -28,7 +30,17 @@ public class WorkoutModel implements Observable {
         notifyObservers();
     }
 
-    public void addExerciseDb(){
+    public List<Exercise> searchExercises(String exerciseName){
+
+        List<Exercise> searchResult = new ArrayList<>();
+        for (var exercise: exercises) {
+            if(exercise.getName().toLowerCase().replaceAll("\\s+","").contains(exerciseName))
+                searchResult.add(exercise);
+        }
+        return searchResult;
+    }
+
+    public void getTodaysExercises(){
         var exerciseItems = getTodayExerciseItems();
         addedExercises.addAll(exerciseItems);
         notifyObservers();
