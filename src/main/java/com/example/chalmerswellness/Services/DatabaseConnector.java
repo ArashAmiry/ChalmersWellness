@@ -1,18 +1,14 @@
 package com.example.chalmerswellness.Services;
 
 import com.example.chalmerswellness.ObjectModels.Exercise;
-import com.example.chalmerswellness.ObjectModels.ExerciseItemSet;
 import com.example.chalmerswellness.ObjectModels.Workout;
 import com.example.chalmerswellness.calorieAPI.Food;
 import com.example.chalmerswellness.calorieAPI.Meal;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.*;
 
-import static com.example.chalmerswellness.Services.WorkoutService.removeSets;
-
-public class Database {
+public class DatabaseConnector {
     private static String dbPath = "src/main/resources/ChalmersWellness.db";
 /*
     private static volatile Database instance;

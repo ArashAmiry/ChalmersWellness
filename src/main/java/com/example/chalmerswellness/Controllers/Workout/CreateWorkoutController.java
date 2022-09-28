@@ -1,7 +1,7 @@
 package com.example.chalmerswellness.Controllers.Workout;
 
 import com.example.chalmerswellness.Controllers.Workout.SearchPane.ExerciseSearchItemController;
-import com.example.chalmerswellness.Services.DataService;
+//import com.example.chalmerswellness.Services.DataService;
 import com.example.chalmerswellness.Models.WorkoutModel;
 import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.ObjectModels.Workout;
@@ -21,7 +21,7 @@ import java.util.List;
 
 public class CreateWorkoutController extends AnchorPane implements Observer {
     private ObservableList<ExerciseSearchItemController> exercisesList = FXCollections.observableArrayList();
-    private DataService dataService = new DataService();
+    //private DataService dataService = new DataService();
     private WorkoutModel model;
     @FXML public ListView mainContent;
     @FXML TextField workoutNameField;
@@ -61,7 +61,7 @@ public class CreateWorkoutController extends AnchorPane implements Observer {
     }
 
     @FXML public void saveWorkout(){
-        dataService.insertWorkout(createWorkoutObject(exercisesList));
+        //dataService.insertWorkout(createWorkoutObject(exercisesList));
         mainContent.getItems().clear();
         workoutNameField.deleteText(0,workoutNameField.getText().length());
     }
