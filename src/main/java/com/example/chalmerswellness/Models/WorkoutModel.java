@@ -43,10 +43,6 @@ public class WorkoutModel implements Observable {
         //notifyObservers();
     }
 
-    public void foo(Workout workout){
-        dataService.insertWorkout(workout);
-    }
-
     public void removeWorkout(Workout workout){
         //savedWorkouts.remove(workout);
         notifyObservers();
@@ -57,10 +53,6 @@ public class WorkoutModel implements Observable {
         notifyObservers();
     }
 
-    public void removeAllExercises(){
-        addedExercises.clear();
-        notifyObservers();
-    }
 
     @Override
     public void notifyObservers() {
