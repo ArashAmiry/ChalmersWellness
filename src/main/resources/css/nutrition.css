@@ -13,3 +13,7 @@
     -fx-font-family: Poppins;
     -fx-font-size: 35;
 }
+
+.combo-box {
+    -fx-font-size: 20;
+}

@@ -82,17 +82,28 @@ public class CalorieIntakeCalculatorController extends AnchorPane implements Ini
     }
 
     @FXML
+    private void handleSubmitButton(MouseEvent event) {
+        if (ageTextField.getText().length() == 0) {
+            ageTextField.setStyle("-fx-border-color: red ; -fx-border-width: 2px ;");
+        }
+    }
+
+    @FXML
     private void calculateCalorieIntake(MouseEvent mouseEvent) {
-        profile.setWeightGoal(Integer.parseInt(weightGoalTextField.getText()));
+        double weightGoal = Double.parseDouble(weightGoalTextField.getText());
+        profile.setWeightGoal(weightGoal);
         double weight = Double.parseDouble(weightTextField.getText());
         double height = Double.parseDouble(heightTextField.getText());
         int age = Integer.parseInt(ageTextField.getText());
         int pace = (int) paceGroup.getSelectedToggle().getUserData();
+        boolean isMale = (boolean) gender.getSelectedToggle().getUserData();
+        double activityLevel = activityLevels.get(activityComboBox.getValue());
         if (Integer.parseInt(weightGoalTextField.getText()) - weight < 0) {
             pace = -pace;
         }
-        boolean isMale = (boolean) gender.getSelectedToggle().getUserData();
-        double activityLevel = activityLevels.get(activityComboBox.getValue());
+        if (weight == weightGoal) {
+            pace = 0;
+        }
 
         int calorieIntake = CalorieCalculator.calculateCalorieIntake(isMale, weight, height, age, activityLevel, pace);
         calorieIntakeText.setText("Your recommended calorie intake is " + calorieIntake + " calories per day.");
@@ -100,7 +111,7 @@ public class CalorieIntakeCalculatorController extends AnchorPane implements Ini
 
         profile.setHasCalculatedCalorieIntake(true);
         profile.setCalorieGoal(calorieIntake);
-        notifyObservers(); // Update calorie progress
+        notifyObservers();
     }
 
     @Override

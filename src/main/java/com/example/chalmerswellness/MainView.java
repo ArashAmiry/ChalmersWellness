@@ -4,6 +4,7 @@ import com.example.chalmerswellness.Controllers.Dashboard.DashboardViewControlle
 import com.example.chalmerswellness.Controllers.Nutrition.NutritionViewController;
 import com.example.chalmerswellness.Controllers.Settings.SettingsViewController;
 import com.example.chalmerswellness.Controllers.Workout.WorkoutController;
+import com.example.chalmerswellness.Services.DataService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
@@ -20,12 +21,20 @@ public class MainView extends AnchorPane {
 
     SettingsViewController settingsViewController = new SettingsViewController();
 
+    SignUpController signUpController = new SignUpController();
+    LoginController loginController = new LoginController();
+    DataService dataService = new DataService();
+
     public MainView(){
     }
 
     @FXML
     public void initialize(){
-        setViewTo(dashboardViewController);
+        if (dataService.checkIfUsersExist()) {
+            setViewTo(loginController);
+        } else {
+            setViewTo(signUpController);
+        }
     }
 
     @FXML

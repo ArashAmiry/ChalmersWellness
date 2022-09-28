@@ -1,5 +1,7 @@
 package com.example.chalmerswellness.Controllers.Nutrition;
 
+import com.example.chalmerswellness.Interfaces.Observable;
+import com.example.chalmerswellness.Interfaces.Observer;
 import com.example.chalmerswellness.Services.DataService;
 import com.example.chalmerswellness.calorieAPI.Food;
 import com.example.chalmerswellness.calorieAPI.FoodFacade;
@@ -16,9 +18,11 @@ import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
-public class NutritionFoodItemController extends AnchorPane implements Initializable {
+public class NutritionFoodItemController extends AnchorPane implements Initializable, Observable {
 
     @FXML
     private Text foodItemText;
@@ -61,6 +65,8 @@ public class NutritionFoodItemController extends AnchorPane implements Initializ
     Food food;
     AnchorPane modalPanel;
     NutritionSearchViewController nutritionSearchViewController;
+
+    private static List<Observer> observers = new ArrayList<>();
 
 
     public NutritionFoodItemController(Food foodItem, AnchorPane pane, Meal meal){
@@ -133,4 +139,15 @@ public class NutritionFoodItemController extends AnchorPane implements Initializ
     }
 
 
+    @Override
+    public void notifyObservers() {
+        for (var observer: observers) {
+            observer.update(this);
+        }
+    }
+
+
+    public void subscribe(Observer observer) {
+        observers.add(observer);
+    }
 }

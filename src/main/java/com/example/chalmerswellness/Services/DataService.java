@@ -14,6 +14,7 @@ public class DataService {
     private final String dbPath = "src/main/resources/ChalmersWellness.db";
 
     public DataService() {
+        createUsersTable();
         createNutritionTable();
     }
 
@@ -423,7 +424,8 @@ public class DataService {
 
     private void createNutritionTable() {
         String sql = "CREATE TABLE IF NOT EXISTS nutrition (\n"
-                + "	id INTEGER PRIMARY KEY,\n"
+                + "	id integer PRIMARY KEY,\n"
+                + "	userID integer,\n"
                 + "	mealName text NOT NULL,\n"
                 + "	calories DOUBLE NOT NULL,\n"
                 + "	servingSize DOUBLE NOT NULL,\n"
@@ -436,7 +438,9 @@ public class DataService {
                 + "	fiber DOUBLE NOT NULL,\n"
                 + "	sugar DOUBLE NOT NULL,\n"
                 + " dateOfInsert DATE DEFAULT CURRENT_DATE,\n"
-                + " mealOfDay text NOT NULL \n"
+                + " mealOfDay text NOT NULL, \n"
+                + " FOREIGN KEY ('userID') REFERENCES 'users' ('id') \n"
+                + " ON UPDATE CASCADE ON DELETE CASCADE\n"
                 + ");";
 
         try (Connection conn = connect(dbPath);
@@ -445,5 +449,81 @@ public class DataService {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    private void createUsersTable() {
+        String sql = "CREATE TABLE IF NOT EXISTS users (\n"
+                + " id INTEGER PRIMARY KEY,\n"
+                + " username text,\n"
+                + " password text \n"
+                + ");";
+        try (Connection conn = connect(dbPath);
+             Statement stmt = conn.createStatement()) {
+            stmt.execute(sql);
+            System.out.println("Created users table");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void insertUser(String username, String password) {
+        String sql = "INSERT INTO users (username, password) VALUES(?,?)";
+        try (Connection conn = connect(dbPath);
+             PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, password);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public boolean loginUser(String username, String password) {
+        String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
+        try (Connection conn = connect(dbPath);
+             PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, password);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
+
+    // Get userid from username
+    public int getUserId(String username) {
+        String sql = "SELECT id FROM users WHERE username = ?";
+        try (Connection conn = connect(dbPath);
+             PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+            preparedStatement.setString(1, username);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("id");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return 0;
+    }
+
+
+
+    // check if any users exist in database
+    public boolean checkIfUsersExist() {
+        String sql = "SELECT * FROM users";
+        try (Connection conn = connect(dbPath);
+             Statement stmt = conn.createStatement()) {
+            ResultSet rs = stmt.executeQuery(sql);
+            if (rs.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
     }
 }
