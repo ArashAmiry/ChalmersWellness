@@ -36,13 +36,12 @@ public class ExerciseSearchItemController extends AnchorPane implements Initiali
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1){
-        exerciseName.textProperty().set(exercise.getName());
+        setInfo();
     }
+
 
     @FXML public void addToWorkout(){
         model.addExercise(exercise);
-
-
     }
 
     @FXML public void removeFromWorkout(){
@@ -51,5 +50,9 @@ public class ExerciseSearchItemController extends AnchorPane implements Initiali
 
     public Exercise getExercise(){
         return this.exercise;
+    }
+
+    private void setInfo(){
+        exerciseName.textProperty().set(exercise.getName());
     }
 }
