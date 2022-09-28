@@ -3,6 +3,7 @@ package com.example.chalmerswellness.Models;
 import com.example.chalmerswellness.Controllers.Workout.WorkoutStates;
 import com.example.chalmerswellness.Services.DataService;
 import com.example.chalmerswellness.ObjectModels.Exercise;
+import com.example.chalmerswellness.ObjectModels.Workout;
 import com.example.chalmerswellness.ObjectModels.ExerciseItemSet;
 import com.example.chalmerswellness.Interfaces.Observable;
 import com.example.chalmerswellness.Interfaces.Observer;
@@ -10,7 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WorkoutModel implements Observable {
+
+    private DataService dataService = new DataService();
     private List<Exercise> addedExercises = new ArrayList<>();
+    //private List<Workout> savedWorkouts = new ArrayList<>();
     private List<Observer> observers = new ArrayList<>();
     private final DataService db;
     private List<ExerciseItemSet> sets = new ArrayList<>();
@@ -21,6 +25,10 @@ public class WorkoutModel implements Observable {
     public WorkoutModel(){
         db = new DataService();
         exercises = getMyExercises();
+    }
+
+    public List<Workout> getSavedWorkouts(){
+        return dataService.getWorkouts();
     }
 
     public List<Exercise> getAddedExercises() {
@@ -92,6 +100,22 @@ public class WorkoutModel implements Observable {
         notifyObservers();
     }
 
+    public void addWorkout(Workout workout){
+        dataService.insertWorkout(workout);
+        //notifyObservers();
+    }
+
+    public void removeWorkout(Workout workout){
+        //savedWorkouts.remove(workout);
+        notifyObservers();
+    }
+
+    public void removeAllExercises(){
+        addedExercises.clear();
+        notifyObservers();
+    }
+
+
     @Override
     public void notifyObservers() {
         for (var observer: observers) {
@@ -103,4 +127,5 @@ public class WorkoutModel implements Observable {
     public void subscribe(Observer observer) {
         observers.add(observer);
     }
+
 }

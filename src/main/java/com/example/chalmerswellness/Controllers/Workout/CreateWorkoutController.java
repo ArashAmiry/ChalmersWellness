@@ -1,6 +1,5 @@
 package com.example.chalmerswellness.Controllers.Workout;
 
-import com.example.chalmerswellness.Controllers.Workout.SearchPane.ExerciseSearchItemController;
 import com.example.chalmerswellness.Controllers.Workout.TodaysWorkout.ExerciseItemController;
 import com.example.chalmerswellness.Services.DataService;
 import com.example.chalmerswellness.Models.WorkoutModel;
@@ -15,7 +14,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +24,7 @@ public class CreateWorkoutController extends AnchorPane implements Observer {
     private WorkoutModel model;
     @FXML public ListView mainContent;
     @FXML TextField workoutNameField;
-    
+
     public CreateWorkoutController(WorkoutModel workoutModel){
         this.model = workoutModel;
         workoutModel.subscribe(this);
@@ -53,7 +51,7 @@ public class CreateWorkoutController extends AnchorPane implements Observer {
     }
 
     private Workout createWorkoutObject(List<ExerciseItemController> exercises){
-        String workoutName = workoutNameField.getText().toString();
+        String workoutName = workoutNameField.getText();
         List<Exercise> workoutExercises = new ArrayList<>();
         for (var exercise: exercises) {
             workoutExercises.add(exercise.getExercise());
@@ -62,9 +60,14 @@ public class CreateWorkoutController extends AnchorPane implements Observer {
     }
 
     @FXML public void saveWorkout(){
-        dataService.insertWorkout(createWorkoutObject(exercisesList));
-        mainContent.getItems().clear();
+        Workout workoutObject = createWorkoutObject(exercisesList);
+        model.addWorkout(workoutObject);
+        clearWorkoutListView();
+    }
+
+    private void clearWorkoutListView(){
         workoutNameField.deleteText(0,workoutNameField.getText().length());
+        model.removeAllExercises();
     }
 
     @Override
