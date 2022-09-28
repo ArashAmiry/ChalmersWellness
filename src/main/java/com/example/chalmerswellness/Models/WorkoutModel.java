@@ -1,22 +1,26 @@
 package com.example.chalmerswellness.Models;
 
-import com.example.chalmerswellness.Services.DataService;
 import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.ObjectModels.ExerciseItemSet;
 import com.example.chalmerswellness.Interfaces.Observable;
 import com.example.chalmerswellness.Interfaces.Observer;
+import com.example.chalmerswellness.Services.WorkoutService;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class WorkoutModel implements Observable {
     private List<Exercise> addedExercises = new ArrayList<>();
     private List<Observer> observers = new ArrayList<>();
-    private final DataService db;
+    //private final DataService db;
     private List<ExerciseItemSet> sets = new ArrayList<>();
     private List<Exercise> exercises = new ArrayList<>();
 
     public WorkoutModel(){
-        db = new DataService();
+        //db = new DataService();
+        //db = DataService.getInstance();
+
+
         exercises = getMyExercises();
     }
 
@@ -25,7 +29,7 @@ public class WorkoutModel implements Observable {
     }
 
     public void addExercise(Exercise exercise){
-        var exerciseItem = db.insertExerciseItem(exercise);
+       var exerciseItem = WorkoutService.insertExerciseItem(exercise);
         addedExercises.add(exerciseItem);
         notifyObservers();
     }
@@ -48,33 +52,33 @@ public class WorkoutModel implements Observable {
 
     public void addSet(ExerciseItemSet set){
         sets.add(set);
-        db.insertExerciseSet(set);
+        WorkoutService.insertExerciseSet(set);
         notifyObservers();
     }
 
     public void saveSets(int setId){
-        db.insertSets(setId, sets);
+        WorkoutService.insertSets(setId, sets);
     }
 
     public void removeSet(int setId){
-        db.removeSet(setId);
+        WorkoutService.removeSet(setId);
         notifyObservers();
     }
 
     public List<ExerciseItemSet> getSets(int exerciseItemId){
-        sets = db.getExerciseSets(exerciseItemId);
+        sets = WorkoutService.getExerciseSets(exerciseItemId);
         return sets;
     }
 
     public List<Exercise> getMyExercises(){
-        return db.getMyExercises();
+        return WorkoutService.getMyExercises();
     }
 
     public List<Exercise> getTodayExerciseItems(){
-        return db.getTodayExerciseItems();
+        return WorkoutService.getTodayExerciseItems();
     }
     public void removeExercise(Exercise exercise){
-        db.removeExerciseItem(exercise);
+        WorkoutService.removeExerciseItem(exercise);
         addedExercises.remove(exercise);
         notifyObservers();
     }

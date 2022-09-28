@@ -10,18 +10,49 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.util.*;
 
-public class DataService {
-    private final String dbPath = "src/main/resources/ChalmersWellness.db";
+import static com.example.chalmerswellness.Services.WorkoutService.removeSets;
 
-    public DataService() {
+public class Database {
+    private static String dbPath = "src/main/resources/ChalmersWellness.db";
+/*
+    private static volatile Database instance;
+*/
+    //private static Object mutex = new Object();
+
+
+    //TODO Should be private
+    /*private Database() {
         createNutritionTable();
+    }
+
+    public static Database getInstance() {
+        Database result = instance;
+        if (result == null) {
+            synchronized (mutex) {
+                result = instance;
+                if (result == null)
+                    instance = result = new Database();
+            }
+        }
+        return result;
+    }*/
+
+    static Connection connect() {
+        String url = "jdbc:sqlite:" + dbPath;
+        Connection conn = null;
+        try {
+            conn = DriverManager.getConnection(url);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return conn;
     }
 
     public List<Workout> getWorkouts(){
         String sql = "SELECT * FROM workouts";
         List<Workout> workouts = new ArrayList<>();
 
-        try (Connection conn = this.connect(dbPath);
+        try (Connection conn = this.connect();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
@@ -44,7 +75,7 @@ public class DataService {
         String sql = "SELECT id, exerciseName, exerciseType, exerciseMuscle, exerciseEquipment, exerciseDifficulty, exerciseInstructions, workoutId FROM exercises WHERE workoutId = ?";
 
         List<Exercise> exercises = new ArrayList<>();
-        try (Connection conn = this.connect(dbPath);
+        try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, workoutId);
 
@@ -70,7 +101,7 @@ public class DataService {
     public void insertWorkout(Workout workout) {
         String sql = "INSERT INTO workouts(workoutName) VALUES(?)";
 
-        try (Connection conn = connect(dbPath);
+        try (Connection conn = connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setString(1, workout.getWorkoutName());
                 pstmt.executeUpdate();
@@ -90,7 +121,7 @@ public class DataService {
 
     private void insertWorkoutExercises(List<Exercise> exercises, int id) {
         String sql = "INSERT INTO exercises(exerciseName, exerciseType, exerciseMuscle, exerciseEquipment, exerciseDifficulty, exerciseInstructions, workoutId) VALUES(?,?,?,?,?,?,?)";
-        try (Connection conn = connect(dbPath);
+        try (Connection conn = connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             for (Exercise exercise : exercises) {
@@ -112,7 +143,7 @@ public class DataService {
     public void removeWorkout(int workoutId) {
         String sql = "DELETE FROM workouts WHERE id = ?";
 
-        try (Connection conn = this.connect(dbPath);
+        try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, workoutId);
             pstmt.executeUpdate();
@@ -127,7 +158,7 @@ public class DataService {
     private void removeExercises(int workoutId) {
         String sql = "DELETE FROM exercises WHERE workoutId = ?";
 
-        try (Connection conn = this.connect(dbPath);
+        try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setInt(1, workoutId);
                 pstmt.executeUpdate();
@@ -137,21 +168,10 @@ public class DataService {
         }
     }
 
-    private static Connection connect(String dbPath) {
-        String url = "jdbc:sqlite:" + dbPath;
-        Connection conn = null;
-        try {
-            conn = DriverManager.getConnection(url);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return conn;
-    }
-
     public void insertMyExercises(List<Exercise> exercises) {
         String sql = "INSERT INTO MyExercises(exerciseName, exerciseType, exerciseMuscle, exerciseEquipment, exerciseDifficulty, exerciseInstructions) VALUES(?,?,?,?,?,?)";
 
-        try (Connection conn = connect(dbPath);
+        try (Connection conn = connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             for (Exercise exercise : exercises) {
@@ -169,11 +189,11 @@ public class DataService {
         }
     }
 
-    public List<Exercise> getMyExercises() {
+   /* public List<Exercise> getMyExercises() {
         String sql = "SELECT * FROM MyExercises";
         List<Exercise> exercises = new ArrayList<>();
 
-        try (Connection conn = this.connect(dbPath);
+        try (Connection conn = this.connect();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
@@ -194,12 +214,12 @@ public class DataService {
         }
 
         return exercises;
-    }
+    }*/
 
-    private Exercise getMyExercise(int id) throws SQLException {
+    /*private Exercise getMyExercise(int id) throws SQLException {
         String sql = "SELECT * FROM MyExercises WHERE id = ?";
 
-        try (Connection conn = this.connect(dbPath);
+        try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, id);
 
@@ -217,15 +237,15 @@ public class DataService {
             }
             return exercise;
         }
-    }
+    }*/
 
-    public List<Exercise> getTodayExerciseItems() {
+    /*public List<Exercise> getTodayExerciseItems() {
         String todayDate = LocalDate.now().toString();
 
         String sql = "SELECT id, exerciseId FROM exerciseItems WHERE date = ?";
         List<Exercise> exercises = new ArrayList<>();
 
-        try (Connection conn = this.connect(dbPath);
+        try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setString(1, todayDate);
                 pstmt.executeQuery();
@@ -240,14 +260,14 @@ public class DataService {
             throw new RuntimeException(e);
         }
         return exercises;
-    }
+    }*/
 
-    public Exercise insertExerciseItem(Exercise exercise) {
+    /*public Exercise insertExerciseItem(Exercise exercise) {
         String sql = "INSERT INTO exerciseItems VALUES(?,?,?)";
         String date = LocalDate.now().toString();
         int generatedKey = 0;
 
-        try (Connection conn = connect(dbPath);
+        try (Connection conn = connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setInt(2, exercise.getId());
                 pstmt.setString(3, date);
@@ -264,22 +284,24 @@ public class DataService {
         return new Exercise(generatedKey, exercise);
     }
 
-    public void removeExerciseItem(Exercise exercise) {
+     */
+
+/*    public void removeExerciseItem(Exercise exercise) {
         String sql = "DELETE FROM exerciseItems WHERE id = ?";
         removeSets(exercise.getId());
 
-        try (Connection conn = connect(dbPath);
+        try (Connection conn = connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, exercise.getId());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-    }
-    public void insertExerciseSet(ExerciseItemSet set) {
+    }*/
+/*    public void insertExerciseSet(ExerciseItemSet set) {
         String sql = "INSERT INTO ExerciseSets VALUES(?,?,?,?)";
 
-        try (Connection conn = connect(dbPath);
+        try (Connection conn = connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setInt(2, set.getId());
                 pstmt.setDouble(3, set.getWeight());
@@ -288,13 +310,13 @@ public class DataService {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-    }
+    }*/
 
-    public void insertSets(int exerciseId, List<ExerciseItemSet> sets){
+/*    public void insertSets(int exerciseId, List<ExerciseItemSet> sets){
         String sql = "INSERT INTO ExerciseSets VALUES(?,?,?,?)";
         removeSets(exerciseId);
 
-        try (Connection conn = connect(dbPath);
+        try (Connection conn = connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             for (ExerciseItemSet set : sets) {
@@ -306,12 +328,12 @@ public class DataService {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-    }
+    }*/
 
-    public void removeSets(int exerciseId){
+/*    public void removeSets(int exerciseId){
         String sql = "DELETE FROM ExerciseSets WHERE exerciseItemId = ?";
 
-        try (Connection conn = this.connect(dbPath);
+        try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setInt(1, exerciseId);
                 pstmt.executeUpdate();
@@ -319,12 +341,12 @@ public class DataService {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-    }
+    }*/
 
-    public void removeSet(int setId) {
+/*    public void removeSet(int setId) {
         String sql = "DELETE FROM ExerciseSets WHERE id = ?";
 
-        try (Connection conn = this.connect(dbPath);
+        try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setInt(1, setId);
                 pstmt.executeUpdate();
@@ -332,13 +354,13 @@ public class DataService {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-    }
+    }*/
 
-    public List<ExerciseItemSet> getExerciseSets(int exerciseItemId) {
+   /* public List<ExerciseItemSet> getExerciseSets(int exerciseItemId) {
         String sql = "SELECT id,exerciseItemId, weight, reps FROM ExerciseSets WHERE exerciseItemId = ?";
         List<ExerciseItemSet> sets = new ArrayList<>();
 
-        try (Connection conn = this.connect(dbPath);
+        try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setInt(1, exerciseItemId);
                 pstmt.executeQuery();
@@ -355,10 +377,10 @@ public class DataService {
             throw new RuntimeException(e);
         }
         return sets;
-    }
+    }*/
     public void insertNutrition(Food nutritionModel, Meal meal) {
         String sql = "INSERT INTO nutrition(mealName, calories, servingSize, fatTotal, fatSaturated, protein, sodium, cholesterol, carbohydrates, fiber, sugar, mealOfDay) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
-        try (Connection conn = connect(dbPath);
+        try (Connection conn = connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, nutritionModel.getName().substring(0, 1).toUpperCase() + nutritionModel.getName().substring(1));
@@ -383,7 +405,7 @@ public class DataService {
     public void removeNutrition(int foodId){
         String sql = "DELETE FROM nutrition WHERE id = ?";
 
-        try (Connection conn = this.connect(dbPath);
+        try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, foodId);
             pstmt.executeUpdate();
@@ -399,7 +421,7 @@ public class DataService {
         String sql = "SELECT * FROM nutrition WHERE mealOfDay = ? AND dateOfInsert = CURRENT_DATE";
         List<Food> foods = new ArrayList<>();
 
-        try (Connection conn = this.connect(dbPath);
+        try (Connection conn = this.connect();
              PreparedStatement pstmt  = conn.prepareStatement(sql)){
             pstmt.setString(1, String.valueOf(meal));
 
@@ -439,7 +461,7 @@ public class DataService {
                 + " mealOfDay text NOT NULL \n"
                 + ");";
 
-        try (Connection conn = connect(dbPath);
+        try (Connection conn = connect();
              Statement stmt = conn.createStatement()) {
             stmt.execute(sql);
         } catch (SQLException e) {
