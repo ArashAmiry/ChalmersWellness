@@ -1,6 +1,8 @@
 package com.example.chalmerswellness.calorieAPI;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class Food {
     private int id;
@@ -31,6 +33,29 @@ public class Food {
 
     }
 
+    public Food(String jsonData){
+        populateFieldsWithMapper(jsonData);
+
+    }
+
+    private void populateFieldsWithMapper(String jsonData) {
+        JSONArray jsonArr = new JSONArray(jsonData);
+
+        JSONObject jsonObj = jsonArr.getJSONObject(0);
+        this.name = jsonObj.getString("name");
+        this.calories = jsonObj.getDouble("calories");
+        this.servingSize = jsonObj.getDouble("serving_size_g");
+        this.fatTotal = jsonObj.getDouble("fat_total_g");
+        this.fatSaturated = jsonObj.getDouble("fat_saturated_g");
+        this.protein = jsonObj.getDouble("protein_g");
+        this.sodium = jsonObj.getDouble("sodium_mg");
+        this.potassium = jsonObj.getDouble("potassium_mg");
+        this.cholesterol = jsonObj.getDouble("cholesterol_mg");
+        this.carbohydrates = jsonObj.getDouble("carbohydrates_total_g");
+        this.fiber = jsonObj.getDouble("fiber_g");
+        this.sugar = jsonObj.getDouble("sugar_g");
+    }
+
     public Food(int id, String foodName, double calories){
         this.id = id;
         this.name = foodName;
@@ -42,103 +67,51 @@ public class Food {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public double getCalories() {
         return calories;
     }
 
-    public void setCalories(double calories) {
-        this.calories = calories;
-    }
-
     public double getServingSize() {
         return servingSize;
-    }
-
-    public void setServingSize(double servingSize) {
-        this.servingSize = servingSize;
     }
 
     public double getFatTotal() {
         return fatTotal;
     }
 
-    public void setFatTotal(double fatTotal) {
-        this.fatTotal = fatTotal;
-    }
-
     public double getFatSaturated() {
         return fatSaturated;
-    }
-
-    public void setFatSaturated(double fatSaturated) {
-        this.fatSaturated = fatSaturated;
     }
 
     public double getProtein() {
         return protein;
     }
 
-    public void setProtein(double protein) {
-        this.protein = protein;
-    }
-
     public double getSodium() {
         return sodium;
-    }
-
-    public void setSodium(double sodium) {
-        this.sodium = sodium;
     }
 
     public double getPotassium() {
         return potassium;
     }
 
-    public void setPotassium(double potassium) {
-        this.potassium = potassium;
-    }
-
     public double getCholesterol() {
         return cholesterol;
-    }
-
-    public void setCholesterol(double cholesterol) {
-        this.cholesterol = cholesterol;
     }
 
     public double getCarbohydrates() {
         return carbohydrates;
     }
 
-    public void setCarbohydrates(double carbohydrates) {
-        this.carbohydrates = carbohydrates;
-    }
-
     public double getFiber() {
         return fiber;
     }
 
-    public void setFiber(double fiber) {
-        this.fiber = fiber;
-    }
-
     public double getSugar() {
         return sugar;
-    }
-
-    public void setSugar(double sugar) {
-        this.sugar = sugar;
     }
 }

@@ -75,15 +75,15 @@ public class NutritionSearchViewController extends AnchorPane implements Observe
         String foodName = searchField.getText();
 
         try {
-            if (foodFacade.isFoodExisting(foodName)){
+            /*if (foodFacade.isFoodExisting(foodName)){*/
                 food = foodFacade.createFood(foodName);
                 parentPane.getChildren().remove(this);
                 parentPane.getChildren().add(new NutritionFoodItemController(food, parentPane, meal));
-            }
+           /* }
             else {
                 searchField.clear();
                 searchField.promptTextProperty().set("No food with that name was found.");
-            }
+            }*/
         } catch (JsonProcessingException exception){
             searchField.promptTextProperty().set("Server could not process food, please try again");
         }

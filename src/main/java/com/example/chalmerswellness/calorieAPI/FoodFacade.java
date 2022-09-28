@@ -15,21 +15,21 @@ public class FoodFacade implements Observable {
     private static List<Observer> observers = new ArrayList<>();
 
     public Food createFood(String foodName) throws JsonProcessingException {
-        Food food = getFood(foodName)[0];
+        Food food = getFood(foodName);
         return food;
     }
 
-    private Food[] getFood(String foodName) throws JsonProcessingException {
+    private Food getFood(String foodName) throws JsonProcessingException {
         //Try catch here... potentially...
         String nutritionJsonString = apiConnector.getNutritionAsStringFromAPI(foodName);
-        Food[] food = objectMapper.readValue(nutritionJsonString, Food[].class);
+        Food food = new Food(nutritionJsonString);
         return food;
     }
 
-    public boolean isFoodExisting(String foodName) throws JsonProcessingException {
-        Food[] food = getFood(foodName);
+    /*public boolean isFoodExisting(String foodName) throws JsonProcessingException {
+        Food food = getFood(foodName);
         return food.length == 1;
-    }
+    }*/
 
     public void removeFood(int foodId){
         DataService dataService = new DataService();
