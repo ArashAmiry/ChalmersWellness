@@ -1,5 +1,6 @@
 package com.example.chalmerswellness.Models;
 
+import com.example.chalmerswellness.Controllers.Workout.WorkoutStates;
 import com.example.chalmerswellness.Services.DataService;
 import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.ObjectModels.ExerciseItemSet;
@@ -15,6 +16,8 @@ public class WorkoutModel implements Observable {
     private List<ExerciseItemSet> sets = new ArrayList<>();
     private List<Exercise> exercises = new ArrayList<>();
 
+    private List<Exercise> addedWorkoutExercises = new ArrayList<>();
+
     public WorkoutModel(){
         db = new DataService();
         exercises = getMyExercises();
@@ -23,10 +26,20 @@ public class WorkoutModel implements Observable {
     public List<Exercise> getAddedExercises() {
         return addedExercises;
     }
-
-    public void addExercise(Exercise exercise){
+    public List<Exercise> getAddedWorkoutExercises() {
+        return addedWorkoutExercises;
+    }
+    public void addExercise(Exercise exercise, WorkoutStates workoutState){
+        //DOES IT STORE IN SAME db?
         var exerciseItem = db.insertExerciseItem(exercise);
-        addedExercises.add(exerciseItem);
+
+        //TODO ENUM STATES
+        if(workoutState.equals(WorkoutStates.ACTIVEWORKOUT)){
+            addedExercises.add(exerciseItem);
+        } else if(workoutState.equals(WorkoutStates.CREATEWORKOUT)){
+            addedWorkoutExercises.add(exerciseItem);
+        }
+
         notifyObservers();
     }
 

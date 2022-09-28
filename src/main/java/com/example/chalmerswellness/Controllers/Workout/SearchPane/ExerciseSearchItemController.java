@@ -1,5 +1,6 @@
 package com.example.chalmerswellness.Controllers.Workout.SearchPane;
 
+import com.example.chalmerswellness.Controllers.Workout.WorkoutStates;
 import com.example.chalmerswellness.Models.WorkoutModel;
 import com.example.chalmerswellness.ObjectModels.Exercise;
 import javafx.fxml.FXML;
@@ -19,9 +20,13 @@ public class ExerciseSearchItemController extends AnchorPane implements Initiali
     @FXML
     Label exerciseName;
 
-    public ExerciseSearchItemController(Exercise exercise, WorkoutModel model){
+    private WorkoutStates workoutState;
+
+    public ExerciseSearchItemController(Exercise exercise, WorkoutModel model, WorkoutStates workoutState){
         this.exercise = exercise;
         this.model = model;
+
+        this.workoutState = workoutState;
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/ExerciseSearchItem.fxml"));
         fxmlLoader.setRoot(this);
@@ -41,7 +46,7 @@ public class ExerciseSearchItemController extends AnchorPane implements Initiali
 
 
     @FXML public void addToWorkout(){
-        model.addExercise(exercise);
+        model.addExercise(exercise, workoutState);
     }
 
     @FXML public void removeFromWorkout(){

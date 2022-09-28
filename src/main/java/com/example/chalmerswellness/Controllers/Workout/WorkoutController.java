@@ -19,7 +19,7 @@ public class WorkoutController extends AnchorPane implements Initializable {
     @FXML public AnchorPane mainContent;
     CreateWorkoutController createWorkoutView;
     TodayWorkoutController todayWorkoutView;
-    ExerciseSearchController esController;
+    ExerciseSearchController exerciseSearchControllerController;
     ManageWorkoutController manageWorkoutView;
 
     public WorkoutController(){
@@ -30,12 +30,13 @@ public class WorkoutController extends AnchorPane implements Initializable {
 
         //TodayWorkoutView
         todayWorkoutView = new TodayWorkoutController(workoutModel);
-        esController = new ExerciseSearchController(workoutModel);
 
-
+        //SearchView
+        exerciseSearchControllerController = new ExerciseSearchController(workoutModel);
 
         //CreateWorkoutView
         createWorkoutView = new CreateWorkoutController(workoutModel);
+        
         //ManageWorkoutView
         manageWorkoutView = new ManageWorkoutController(workoutModel);
 
@@ -48,34 +49,28 @@ public class WorkoutController extends AnchorPane implements Initializable {
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1){
+        if(anchorPaneSearch.getChildren().isEmpty()) {
+            anchorPaneSearch.getChildren().add(exerciseSearchControllerController);
+        }
+
         openWorkoutTab();
     }
 
     @FXML void openWorkoutTab(){
-        if(anchorPaneSearch.getChildren().isEmpty()) {
-            anchorPaneSearch.getChildren().add(esController);
-        }
-
-
+        exerciseSearchControllerController.setState(WorkoutStates.ACTIVEWORKOUT);
         setTabTo(todayWorkoutView);
-        //todayWorkout.textProperty().set("Workout Tab");
     }
 
     @FXML void openCreateWorkoutTab(){
-        //todayWorkout.textProperty().set("CreateWorkout Tab");
+        exerciseSearchControllerController.setState(WorkoutStates.CREATEWORKOUT);
         setTabTo(createWorkoutView);
     }
     @FXML void openManageWorkoutTab(){
-        //todayWorkoutView.textProperty().set("ManageWorkout Tab");
         setTabTo(manageWorkoutView);
     }
-
-
 
     private void setTabTo(AnchorPane pane){
         mainContent.getChildren().clear();
         mainContent.getChildren().add(pane);
     }
-
-
 }

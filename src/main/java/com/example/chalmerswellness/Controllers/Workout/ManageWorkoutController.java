@@ -1,6 +1,7 @@
 package com.example.chalmerswellness.Controllers.Workout;
 
 import com.example.chalmerswellness.Controllers.Workout.SearchPane.ExerciseSearchItemController;
+import com.example.chalmerswellness.Controllers.Workout.TodaysWorkout.ExerciseItemController;
 import com.example.chalmerswellness.Models.WorkoutModel;
 import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.Interfaces.Observable;
@@ -41,7 +42,7 @@ public class ManageWorkoutController extends AnchorPane implements Observer {
         //exercisesList.clear();
 
         for (var exercise: exercises) {
-            ExerciseSearchItemController exerciseController = new ExerciseSearchItemController(exercise, model);
+            ExerciseItemController exerciseController = new ExerciseItemController(exercise, model, this);
             //exercisesList.add(exerciseController);
         }
         //exerciseList.getItems().setAll(exercisesList);

@@ -1,5 +1,6 @@
 package com.example.chalmerswellness.Controllers.Workout.SearchPane;
 
+import com.example.chalmerswellness.Controllers.Workout.WorkoutStates;
 import com.example.chalmerswellness.Models.WorkoutModel;
 import com.example.chalmerswellness.ObjectModels.Exercise;
 import javafx.fxml.FXML;
@@ -20,8 +21,12 @@ public class ExerciseSearchController extends AnchorPane implements Initializabl
     @FXML public ListView<ExerciseSearchItemController> searchListView;
     @FXML public Label noResultLabel;
 
+    private WorkoutStates workoutState;
+
+    //TODO string should be enum
     public ExerciseSearchController(WorkoutModel model){
         this.model = model;
+
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/ExerciseSearchView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -41,7 +46,7 @@ public class ExerciseSearchController extends AnchorPane implements Initializabl
     void updateSearchResult(List<Exercise> exercises){
         searchListView.getItems().clear();
         for (var exercise: exercises) {
-            ExerciseSearchItemController exerciseController = new ExerciseSearchItemController(exercise, model);
+            ExerciseSearchItemController exerciseController = new ExerciseSearchItemController(exercise, model, workoutState);
             searchListView.getItems().add(exerciseController);
         }
         isNoResult();
@@ -56,5 +61,11 @@ public class ExerciseSearchController extends AnchorPane implements Initializabl
 
     void isNoResult(){
         noResultLabel.visibleProperty().set(searchListView.getItems().size() <= 0);
+    }
+
+
+    public void setState(WorkoutStates state){
+        this.workoutState = state;
+        searchExercise();
     }
 }
