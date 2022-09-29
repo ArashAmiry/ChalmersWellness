@@ -49,6 +49,7 @@ public class ManageWorkoutController extends AnchorPane implements Observer {
     }
 
     void populateWorkoutList(){
+        workoutsList.clear();
         for (var workout : dataservice.getWorkouts() ){
             workoutsList.add(new WorkoutItemController(workout, model));
         }
@@ -78,8 +79,8 @@ public class ManageWorkoutController extends AnchorPane implements Observer {
     @Override
     public void update(Observable observable) {
         model = (WorkoutModel) observable;
-        var exercises = model.getAddedExercises();
-
-        updateExerciseList(exercises);
+        //var exercises = model.getAddedExercises();
+        populateWorkoutList();
+        //updateExerciseList(exercises);
     }
 }
