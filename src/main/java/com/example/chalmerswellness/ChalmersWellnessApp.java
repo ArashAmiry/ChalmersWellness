@@ -1,5 +1,6 @@
 package com.example.chalmerswellness;
 
+import com.example.chalmerswellness.Services.DataService;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -17,6 +18,7 @@ public class ChalmersWellnessApp extends Application {
         stage.setFullScreen(false);
         stage.setScene(scene);
         stage.show();
+        DataService dataService = new DataService();
 
         stage.setOnCloseRequest(event -> {
             try {

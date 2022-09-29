@@ -4,7 +4,6 @@ import com.example.chalmerswellness.Services.DataService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -20,18 +19,18 @@ public class LoginController extends AnchorPane implements Initializable {
     TextField passwordTextField;
     @FXML
     AnchorPane parentPane;
-
-    User user = User.getInstance();
+    @FXML
+    AnchorPane navigationPane;
     DataService dataService = new DataService();
 
 
-    public LoginController(AnchorPane pane) {
+    public LoginController(AnchorPane parent) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/LoginView.fxml"));
 
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 
-        parentPane = pane;
+        parentPane = parent;
 
         try {
             fxmlLoader.load();
@@ -52,8 +51,8 @@ public class LoginController extends AnchorPane implements Initializable {
         String password = passwordTextField.getText();
         if(dataService.loginUser(username, password)) {
             System.out.println("Login successful");
-            user.setUsername(username);
-            user.setId(dataService.getUserId(username));
+            parentPane.getChildren().remove(this);
+            System.out.println(dataService.getUser(username,password).getBirthDate());
         } else {
             System.out.println("Login failed");
         }
@@ -64,9 +63,6 @@ public class LoginController extends AnchorPane implements Initializable {
         SignUpController signUpController = new SignUpController(parentPane);
         parentPane.getChildren().remove(this);
         parentPane.getChildren().add(signUpController);
-        parentPane.setRightAnchor(signUpController, 0.0);
-        parentPane.setTopAnchor(signUpController, 0.0);
-        parentPane.setBottomAnchor(signUpController, 0.0);
     }
 
 }

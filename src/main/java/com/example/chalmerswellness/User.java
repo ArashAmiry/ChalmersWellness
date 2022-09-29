@@ -1,30 +1,56 @@
 package com.example.chalmerswellness;
 
+import java.time.LocalDate;
+
 public class User {
-    private String username;
     private int id;
+    private String username;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private int height;
+    private LocalDate birthDate;
+    private double weight;
+    private double weightGoal;
 
-    private final static User instance = new User();
-
-    private User() {}
-
-    public static User getInstance() {
-        return instance;
+    public User(String username, String firstName, String lastName, String email, int height, LocalDate birthDate, double weight) {
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.height = height;
+        this.birthDate = birthDate;
+        this.weight = weight;
     }
+
 
     public String getUsername() {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public double getWeight() {
+        return weight;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public int getHeight() {
+        return height;
     }
 
-    public int getId() {
-        return id;
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public LocalDate getBirthDate() {
+        return birthDate;
     }
 }
+
+

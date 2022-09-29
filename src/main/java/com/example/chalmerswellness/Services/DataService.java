@@ -3,12 +3,14 @@ package com.example.chalmerswellness.Services;
 import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.ObjectModels.ExerciseItemSet;
 import com.example.chalmerswellness.ObjectModels.Workout;
+import com.example.chalmerswellness.User;
 import com.example.chalmerswellness.calorieAPI.Food;
 import com.example.chalmerswellness.calorieAPI.Meal;
 
 import java.sql.*;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DataService {
     private final String dbPath = "src/main/resources/ChalmersWellness.db";
@@ -455,7 +457,14 @@ public class DataService {
         String sql = "CREATE TABLE IF NOT EXISTS users (\n"
                 + " id INTEGER PRIMARY KEY,\n"
                 + " username text,\n"
-                + " password text \n"
+                + " password text,\n"
+                + " firstName text,\n"
+                + " lastName text,\n"
+                + " email text,\n"
+                + " birthDate date,\n"
+                + " height integer,\n"
+                + " weight double,\n"
+                + " weightGoal double\n"
                 + ");";
         try (Connection conn = connect(dbPath);
              Statement stmt = conn.createStatement()) {
@@ -465,17 +474,44 @@ public class DataService {
         }
     }
 
-    public void insertUser(String username, String password) {
-        String sql = "INSERT INTO users (username, password) VALUES(?,?)";
+    public void insertUser(User user, String password) {
+        String sql = "INSERT INTO users (username, password, firstName, lastName, email, birthDate, height, weight) VALUES(?,?,?,?,?,?,?,?)";
         try (Connection conn = connect(dbPath);
              PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
-            preparedStatement.setString(1, username);
+            preparedStatement.setString(1, user.getUsername());
             preparedStatement.setString(2, password);
+            preparedStatement.setString(3, user.getFirstName());
+            preparedStatement.setString(4, user.getLastName());
+            preparedStatement.setString(5, user.getEmail());
+            preparedStatement.setDate(6, Date.valueOf(user.getBirthDate()));
+            preparedStatement.setInt(7, user.getHeight());
+            preparedStatement.setDouble(8, user.getWeight());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
+
+    // Return user object if user exists in database
+    public User getUser(String username, String password) {
+            String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
+            User user = null;
+            try (Connection conn = connect(dbPath);
+                 PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+                preparedStatement.setString(1, username);
+                preparedStatement.setString(2, password);
+                ResultSet rs = preparedStatement.executeQuery();
+                if (rs.next()) {
+                    user = new User(rs.getString("username"), rs.getString("firstName"), rs.getString("lastName"), rs.getString("email"), rs.getInt("height"),rs.getDate("birthDate").toLocalDate(), rs.getDouble("weight"));
+                }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+            return user;
+        }
+
+
+
 
     public boolean loginUser(String username, String password) {
         String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
@@ -509,9 +545,21 @@ public class DataService {
         return 0;
     }
 
+    public boolean checkIfUsernameExists(String username) {
+        String sql = "SELECT * FROM users WHERE username = ?";
+        try (Connection conn = connect(dbPath);
+             PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+            preparedStatement.setString(1, username);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
 
-
-    // check if any users exist in database
     public boolean checkIfUsersExist() {
         String sql = "SELECT * FROM users";
         try (Connection conn = connect(dbPath);
