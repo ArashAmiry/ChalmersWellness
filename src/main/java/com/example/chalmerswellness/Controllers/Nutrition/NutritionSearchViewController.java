@@ -3,7 +3,7 @@ package com.example.chalmerswellness.Controllers.Nutrition;
 import com.example.chalmerswellness.FoodItemController;
 import com.example.chalmerswellness.Interfaces.Observable;
 import com.example.chalmerswellness.Interfaces.Observer;
-import com.example.chalmerswellness.Services.DataService;
+import com.example.chalmerswellness.Services.DatabaseConnector;
 import com.example.chalmerswellness.calorieAPI.Food;
 import com.example.chalmerswellness.calorieAPI.FoodFacade;
 import com.example.chalmerswellness.calorieAPI.Meal;
@@ -26,7 +26,7 @@ public class NutritionSearchViewController extends AnchorPane implements Observe
     Meal meal;
     FoodFacade foodFacade = new FoodFacade();
     Food food = new Food();
-    DataService dataService = new DataService();
+    DatabaseConnector dataService = new DatabaseConnector();
     List<Food> foods;
 
     @FXML
