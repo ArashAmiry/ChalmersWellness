@@ -1,8 +1,6 @@
 package com.example.chalmerswellness.Controllers.Nutrition;
 
-import com.example.chalmerswellness.Interfaces.Observable;
-import com.example.chalmerswellness.Interfaces.Observer;
-import com.example.chalmerswellness.Services.DataService;
+import com.example.chalmerswellness.Services.DatabaseConnector;
 import com.example.chalmerswellness.calorieAPI.Food;
 import com.example.chalmerswellness.calorieAPI.FoodFacade;
 import com.example.chalmerswellness.calorieAPI.Meal;
@@ -18,11 +16,9 @@ import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
-public class NutritionFoodItemController extends AnchorPane implements Initializable, Observable {
+public class NutritionFoodItemController extends AnchorPane implements Initializable {
 
     @FXML
     private Text foodItemText;
@@ -59,14 +55,12 @@ public class NutritionFoodItemController extends AnchorPane implements Initializ
     private AnchorPane rootPane;
 
 
-    DataService dataService = new DataService();
+    DatabaseConnector dataService = new DatabaseConnector();
     Meal meal;
     FoodFacade foodFacade = new FoodFacade();
     Food food;
     AnchorPane modalPanel;
     NutritionSearchViewController nutritionSearchViewController;
-
-    private static List<Observer> observers = new ArrayList<>();
 
 
     public NutritionFoodItemController(Food foodItem, AnchorPane pane, Meal meal){
@@ -106,48 +100,25 @@ public class NutritionFoodItemController extends AnchorPane implements Initializ
     @FXML
     private void addFoodEaten(MouseEvent mouseEvent) throws JsonProcessingException {
         if (validateAmountGrams()){
-            dataService.insertNutrition(foodFacade.createFood(foodItemGrams.getText() + "g " + food.getName()), meal);
-            //parentPane.getChildren().setAll(new NutritionSearchViewController(parentPane, meal));
+            foodFacade.addFoodEaten(foodItemGrams.getText(), food.getName(), meal);
             parentPane.getChildren().remove(this);
             parentPane.getChildren().add(new NutritionSearchViewController(parentPane, meal));
         }
         else {
             foodItemGrams.clear();
-            foodItemGrams.setPromptText("Please enter a positive number");
+            foodItemGrams.setPromptText("Please enter a positive integer.");
         }
     }
 
     private boolean validateAmountGrams(){
         String grams = foodItemGrams.getText();
-        if (grams == null) {
-            return false;
-        }
-        try {
-            double parsedGrams = Double.parseDouble(grams);
-            if (parsedGrams <= 0 ){
-                throw new NumberFormatException();
-            }
-        } catch (NumberFormatException nfe) {
-            return false;
-        }
-        return true;
+        return foodFacade.validateAmountOfGrams(grams);
     }
 
     @FXML
     private void closeWindow(MouseEvent mouseEvent) {
-        parentPane.getChildren().remove(nutritionSearchViewController);
+        parentPane.getChildren().remove(this);
     }
 
 
-    @Override
-    public void notifyObservers() {
-        for (var observer: observers) {
-            observer.update(this);
-        }
-    }
-
-
-    public void subscribe(Observer observer) {
-        observers.add(observer);
-    }
 }

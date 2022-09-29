@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class NutritionAPIConnector {
+class NutritionAPIConnector {
 
     private final String urlString = "https://api.api-ninjas.com/v1/nutrition?query=";
 
@@ -50,8 +50,8 @@ public class NutritionAPIConnector {
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestProperty("x-api-key", "w654GbcWJOO5z0zkEac5sYcuRKqNjRBZ5BjDqI50");
         connection.setRequestMethod("GET");
-        connection.setConnectTimeout(2000);
-        connection.setReadTimeout(5000);
+        connection.setConnectTimeout(10000);
+        connection.setReadTimeout(10000);
         connection.connect();
         return connection;
     }
