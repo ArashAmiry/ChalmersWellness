@@ -388,8 +388,6 @@ public class DataService {
             pstmt.setInt(1, foodId);
             pstmt.executeUpdate();
 
-            removeExercises(foodId);
-
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

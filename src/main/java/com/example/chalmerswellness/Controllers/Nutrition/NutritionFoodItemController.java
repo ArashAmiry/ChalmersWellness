@@ -100,31 +100,19 @@ public class NutritionFoodItemController extends AnchorPane implements Initializ
     @FXML
     private void addFoodEaten(MouseEvent mouseEvent) throws JsonProcessingException {
         if (validateAmountGrams()){
-            dataService.insertNutrition(foodFacade.createFood(foodItemGrams.getText() + "g " + food.getName()), meal);
-            //parentPane.getChildren().setAll(new NutritionSearchViewController(parentPane, meal));
+            foodFacade.addFoodEaten(foodItemGrams.getText(), food.getName(), meal);
             parentPane.getChildren().remove(this);
             parentPane.getChildren().add(new NutritionSearchViewController(parentPane, meal));
         }
         else {
             foodItemGrams.clear();
-            foodItemGrams.setPromptText("Please enter a positive number");
+            foodItemGrams.setPromptText("Please enter a positive integer.");
         }
     }
 
     private boolean validateAmountGrams(){
         String grams = foodItemGrams.getText();
-        if (grams == null) {
-            return false;
-        }
-        try {
-            double parsedGrams = Double.parseDouble(grams);
-            if (parsedGrams <= 0 ){
-                throw new NumberFormatException();
-            }
-        } catch (NumberFormatException nfe) {
-            return false;
-        }
-        return true;
+        return foodFacade.validateAmountOfGrams(grams);
     }
 
     @FXML
