@@ -29,11 +29,10 @@ public class FoodFacade implements Observable {
     public boolean isFoodExisting(String foodName) throws JsonProcessingException {
         try {
             Food food = getFood(foodName);
+            return food.getName().equals(foodName);
         }catch (JSONException e){
             return false;
         }
-
-        return true;
     }
 
     public void addFoodEaten(String grams, String foodName, Meal meal) throws JsonProcessingException {
