@@ -2,6 +2,7 @@ package com.example.chalmerswellness.calorieAPI;
 
 import com.example.chalmerswellness.Interfaces.Observable;
 import com.example.chalmerswellness.Interfaces.Observer;
+import com.example.chalmerswellness.Services.DataService;
 import com.example.chalmerswellness.Services.DatabaseConnector;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
