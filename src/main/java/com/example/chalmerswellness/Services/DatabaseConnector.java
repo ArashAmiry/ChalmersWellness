@@ -11,7 +11,6 @@ import java.util.*;
 public class DatabaseConnector {
     private static String dbPath = "src/main/resources/ChalmersWellness.db";
 
-
     static Connection connect() {
         String url = "jdbc:sqlite:" + dbPath;
         Connection conn = null;
@@ -22,8 +21,6 @@ public class DatabaseConnector {
         }
         return conn;
     }
-
-
 
     public void insertNutrition(Food nutritionModel, Meal meal) {
         String sql = "INSERT INTO nutrition(mealName, calories, servingSize, fatTotal, fatSaturated, protein, sodium, cholesterol, carbohydrates, fiber, sugar, mealOfDay) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";

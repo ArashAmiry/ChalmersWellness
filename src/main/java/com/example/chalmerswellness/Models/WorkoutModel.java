@@ -6,7 +6,6 @@ import com.example.chalmerswellness.Interfaces.Observable;
 import com.example.chalmerswellness.Interfaces.Observer;
 import com.example.chalmerswellness.Services.IWorkoutDatabaseHandler;
 import com.example.chalmerswellness.Services.WorkoutService;
-
 import java.util.ArrayList;
 import java.util.List;
 
