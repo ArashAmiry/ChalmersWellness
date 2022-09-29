@@ -27,8 +27,9 @@ public class WorkoutModel implements Observable {
         return addedExercises;
     }
 
+    //TODO integrate with CreateWorkout
     public void addExercise(Exercise exercise){
-       var exerciseItem = workoutService.insertExerciseItem(exercise);
+       var exerciseItem = workoutService.insertCompletedExercise(exercise);
         addedExercises.add(exerciseItem);
         notifyObservers();
     }
@@ -74,10 +75,10 @@ public class WorkoutModel implements Observable {
     }
 
     public List<Exercise> getTodayExerciseItems(){
-        return workoutService.getTodayExerciseItems();
+        return workoutService.getTodayAddedExercises();
     }
     public void removeExercise(Exercise exercise){
-        workoutService.removeExerciseItem(exercise);
+        workoutService.removeAddedExercise(exercise);
         addedExercises.remove(exercise);
         notifyObservers();
     }

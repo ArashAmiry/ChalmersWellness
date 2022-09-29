@@ -7,8 +7,10 @@ import java.util.List;
 
 public interface IWorkoutDatabaseHandler {
     Exercise insertExerciseItem(Exercise exercise);
+    Exercise insertCompletedExercise(Exercise exercise);
+    void removeAddedExercise(Exercise exercise);
     void insertExerciseSet(ExerciseItemSet set);
-    List<Exercise> getTodayExerciseItems();
+    List<Exercise> getTodayAddedExercises();
     void removeSet(int setId);
     List<ExerciseItemSet> getExerciseSets(int exerciseItemId);
     List<Exercise> getMyExercises();

@@ -2,6 +2,8 @@ package com.example.chalmerswellness.Services;
 
 import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.ObjectModels.ExerciseItemSet;
+import com.example.chalmerswellness.ObjectModels.Workout;
+
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -29,6 +31,65 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
             }
 
         return new Exercise(generatedKey, exercise);
+    }
+
+    public Exercise insertCompletedExercise(Exercise exercise){
+        String sql = "INSERT INTO addedExercises VALUES(?,?,?)";
+        String date = LocalDate.now().toString();
+        int generatedKey = 0;
+
+        try (Connection conn = DatabaseConnector.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(2, exercise.getId());
+            pstmt.setString(3, date);
+            pstmt.executeUpdate();
+
+            ResultSet rs = pstmt.getGeneratedKeys();
+            if (rs.next()) {
+                generatedKey = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return new Exercise(generatedKey, exercise);
+    }
+
+    public List<Exercise> getTodayAddedExercises() {
+        String todayDate = LocalDate.now().toString();
+
+        String sql = "SELECT id, exerciseId FROM addedExercises WHERE date = ?";
+        List<Exercise> exercises = new ArrayList<>();
+
+        try (Connection conn = DatabaseConnector.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, todayDate);
+            pstmt.executeQuery();
+
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                var exerciseId = rs.getInt("exerciseId");
+                Exercise exercise = getMyExercise(exerciseId);
+                exercises.add(exercise);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return exercises;
+    }
+
+
+    public void removeAddedExercise(Exercise exercise) {
+        String sql = "DELETE FROM addedExercises WHERE id = ?";
+        removeSets(exercise.getId());
+
+        try (Connection conn = DatabaseConnector.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, exercise.getId());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void insertExerciseSet(ExerciseItemSet set) {
@@ -73,8 +134,8 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
 
         try (Connection conn = DatabaseConnector.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, setId);
-            pstmt.executeUpdate();
+                pstmt.setInt(1, setId);
+                pstmt.executeUpdate();
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -195,6 +256,147 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
                 pstmt.setInt(4, set.getReps());
                 pstmt.executeUpdate();
             }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void insertMyExercises(List<Exercise> exercises) {
+        String sql = "INSERT INTO MyExercises(exerciseName, exerciseType, exerciseMuscle, exerciseEquipment, exerciseDifficulty, exerciseInstructions) VALUES(?,?,?,?,?,?)";
+
+        try (Connection conn = DatabaseConnector.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            for (Exercise exercise : exercises) {
+                pstmt.setString(1, exercise.getName());
+                pstmt.setString(2, exercise.getType());
+                pstmt.setString(3, exercise.getMuscle());
+                pstmt.setString(4, exercise.getEquipment());
+                pstmt.setString(5, exercise.getDifficulty());
+                pstmt.setString(6, exercise.getInstructions());
+                pstmt.executeUpdate();
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public List<Workout> getWorkouts(){
+        String sql = "SELECT * FROM workouts";
+        List<Workout> workouts = new ArrayList<>();
+
+        try (Connection conn = DatabaseConnector.connect();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String workoutName = rs.getString("workoutName");
+                List<Exercise> exercises = getWorkoutExercises(id);
+
+                Workout workout = new Workout(workoutName, exercises);
+                workouts.add(workout);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return workouts;
+    }
+
+    public List<Exercise> getWorkoutExercises(int workoutId) throws SQLException {
+        String sql = "SELECT id, exerciseName, exerciseType, exerciseMuscle, exerciseEquipment, exerciseDifficulty, exerciseInstructions, workoutId FROM exercises WHERE workoutId = ?";
+
+        List<Exercise> exercises = new ArrayList<>();
+        try (Connection conn = DatabaseConnector.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, workoutId);
+
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                var id = rs.getInt("id");
+                var exerciseName = rs.getString("exerciseName");
+                var type = rs.getString("exerciseType");
+                var muscle = rs.getString("exerciseMuscle");
+                var equipment = rs.getString("exerciseEquipment");
+                var difficulty = rs.getString("exerciseDifficulty");
+                var instructions = rs.getString("exerciseInstructions");
+
+                Exercise exercise = new Exercise(id, exerciseName, type, muscle, equipment, difficulty, instructions);
+                exercises.add(exercise);
+            }
+        }
+
+        return exercises;
+    }
+
+
+    public void insertWorkout(Workout workout) {
+        String sql = "INSERT INTO workouts(workoutName) VALUES(?)";
+
+        try (Connection conn = DatabaseConnector.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, workout.getWorkoutName());
+            pstmt.executeUpdate();
+
+            ResultSet rs = pstmt.getGeneratedKeys();
+            int generatedKey = 0;
+            if (rs.next()) {
+                generatedKey = rs.getInt(1);
+            }
+
+            insertWorkoutExercises(workout.getExercises(), generatedKey);
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void insertWorkoutExercises(List<Exercise> exercises, int id) {
+        String sql = "INSERT INTO exercises(exerciseName, exerciseType, exerciseMuscle, exerciseEquipment, exerciseDifficulty, exerciseInstructions, workoutId) VALUES(?,?,?,?,?,?,?)";
+        try (Connection conn = DatabaseConnector.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            for (Exercise exercise : exercises) {
+                pstmt.setString(1, exercise.getName());
+                pstmt.setString(2, exercise.getType());
+                pstmt.setString(3, exercise.getMuscle());
+                pstmt.setString(4, exercise.getEquipment());
+                pstmt.setString(5, exercise.getDifficulty());
+                pstmt.setString(6, exercise.getInstructions());
+                pstmt.setInt(7, id);
+                pstmt.executeUpdate();
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void removeWorkout(int workoutId) {
+        String sql = "DELETE FROM workouts WHERE id = ?";
+
+        try (Connection conn = DatabaseConnector.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, workoutId);
+            pstmt.executeUpdate();
+
+            removeExercises(workoutId);
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void removeExercises(int workoutId) {
+        String sql = "DELETE FROM exercises WHERE workoutId = ?";
+
+        try (Connection conn = DatabaseConnector.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, workoutId);
+            pstmt.executeUpdate();
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
