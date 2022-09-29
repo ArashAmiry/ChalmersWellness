@@ -460,7 +460,6 @@ public class DataService {
         try (Connection conn = connect(dbPath);
              Statement stmt = conn.createStatement()) {
             stmt.execute(sql);
-            System.out.println("Created users table");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

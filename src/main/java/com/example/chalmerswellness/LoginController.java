@@ -4,6 +4,7 @@ import com.example.chalmerswellness.Services.DataService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -17,16 +18,20 @@ public class LoginController extends AnchorPane implements Initializable {
     TextField usernameTextField;
     @FXML
     TextField passwordTextField;
+    @FXML
+    AnchorPane parentPane;
 
     User user = User.getInstance();
     DataService dataService = new DataService();
 
 
-    public LoginController() {
+    public LoginController(AnchorPane pane) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/LoginView.fxml"));
 
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
+
+        parentPane = pane;
 
         try {
             fxmlLoader.load();
@@ -52,6 +57,16 @@ public class LoginController extends AnchorPane implements Initializable {
         } else {
             System.out.println("Login failed");
         }
+    }
+
+    @FXML
+    void createNewAccount(MouseEvent event) {
+        SignUpController signUpController = new SignUpController(parentPane);
+        parentPane.getChildren().remove(this);
+        parentPane.getChildren().add(signUpController);
+        parentPane.setRightAnchor(signUpController, 0.0);
+        parentPane.setTopAnchor(signUpController, 0.0);
+        parentPane.setBottomAnchor(signUpController, 0.0);
     }
 
 }

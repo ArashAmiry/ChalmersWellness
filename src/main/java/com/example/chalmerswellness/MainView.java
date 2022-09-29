@@ -11,6 +11,8 @@ import javafx.scene.layout.AnchorPane;
 
 public class MainView extends AnchorPane {
     @FXML AnchorPane contentRootAnchorPane;
+    @FXML AnchorPane navigationAnchorPane;
+    @FXML AnchorPane templateRootAnchorPane;
     @FXML Button workoutBtn;
 
     WorkoutController workoutView = new WorkoutController();
@@ -20,9 +22,6 @@ public class MainView extends AnchorPane {
     DashboardViewController dashboardViewController = new DashboardViewController();
 
     SettingsViewController settingsViewController = new SettingsViewController();
-
-    SignUpController signUpController = new SignUpController();
-    LoginController loginController = new LoginController();
     DataService dataService = new DataService();
 
     public MainView(){
@@ -31,9 +30,9 @@ public class MainView extends AnchorPane {
     @FXML
     public void initialize(){
         if (dataService.checkIfUsersExist()) {
-            setViewTo(loginController);
+            openLoginScreen();
         } else {
-            setViewTo(signUpController);
+
         }
     }
 
@@ -65,5 +64,14 @@ public class MainView extends AnchorPane {
         contentRootAnchorPane.setRightAnchor(pane, 0.0);
         contentRootAnchorPane.setTopAnchor(pane, 0.0);
         contentRootAnchorPane.setBottomAnchor(pane, 0.0);
+    }
+
+    private void openLoginScreen() {
+        LoginController loginController = new LoginController(templateRootAnchorPane);
+        templateRootAnchorPane.getChildren().add(loginController);
+        navigationAnchorPane.setVisible(false);
+        templateRootAnchorPane.setRightAnchor(loginController, 0.0);
+        templateRootAnchorPane.setTopAnchor(loginController, 0.0);
+        templateRootAnchorPane.setBottomAnchor(loginController, 0.0);
     }
 }
