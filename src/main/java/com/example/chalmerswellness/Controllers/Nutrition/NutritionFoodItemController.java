@@ -129,7 +129,7 @@ public class NutritionFoodItemController extends AnchorPane implements Initializ
 
     @FXML
     private void closeWindow(MouseEvent mouseEvent) {
-        parentPane.getChildren().remove(nutritionSearchViewController);
+        parentPane.getChildren().remove(this);
     }
 
 
