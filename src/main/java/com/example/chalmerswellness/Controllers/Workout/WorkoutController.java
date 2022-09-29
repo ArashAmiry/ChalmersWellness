@@ -19,7 +19,7 @@ public class WorkoutController extends AnchorPane implements Initializable {
     @FXML public AnchorPane mainContent;
     CreateWorkoutController createWorkoutView;
     TodayWorkoutController todayWorkoutView;
-    ExerciseSearchController esController;
+    ExerciseSearchController exerciseSearchController;
     ManageWorkoutController manageWorkoutView;
 
     public WorkoutController(){
@@ -30,9 +30,9 @@ public class WorkoutController extends AnchorPane implements Initializable {
 
         //TodayWorkoutView
         todayWorkoutView = new TodayWorkoutController(workoutModel);
-        esController = new ExerciseSearchController(workoutModel);
 
-
+        //SearchPanel
+        exerciseSearchController = new ExerciseSearchController(workoutModel);
 
         //CreateWorkoutView
         createWorkoutView = new CreateWorkoutController(workoutModel);
@@ -48,13 +48,15 @@ public class WorkoutController extends AnchorPane implements Initializable {
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1){
+        if(anchorPaneSearch.getChildren().isEmpty()) {
+            anchorPaneSearch.getChildren().add(exerciseSearchController);
+        }
+
         openWorkoutTab();
     }
 
     @FXML void openWorkoutTab(){
-        if(anchorPaneSearch.getChildren().isEmpty()) {
-            anchorPaneSearch.getChildren().add(esController);
-        }
+
 
 
         setTabTo(todayWorkoutView);
