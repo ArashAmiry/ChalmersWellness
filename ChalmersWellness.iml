@@ -35,6 +35,8 @@
     <orderEntry type="library" name="Maven: eu.hansolo:medusa:17.1.5" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: eu.hansolo:toolbox:17.0.21" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: eu.hansolo:toolboxfx:17.0.27" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-base:18.0.2" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-base:win:18.0.2" level="project" />
     <orderEntry type="library" name="lib1" level="project" />
     <orderEntry type="library" name="lib" level="project" />
   </component>

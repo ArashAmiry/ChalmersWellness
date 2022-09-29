@@ -1,7 +1,9 @@
 package com.example.chalmerswellness;
 
-import com.example.chalmerswellness.Controllers.ManageWorkoutController;
-import com.example.chalmerswellness.Controllers.WorkoutController;
+import com.example.chalmerswellness.Controllers.Dashboard.DashboardViewController;
+import com.example.chalmerswellness.Controllers.Nutrition.NutritionViewController;
+import com.example.chalmerswellness.Controllers.Settings.SettingsViewController;
+import com.example.chalmerswellness.Controllers.Workout.WorkoutController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
@@ -12,6 +14,8 @@ public class MainView extends AnchorPane {
 
     WorkoutController workoutView = new WorkoutController();
     NutritionViewController nutritionViewController = new NutritionViewController();
+
+    CalorieIntakeCalculatorController calorieIntakeCalculatorController = new CalorieIntakeCalculatorController();
     DashboardViewController dashboardViewController = new DashboardViewController();
 
     SettingsViewController settingsViewController = new SettingsViewController();
@@ -31,7 +35,11 @@ public class MainView extends AnchorPane {
 
    @FXML
    public void navigateToNutritionView() {
-        setViewTo(nutritionViewController);
+        if (!Profile.getInstance().hasCalculatedCalorieIntake()) {
+            setViewTo(calorieIntakeCalculatorController);
+        } else {
+            setViewTo(nutritionViewController);
+        }
    }
    @FXML
    public void navigateToSettingsView() { setViewTo(settingsViewController);}

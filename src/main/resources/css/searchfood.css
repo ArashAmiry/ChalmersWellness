@@ -1,0 +1,19 @@
+@font-face {
+    font-family: "Koulen";
+    src: url('../font/Koulen/Koulen-Regular.ttf');
+}
+
+.mealOfDay{
+    -fx-font-family: "Koulen";
+    -fx-font-size: 30px;
+}
+
+.searchButton{
+    -fx-font-family: Koulen;
+    -fx-font-size: 15px;
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, rgba(214, 214, 214, 0.45), #FFFFFF);
+    -fx-border-style: solid;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-border-color: rgba(214, 214, 214, 0.9);
+}

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="600.0" styleClass="box" stylesheets="@../css/fooditem.css" type="AnchorPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="foodName" layoutX="21.0" layoutY="7.0" prefHeight="38.0" prefWidth="423.0" styleClass="foodName" text="Food Name" />
+      <Label fx:id="calories" layoutX="21.0" layoutY="39.0" styleClass="calories" text="351 kcal" />
+      <ImageView fitHeight="79.0" fitWidth="35.0" layoutX="551.0" layoutY="18.0" onMouseClicked="#removeFoodItem" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/trashcan.png" />
+         </image>
+      </ImageView>
+   </children>
+</fx:root>

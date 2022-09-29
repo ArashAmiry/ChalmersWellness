@@ -1,0 +1,11 @@
+com\example\chalmerswellness\calorieAPI\FoodFacade.class
+com\example\chalmerswellness\ObjectModels\Workout.class
+com\example\chalmerswellness\UserNutritionTracker.class
+com\example\chalmerswellness\calorieAPI\Food.class
+com\example\chalmerswellness\Models\WorkoutModel.class
+com\example\chalmerswellness\calorieAPI\NutritionAPIConnector.class
+module-info.class
+com\example\chalmerswellness\ObjectModels\Exercise.class
+com\example\chalmerswellness\ChalmersWellnessApp.class
+com\example\chalmerswellness\calorieAPI\NutritionTypeAdapter.class
+com\example\chalmerswellness\MainView.class
