@@ -2,7 +2,7 @@ package com.example.chalmerswellness;
 
 import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.ObjectModels.Workout;
-import com.example.chalmerswellness.Services.DataService;
+//import com.example.chalmerswellness.Services.DataService;
 import com.example.chalmerswellness.calorieAPI.Food;
 import com.example.chalmerswellness.calorieAPI.FoodFacade;
 import com.example.chalmerswellness.calorieAPI.Meal;
@@ -20,7 +20,7 @@ public class ChalmersWellnessApp extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ChalmersWellnessApp.class.getResource("/fxml/MainView.fxml"));
 
-        Scene scene = new Scene(fxmlLoader.load(), 192, 108);
+        Scene scene = new Scene(fxmlLoader.load(), 1920, 1080);
         stage.setTitle("Chalmers Wellness");
         stage.setFullScreen(false);
         stage.setScene(scene);
