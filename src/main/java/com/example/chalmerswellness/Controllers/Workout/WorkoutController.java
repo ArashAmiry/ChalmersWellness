@@ -19,7 +19,7 @@ public class WorkoutController extends AnchorPane implements Initializable {
     @FXML public AnchorPane mainContent;
     CreateWorkoutController createWorkoutView;
     TodayWorkoutController todayWorkoutView;
-    ExerciseSearchController exerciseSearchControllerController;
+    ExerciseSearchController exerciseSearchController;
     ManageWorkoutController manageWorkoutView;
 
     public WorkoutController(){
@@ -31,16 +31,14 @@ public class WorkoutController extends AnchorPane implements Initializable {
         //TodayWorkoutView
         todayWorkoutView = new TodayWorkoutController(workoutModel);
 
-        //SearchView
-        exerciseSearchControllerController = new ExerciseSearchController(workoutModel);
+        //SearchPanel
+        exerciseSearchController = new ExerciseSearchController(workoutModel);
 
         //CreateWorkoutView
         createWorkoutView = new CreateWorkoutController(workoutModel);
 
         //ManageWorkoutView
         manageWorkoutView = new ManageWorkoutController(workoutModel);
-
-
 
         try {
             fxmlLoader.load();
@@ -52,20 +50,20 @@ public class WorkoutController extends AnchorPane implements Initializable {
     @Override
     public void initialize(URL arg0, ResourceBundle arg1){
         if(anchorPaneSearch.getChildren().isEmpty()) {
-            anchorPaneSearch.getChildren().add(exerciseSearchControllerController);
+            anchorPaneSearch.getChildren().add(exerciseSearchController);
         }
 
         openWorkoutTab();
     }
 
     @FXML void openWorkoutTab(){
-        exerciseSearchControllerController.setState(WorkoutStates.ACTIVEWORKOUT);
+        exerciseSearchController.setState(WorkoutStates.ACTIVEWORKOUT);
         setTabTo(todayWorkoutView);
         //todayWorkout.textProperty().set("Workout Tab");
     }
 
     @FXML void openCreateWorkoutTab(){
-        exerciseSearchControllerController.setState(WorkoutStates.CREATEWORKOUT);
+        exerciseSearchController.setState(WorkoutStates.CREATEWORKOUT);
         setTabTo(createWorkoutView);
     }
 

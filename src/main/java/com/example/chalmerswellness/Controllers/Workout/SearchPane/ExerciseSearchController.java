@@ -43,7 +43,7 @@ public class ExerciseSearchController extends AnchorPane implements Initializabl
         searchExercise();
     }
 
-    void updateSearchResult(List<Exercise> exercises){
+    private void updateSearchResult(List<Exercise> exercises){
         searchListView.getItems().clear();
         for (var exercise: exercises) {
             ExerciseSearchItemController exerciseController = new ExerciseSearchItemController(exercise, model, workoutState);

@@ -36,14 +36,20 @@ public class TodayWorkoutController extends AnchorPane implements Observer, Init
 
     private void updateExerciseList(List<Exercise> exercises){
         exerciseList.getItems().clear();
+
         for (var exercise: exercises) {
             exerciseList.getItems().add(new ExerciseItemController(exercise, model, this));
         }
-        isNoResult();
+
+        displayNoResult(isExerciseListEmpty());
     }
 
-    private void isNoResult(){
-        noResult.visibleProperty().set(exerciseList.getItems().size() <= 0);
+    private void displayNoResult(boolean isNoResult){
+        noResult.visibleProperty().set(isNoResult);
+    }
+
+    private boolean isExerciseListEmpty(){
+        return exerciseList.getItems().size() <= 0;
     }
 
     @Override

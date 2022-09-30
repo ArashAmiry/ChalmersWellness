@@ -2,6 +2,7 @@ package com.example.chalmerswellness.Controllers.Workout;
 
 import com.example.chalmerswellness.Controllers.Workout.TodaysWorkout.ExerciseItemController;
 import com.example.chalmerswellness.Services.DataService;
+import com.example.chalmerswellness.Controllers.Workout.SearchPane.ExerciseSearchItemController;
 import com.example.chalmerswellness.Models.WorkoutModel;
 import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.ObjectModels.Workout;
@@ -14,13 +15,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CreateWorkoutController extends AnchorPane implements Observer {
     private ObservableList<ExerciseItemController> exercisesList = FXCollections.observableArrayList();
-    private DataService dataService = new DataService();
     private WorkoutModel model;
     @FXML public ListView mainContent;
     @FXML TextField workoutNameField;
