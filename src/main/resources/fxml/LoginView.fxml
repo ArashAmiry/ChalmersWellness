@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<fx:root fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: white;" type="AnchorPane" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Text layoutX="801.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login">
+         <font>
+            <Font size="96.0" />
+         </font>
+      </Text>
+      <TextField fx:id="usernameTextField" layoutX="790.0" layoutY="348.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <Text layoutX="789.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Text>
+      <TextField fx:id="passwordTextField" layoutX="793.0" layoutY="449.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <Text layoutX="792.0" layoutY="436.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Text>
+      <Button layoutX="869.0" layoutY="518.0" mnemonicParsing="false" onMouseClicked="#login" text="Login">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Button>
+      <Button layoutX="831.0" layoutY="583.0" mnemonicParsing="false" onMouseClicked="#createNewAccount" prefHeight="45.0" prefWidth="157.0" text="Create new account" />
+   </children>
+</fx:root>

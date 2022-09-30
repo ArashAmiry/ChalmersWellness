@@ -8,74 +8,49 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1460.0" type="AnchorPane" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1460.0" stylesheets="@../css/nutrition.css" type="AnchorPane" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Text layoutX="351.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Calorie Intake Calculator">
          <font>
             <Font size="70.0" />
          </font>
       </Text>
-      <RadioButton fx:id="radioButtonMale" layoutX="386.0" layoutY="213.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="320.0" text="Male">
-         <font>
-            <Font size="40.0" />
-         </font>
-      </RadioButton>
-      <RadioButton fx:id="radioButtonFemale" layoutX="759.0" layoutY="212.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="320.0" text="Female">
-         <font>
-            <Font size="40.0" />
-         </font>
-      </RadioButton>
-      <TextField fx:id="ageTextField" layoutX="388.0" layoutY="333.0" prefHeight="61.0" prefWidth="220.0" promptText="Age">
-         <font>
-            <Font size="30.0" />
-         </font>
-      </TextField>
-      <TextField fx:id="weightTextField" layoutX="626.0" layoutY="333.0" prefHeight="61.0" prefWidth="220.0" promptText="Weight">
-         <font>
-            <Font size="30.0" />
-         </font>
-      </TextField>
-      <TextField fx:id="heightTextField" layoutX="863.0" layoutY="333.0" prefHeight="61.0" prefWidth="220.0" promptText="Height">
-         <font>
-            <Font size="30.0" />
-         </font>
-      </TextField>
-      <Text layoutX="388.0" layoutY="452.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Activity level">
+      <Text layoutX="385.0" layoutY="308.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Activity level">
          <font>
             <Font size="40.0" />
          </font>
       </Text>
-      <Button layoutX="629.0" layoutY="785.0" mnemonicParsing="false" onMouseClicked="#calculateCalorieIntake" prefHeight="80.0" prefWidth="227.0" text="Calculate">
+      <Button layoutX="613.0" layoutY="730.0" mnemonicParsing="false" onMouseClicked="#calculateCalorieIntake" prefHeight="80.0" prefWidth="227.0" text="Calculate">
          <font>
             <Font size="34.0" />
          </font>
       </Button>
-      <TextField fx:id="weightGoalTextField" layoutX="388.0" layoutY="581.0" prefHeight="61.0" prefWidth="220.0" promptText="Weight goal">
+      <TextField fx:id="weightGoalTextField" layoutX="385.0" layoutY="487.0" prefHeight="61.0" prefWidth="220.0" promptText="Weight goal">
          <font>
             <Font size="30.0" />
          </font>
       </TextField>
-      <Text layoutX="388.0" layoutY="565.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Weight goal">
+      <Text layoutX="387.0" layoutY="459.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Weight goal">
          <font>
             <Font size="40.0" />
          </font>
       </Text>
-      <Text layoutX="388.0" layoutY="692.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pace">
+      <Text layoutX="385.0" layoutY="614.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pace">
          <font>
             <Font size="40.0" />
          </font>
       </Text>
-      <RadioButton fx:id="radioButtonSlowPace" layoutX="388.0" layoutY="716.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="170.0" text="Slow">
+      <RadioButton fx:id="radioButtonSlowPace" layoutX="385.0" layoutY="638.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="170.0" text="Slow">
          <font>
             <Font size="30.0" />
          </font>
       </RadioButton>
-      <RadioButton fx:id="radioButtonMediumPace" layoutX="579.0" layoutY="716.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="196.0" text="Medium">
+      <RadioButton fx:id="radioButtonMediumPace" layoutX="576.0" layoutY="638.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="196.0" text="Medium">
          <font>
             <Font size="30.0" />
          </font>
       </RadioButton>
-      <RadioButton fx:id="radioButtonFastPace" layoutX="816.0" layoutY="713.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="240.0" text="Fast">
+      <RadioButton fx:id="radioButtonFastPace" layoutX="813.0" layoutY="635.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="240.0" text="Fast">
          <font>
             <Font size="30.0" />
          </font>
@@ -85,21 +60,6 @@
             <Font size="40.0" />
          </font>
       </Text>
-      <Text layoutX="388.0" layoutY="319.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Age">
-         <font>
-            <Font size="35.0" />
-         </font>
-      </Text>
-      <Text layoutX="626.0" layoutY="319.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Weight">
-         <font>
-            <Font size="35.0" />
-         </font>
-      </Text>
-      <Text layoutX="863.0" layoutY="319.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Height">
-         <font>
-            <Font size="35.0" />
-         </font>
-      </Text>
-      <ComboBox fx:id="activityComboBox" layoutX="388.0" layoutY="473.0" prefHeight="40.0" prefWidth="302.0" />
+      <ComboBox fx:id="activityComboBox" layoutX="388.0" layoutY="344.0" prefHeight="40.0" prefWidth="302.0" />
    </children>
 </fx:root>
