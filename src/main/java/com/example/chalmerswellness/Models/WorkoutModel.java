@@ -28,7 +28,8 @@ public class WorkoutModel implements Observable {
     }
 
     public List<Workout> getSavedWorkouts(){
-        return workoutService.getWorkouts();
+        return null;
+        //return workoutService.getWorkouts();
     }
 
     public List<Exercise> getAddedExercises() {
@@ -103,7 +104,8 @@ public class WorkoutModel implements Observable {
     }
 
     public void addWorkout(Workout workout){
-        workoutService.insertWorkout(workout);
+        //TODO remove comment
+        //workoutService.insertWorkout(workout);
         //notifyObservers();
     }
 

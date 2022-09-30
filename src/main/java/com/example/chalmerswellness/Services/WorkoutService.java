@@ -34,7 +34,7 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
     }
 
     public Exercise insertCompletedExercise(Exercise exercise){
-        String sql = "INSERT INTO addedExercises VALUES(?,?,?)";
+        String sql = "INSERT INTO completed_exercise VALUES(?,?,?)";
         String date = LocalDate.now().toString();
         int generatedKey = 0;
 
@@ -58,7 +58,7 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
     public List<Exercise> getTodayAddedExercises() {
         String todayDate = LocalDate.now().toString();
 
-        String sql = "SELECT id, exerciseId FROM addedExercises WHERE date = ?";
+        String sql = "SELECT id, exerciseId FROM completed_exercise WHERE date = ?";
         List<Exercise> exercises = new ArrayList<>();
 
         try (Connection conn = DatabaseConnector.connect();
@@ -80,7 +80,7 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
 
 
     public void removeAddedExercise(Exercise exercise) {
-        String sql = "DELETE FROM addedExercises WHERE id = ?";
+        String sql = "DELETE FROM completed_exercise WHERE id = ?";
         removeSets(exercise.getId());
 
         try (Connection conn = DatabaseConnector.connect();
@@ -93,7 +93,7 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
     }
 
     public void insertExerciseSet(ExerciseItemSet set) {
-        String sql = "INSERT INTO ExerciseSets VALUES(?,?,?,?)";
+        String sql = "INSERT INTO completed_set VALUES(?,?,?,?)";
 
         try (Connection conn = DatabaseConnector.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -130,7 +130,7 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
     }
 
     public void removeSet(int setId) {
-        String sql = "DELETE FROM ExerciseSets WHERE id = ?";
+        String sql = "DELETE FROM completed_set WHERE id = ?";
 
         try (Connection conn = DatabaseConnector.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -143,7 +143,7 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
     }
 
     public List<ExerciseItemSet> getExerciseSets(int exerciseItemId) {
-        String sql = "SELECT id,exerciseItemId, weight, reps FROM ExerciseSets WHERE exerciseItemId = ?";
+        String sql = "SELECT id,exerciseItemId, weight, reps FROM completed_set WHERE exerciseItemId = ?";
         List<ExerciseItemSet> sets = new ArrayList<>();
 
         try (Connection conn = DatabaseConnector.connect();
@@ -168,7 +168,7 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
 
 
     public List<Exercise> getMyExercises() {
-        String sql = "SELECT * FROM MyExercises";
+        String sql = "SELECT * FROM exercise";
         List<Exercise> exercises = new ArrayList<>();
 
         try (Connection conn = DatabaseConnector.connect();
@@ -195,7 +195,7 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
     }
 
     private static Exercise getMyExercise(int id) throws SQLException {
-        String sql = "SELECT * FROM MyExercises WHERE id = ?";
+        String sql = "SELECT * FROM exercise WHERE id = ?";
 
         try (Connection conn = DatabaseConnector.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -231,7 +231,7 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
     }
 
     public static void removeSets(int exerciseId){
-        String sql = "DELETE FROM ExerciseSets WHERE exerciseItemId = ?";
+        String sql = "DELETE FROM completed_set WHERE exerciseItemId = ?";
 
         try (Connection conn = DatabaseConnector.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -244,7 +244,7 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
     }
 
     public void insertSets(int exerciseId, List<ExerciseItemSet> sets){
-        String sql = "INSERT INTO ExerciseSets VALUES(?,?,?,?)";
+        String sql = "INSERT INTO completed_set VALUES(?,?,?,?)";
         removeSets(exerciseId);
 
         try (Connection conn = DatabaseConnector.connect();
@@ -262,7 +262,7 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
     }
 
     public void insertMyExercises(List<Exercise> exercises) {
-        String sql = "INSERT INTO MyExercises(exerciseName, exerciseType, exerciseMuscle, exerciseEquipment, exerciseDifficulty, exerciseInstructions) VALUES(?,?,?,?,?,?)";
+        String sql = "INSERT INTO exercise(exerciseName, exerciseType, exerciseMuscle, exerciseEquipment, exerciseDifficulty, exerciseInstructions) VALUES(?,?,?,?,?,?)";
 
         try (Connection conn = DatabaseConnector.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -282,8 +282,8 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
         }
     }
 
-    public List<Workout> getWorkouts(){
-        String sql = "SELECT * FROM workouts";
+/*    public List<Workout> getWorkouts(){
+        String sql = "SELECT * FROM created_workout";
         List<Workout> workouts = new ArrayList<>();
 
         try (Connection conn = DatabaseConnector.connect();
@@ -303,10 +303,10 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
         }
 
         return workouts;
-    }
+    }*/
 
     public List<Exercise> getWorkoutExercises(int workoutId) throws SQLException {
-        String sql = "SELECT id, exerciseName, exerciseType, exerciseMuscle, exerciseEquipment, exerciseDifficulty, exerciseInstructions, workoutId FROM exercises WHERE workoutId = ?";
+        String sql = "SELECT id, exerciseName, exerciseType, exerciseMuscle, exerciseEquipment, exerciseDifficulty, exerciseInstructions, workoutId FROM workout_exercise WHERE workoutId = ?";
 
         List<Exercise> exercises = new ArrayList<>();
         try (Connection conn = DatabaseConnector.connect();
@@ -332,8 +332,8 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
     }
 
 
-    public void insertWorkout(Workout workout) {
-        String sql = "INSERT INTO workouts(workoutName) VALUES(?)";
+/*    public void insertWorkout(Workout workout) {
+        String sql = "INSERT INTO created_workout(workoutName) VALUES(?)";
 
         try (Connection conn = DatabaseConnector.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -351,10 +351,10 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-    }
+    }*/
 
     private void insertWorkoutExercises(List<Exercise> exercises, int id) {
-        String sql = "INSERT INTO exercises(exerciseName, exerciseType, exerciseMuscle, exerciseEquipment, exerciseDifficulty, exerciseInstructions, workoutId) VALUES(?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO workout_exercise(exerciseName, exerciseType, exerciseMuscle, exerciseEquipment, exerciseDifficulty, exerciseInstructions, workoutId) VALUES(?,?,?,?,?,?,?)";
         try (Connection conn = DatabaseConnector.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -374,8 +374,8 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
         }
     }
 
-    public void removeWorkout(int workoutId) {
-        String sql = "DELETE FROM workouts WHERE id = ?";
+    /*public void removeWorkout(int workoutId) {
+        String sql = "DELETE FROM created_workout WHERE id = ?";
 
         try (Connection conn = DatabaseConnector.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -387,10 +387,10 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-    }
+    }*/
 
     private void removeExercises(int workoutId) {
-        String sql = "DELETE FROM exercises WHERE workoutId = ?";
+        String sql = "DELETE FROM workout_exercise WHERE workoutId = ?";
 
         try (Connection conn = DatabaseConnector.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {

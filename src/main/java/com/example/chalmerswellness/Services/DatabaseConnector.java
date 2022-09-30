@@ -11,6 +11,10 @@ import java.util.*;
 public class DatabaseConnector {
     private static String dbPath = "src/main/resources/ChalmersWellness.db";
 
+    public DatabaseConnector(){
+
+    }
+
     static Connection connect() {
         String url = "jdbc:sqlite:" + dbPath;
         Connection conn = null;
@@ -168,8 +172,8 @@ public class DatabaseConnector {
         }
     }
 
-    private void createMyExercisesTable() {
-        String sql = "CREATE TABLE IF NOT EXISTS MyExercises (\n"
+    private void createExerciseTable() {
+        String sql = "CREATE TABLE IF NOT EXISTS exercise (\n"
                 + "	id INTEGER PRIMARY KEY,\n"
                 + "	exerciseName text NOT NULL,\n"
                 + "	exerciseType text NOT NULL,\n"
