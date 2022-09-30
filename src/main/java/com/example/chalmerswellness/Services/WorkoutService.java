@@ -39,9 +39,9 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
 
         try (Connection conn = DatabaseConnector.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(2, exercise.getId());
-            pstmt.setString(3, date);
-            pstmt.executeUpdate();
+                pstmt.setInt(2, exercise.getId());
+                pstmt.setString(3, date);
+                pstmt.executeUpdate();
 
             ResultSet rs = pstmt.getGeneratedKeys();
             if (rs.next()) {
@@ -54,10 +54,10 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
         return new Exercise(generatedKey, exercise);
     }
 
-    public List<Exercise> getTodayAddedExercises() {
+    public List<Exercise> getCompletedExercises() {
         String todayDate = LocalDate.now().toString();
 
-        String sql = "SELECT id, exerciseId FROM completed_exercise WHERE date = ?";
+        String sql = "SELECT * FROM completed_exercise WHERE date = ?";
         List<Exercise> exercises = new ArrayList<>();
 
         try (Connection conn = DatabaseConnector.connect();
@@ -67,7 +67,7 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
 
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                var exerciseId = rs.getInt("exerciseId");
+                var exerciseId = rs.getInt("id");
                 Exercise exercise = getMyExercise(exerciseId);
                 exercises.add(exercise);
             }
@@ -80,6 +80,7 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
 
     public void removeCompletedExercise(Exercise exercise) {
         String sql = "DELETE FROM completed_exercise WHERE id = ?";
+
         //removeCompletedSets(exercise.getId());
 
         try (Connection conn = DatabaseConnector.connect();
@@ -108,7 +109,7 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
     public List<Exercise> getTodayExerciseItems() {
         String todayDate = LocalDate.now().toString();
 
-        String sql = "SELECT id, exerciseId FROM exerciseItems WHERE date = ?";
+        String sql = "SELECT * FROM exerciseItems WHERE date = ?";
         List<Exercise> exercises = new ArrayList<>();
 
         try (Connection conn = DatabaseConnector.connect();
@@ -141,8 +142,8 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
         }
     }
 
-    public List<ExerciseItemSet> getExerciseSets(int exerciseItemId) {
-        String sql = "SELECT id,exerciseItemId, weight, reps FROM completed_set WHERE exerciseItemId = ?";
+    public List<ExerciseItemSet> getCompletedSets(int exerciseItemId) {
+        String sql = "SELECT * FROM completed_set WHERE completed_exercise_id = ?";
         List<ExerciseItemSet> sets = new ArrayList<>();
 
         try (Connection conn = DatabaseConnector.connect();
@@ -230,7 +231,7 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
     }
 
     public static void removeCompletedSets(int exerciseId){
-        String sql = "DELETE FROM completed_set WHERE exerciseItemId = ?";
+        String sql = "DELETE FROM completed_set WHERE completed_exercise_id = ?";
 
         try (Connection conn = DatabaseConnector.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {

@@ -23,6 +23,7 @@ public class DatabaseConnector {
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url);
+            conn.createStatement().execute("PRAGMA foreign_keys = ON");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -121,7 +122,7 @@ public class DatabaseConnector {
     private void createCompletedSetTable() {
         String sql = "CREATE TABLE IF NOT EXISTS completed_set (\n"
                 + "	id INTEGER PRIMARY KEY,\n"
-                + "	completed_exercise_id INTEGER NOT NULL,\n"
+                + "	completed_exercise_id INTEGER,\n"
                 + "	weight DOUBLE NOT NULL,\n"
                 + "	reps INTEGER NOT NULL,\n"
                 + " FOREIGN KEY ('completed_exercise_id') REFERENCES 'completed_exercise' ('id')\n"

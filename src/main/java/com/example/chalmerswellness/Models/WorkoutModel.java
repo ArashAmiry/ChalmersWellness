@@ -85,7 +85,7 @@ public class WorkoutModel implements Observable {
     }
 
     public List<ExerciseItemSet> getSets(int exerciseItemId){
-        sets = workoutService.getExerciseSets(exerciseItemId);
+        sets = workoutService.getCompletedSets(exerciseItemId);
         return sets;
     }
 
@@ -94,7 +94,7 @@ public class WorkoutModel implements Observable {
     }
 
     public List<Exercise> getTodayExerciseItems(){
-        return workoutService.getTodayAddedExercises();
+        return workoutService.getCompletedExercises();
     }
     public void removeExercise(Exercise exercise){
         workoutService.removeCompletedExercise(exercise);
