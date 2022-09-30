@@ -39,12 +39,14 @@ public class WorkoutModel implements Observable {
     }
     public void addExercise(Exercise exercise, WorkoutStates workoutState){
         //DOES IT STORE IN SAME db?
-        var exerciseItem = workoutService.insertExerciseItem(exercise);
+        Exercise exerciseItem;
 
         //TODO ENUM STATES
         if(workoutState.equals(WorkoutStates.ACTIVEWORKOUT)){
+            exerciseItem = workoutService.insertCompletedExercise(exercise);
             addedExercises.add(exerciseItem);
         } else if(workoutState.equals(WorkoutStates.CREATEWORKOUT)){
+            exerciseItem = workoutService.insertExerciseItem(exercise);
             addedWorkoutExercises.add(exerciseItem);
         }
 
