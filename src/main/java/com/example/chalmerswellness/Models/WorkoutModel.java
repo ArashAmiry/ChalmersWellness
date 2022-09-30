@@ -110,6 +110,13 @@ public class WorkoutModel implements Observable {
         notifyObservers();
     }
 
+    public void addExercisesFromWorkout(Workout workout){
+        for (var exercise: workout.getExercises()) {
+            addedExercises.add(exercise);
+        }
+        notifyObservers();
+    }
+
     public void removeAllExercises(){
         addedExercises.clear();
         notifyObservers();
