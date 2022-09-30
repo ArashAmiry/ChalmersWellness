@@ -1,5 +1,6 @@
 com\example\chalmerswellness\CalorieIntakeCalculatorController.class
 com\example\chalmerswellness\ObjectModels\ExerciseItemSet.class
+com\example\chalmerswellness\Controllers\Friends\FriendsViewController.class
 com\example\chalmerswellness\Controllers\Workout\WorkoutStates.class
 com\example\chalmerswellness\Controllers\Workout\States\ActiveWorkoutState.class
 com\example\chalmerswellness\Controllers\Settings\SettingsViewController.class
@@ -39,5 +40,6 @@ com\example\chalmerswellness\Interfaces\Observer.class
 com\example\chalmerswellness\Services\IWorkoutDatabaseHandler.class
 com\example\chalmerswellness\Services\WorkoutService.class
 com\example\chalmerswellness\CalorieCalculator.class
+com\example\chalmerswellness\Controllers\Friends\FriendsItemController.class
 com\example\chalmerswellness\Controllers\Workout\TodaysWorkout\ExerciseItemController.class
 com\example\chalmerswellness\MainView.class

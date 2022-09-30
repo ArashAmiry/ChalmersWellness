@@ -12,10 +12,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 
-public class FriendsViewController extends AnchorPane {
+public class FriendsViewController extends AnchorPane{
 
     @FXML
-    VBox test;
+    VBox friendList;
 
     /*@FXML
     TextField search;*/
@@ -31,18 +31,12 @@ public class FriendsViewController extends AnchorPane {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
+
     }
 
-
- /*   @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
-
-
-    }*/
-
-    /*@FXML
+    @FXML
     public void initialize(){
+        friendList.getChildren().clear();
         friendList.getChildren().add(new FriendsItemController());
-    }*/
+    }
 }

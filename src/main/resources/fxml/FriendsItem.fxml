@@ -6,14 +6,14 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="130.0" prefWidth="687.0" styleClass="rootpane" stylesheets="@../css/friendsItem.css" type="AnchorPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="687.0" styleClass="rootpane" stylesheets="@../css/friendsItem.css" type="AnchorPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fitHeight="107.0" fitWidth="121.0" layoutX="23.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="107.0" fitWidth="121.0" layoutX="24.0" layoutY="-7.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/memoji2.png" />
          </image>
       </ImageView>
-      <Label layoutX="156.0" layoutY="39.0" prefHeight="54.0" prefWidth="279.0" styleClass="friendName" text="Gustav TvärKlen" />
-      <Button layoutX="502.0" layoutY="46.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="160.0" styleClass="followButton" text="Follow" />
+      <Label layoutX="156.0" layoutY="23.0" prefHeight="54.0" prefWidth="279.0" styleClass="friendName" text="Gustav BERNZSTEN" AnchorPane.topAnchor="27.0" />
+      <Button layoutX="500.0" layoutY="42.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="160.0" styleClass="followButton" text="Follow" AnchorPane.topAnchor="37.0" />
    </children>
 </fx:root>

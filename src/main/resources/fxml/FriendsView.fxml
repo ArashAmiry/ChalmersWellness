@@ -10,6 +10,6 @@
    <children>
       <TextField layoutX="383.0" layoutY="103.0" prefHeight="53.0" prefWidth="687.0" promptText="Search for friends..." AnchorPane.leftAnchor="383.0" />
       <Button layoutX="1080.0" layoutY="104.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="93.0" styleClass="searchFriendsButton" />
-      <VBox fx:id="test" layoutX="379.0" layoutY="208.0" prefHeight="810.0" prefWidth="687.0" AnchorPane.leftAnchor="383.0" />
+      <VBox fx:id="friendList" layoutX="379.0" layoutY="208.0" prefHeight="810.0" prefWidth="687.0" AnchorPane.leftAnchor="383.0" />
    </children>
 </fx:root>
