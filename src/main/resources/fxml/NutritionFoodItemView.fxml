@@ -12,159 +12,157 @@
 
 <fx:root prefHeight="1080.0" prefWidth="1460.0" style="-fx-background-color: rgbA(0,0,0,0.8);" stylesheets="@../css/searchfood.css" type="AnchorPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane fx:id="rootPane" layoutX="380.0" layoutY="116.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" style="-fx-background-color: white;" stylesheets="@../css/nutrition.css">
+      <AnchorPane fx:id="rootPane" layoutX="380.0" layoutY="116.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" style="-fx-background-color: white;" stylesheets="@../css/nutrition.css" AnchorPane.leftAnchor="353.0" AnchorPane.topAnchor="100.0">
          <children>
-            <Text layoutX="79.0" layoutY="563.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nutrition Facts">
+            <Text layoutX="79.0" layoutY="563.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="nutritionFact" text="Nutrition Facts">
                <font>
                   <Font size="30.0" />
                </font>
             </Text>
-            <Circle fill="WHITE" layoutX="341.0" layoutY="275.0" radius="150.0" stroke="BLACK" strokeType="INSIDE" />
-            <Text fx:id="foodItemText" layoutX="247.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="circleText" text="Food Name" textAlignment="CENTER" wrappingWidth="194.150390625">
+            <Circle fill="WHITE" layoutX="341.0" layoutY="275.0" radius="150.0" stroke="BLACK" strokeType="INSIDE" styleClass="foodGramCircle" />
+            <Text fx:id="foodItemText" layoutX="249.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="circleText" text="Food Name" textAlignment="CENTER" wrappingWidth="194.150390625">
                <font>
                   <Font size="35.0" />
                </font>
             </Text>
-            <TextField fx:id="foodItemGrams" layoutX="271.0" layoutY="293.0" />
-            <Button id="addFoodButton" fx:id="addFoodButton" layoutX="196.0" layoutY="444.0" mnemonicParsing="false" onMouseClicked="#addFoodEaten" prefHeight="60.0" prefWidth="300.0" text="Add food" />
-            <Text layoutX="78.0" layoutY="644.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Calories">
+            <TextField fx:id="foodItemGrams" layoutX="260.0" layoutY="280.0" prefHeight="25.0" prefWidth="114.0" styleClass="amountGram" />
+            <Button fx:id="addFoodButton" layoutX="196.0" layoutY="444.0" mnemonicParsing="false" onMouseClicked="#addFoodEaten" prefHeight="60.0" prefWidth="300.0" styleClass="addFoodButton" text="Add food" />
+            <Text layoutX="78.0" layoutY="644.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="nutritionFact" text="Calories">
                <font>
                   <Font size="22.0" />
                </font>
             </Text>
-            <Text layoutX="79.0" layoutY="663.0" strokeType="OUTSIDE" strokeWidth="0.0" text="per serving">
+            <Text layoutX="79.0" layoutY="663.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="nutritionFact" text="per serving">
                <font>
                   <Font size="13.0" />
                </font>
             </Text>
-            <Text fx:id="caloriesPerServing" layoutX="218.0" layoutY="657.0" strokeType="OUTSIDE" strokeWidth="0.0" text="999" textAlignment="CENTER" wrappingWidth="57.1435546875">
+            <Text fx:id="caloriesPerServing" layoutX="218.0" layoutY="657.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="nutritionFact" text="999" textAlignment="CENTER" wrappingWidth="57.1435546875">
                <font>
                   <Font size="19.0" />
                </font>
             </Text>
-            <Text layoutX="80.0" layoutY="602.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Serving size">
+            <Text layoutX="80.0" layoutY="602.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="nutritionFact" text="Serving size">
                <font>
                   <Font size="19.0" />
                </font>
             </Text>
-            <Text fx:id="servingSizeGrams" layoutX="188.0" layoutY="602.0" strokeType="OUTSIDE" strokeWidth="0.0" text="100g">
+            <Text fx:id="servingSizeGrams" layoutX="188.0" layoutY="602.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="nutritionFact" text="100g">
                <font>
                   <Font size="19.0" />
                </font>
             </Text>
             <Line endX="91.0" layoutX="179.0" layoutY="571.0" startX="-100.0" />
-            <Text layoutX="299.0" layoutY="552.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amount/serving">
+            <Text layoutX="299.0" layoutY="552.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="nutritionFact" text="Amount/serving">
                <font>
                   <Font size="13.0" />
                </font>
             </Text>
             <Line endX="2.833333969116211" endY="-76.0" layoutX="62.0" layoutY="611.0" startX="2.833333969116211" startY="66.0" />
-            <Line endX="469.33331298828125" endY="-0.5" layoutX="167.0" layoutY="535.0" startX="-101.66667175292969" startY="-0.5" />
             <Line endX="2.833333969116211" endY="-76.0" layoutX="634.0" layoutY="611.0" startX="2.833333969116211" startY="66.0" />
             <Line endX="469.33331298828125" endY="-0.5" layoutX="167.0" layoutY="678.0" startX="-102.16667175292969" startY="-0.5" />
             <Line endX="51.5" layoutX="390.0" layoutY="559.0" scaleY="3.0" startX="-90.5" />
-            <Line endX="-0.5" endY="104.0" layoutX="285.0" layoutY="573.0" startX="-0.5" startY="-38.0" />
-            <Text layoutX="299.0" layoutY="578.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Fat">
+            <Text layoutX="299.0" layoutY="578.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="nutritionFact" text="Total Fat">
                <font>
                   <Font size="15.0" />
                </font>
             </Text>
-            <Text fx:id="totalFatGrams" layoutX="361.0" layoutY="578.0" strokeType="OUTSIDE" strokeWidth="0.0" text="99g">
+            <Text fx:id="totalFatGrams" layoutX="361.0" layoutY="578.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="nutritionFact" text="99g">
                <font>
                   <Font size="15.0" />
                </font>
             </Text>
             <Line endX="40.0" layoutX="400.0" layoutY="583.0" startX="-100.0" />
-            <Text layoutX="309.0" layoutY="599.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Saturated Fat">
+            <Text layoutX="309.0" layoutY="599.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="nutritionFact" text="Saturated Fat">
                <font>
                   <Font size="14.0" />
                </font>
             </Text>
-            <Text fx:id="saturatedFatGrams" layoutX="396.0" layoutY="599.0" strokeType="OUTSIDE" strokeWidth="0.0" text="99g">
+            <Text fx:id="saturatedFatGrams" layoutX="396.0" layoutY="599.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="nutritionFact" text="99g">
                <font>
                   <Font size="14.0" />
                </font>
             </Text>
             <Line endX="40.0" layoutX="400.0" layoutY="604.0" startX="-100.0" />
-            <Text layoutX="299.0" layoutY="621.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cholesterol">
+            <Text layoutX="299.0" layoutY="621.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="nutritionFact" text="Cholesterol">
                <font>
                   <Font size="15.0" />
                </font>
             </Text>
             <Line endX="40.0" layoutX="400.0" layoutY="626.0" startX="-100.0" />
-            <Text layoutX="300.0" layoutY="642.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sodium">
+            <Text layoutX="300.0" layoutY="642.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="nutritionFact" text="Sodium">
                <font>
                   <Font size="15.0" />
                </font>
             </Text>
-            <Text layoutX="300.0" layoutY="664.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Potassium">
+            <Text layoutX="300.0" layoutY="664.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="nutritionFact" text="Potassium">
                <font>
                   <Font size="15.0" />
                </font>
             </Text>
             <Line endX="40.0" layoutX="400.0" layoutY="647.0" startX="-100.0" />
-            <Text fx:id="cholesterolMilligrams" layoutX="379.0" layoutY="621.0" strokeType="OUTSIDE" strokeWidth="0.0" text="99g">
+            <Text fx:id="cholesterolMilligrams" layoutX="379.0" layoutY="621.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="nutritionFact" text="99g">
                <font>
                   <Font size="15.0" />
                </font>
             </Text>
-            <Text fx:id="sodiumMilligrams" layoutX="355.0" layoutY="642.0" strokeType="OUTSIDE" strokeWidth="0.0" text="99g">
+            <Text fx:id="sodiumMilligrams" layoutX="355.0" layoutY="642.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="nutritionFact" text="99g">
                <font>
                   <Font size="15.0" />
                </font>
             </Text>
-            <Text fx:id="potassiumMilligrams" layoutX="370.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="99g">
+            <Text fx:id="potassiumMilligrams" layoutX="370.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="nutritionFact" text="99g">
                <font>
                   <Font size="15.0" />
                </font>
             </Text>
             <Line endX="51.5" layoutX="391.0" layoutY="671.0" scaleY="3.0" startX="-90.5" />
-            <Text layoutX="462.0" layoutY="552.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amount/serving">
+            <Text layoutX="462.0" layoutY="552.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="nutritionFact" text="Amount/serving">
                <font>
                   <Font size="13.0" />
                </font>
             </Text>
             <Line endX="69.0" layoutX="553.0" layoutY="559.0" scaleY="3.0" startX="-90.5" />
-            <Text layoutX="462.0" layoutY="578.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Carbohydrate">
+            <Text layoutX="462.0" layoutY="578.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="nutritionFact" text="Total Carbohydrate">
                <font>
                   <Font size="15.0" />
                </font>
             </Text>
-            <Text fx:id="totalCarbohydrateGrams" layoutX="593.0" layoutY="578.0" strokeType="OUTSIDE" strokeWidth="0.0" text="99g">
+            <Text fx:id="totalCarbohydrateGrams" layoutX="593.0" layoutY="578.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="nutritionFact" text="99g">
                <font>
                   <Font size="15.0" />
                </font>
             </Text>
             <Line endX="58.5" layoutX="563.0" layoutY="583.0" startX="-100.0" />
-            <Text layoutX="472.0" layoutY="599.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dietary Fiber">
+            <Text layoutX="472.0" layoutY="599.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="nutritionFact" text="Dietary Fiber">
                <font>
                   <Font size="14.0" />
                </font>
             </Text>
-            <Text fx:id="dietaryFiberGrams" layoutX="557.0" layoutY="599.0" strokeType="OUTSIDE" strokeWidth="0.0" text="99g">
+            <Text fx:id="dietaryFiberGrams" layoutX="557.0" layoutY="599.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="nutritionFact" text="99g">
                <font>
                   <Font size="14.0" />
                </font>
             </Text>
             <Line endX="58.5" layoutX="563.0" layoutY="604.0" startX="-100.0" />
-            <Text layoutX="462.0" layoutY="621.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Sugars">
+            <Text layoutX="462.0" layoutY="621.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="nutritionFact" text="Total Sugars">
                <font>
                   <Font size="15.0" />
                </font>
             </Text>
             <Line endX="58.5" layoutX="563.0" layoutY="626.0" startX="-100.0" />
-            <Text layoutX="463.0" layoutY="642.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Protein">
+            <Text layoutX="463.0" layoutY="642.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="nutritionFact" text="Protein">
                <font>
                   <Font size="15.0" />
                </font>
             </Text>
             <Line endX="58.5" layoutX="563.0" layoutY="647.0" startX="-100.0" />
-            <Text fx:id="totalSugarsGrams" layoutX="550.0" layoutY="621.0" strokeType="OUTSIDE" strokeWidth="0.0" text="99g">
+            <Text fx:id="totalSugarsGrams" layoutX="550.0" layoutY="621.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="nutritionFact" text="99g">
                <font>
                   <Font size="15.0" />
                </font>
             </Text>
-            <Text fx:id="totalProteinGrams" layoutX="518.0" layoutY="642.0" strokeType="OUTSIDE" strokeWidth="0.0" text="99g">
+            <Text fx:id="totalProteinGrams" layoutX="518.0" layoutY="642.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="nutritionFact" text="99g">
                <font>
                   <Font size="15.0" />
                </font>
@@ -175,6 +173,11 @@
                   <Image url="@../img/closebutton.png" />
                </image>
             </ImageView>
+            <Text fx:id="foodItemText1" layoutX="353.0" layoutY="310.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="circleText" text="gram" textAlignment="CENTER" wrappingWidth="141.0">
+               <font>
+                  <Font size="35.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
    </children>
