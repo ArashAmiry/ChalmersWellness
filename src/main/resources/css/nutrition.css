@@ -1,15 +1,40 @@
 @font-face {
-    font-family: "Poppins";
-    src: url('../font/Poppins/Poppins-Medium.ttf');
+    font-family: "Koulen";
+    src: url('../font/Koulen/Koulen-Regular.ttf');
 }
 
 
-#addFoodButton {
-    -fx-background-radius: 50;
-    -fx-background-color: #E0E0E0;
+.addFoodButton {
+    -fx-border-radius: 100px;
+    -fx-background-radius: 100px;
+    -fx-text-fill: #5d5d5d;
+    -fx-font-family: Koulen;
+    -fx-font-size: 25px;
+    -fx-alignment: center;
+    -fx-background-color: linear-gradient(to top left, #f1f1f1, #ffffff);
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 10, 0, 0, 0);
+    -fx-background-image: url(../img/addIcon.png);
+    -fx-background-size: 30px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 90%;
 }
 
 .circleText {
-    -fx-font-family: Poppins;
+    -fx-font-family: Koulen;
     -fx-font-size: 35;
+}
+
+.foodGramCircle{
+    -fx-fill: linear-gradient(to top left, #f1f1f1, #ffffff);
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 15, 0, 0, 0);
+    -fx-stroke: none;
+}
+
+.amountGram{
+    -fx-font-family: Koulen;
+    -fx-font-size: 15px;
+}
+
+.nutritionFact{
+    -fx-font-family: Koulen;
 }
