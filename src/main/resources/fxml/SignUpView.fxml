@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -95,5 +96,15 @@
             <Font size="25.0" />
          </font>
       </Text>
+      <RadioButton fx:id="maleRadioButton" layoutX="642.0" layoutY="215.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="249.0" text="Male">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </RadioButton>
+      <RadioButton fx:id="femaleRadioButton" layoutX="916.0" layoutY="215.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="249.0" text="Female">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </RadioButton>
    </children>
 </fx:root>

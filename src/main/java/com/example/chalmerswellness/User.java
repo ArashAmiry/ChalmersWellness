@@ -7,16 +7,19 @@ public class User {
     private String username;
     private String firstName;
     private String lastName;
+    private Gender gender;
     private String email;
     private int height;
     private LocalDate birthDate;
     private double weight;
+    private int calorieGoal;
     private double weightGoal;
 
-    public User(String username, String firstName, String lastName, String email, int height, LocalDate birthDate, double weight) {
+    public User(String username, String firstName, String lastName, Gender gender, String email, int height, LocalDate birthDate, double weight) {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.gender = gender;
         this.email = email;
         this.height = height;
         this.birthDate = birthDate;
@@ -66,6 +69,14 @@ public class User {
 
     public LocalDate getBirthDate() {
         return birthDate;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public int getAge() {
+        return LocalDate.now().getYear() - birthDate.getYear();
     }
 
 }

@@ -209,10 +209,12 @@ public class DatabaseConnector {
                 + " password text,\n"
                 + " firstName text,\n"
                 + " lastName text,\n"
+                + " gender text,\n"
                 + " email text,\n"
                 + " birthDate date,\n"
                 + " height integer,\n"
                 + " weight double,\n"
+                + " calorieGoal integer,\n"
                 + " weightGoal double\n"
                 + ");";
         try (Connection conn = connect();

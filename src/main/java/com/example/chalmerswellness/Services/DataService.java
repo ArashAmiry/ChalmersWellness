@@ -13,8 +13,6 @@ public class DataService {
     private final String dbPath = "src/main/resources/ChalmersWellness.db";
 
     public DataService() {
-        createUsersTable();
-        createNutritionTable();
     }
 
     private static Connection connect(String dbPath) {
@@ -145,15 +143,16 @@ public class DataService {
     }
 
     public void insertUser(User user, String password) {
-        String sql = "INSERT INTO users (username, password, firstName, lastName, email, birthDate, height, weight) VALUES(?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO users (username, password, firstName, lastName, gender, email, birthDate, height, weight) VALUES(?,?,?,?,?,?,?,?,?)";
         try (Connection conn = connect(dbPath);
              PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
             preparedStatement.setString(1, user.getUsername());
             preparedStatement.setString(2, password);
             preparedStatement.setString(3, user.getFirstName());
             preparedStatement.setString(4, user.getLastName());
-            preparedStatement.setString(5, user.getEmail());
-            preparedStatement.setDate(6, Date.valueOf(user.getBirthDate()));
+            preparedStatement.setString(5, String.valueOf(user.getGender()));
+            preparedStatement.setString(6, user.getEmail());
+            preparedStatement.setDate(7, Date.valueOf(user.getBirthDate()));
             preparedStatement.setInt(7, user.getHeight());
             preparedStatement.setDouble(8, user.getWeight());
             preparedStatement.executeUpdate();
@@ -179,9 +178,6 @@ public class DataService {
             }
             return user;
         }
-
-
-
 
     public boolean loginUser(String username, String password) {
         String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
@@ -228,6 +224,18 @@ public class DataService {
             System.out.println(e.getMessage());
         }
         return false;
+    }
+
+    public void setCalorieGoal(int userId, double calorieGoal) {
+        String sql = "UPDATE users SET calorieGoal = ? WHERE id = ?";
+        try (Connection conn = connect(dbPath);
+             PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+            preparedStatement.setDouble(1, calorieGoal);
+            preparedStatement.setInt(2, userId);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public boolean checkIfUsersExist() {

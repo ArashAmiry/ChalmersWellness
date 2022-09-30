@@ -4,8 +4,7 @@ import com.example.chalmerswellness.Services.DataService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
@@ -31,8 +30,13 @@ public class SignUpController extends AnchorPane implements Initializable {
     TextField weightTextField;
     @FXML
     DatePicker birthDatePicker;
+    @FXML
+    RadioButton maleRadioButton;
+    @FXML
+    RadioButton femaleRadioButton;
     @FXML AnchorPane parentPane;
     @FXML AnchorPane navigationPane;
+    ToggleGroup genderToggleGroup = new ToggleGroup();
     DataService dataService = new DataService();
 
 
@@ -54,13 +58,17 @@ public class SignUpController extends AnchorPane implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        maleRadioButton.setToggleGroup(genderToggleGroup);
+        femaleRadioButton.setToggleGroup(genderToggleGroup);
+        maleRadioButton.setUserData(Gender.Male);
+        femaleRadioButton.setUserData(Gender.Female);
     }
 
     @FXML
     void signUp(MouseEvent event) {
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
+        Gender gender = (Gender) genderToggleGroup.getSelectedToggle().getUserData();
         String email = emailTextField.getText();
         String firstName = firstNameTextField.getText();
         String lastName = lastNameTextField.getText();
@@ -68,7 +76,7 @@ public class SignUpController extends AnchorPane implements Initializable {
         double weight = Double.parseDouble(weightTextField.getText());
         LocalDate birthDate = birthDatePicker.getValue();
 
-        User newUser = new User(username, firstName, lastName, email, height, birthDate, weight);
+        User newUser = new User(username, firstName, lastName, gender, email, height, birthDate, weight);
 
         if (dataService.checkIfUsernameExists(username)) {
             System.out.println("Username already exists");
@@ -77,7 +85,6 @@ public class SignUpController extends AnchorPane implements Initializable {
             LoggedInUser.createInstance(dataService.getUser(username, password));
             parentPane.getChildren().remove(this);
         }
-
     }
 
 }
