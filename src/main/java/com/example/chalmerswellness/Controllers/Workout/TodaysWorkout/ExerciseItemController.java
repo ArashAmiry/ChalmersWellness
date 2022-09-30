@@ -57,4 +57,8 @@ public class ExerciseItemController extends AnchorPane implements Initializable{
         AddSetsController addSetsController = new AddSetsController(model, exercise, anchorPane);
         anchorPane.getChildren().add(addSetsController);
     }
+
+    public Exercise getExercise() {
+        return exercise;
+    }
 }

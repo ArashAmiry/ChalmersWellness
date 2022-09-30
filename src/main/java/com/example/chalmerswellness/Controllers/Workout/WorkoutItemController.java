@@ -15,11 +15,13 @@ import java.util.ResourceBundle;
 public class WorkoutItemController extends AnchorPane implements Initializable{
 
     private Workout workoutItem;
+    private WorkoutModel model;
     @FXML
     Label workoutNameLabel;
 
-    public WorkoutItemController(Workout workout){
+    public WorkoutItemController(Workout workout, WorkoutModel model){
         this.workoutItem = workout;
+        this.model = model;
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/WorkoutItem.fxml"));
         fxmlLoader.setRoot(this);
