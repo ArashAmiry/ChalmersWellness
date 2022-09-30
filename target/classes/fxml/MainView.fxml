@@ -10,7 +10,7 @@
 <AnchorPane fx:id="templateRootAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.chalmerswellness.MainView">
    <children>
       <AnchorPane fx:id="contentRootAnchorPane" layoutX="460.0" prefHeight="1080.0" prefWidth="1460.0" AnchorPane.topAnchor="0.0" />
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="460.0" styleClass="navbar" stylesheets="@../css/navbar.css">
+      <AnchorPane fx:id="navigationAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="460.0" styleClass="navbar" stylesheets="@../css/navbar.css">
          <children>
             <ImageView fitHeight="165.0" fitWidth="200.0" layoutX="132.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true" styleClass="profileImage">
                <image>

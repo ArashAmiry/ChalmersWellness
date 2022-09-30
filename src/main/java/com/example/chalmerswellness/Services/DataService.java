@@ -121,27 +121,6 @@ public class DataService {
         }
     }
 
-    private void createUsersTable() {
-        String sql = "CREATE TABLE IF NOT EXISTS users (\n"
-                + " id INTEGER PRIMARY KEY,\n"
-                + " username text,\n"
-                + " password text,\n"
-                + " firstName text,\n"
-                + " lastName text,\n"
-                + " email text,\n"
-                + " birthDate date,\n"
-                + " height integer,\n"
-                + " weight double,\n"
-                + " weightGoal double\n"
-                + ");";
-        try (Connection conn = connect(dbPath);
-             Statement stmt = conn.createStatement()) {
-            stmt.execute(sql);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
     public void insertUser(User user, String password) {
         String sql = "INSERT INTO users (username, password, firstName, lastName, gender, email, birthDate, height, weight) VALUES(?,?,?,?,?,?,?,?,?)";
         try (Connection conn = connect(dbPath);
