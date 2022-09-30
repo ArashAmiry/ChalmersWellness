@@ -101,7 +101,7 @@ public class WorkoutModel implements Observable {
     }
 
     public void addWorkout(Workout workout){
-        dataService.insertWorkout(workout);
+        workoutService.insertWorkout(workout);
         //notifyObservers();
     }
 

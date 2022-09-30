@@ -24,9 +24,6 @@ public class ManageWorkoutController extends AnchorPane implements Observer {
     private ObservableList<ExerciseItemController> exercisesList = FXCollections.observableArrayList();
     private ObservableList<WorkoutItemController> workoutsList = FXCollections.observableArrayList();
 
-
-    private DataService dataservice = new DataService();
-
     private WorkoutModel model;
     @FXML public ListView workoutList;
     @FXML public Label noResult;
@@ -50,7 +47,7 @@ public class ManageWorkoutController extends AnchorPane implements Observer {
 
     void populateWorkoutList(){
         workoutsList.clear();
-        for (var workout : dataservice.getWorkouts() ){
+        for (var workout : model.getSavedWorkouts() ){
             workoutsList.add(new WorkoutItemController(workout, model));
         }
         workoutList.getItems().setAll(workoutsList);
