@@ -2,7 +2,6 @@ package com.example.chalmerswellness.Services;
 
 import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.ObjectModels.ExerciseItemSet;
-import com.example.chalmerswellness.ObjectModels.Workout;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -11,7 +10,7 @@ import java.util.List;
 
 public class WorkoutService implements IWorkoutDatabaseHandler {
 
-    public Exercise insertExerciseItem(Exercise exercise){
+/*    public Exercise insertExerciseItem(Exercise exercise){
         String sql = "INSERT INTO exerciseItems VALUES(?,?,?)";
             String date = LocalDate.now().toString();
             int generatedKey = 0;
@@ -31,7 +30,7 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
             }
 
         return new Exercise(generatedKey, exercise);
-    }
+    }*/
 
     public Exercise insertCompletedExercise(Exercise exercise){
         String sql = "INSERT INTO completed_exercise VALUES(?,?,?)";
@@ -79,9 +78,9 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
     }
 
 
-    public void removeAddedExercise(Exercise exercise) {
+    public void removeCompletedExercise(Exercise exercise) {
         String sql = "DELETE FROM completed_exercise WHERE id = ?";
-        removeSets(exercise.getId());
+        //removeCompletedSets(exercise.getId());
 
         try (Connection conn = DatabaseConnector.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -92,7 +91,7 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
         }
     }
 
-    public void insertExerciseSet(ExerciseItemSet set) {
+    public void insertCompletedSet(ExerciseItemSet set) {
         String sql = "INSERT INTO completed_set VALUES(?,?,?,?)";
 
         try (Connection conn = DatabaseConnector.connect();
@@ -219,7 +218,7 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
 
     public void removeExerciseItem(Exercise exercise) {
         String sql = "DELETE FROM exerciseItems WHERE id = ?";
-        removeSets(exercise.getId());
+        removeCompletedSets(exercise.getId());
 
         try (Connection conn = DatabaseConnector.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -230,7 +229,7 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
         }
     }
 
-    public static void removeSets(int exerciseId){
+    public static void removeCompletedSets(int exerciseId){
         String sql = "DELETE FROM completed_set WHERE exerciseItemId = ?";
 
         try (Connection conn = DatabaseConnector.connect();
@@ -245,7 +244,7 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
 
     public void insertSets(int exerciseId, List<ExerciseItemSet> sets){
         String sql = "INSERT INTO completed_set VALUES(?,?,?,?)";
-        removeSets(exerciseId);
+        removeCompletedSets(exerciseId);
 
         try (Connection conn = DatabaseConnector.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {

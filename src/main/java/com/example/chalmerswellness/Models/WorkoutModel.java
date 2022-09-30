@@ -1,7 +1,6 @@
 package com.example.chalmerswellness.Models;
 
 import com.example.chalmerswellness.Controllers.Workout.WorkoutStates;
-import com.example.chalmerswellness.Services.DataService;
 import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.ObjectModels.Workout;
 import com.example.chalmerswellness.ObjectModels.ExerciseItemSet;
@@ -47,8 +46,8 @@ public class WorkoutModel implements Observable {
             exerciseItem = workoutService.insertCompletedExercise(exercise);
             addedExercises.add(exerciseItem);
         } else if(workoutState.equals(WorkoutStates.CREATEWORKOUT)){
-            exerciseItem = workoutService.insertExerciseItem(exercise);
-            addedWorkoutExercises.add(exerciseItem);
+            //exerciseItem = workoutService.insertExerciseItem(exercise);
+            //addedWorkoutExercises.add(exerciseItem);
         }
 
         notifyObservers();
@@ -72,7 +71,7 @@ public class WorkoutModel implements Observable {
 
     public void addSet(ExerciseItemSet set){
         sets.add(set);
-        workoutService.insertExerciseSet(set);
+        workoutService.insertCompletedSet(set);
         notifyObservers();
     }
 
@@ -98,7 +97,7 @@ public class WorkoutModel implements Observable {
         return workoutService.getTodayAddedExercises();
     }
     public void removeExercise(Exercise exercise){
-        workoutService.removeAddedExercise(exercise);
+        workoutService.removeCompletedExercise(exercise);
         addedExercises.remove(exercise);
         notifyObservers();
     }
