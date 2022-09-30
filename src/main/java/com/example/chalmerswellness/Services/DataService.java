@@ -30,7 +30,6 @@ public class DataService {
         String sql = "INSERT INTO nutrition(userID, mealName, calories, servingSize, fatTotal, fatSaturated, protein, sodium, cholesterol, carbohydrates, fiber, sugar, mealOfDay) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try (Connection conn = connect(dbPath);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            System.out.println("insertNutrition: " + LoggedInUser.getInstance().getId());
             pstmt.setInt(1, LoggedInUser.getInstance().getId());
             pstmt.setString(2, nutritionModel.getName().substring(0, 1).toUpperCase() + nutritionModel.getName().substring(1));
             pstmt.setDouble(3, nutritionModel.getCalories());
@@ -132,8 +131,8 @@ public class DataService {
             preparedStatement.setString(5, String.valueOf(user.getGender()));
             preparedStatement.setString(6, user.getEmail());
             preparedStatement.setDate(7, Date.valueOf(user.getBirthDate()));
-            preparedStatement.setInt(7, user.getHeight());
-            preparedStatement.setDouble(8, user.getWeight());
+            preparedStatement.setInt(8, user.getHeight());
+            preparedStatement.setDouble(9, user.getWeight());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
