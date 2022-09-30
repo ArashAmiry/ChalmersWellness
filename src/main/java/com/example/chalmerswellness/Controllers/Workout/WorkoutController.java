@@ -28,7 +28,6 @@ public class WorkoutController extends AnchorPane implements Initializable {
     ExerciseSearchController exerciseSearchController;
     ManageWorkoutController manageWorkoutView;
 
-
     public WorkoutController(){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/WorkoutView.fxml"));
         fxmlLoader.setRoot(this);
@@ -36,7 +35,7 @@ public class WorkoutController extends AnchorPane implements Initializable {
         workoutModel = new WorkoutModel();
 
         //TodayWorkoutView
-        todayWorkoutView = new TodayWorkoutController(workoutModel);
+        todayWorkoutView = new TodayWorkoutController(workoutModel, this);
 
         //SearchPanel
         exerciseSearchController = new ExerciseSearchController(workoutModel);
@@ -59,8 +58,8 @@ public class WorkoutController extends AnchorPane implements Initializable {
         if(anchorPaneSearch.getChildren().isEmpty()) {
             anchorPaneSearch.getChildren().add(exerciseSearchController);
         }
-        addedWorkoutsBtn.setOnAction(event -> showWorkouts());
 
+        addedWorkoutsBtn.setOnAction(event -> showWorkouts());
         openWorkoutTab();
     }
 
@@ -80,12 +79,10 @@ public class WorkoutController extends AnchorPane implements Initializable {
         setTabTo(manageWorkoutView);
     }
 
-    void showWorkouts(){
-        WorkoutListController addSetsController = new WorkoutListController(workoutModel, mainContent);
-        mainContent.getChildren().add(addSetsController);
+    private void showWorkouts(){
+        WorkoutListController workoutListController = new WorkoutListController(workoutModel, this);
+        this.getChildren().add(workoutListController);
     }
-
-
 
     private void setTabTo(AnchorPane pane){
         addedWorkoutsBtn.setVisible(false);

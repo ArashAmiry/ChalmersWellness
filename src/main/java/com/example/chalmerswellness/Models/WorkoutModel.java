@@ -110,7 +110,9 @@ public class WorkoutModel implements Observable {
         notifyObservers();
     }
 
+    //TODO show promt if exercises are already added
     public void addExercisesFromWorkout(Workout workout){
+        addedExercises.clear();
         for (var exercise: workout.getExercises()) {
             addedExercises.add(exercise);
         }
