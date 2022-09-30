@@ -1,14 +1,11 @@
 package com.example.chalmerswellness.Services;
 
-import com.example.chalmerswellness.ObjectModels.Exercise;
-import com.example.chalmerswellness.ObjectModels.ExerciseItemSet;
-import com.example.chalmerswellness.ObjectModels.Workout;
+import com.example.chalmerswellness.LoggedInUser;
 import com.example.chalmerswellness.User;
 import com.example.chalmerswellness.calorieAPI.Food;
 import com.example.chalmerswellness.calorieAPI.Meal;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,22 +29,23 @@ public class DataService {
     }
 
     public void insertNutrition(Food nutritionModel, Meal meal) {
-        String sql = "INSERT INTO nutrition(mealName, calories, servingSize, fatTotal, fatSaturated, protein, sodium, cholesterol, carbohydrates, fiber, sugar, mealOfDay) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO nutrition(userID, mealName, calories, servingSize, fatTotal, fatSaturated, protein, sodium, cholesterol, carbohydrates, fiber, sugar, mealOfDay) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try (Connection conn = connect(dbPath);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            pstmt.setString(1, nutritionModel.getName().substring(0, 1).toUpperCase() + nutritionModel.getName().substring(1));
-            pstmt.setDouble(2, nutritionModel.getCalories());
-            pstmt.setDouble(3, nutritionModel.getServingSize());
-            pstmt.setDouble(4, nutritionModel.getFatTotal());
-            pstmt.setDouble(5, nutritionModel.getFatSaturated());
-            pstmt.setDouble(6, nutritionModel.getProtein());
-            pstmt.setDouble(7, nutritionModel.getSodium());
-            pstmt.setDouble(8, nutritionModel.getCholesterol());
-            pstmt.setDouble(9, nutritionModel.getCarbohydrates());
-            pstmt.setDouble(10, nutritionModel.getFiber());
-            pstmt.setDouble(11, nutritionModel.getSugar());
-            pstmt.setString(12, String.valueOf(meal));
+            System.out.println("insertNutrition: " + LoggedInUser.getInstance().getId());
+            pstmt.setInt(1, LoggedInUser.getInstance().getId());
+            pstmt.setString(2, nutritionModel.getName().substring(0, 1).toUpperCase() + nutritionModel.getName().substring(1));
+            pstmt.setDouble(3, nutritionModel.getCalories());
+            pstmt.setDouble(4, nutritionModel.getServingSize());
+            pstmt.setDouble(5, nutritionModel.getFatTotal());
+            pstmt.setDouble(6, nutritionModel.getFatSaturated());
+            pstmt.setDouble(7, nutritionModel.getProtein());
+            pstmt.setDouble(8, nutritionModel.getSodium());
+            pstmt.setDouble(9, nutritionModel.getCholesterol());
+            pstmt.setDouble(10, nutritionModel.getCarbohydrates());
+            pstmt.setDouble(11, nutritionModel.getFiber());
+            pstmt.setDouble(12, nutritionModel.getSugar());
+            pstmt.setString(13, String.valueOf(meal));
             pstmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -56,11 +54,12 @@ public class DataService {
     }
 
     public void removeNutrition(int foodId){
-        String sql = "DELETE FROM nutrition WHERE id = ?";
+        String sql = "DELETE FROM nutrition WHERE id = ? AND userID = ?";
 
         try (Connection conn = this.connect(dbPath);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, foodId);
+            pstmt.setInt(2, LoggedInUser.getInstance().getId());
             pstmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -69,12 +68,13 @@ public class DataService {
     }
 
     public List<Food> getTodaysNutrition(Meal meal){
-        String sql = "SELECT * FROM nutrition WHERE mealOfDay = ? AND dateOfInsert = CURRENT_DATE";
+        String sql = "SELECT * FROM nutrition WHERE mealOfDay = ? AND userID = ? AND dateOfInsert = CURRENT_DATE";
         List<Food> foods = new ArrayList<>();
 
         try (Connection conn = this.connect(dbPath);
              PreparedStatement pstmt  = conn.prepareStatement(sql)){
             pstmt.setString(1, String.valueOf(meal));
+            pstmt.setInt(2, LoggedInUser.getInstance().getId());
 
             ResultSet rs = pstmt.executeQuery();
 
@@ -97,7 +97,7 @@ public class DataService {
     private void createNutritionTable() {
         String sql = "CREATE TABLE IF NOT EXISTS nutrition (\n"
                 + "	id integer PRIMARY KEY,\n"
-                + "	userID integer,\n"
+                + "	userID INTEGER,\n"
                 + "	mealName text NOT NULL,\n"
                 + "	calories DOUBLE NOT NULL,\n"
                 + "	servingSize DOUBLE NOT NULL,\n"
@@ -172,7 +172,7 @@ public class DataService {
                 preparedStatement.setString(2, password);
                 ResultSet rs = preparedStatement.executeQuery();
                 if (rs.next()) {
-                    user = new User(rs.getString("username"), rs.getString("firstName"), rs.getString("lastName"), rs.getString("email"), rs.getInt("height"),rs.getDate("birthDate").toLocalDate(), rs.getDouble("weight"));
+                    user = new User(rs.getInt("id"), rs.getString("username"), rs.getString("firstName"), rs.getString("lastName"), rs.getString("email"), rs.getInt("height"),rs.getDate("birthDate").toLocalDate(), rs.getDouble("weight"));
                 }
             } catch (SQLException e) {
                 System.out.println(e.getMessage());

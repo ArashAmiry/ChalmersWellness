@@ -74,8 +74,10 @@ public class SignUpController extends AnchorPane implements Initializable {
             System.out.println("Username already exists");
         } else {
             dataService.insertUser(newUser, password);
+            LoggedInUser.createInstance(dataService.getUser(username, password));
             parentPane.getChildren().remove(this);
         }
+
     }
 
 }

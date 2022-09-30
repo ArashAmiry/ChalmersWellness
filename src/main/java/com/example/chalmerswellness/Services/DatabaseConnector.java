@@ -1,15 +1,25 @@
 package com.example.chalmerswellness.Services;
 
-import com.example.chalmerswellness.ObjectModels.Exercise;
-import com.example.chalmerswellness.ObjectModels.Workout;
+import com.example.chalmerswellness.LoggedInUser;
 import com.example.chalmerswellness.calorieAPI.Food;
 import com.example.chalmerswellness.calorieAPI.Meal;
 
 import java.sql.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DatabaseConnector {
     private static String dbPath = "src/main/resources/ChalmersWellness.db";
+
+    public DatabaseConnector() {
+        createUsersTable();
+        createNutritionTable();
+        createAddedExercisesTable();
+        createExerciseItemTable();
+        createExercisesTable();
+        createMyExercisesTable();
+        createExerciseSetsTable();
+    }
 
     static Connection connect() {
         String url = "jdbc:sqlite:" + dbPath;
@@ -23,7 +33,7 @@ public class DatabaseConnector {
     }
 
     public void insertNutrition(Food nutritionModel, Meal meal) {
-        String sql = "INSERT INTO nutrition(mealName, calories, servingSize, fatTotal, fatSaturated, protein, sodium, cholesterol, carbohydrates, fiber, sugar, mealOfDay) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO nutrition(mealName, calories, servingSize, fatTotal, fatSaturated, protein, sodium, cholesterol, carbohydrates, fiber, sugar, mealOfDay, userID) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
         try (Connection conn = connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -39,6 +49,7 @@ public class DatabaseConnector {
             pstmt.setDouble(10, nutritionModel.getFiber());
             pstmt.setDouble(11, nutritionModel.getSugar());
             pstmt.setString(12, String.valueOf(meal));
+            pstmt.setInt(13, LoggedInUser.getInstance().getId());
             pstmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -47,11 +58,12 @@ public class DatabaseConnector {
     }
 
     public void removeNutrition(int foodId){
-        String sql = "DELETE FROM nutrition WHERE id = ?";
+        String sql = "DELETE FROM nutrition WHERE id = ? AND userID = ?";
 
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, foodId);
+            pstmt.setInt(2, LoggedInUser.getInstance().getId());
             pstmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -60,12 +72,13 @@ public class DatabaseConnector {
     }
 
     public List<Food> getTodaysNutrition(Meal meal){
-        String sql = "SELECT * FROM nutrition WHERE mealOfDay = ? AND dateOfInsert = CURRENT_DATE";
+        String sql = "SELECT * FROM nutrition WHERE mealOfDay = ? AND userID = ? AND dateOfInsert = CURRENT_DATE";
         List<Food> foods = new ArrayList<>();
 
         try (Connection conn = this.connect();
              PreparedStatement pstmt  = conn.prepareStatement(sql)){
             pstmt.setString(1, String.valueOf(meal));
+            pstmt.setInt(2, LoggedInUser.getInstance().getId());
 
             ResultSet rs = pstmt.executeQuery();
 
@@ -88,6 +101,7 @@ public class DatabaseConnector {
     private void createNutritionTable() {
         String sql = "CREATE TABLE IF NOT EXISTS nutrition (\n"
                 + "	id INTEGER PRIMARY KEY,\n"
+                + " userID INTEGER,\n"
                 + "	mealName text NOT NULL,\n"
                 + "	calories DOUBLE NOT NULL,\n"
                 + "	servingSize DOUBLE NOT NULL,\n"
@@ -100,7 +114,9 @@ public class DatabaseConnector {
                 + "	fiber DOUBLE NOT NULL,\n"
                 + "	sugar DOUBLE NOT NULL,\n"
                 + " dateOfInsert DATE DEFAULT CURRENT_DATE,\n"
-                + " mealOfDay text NOT NULL \n"
+                + " mealOfDay text NOT NULL, \n"
+                + " FOREIGN KEY ('userID') REFERENCES 'users' ('id') \n"
+                + " ON UPDATE CASCADE ON DELETE CASCADE\n"
                 + ");";
 
         try (Connection conn = connect();
@@ -128,7 +144,7 @@ public class DatabaseConnector {
 
     private static void createExercisesTable() {
         String sql = "CREATE TABLE IF NOT EXISTS exercises (\n"
-                + "	id INTEGER PRIMARY KEY,\n"
+                + "	id INTEGER PRIMARY KEY\n"
                 + ");";
 
         try (Connection conn = connect();
@@ -177,6 +193,27 @@ public class DatabaseConnector {
                 + "	exerciseEquipment text NOT NULL,\n"
                 + "	exerciseDifficulty text NOT NULL,\n"
                 + "	exerciseInstructions text NOT NULL\n"
+                + ");";
+        try (Connection conn = connect();
+             Statement stmt = conn.createStatement()) {
+            stmt.execute(sql);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void createUsersTable() {
+        String sql = "CREATE TABLE IF NOT EXISTS users (\n"
+                + " id INTEGER PRIMARY KEY,\n"
+                + " username text,\n"
+                + " password text,\n"
+                + " firstName text,\n"
+                + " lastName text,\n"
+                + " email text,\n"
+                + " birthDate date,\n"
+                + " height integer,\n"
+                + " weight double,\n"
+                + " weightGoal double\n"
                 + ");";
         try (Connection conn = connect();
              Statement stmt = conn.createStatement()) {

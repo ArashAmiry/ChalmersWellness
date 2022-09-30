@@ -23,7 +23,23 @@ public class User {
         this.weight = weight;
     }
 
+    public User(int id, String username, String firstName, String lastName, String email, int height, LocalDate birthDate, double weight) {
+        this.id = id;
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.height = height;
+        this.birthDate = birthDate;
+        this.weight = weight;
+    }
 
+
+
+
+    public int getId() {
+        return id;
+    }
     public String getUsername() {
         return username;
     }
@@ -51,6 +67,7 @@ public class User {
     public LocalDate getBirthDate() {
         return birthDate;
     }
+
 }
 
 

@@ -51,8 +51,8 @@ public class LoginController extends AnchorPane implements Initializable {
         String password = passwordTextField.getText();
         if(dataService.loginUser(username, password)) {
             System.out.println("Login successful");
+            LoggedInUser.createInstance(dataService.getUser(username,password));
             parentPane.getChildren().remove(this);
-            System.out.println(dataService.getUser(username,password).getBirthDate());
         } else {
             System.out.println("Login failed");
         }
