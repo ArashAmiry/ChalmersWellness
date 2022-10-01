@@ -21,6 +21,8 @@ public interface IWorkoutDatabaseHandler {
     void insertWorkout(Workout workout);
     List<Workout> getWorkouts();
 
+    void insertCompletedExercises(List<Exercise> exercises);
+
     //Exercise insertWorkoutExercise(Exercise exercise);
     //void removeExerciseItem(Exercise exercise);
 

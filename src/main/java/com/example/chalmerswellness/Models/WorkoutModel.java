@@ -42,7 +42,6 @@ public class WorkoutModel implements Observable {
         Exercise exerciseItem;
 
 
-
         //TODO ENUM STATES
         if(workoutState.equals(WorkoutStates.ACTIVEWORKOUT)){
             exerciseItem = workoutService.insertCompletedExercise(exercise);
@@ -118,9 +117,8 @@ public class WorkoutModel implements Observable {
     //TODO show promt if exercises are already added
     public void addExercisesFromWorkout(Workout workout){
         addedExercises.clear();
-        for (var exercise: workout.getExercises()) {
-            addedExercises.add(exercise);
-        }
+        workoutService.insertCompletedExercises(workout.getExercises());
+        getTodaysExercises();
         notifyObservers();
     }
 

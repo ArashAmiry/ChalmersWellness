@@ -182,25 +182,12 @@ public class DatabaseConnector {
         }
     }*/
 
-    /*private void createExerciseItemTable() {
-        String sql = "CREATE TABLE IF NOT EXISTS exerciseItems (\n"
-                + "	id INTEGER PRIMARY KEY,\n"
-                + "	exerciseId INTEGER,\n"
-                + " date TEXT\n"
-                + ");";
-        try (Connection conn = connect();
-             Statement stmt = conn.createStatement()) {
-            stmt.execute(sql);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }*/
 
     public static void createCompletedExerciseTable() {
         String sql = "CREATE TABLE IF NOT EXISTS completed_exercise (\n"
                 + "	id INTEGER PRIMARY KEY,\n"
                 + " exercise_id INTEGER,\n"
-                + " date TEXT,\n"
+                + " insert_date DATE DEFAULT CURRENT_DATE,\n"
                 + " FOREIGN KEY ('exercise_id') REFERENCES 'exercise' ('id')\n"
                 + " ON UPDATE CASCADE ON DELETE CASCADE\n"
                 + ");";

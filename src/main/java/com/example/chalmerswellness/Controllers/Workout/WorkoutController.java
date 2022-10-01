@@ -35,6 +35,10 @@ public class WorkoutController extends AnchorPane implements Initializable {
         fxmlLoader.setController(this);
         workoutModel = new WorkoutModel();
 
+
+        //TODO remove
+        DatabaseConnector d = new DatabaseConnector();
+
         //TodayWorkoutView
         todayWorkoutView = new TodayWorkoutController(workoutModel, this);
 
