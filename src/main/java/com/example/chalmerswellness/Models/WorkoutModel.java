@@ -1,7 +1,6 @@
 package com.example.chalmerswellness.Models;
 
 import com.example.chalmerswellness.Controllers.Workout.WorkoutStates;
-import com.example.chalmerswellness.Services.DataService;
 import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.ObjectModels.Workout;
 import com.example.chalmerswellness.ObjectModels.ExerciseItemSet;
@@ -28,6 +27,7 @@ public class WorkoutModel implements Observable {
     }
 
     public List<Workout> getSavedWorkouts(){
+        //return null;
         return workoutService.getWorkouts();
     }
 
@@ -39,13 +39,16 @@ public class WorkoutModel implements Observable {
     }
     public void addExercise(Exercise exercise, WorkoutStates workoutState){
         //DOES IT STORE IN SAME db?
-        var exerciseItem = workoutService.insertExerciseItem(exercise);
+        Exercise exerciseItem;
+
 
         //TODO ENUM STATES
         if(workoutState.equals(WorkoutStates.ACTIVEWORKOUT)){
+            exerciseItem = workoutService.insertCompletedExercise(exercise);
             addedExercises.add(exerciseItem);
         } else if(workoutState.equals(WorkoutStates.CREATEWORKOUT)){
-            addedWorkoutExercises.add(exerciseItem);
+            //exerciseItem = workoutService.insertWorkoutExercise(exercise);
+            addedWorkoutExercises.add(exercise);
         }
 
         notifyObservers();
@@ -69,12 +72,12 @@ public class WorkoutModel implements Observable {
 
     public void addSet(ExerciseItemSet set){
         sets.add(set);
-        workoutService.insertExerciseSet(set);
+        workoutService.insertCompletedSet(set);
         notifyObservers();
     }
 
     public void saveSets(int setId){
-        workoutService.insertSets(setId, sets);
+        workoutService.insertCompletedSets(setId, sets);
     }
 
     public void removeSet(int setId){
@@ -83,7 +86,7 @@ public class WorkoutModel implements Observable {
     }
 
     public List<ExerciseItemSet> getSets(int exerciseItemId){
-        sets = workoutService.getExerciseSets(exerciseItemId);
+        sets = workoutService.getCompletedSets(exerciseItemId);
         return sets;
     }
 
@@ -92,21 +95,30 @@ public class WorkoutModel implements Observable {
     }
 
     public List<Exercise> getTodayExerciseItems(){
-        return workoutService.getTodayAddedExercises();
+        return workoutService.getCompletedExercises();
     }
     public void removeExercise(Exercise exercise){
-        workoutService.removeAddedExercise(exercise);
+        workoutService.removeCompletedExercise(exercise);
         addedExercises.remove(exercise);
         notifyObservers();
     }
 
     public void addWorkout(Workout workout){
+        addedWorkoutExercises.clear();
         workoutService.insertWorkout(workout);
-        //notifyObservers();
+        notifyObservers();
     }
 
     public void removeWorkout(Workout workout){
         //savedWorkouts.remove(workout);
+        notifyObservers();
+    }
+
+    //TODO show promt if exercises are already added
+    public void addExercisesFromWorkout(Workout workout){
+        addedExercises.clear();
+        workoutService.insertCompletedExercises(workout.getExercises());
+        getTodaysExercises();
         notifyObservers();
     }
 

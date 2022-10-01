@@ -39,4 +39,8 @@ public class WorkoutItemController extends AnchorPane implements Initializable{
         workoutNameLabel.textProperty().set(workoutItem.getWorkoutName());
     }
 
+    @FXML private void insertToWorkout(){
+        model.addExercisesFromWorkout(workoutItem);
+    }
+
 }

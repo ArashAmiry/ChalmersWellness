@@ -76,7 +76,6 @@ public class CreateWorkoutController extends AnchorPane implements Observer {
     public void update(Observable observable) {
         model = (WorkoutModel) observable;
         var exercises = model.getAddedWorkoutExercises();
-
         updateExerciseList(exercises);
     }
 }
