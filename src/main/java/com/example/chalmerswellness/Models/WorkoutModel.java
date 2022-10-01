@@ -47,7 +47,6 @@ public class WorkoutModel implements Observable {
             exerciseItem = workoutService.insertCompletedExercise(exercise);
             addedExercises.add(exerciseItem);
         } else if(workoutState.equals(WorkoutStates.CREATEWORKOUT)){
-            //exerciseItem = workoutService.insertWorkoutExercise(exercise);
             addedWorkoutExercises.add(exercise);
         }
 
@@ -91,7 +90,7 @@ public class WorkoutModel implements Observable {
     }
 
     public List<Exercise> getMyExercises(){
-        return workoutService.getMyExercises();
+        return workoutService.getExercises();
     }
 
     public List<Exercise> getTodayExerciseItems(){
@@ -122,8 +121,8 @@ public class WorkoutModel implements Observable {
         notifyObservers();
     }
 
-    public void removeAllExercises(){
-        addedExercises.clear();
+    public void removeAllWorkoutExercises(){
+        addedWorkoutExercises.clear();
         notifyObservers();
     }
 

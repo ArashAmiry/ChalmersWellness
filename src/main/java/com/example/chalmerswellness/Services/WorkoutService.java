@@ -5,8 +5,6 @@ import com.example.chalmerswellness.ObjectModels.ExerciseItemSet;
 import com.example.chalmerswellness.ObjectModels.Workout;
 
 import java.sql.*;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -94,9 +92,11 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
 
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                var exerciseId = rs.getInt("id");
-                Exercise exercise = getMyExercise(exerciseId);
-                exercises.add(exercise);
+                var id = rs.getInt("id");
+                var exercise_id = rs.getInt("exercise_id");
+
+                Exercise exerciseItem = new Exercise(id, getExercise(exercise_id));
+                exercises.add(exerciseItem);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -110,8 +110,8 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
 
         try (Connection conn = DatabaseConnector.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, exercise.getId());
-            pstmt.executeUpdate();
+                pstmt.setInt(1, exercise.getId());
+                pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -169,7 +169,7 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
 
 
 
-    public List<Exercise> getMyExercises() {
+    public List<Exercise> getExercises() {
         String sql = "SELECT * FROM exercise";
         List<Exercise> exercises = new ArrayList<>();
 
@@ -196,12 +196,12 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
         return exercises;
     }
 
-    private static Exercise getMyExercise(int id) throws SQLException {
+    private static Exercise getExercise(int exercise_id) throws SQLException {
         String sql = "SELECT * FROM exercise WHERE id = ?";
 
         try (Connection conn = DatabaseConnector.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, id);
+            pstmt.setInt(1, exercise_id);
 
             ResultSet rs = pstmt.executeQuery();
             Exercise exercise = null;
@@ -213,7 +213,7 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
                 var difficulty = rs.getString("exerciseDifficulty");
                 var instructions = rs.getString("exerciseInstructions");
 
-                exercise = new Exercise(id, exerciseName, type, muscle, equipment, difficulty, instructions);
+                exercise = new Exercise(exercise_id, exerciseName, type, muscle, equipment, difficulty, instructions);
             }
             return exercise;
         }
@@ -307,7 +307,7 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
                 //var id = rs.getInt("id");
                 var exerciseId  =rs.getInt("exercise_id");
 
-                Exercise exercise = getMyExercise(exerciseId);
+                Exercise exercise = getExercise(exerciseId);
                 //Exercise exercise = new Exercise(id, exerciseName, type, muscle, equipment, difficulty, instructions);
                 exercises.add(exercise);
             }
