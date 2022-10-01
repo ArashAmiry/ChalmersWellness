@@ -33,7 +33,6 @@ public class NutritionSearchViewController extends AnchorPane implements Observe
     @FXML
     private TextField searchField;
     @FXML
-
     private AnchorPane parentPane;
     @FXML
     private AnchorPane rootPane;

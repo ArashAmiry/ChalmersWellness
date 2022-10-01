@@ -1,6 +1,8 @@
 package com.example.chalmerswellness;
 
 import com.example.chalmerswellness.Controllers.Dashboard.DashboardViewController;
+import com.example.chalmerswellness.Controllers.Friends.FriendsItemController;
+import com.example.chalmerswellness.Controllers.Friends.FriendsViewController;
 import com.example.chalmerswellness.Controllers.Nutrition.NutritionViewController;
 import com.example.chalmerswellness.Controllers.Settings.SettingsViewController;
 import com.example.chalmerswellness.Controllers.Workout.WorkoutController;
@@ -17,10 +19,9 @@ public class MainView extends AnchorPane {
 
     WorkoutController workoutView = new WorkoutController();
     NutritionViewController nutritionViewController = new NutritionViewController();
-
+    FriendsViewController friendsViewController = new FriendsViewController();
     CalorieIntakeCalculatorController calorieIntakeCalculatorController = new CalorieIntakeCalculatorController();
     DashboardViewController dashboardViewController = new DashboardViewController();
-
     SettingsViewController settingsViewController = new SettingsViewController();
     DataService dataService = new DataService();
 
@@ -56,6 +57,11 @@ public class MainView extends AnchorPane {
     @FXML
     public void navigateToDashboardView() {
         setViewTo(dashboardViewController);
+    }
+
+    @FXML
+    public void navigateToFriendsView() {
+        setViewTo(friendsViewController);
     }
 
     private void setViewTo(AnchorPane pane){

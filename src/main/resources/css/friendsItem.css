@@ -1,0 +1,25 @@
+@font-face {
+    font-family: "Koulen";
+    src: url('../font/Koulen/Koulen-Regular.ttf');
+}
+
+.friendName{
+    -fx-font-family: Koulen;
+    -fx-font-size: 30px;
+}
+
+.followButton{
+    -fx-font-family: Koulen;
+    -fx-font-size: 20px;
+    -fx-text-fill: white;
+    -fx-background-color: linear-gradient(to top left, #00d2ff, #0096FF);
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 7, 0, 0, 0);
+    -fx-padding: 0;
+    -fx-background-radius: 20px;
+}
+
+.rootpane{
+    -fx-border-radius: 100px;
+    -fx-background-radius: 100px;
+    -fx-background-color: #ffffff;
+}
