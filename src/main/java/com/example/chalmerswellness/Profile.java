@@ -3,17 +3,15 @@ package com.example.chalmerswellness;
 import java.time.LocalDateTime;
 
 public class Profile {
-
-    private String username;
     private String firstName;
     private String lastName;
     private String email;
-    private String password;
     private LocalDateTime birthDate;
     private Boolean hasCalculatedCalorieIntake = false;
-    private int calorieGoal;
-    private int weightGoal;
     private int caloriesConsumed;
+    private int calorieGoal;
+    private double weightGoal;
+    private double weight;
     private static final Profile instance = new Profile();
     private Profile() {}
 
@@ -45,7 +43,7 @@ public class Profile {
         this.hasCalculatedCalorieIntake = hasCalculatedCalorieIntake;
     }
 
-    public void setWeightGoal(int weightGoal) {
+    public void setWeightGoal(double weightGoal) {
         this.weightGoal = weightGoal;
     }
 
