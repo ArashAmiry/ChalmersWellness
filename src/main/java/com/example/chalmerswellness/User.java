@@ -26,7 +26,7 @@ public class User {
         this.weight = weight;
     }
 
-    public User(int id, String username, String firstName, String lastName, String email, int height, LocalDate birthDate, double weight) {
+    public User(int id, String username, String firstName, String lastName, String email, int height, LocalDate birthDate, double weight, int calorieGoal) {
         this.id = id;
         this.username = username;
         this.firstName = firstName;
@@ -35,6 +35,7 @@ public class User {
         this.height = height;
         this.birthDate = birthDate;
         this.weight = weight;
+        this.calorieGoal = calorieGoal;
     }
 
 
@@ -77,6 +78,10 @@ public class User {
 
     public int getAge() {
         return LocalDate.now().getYear() - birthDate.getYear();
+    }
+
+    public int getCalorieGoal() {
+        return calorieGoal;
     }
 
 }

@@ -17,4 +17,13 @@ public class LoggedInUser {
         return instance;
     }
 
+    public static void destroyInstance(){
+        instance = null;
+    }
+
+    public static void updateInstance(User user){
+        destroyInstance();
+        createInstance(user);
+    }
+
 }

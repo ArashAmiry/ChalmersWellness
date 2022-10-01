@@ -3,7 +3,6 @@ package com.example.chalmerswellness.Controllers.Nutrition;
 import com.example.chalmerswellness.CalorieIntakeCalculatorController;
 import com.example.chalmerswellness.Interfaces.Observable;
 import com.example.chalmerswellness.Interfaces.Observer;
-import com.example.chalmerswellness.Profile;
 import com.example.chalmerswellness.calorieAPI.Meal;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,7 +25,6 @@ public class NutritionViewController extends AnchorPane implements Initializable
     private ProgressBar progressBar;
     @FXML
     private Text progressBarText;
-    private final Profile profile = Profile.getInstance();
 
     public NutritionViewController() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/NutritionView.fxml"));
@@ -44,8 +42,8 @@ public class NutritionViewController extends AnchorPane implements Initializable
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        progressBarText.setText(profile.calorieGoal() - profile.caloriesConsumed() + " Kcal Left");
-        progressBar.setProgress((double) profile.caloriesConsumed() / profile.calorieGoal());
+        /*progressBarText.setText(profile.calorieGoal() - profile.caloriesConsumed() + " Kcal Left");
+        progressBar.setProgress((double) profile.caloriesConsumed() / profile.calorieGoal());*/
         CalorieIntakeCalculatorController calorieIntakeCalculatorController = new CalorieIntakeCalculatorController();
         calorieIntakeCalculatorController.subscribe(this);
     }
@@ -77,7 +75,7 @@ public class NutritionViewController extends AnchorPane implements Initializable
 
     @Override
     public void update(Observable observable) {
-        progressBarText.setText(profile.calorieGoal() - profile.caloriesConsumed() + " Kcal Left");
-        progressBar.setProgress((double) profile.caloriesConsumed() / profile.calorieGoal());
+        /*progressBarText.setText(profile.calorieGoal() - profile.caloriesConsumed() + " Kcal Left");
+        progressBar.setProgress((double) profile.caloriesConsumed() / profile.calorieGoal());*/
     }
 }
