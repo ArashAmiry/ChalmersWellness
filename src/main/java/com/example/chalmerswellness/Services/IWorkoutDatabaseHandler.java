@@ -12,19 +12,10 @@ public interface IWorkoutDatabaseHandler {
     Exercise insertCompletedExercise(Exercise exercise);
     void insertCompletedSet(ExerciseItemSet set);
     void removeCompletedExercise(Exercise exercise);
-
-    //TODO is this being used
     void removeSet(int setId);
-
-    List<Exercise> getMyExercises();
+    List<Exercise> getExercises();
     void insertCompletedSets(int exerciseId, List<ExerciseItemSet> sets);
     void insertWorkout(Workout workout);
     List<Workout> getWorkouts();
-
     void insertCompletedExercises(List<Exercise> exercises);
-
-    //Exercise insertWorkoutExercise(Exercise exercise);
-    //void removeExerciseItem(Exercise exercise);
-
-
 }
