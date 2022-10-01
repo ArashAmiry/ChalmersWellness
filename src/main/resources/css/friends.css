@@ -1,0 +1,14 @@
+.rootpane{
+    -fx-background-color: #F2F4FF;
+}
+
+.searchFriendsButton{
+    -fx-border-radius: 7px;
+    -fx-background-radius: 7px;
+    -fx-background-color: linear-gradient(to top left, #f1f1f1, #ffffff);
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 7, 0, 0, 0);
+    -fx-background-image: url(../img/searchIcon.png);
+    -fx-background-size: 30px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 50%;
+}

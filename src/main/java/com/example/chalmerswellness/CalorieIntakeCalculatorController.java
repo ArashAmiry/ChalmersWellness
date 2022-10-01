@@ -2,6 +2,7 @@ package com.example.chalmerswellness;
 
 import com.example.chalmerswellness.Interfaces.Observable;
 import com.example.chalmerswellness.Interfaces.Observer;
+import com.example.chalmerswellness.Services.DataService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -18,12 +19,6 @@ import java.net.URL;
 import java.util.*;
 
 public class CalorieIntakeCalculatorController extends AnchorPane implements Initializable, Observable {
-
-    final private Profile profile = Profile.getInstance();
-    @FXML
-    private RadioButton radioButtonMale;
-    @FXML
-    private RadioButton radioButtonFemale;
     @FXML
     private RadioButton radioButtonSlowPace;
     @FXML
@@ -42,10 +37,11 @@ public class CalorieIntakeCalculatorController extends AnchorPane implements Ini
     @FXML
     private Text calorieIntakeText;
     @FXML
-    private TextField ageTextField, weightTextField, weightGoalTextField, heightTextField;
+    private TextField weightGoalTextField;
     private ToggleGroup gender = new ToggleGroup();
     private ToggleGroup paceGroup = new ToggleGroup();
     private static List<Observer> observers = new ArrayList<>();
+    DataService dataService = new DataService();
 
 
     public CalorieIntakeCalculatorController(){
@@ -63,11 +59,6 @@ public class CalorieIntakeCalculatorController extends AnchorPane implements Ini
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        radioButtonMale.setToggleGroup(gender);
-        radioButtonFemale.setToggleGroup(gender);
-        radioButtonMale.setUserData(true);
-        radioButtonFemale.setUserData(false);
-
         radioButtonSlowPace.setToggleGroup(paceGroup);
         radioButtonMediumPace.setToggleGroup(paceGroup);
         radioButtonFastPace.setToggleGroup(paceGroup);
@@ -83,24 +74,29 @@ public class CalorieIntakeCalculatorController extends AnchorPane implements Ini
 
     @FXML
     private void calculateCalorieIntake(MouseEvent mouseEvent) {
-        profile.setWeightGoal(Integer.parseInt(weightGoalTextField.getText()));
-        double weight = Double.parseDouble(weightTextField.getText());
-        double height = Double.parseDouble(heightTextField.getText());
-        int age = Integer.parseInt(ageTextField.getText());
+        User loggedInUser = LoggedInUser.getInstance();
+        double weight = loggedInUser.getWeight();
+        double height = loggedInUser.getHeight();
+        int age = loggedInUser.getAge();
+        Gender gender = loggedInUser.getGender();
+        double weightGoal = Double.parseDouble(weightGoalTextField.getText());
         int pace = (int) paceGroup.getSelectedToggle().getUserData();
+        double activityLevel = activityLevels.get(activityComboBox.getValue());
         if (Integer.parseInt(weightGoalTextField.getText()) - weight < 0) {
             pace = -pace;
         }
-        boolean isMale = (boolean) gender.getSelectedToggle().getUserData();
-        double activityLevel = activityLevels.get(activityComboBox.getValue());
+        if (weight == weightGoal) {
+            pace = 0;
+        }
 
-        int calorieIntake = CalorieCalculator.calculateCalorieIntake(isMale, weight, height, age, activityLevel, pace);
+        int calorieIntake = CalorieCalculator.calculateCalorieIntake(gender, weight, height, age, activityLevel, pace);
         calorieIntakeText.setText("Your recommended calorie intake is " + calorieIntake + " calories per day.");
         calorieIntakeText.setVisible(true);
 
-        profile.setHasCalculatedCalorieIntake(true);
-        profile.setCalorieGoal(calorieIntake);
-        notifyObservers(); // Update calorie progress
+        dataService.setCalorieGoal(loggedInUser.getId(), calorieIntake);
+        LoggedInUser.updateInstance(dataService.getUser(loggedInUser.getId()));
+
+        notifyObservers();
     }
 
     @Override

@@ -38,6 +38,7 @@ public class FoodFacade implements Observable {
 
     public void addFoodEaten(String grams, String foodName, Meal meal) throws JsonProcessingException {
         dataService.insertNutrition(this.createFood(grams + "g " + foodName), meal);
+        notifyObservers();
     }
 
     public void removeFood(int foodId){
