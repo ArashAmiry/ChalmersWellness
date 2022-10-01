@@ -12,8 +12,6 @@ public class DatabaseConnector {
     public DatabaseConnector(){
         //createExercisesTable();
         createExerciseTable();
-
-
         createCompletedExerciseTable();
         createCompletedSetTable();
     }

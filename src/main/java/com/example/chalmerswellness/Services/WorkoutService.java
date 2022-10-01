@@ -243,7 +243,8 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
         }
     }
 
-    public void insertSets(int exerciseId, List<ExerciseItemSet> sets){
+    //TODO does it work without removeCompletedSets with the use of FOREIGN keys
+    public void insertCompletedSets(int exerciseId, List<ExerciseItemSet> sets){
         String sql = "INSERT INTO completed_set VALUES(?,?,?,?)";
         removeCompletedSets(exerciseId);
 

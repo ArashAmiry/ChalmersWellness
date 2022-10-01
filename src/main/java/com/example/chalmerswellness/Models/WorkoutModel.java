@@ -76,7 +76,7 @@ public class WorkoutModel implements Observable {
     }
 
     public void saveSets(int setId){
-        workoutService.insertSets(setId, sets);
+        workoutService.insertCompletedSets(setId, sets);
     }
 
     public void removeSet(int setId){
