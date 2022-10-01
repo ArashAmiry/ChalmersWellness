@@ -27,8 +27,8 @@ public class WorkoutModel implements Observable {
     }
 
     public List<Workout> getSavedWorkouts(){
-        return null;
-        //return workoutService.getWorkouts();
+        //return null;
+        return workoutService.getWorkouts();
     }
 
     public List<Exercise> getAddedExercises() {
@@ -41,13 +41,15 @@ public class WorkoutModel implements Observable {
         //DOES IT STORE IN SAME db?
         Exercise exerciseItem;
 
+
+
         //TODO ENUM STATES
         if(workoutState.equals(WorkoutStates.ACTIVEWORKOUT)){
             exerciseItem = workoutService.insertCompletedExercise(exercise);
             addedExercises.add(exerciseItem);
         } else if(workoutState.equals(WorkoutStates.CREATEWORKOUT)){
-            //exerciseItem = workoutService.insertExerciseItem(exercise);
-            //addedWorkoutExercises.add(exerciseItem);
+            //exerciseItem = workoutService.insertWorkoutExercise(exercise);
+            addedWorkoutExercises.add(exercise);
         }
 
         notifyObservers();
@@ -103,9 +105,9 @@ public class WorkoutModel implements Observable {
     }
 
     public void addWorkout(Workout workout){
-        //TODO remove comment
-        //workoutService.insertWorkout(workout);
-        //notifyObservers();
+        addedWorkoutExercises.clear();
+        workoutService.insertWorkout(workout);
+        notifyObservers();
     }
 
     public void removeWorkout(Workout workout){

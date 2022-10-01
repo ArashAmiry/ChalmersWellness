@@ -5,6 +5,7 @@ import com.example.chalmerswellness.Controllers.Workout.TodaysWorkout.AddSetsCon
 import com.example.chalmerswellness.Controllers.Workout.TodaysWorkout.TodayWorkoutController;
 import com.example.chalmerswellness.Controllers.Workout.TodaysWorkout.WorkoutListController;
 import com.example.chalmerswellness.Models.WorkoutModel;
+import com.example.chalmerswellness.Services.DatabaseConnector;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

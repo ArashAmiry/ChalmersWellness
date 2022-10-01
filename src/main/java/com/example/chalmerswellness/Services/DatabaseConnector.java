@@ -14,6 +14,8 @@ public class DatabaseConnector {
         createExerciseTable();
         createCompletedExerciseTable();
         createCompletedSetTable();
+        createCreatedWorkoutTable();
+        createWorkoutExerciseTable();
     }
 
     static Connection connect() {
@@ -109,6 +111,38 @@ public class DatabaseConnector {
                 + " mealOfDay text NOT NULL \n"
                 + ");";
 
+        try (Connection conn = connect();
+             Statement stmt = conn.createStatement()) {
+            stmt.execute(sql);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void createCreatedWorkoutTable() {
+        String sql = "CREATE TABLE IF NOT EXISTS created_workout (\n"
+                + "	id INTEGER PRIMARY KEY,\n"
+                + "	workoutName TEXT\n"
+                + ");";
+        try (Connection conn = connect();
+             Statement stmt = conn.createStatement()) {
+            stmt.execute(sql);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void createWorkoutExerciseTable() {
+        String sql = "CREATE TABLE IF NOT EXISTS workout_exercise (\n"
+                + "	id INTEGER PRIMARY KEY,\n"
+                + "	workout_id INTEGER,\n"
+                + "	exercise_id INTEGER,\n"
+                + " FOREIGN KEY ('workout_id') REFERENCES 'created_workout' ('id')\n"
+                + " ON UPDATE CASCADE ON DELETE CASCADE\n"
+
+                + " FOREIGN KEY ('exercise_id') REFERENCES 'exercise' ('id')\n"
+                + " ON UPDATE CASCADE ON DELETE CASCADE\n"
+                + ");";
         try (Connection conn = connect();
              Statement stmt = conn.createStatement()) {
             stmt.execute(sql);

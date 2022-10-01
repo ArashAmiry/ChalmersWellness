@@ -2,6 +2,7 @@ package com.example.chalmerswellness.Services;
 
 import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.ObjectModels.ExerciseItemSet;
+import com.example.chalmerswellness.ObjectModels.Workout;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -10,8 +11,8 @@ import java.util.List;
 
 public class WorkoutService implements IWorkoutDatabaseHandler {
 
-/*    public Exercise insertExerciseItem(Exercise exercise){
-        String sql = "INSERT INTO exerciseItems VALUES(?,?,?)";
+    /*public Exercise insertWorkoutExercise(Exercise exercise){
+        String sql = "INSERT INTO workout_exercise VALUES(?,?,?)";
             String date = LocalDate.now().toString();
             int generatedKey = 0;
 
@@ -30,7 +31,9 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
             }
 
         return new Exercise(generatedKey, exercise);
-    }*/
+    }
+
+     */
 
     public Exercise insertCompletedExercise(Exercise exercise){
         String sql = "INSERT INTO completed_exercise VALUES(?,?,?)";
@@ -80,8 +83,6 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
 
     public void removeCompletedExercise(Exercise exercise) {
         String sql = "DELETE FROM completed_exercise WHERE id = ?";
-
-        //removeCompletedSets(exercise.getId());
 
         try (Connection conn = DatabaseConnector.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -262,7 +263,7 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
         }
     }
 
-    public void insertMyExercises(List<Exercise> exercises) {
+    public void insertExercises(List<Exercise> exercises) {
         String sql = "INSERT INTO exercise(exerciseName, exerciseType, exerciseMuscle, exerciseEquipment, exerciseDifficulty, exerciseInstructions) VALUES(?,?,?,?,?,?)";
 
         try (Connection conn = DatabaseConnector.connect();
@@ -283,7 +284,7 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
         }
     }
 
-/*    public List<Workout> getWorkouts(){
+    public List<Workout> getWorkouts(){
         String sql = "SELECT * FROM created_workout";
         List<Workout> workouts = new ArrayList<>();
 
@@ -304,10 +305,10 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
         }
 
         return workouts;
-    }*/
+    }
 
     public List<Exercise> getWorkoutExercises(int workoutId) throws SQLException {
-        String sql = "SELECT id, exerciseName, exerciseType, exerciseMuscle, exerciseEquipment, exerciseDifficulty, exerciseInstructions, workoutId FROM workout_exercise WHERE workoutId = ?";
+        String sql = "SELECT * FROM workout_exercise WHERE workout_id = ?";
 
         List<Exercise> exercises = new ArrayList<>();
         try (Connection conn = DatabaseConnector.connect();
@@ -316,15 +317,11 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
 
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                var id = rs.getInt("id");
-                var exerciseName = rs.getString("exerciseName");
-                var type = rs.getString("exerciseType");
-                var muscle = rs.getString("exerciseMuscle");
-                var equipment = rs.getString("exerciseEquipment");
-                var difficulty = rs.getString("exerciseDifficulty");
-                var instructions = rs.getString("exerciseInstructions");
+                //var id = rs.getInt("id");
+                var exerciseId  =rs.getInt("exercise_id");
 
-                Exercise exercise = new Exercise(id, exerciseName, type, muscle, equipment, difficulty, instructions);
+                Exercise exercise = getMyExercise(exerciseId);
+                //Exercise exercise = new Exercise(id, exerciseName, type, muscle, equipment, difficulty, instructions);
                 exercises.add(exercise);
             }
         }
@@ -333,7 +330,7 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
     }
 
 
-/*    public void insertWorkout(Workout workout) {
+    public void insertWorkout(Workout workout) {
         String sql = "INSERT INTO created_workout(workoutName) VALUES(?)";
 
         try (Connection conn = DatabaseConnector.connect();
@@ -352,21 +349,17 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-    }*/
+    }
 
     private void insertWorkoutExercises(List<Exercise> exercises, int id) {
-        String sql = "INSERT INTO workout_exercise(exerciseName, exerciseType, exerciseMuscle, exerciseEquipment, exerciseDifficulty, exerciseInstructions, workoutId) VALUES(?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO workout_exercise(exercise_id, workout_id) VALUES(?,?)";
         try (Connection conn = DatabaseConnector.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             for (Exercise exercise : exercises) {
-                pstmt.setString(1, exercise.getName());
-                pstmt.setString(2, exercise.getType());
-                pstmt.setString(3, exercise.getMuscle());
-                pstmt.setString(4, exercise.getEquipment());
-                pstmt.setString(5, exercise.getDifficulty());
-                pstmt.setString(6, exercise.getInstructions());
-                pstmt.setInt(7, id);
+                pstmt.setInt(1, exercise.getId());
+                pstmt.setInt(2, id);
+
                 pstmt.executeUpdate();
             }
 
