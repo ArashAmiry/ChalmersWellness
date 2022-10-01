@@ -1,6 +1,5 @@
 package com.example.chalmerswellness.Controllers.Dashboard;
 
-import com.example.chalmerswellness.Controllers.Dashboard.QuotesAPIConnector;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -30,10 +29,8 @@ public class DashboardViewController extends AnchorPane implements Initializable
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        QuotesAPIConnector apiConnector = new QuotesAPIConnector();
-        String motivationalQuote = apiConnector.getRandomQuoteAsStringFromAPI("motivational");
-        String sportsAndCompetitionQuote = apiConnector.getRandomQuoteAsStringFromAPI("sports&competition");
-        dashboardQuote2.setText(motivationalQuote);
-        dashboardQuote1.setText(sportsAndCompetitionQuote);
+        DashboardQuotes dashboardQuotes = DashboardQuotes.getInstance();
+        dashboardQuote2.setText(dashboardQuotes.getMotivationalQuote());
+        dashboardQuote1.setText(dashboardQuotes.getSportsAndCompetitionQuote());
     }
 }
