@@ -5,7 +5,6 @@ import com.example.chalmerswellness.Interfaces.Observable;
 import com.example.chalmerswellness.Interfaces.Observer;
 import com.example.chalmerswellness.Profile;
 import com.example.chalmerswellness.calorieAPI.Meal;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
