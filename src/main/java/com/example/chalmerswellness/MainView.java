@@ -8,20 +8,14 @@ import com.example.chalmerswellness.Services.DataService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 
 public class MainView extends AnchorPane {
     @FXML AnchorPane contentRootAnchorPane;
     @FXML AnchorPane navigationAnchorPane;
     @FXML AnchorPane templateRootAnchorPane;
     @FXML Button workoutBtn;
-
-    WorkoutController workoutView = new WorkoutController();
-    NutritionViewController nutritionViewController = new NutritionViewController();
-
-    CalorieIntakeCalculatorController calorieIntakeCalculatorController = new CalorieIntakeCalculatorController();
-    DashboardViewController dashboardViewController = new DashboardViewController();
-
-    SettingsViewController settingsViewController = new SettingsViewController();
+    @FXML Text firstNameText;
     DataService dataService = new DataService();
 
     public MainView(){
@@ -29,7 +23,6 @@ public class MainView extends AnchorPane {
 
     @FXML
     public void initialize(){
-        navigateToDashboardView();
         if (dataService.checkIfUsersExist()) {
             openLoginScreen();
         } else {
@@ -39,23 +32,25 @@ public class MainView extends AnchorPane {
 
     @FXML
     public void navigateToWorkout() {
-        setViewTo(workoutView);
+        setViewTo(new WorkoutController());
     }
 
    @FXML
    public void navigateToNutritionView() {
         if (LoggedInUser.getInstance().getCalorieGoal() == 0) {
-            setViewTo(calorieIntakeCalculatorController);
+            setViewTo(new CalorieIntakeCalculatorController());
         } else {
-            setViewTo(nutritionViewController);
+            setViewTo(new NutritionViewController());
         }
    }
    @FXML
-   public void navigateToSettingsView() { setViewTo(settingsViewController);}
+   public void navigateToSettingsView() {
+        setViewTo(new SettingsViewController());
+    }
 
     @FXML
     public void navigateToDashboardView() {
-        setViewTo(dashboardViewController);
+        setViewTo(new DashboardViewController());
     }
 
     private void setViewTo(AnchorPane pane){
@@ -68,12 +63,10 @@ public class MainView extends AnchorPane {
     }
 
     private void openLoginScreen() {
-        LoginController loginController = new LoginController(templateRootAnchorPane);
-        templateRootAnchorPane.getChildren().add(loginController);
+        templateRootAnchorPane.getChildren().add(new LoginController(templateRootAnchorPane, contentRootAnchorPane));
     }
 
     private void openSignUpScreen() {
-        SignUpController signUpController = new SignUpController(templateRootAnchorPane);
-        templateRootAnchorPane.getChildren().add(signUpController);
+        templateRootAnchorPane.getChildren().add(new SignUpController(templateRootAnchorPane, contentRootAnchorPane));
     }
 }

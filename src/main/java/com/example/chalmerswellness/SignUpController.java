@@ -1,5 +1,6 @@
 package com.example.chalmerswellness;
 
+import com.example.chalmerswellness.Controllers.Dashboard.DashboardViewController;
 import com.example.chalmerswellness.Services.DataService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -34,19 +35,23 @@ public class SignUpController extends AnchorPane implements Initializable {
     RadioButton maleRadioButton;
     @FXML
     RadioButton femaleRadioButton;
-    @FXML AnchorPane parentPane;
-    @FXML AnchorPane navigationPane;
+    @FXML
+    AnchorPane parentPane;
+    @FXML
+    AnchorPane contentPane;
+
     ToggleGroup genderToggleGroup = new ToggleGroup();
     DataService dataService = new DataService();
 
 
-    public SignUpController(AnchorPane parent) {
+    public SignUpController(AnchorPane parent, AnchorPane content) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/SignUpView.fxml"));
 
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 
         parentPane = parent;
+        contentPane = content;
 
         try {
             fxmlLoader.load();
@@ -84,6 +89,7 @@ public class SignUpController extends AnchorPane implements Initializable {
             dataService.insertUser(newUser, password);
             LoggedInUser.createInstance(dataService.getUser(username, password));
             parentPane.getChildren().remove(this);
+            contentPane.getChildren().add(new DashboardViewController());
         }
     }
 

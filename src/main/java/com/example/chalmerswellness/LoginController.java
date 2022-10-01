@@ -1,5 +1,6 @@
 package com.example.chalmerswellness;
 
+import com.example.chalmerswellness.Controllers.Dashboard.DashboardViewController;
 import com.example.chalmerswellness.Services.DataService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,17 +21,20 @@ public class LoginController extends AnchorPane implements Initializable {
     @FXML
     AnchorPane parentPane;
     @FXML
+    AnchorPane contentPane;
+    @FXML
     AnchorPane navigationPane;
     DataService dataService = new DataService();
 
 
-    public LoginController(AnchorPane parent) {
+    public LoginController(AnchorPane parent, AnchorPane content) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/LoginView.fxml"));
 
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 
         parentPane = parent;
+        contentPane = content;
 
         try {
             fxmlLoader.load();
@@ -49,10 +53,11 @@ public class LoginController extends AnchorPane implements Initializable {
     void login(MouseEvent event) {
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
-        if(dataService.loginUser(username, password)) {
+        if(dataService.checkIfCredentialsMatch(username, password)) {
             System.out.println("Login successful");
             LoggedInUser.createInstance(dataService.getUser(username,password));
             parentPane.getChildren().remove(this);
+            contentPane.getChildren().add(new DashboardViewController());
         } else {
             System.out.println("Login failed");
         }
@@ -60,9 +65,8 @@ public class LoginController extends AnchorPane implements Initializable {
 
     @FXML
     void createNewAccount(MouseEvent event) {
-        SignUpController signUpController = new SignUpController(parentPane);
         parentPane.getChildren().remove(this);
-        parentPane.getChildren().add(signUpController);
+        parentPane.getChildren().add(new SignUpController(parentPane, contentPane));
     }
 
 }

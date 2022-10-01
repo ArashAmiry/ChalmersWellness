@@ -26,11 +26,12 @@ public class User {
         this.weight = weight;
     }
 
-    public User(int id, String username, String firstName, String lastName, String email, int height, LocalDate birthDate, double weight, int calorieGoal) {
+    public User(int id, String username, String firstName, String lastName, Gender gender, String email, int height, LocalDate birthDate, double weight, int calorieGoal) {
         this.id = id;
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.gender = gender;
         this.email = email;
         this.height = height;
         this.birthDate = birthDate;

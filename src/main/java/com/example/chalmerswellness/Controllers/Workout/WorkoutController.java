@@ -52,7 +52,6 @@ public class WorkoutController extends AnchorPane implements Initializable {
         if(anchorPaneSearch.getChildren().isEmpty()) {
             anchorPaneSearch.getChildren().add(exerciseSearchController);
         }
-
         openWorkoutTab();
     }
 

@@ -47,7 +47,7 @@
                   <Font size="24.0" />
                </font>
             </Text>
-            <Text layoutX="165.0" layoutY="322.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="nameLabel" text="Amiry" textAlignment="CENTER" wrappingWidth="115.4189224243164" AnchorPane.leftAnchor="165.0" AnchorPane.rightAnchor="179.5810775756836">
+            <Text fx:id="firstNameText" layoutX="165.0" layoutY="322.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="nameLabel" text="Amiry" textAlignment="CENTER" wrappingWidth="115.4189224243164" AnchorPane.leftAnchor="165.0" AnchorPane.rightAnchor="179.5810775756836">
                <font>
                   <Font size="36.0" />
                </font>

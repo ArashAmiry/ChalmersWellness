@@ -94,6 +94,7 @@ public class CalorieIntakeCalculatorController extends AnchorPane implements Ini
         calorieIntakeText.setVisible(true);
 
         dataService.setCalorieGoal(loggedInUser.getId(), calorieIntake);
+        dataService.setWeightGoal(loggedInUser.getId(), weightGoal);
         LoggedInUser.updateInstance(dataService.getUser(loggedInUser.getId()));
 
         notifyObservers();
