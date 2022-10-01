@@ -139,7 +139,6 @@ public class DataService {
         }
     }
 
-    // Return user object if user exists in database
     public User getUser(String username, String password) {
             String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
             User user = null;
@@ -149,13 +148,29 @@ public class DataService {
                 preparedStatement.setString(2, password);
                 ResultSet rs = preparedStatement.executeQuery();
                 if (rs.next()) {
-                    user = new User(rs.getInt("id"), rs.getString("username"), rs.getString("firstName"), rs.getString("lastName"), rs.getString("email"), rs.getInt("height"),rs.getDate("birthDate").toLocalDate(), rs.getDouble("weight"));
+                    user = new User(rs.getInt("id"), rs.getString("username"), rs.getString("firstName"), rs.getString("lastName"), rs.getString("email"), rs.getInt("height"),rs.getDate("birthDate").toLocalDate(), rs.getDouble("weight"), rs.getInt("calorieGoal"));
                 }
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             }
             return user;
         }
+
+    public User getUser(int id) {
+        String sql = "SELECT * FROM users WHERE id = ?";
+        User user = null;
+        try (Connection conn = connect(dbPath);
+             PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+            preparedStatement.setInt(1, id);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                user = new User(rs.getInt("id"), rs.getString("username"), rs.getString("firstName"), rs.getString("lastName"), rs.getString("email"), rs.getInt("height"),rs.getDate("birthDate").toLocalDate(), rs.getDouble("weight"), rs.getInt("calorieGoal"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return user;
+    }
 
     public boolean loginUser(String username, String password) {
         String sql = "SELECT * FROM users WHERE username = ? AND password = ?";

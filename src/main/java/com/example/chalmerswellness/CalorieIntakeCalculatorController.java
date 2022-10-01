@@ -19,8 +19,6 @@ import java.net.URL;
 import java.util.*;
 
 public class CalorieIntakeCalculatorController extends AnchorPane implements Initializable, Observable {
-
-    final private Profile profile = Profile.getInstance();
     @FXML
     private RadioButton radioButtonSlowPace;
     @FXML
@@ -95,9 +93,8 @@ public class CalorieIntakeCalculatorController extends AnchorPane implements Ini
         calorieIntakeText.setText("Your recommended calorie intake is " + calorieIntake + " calories per day.");
         calorieIntakeText.setVisible(true);
 
-        profile.setHasCalculatedCalorieIntake(true);
-        profile.setCalorieGoal(calorieIntake);
         dataService.setCalorieGoal(loggedInUser.getId(), calorieIntake);
+        LoggedInUser.updateInstance(dataService.getUser(loggedInUser.getId()));
 
         notifyObservers();
     }
