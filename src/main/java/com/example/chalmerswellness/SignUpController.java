@@ -1,11 +1,14 @@
 package com.example.chalmerswellness;
 
-import com.example.chalmerswellness.Controllers.Dashboard.DashboardViewController;
 import com.example.chalmerswellness.Services.DataService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.Node;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
@@ -36,28 +39,13 @@ public class SignUpController extends AnchorPane implements Initializable {
     @FXML
     RadioButton femaleRadioButton;
     @FXML
-    AnchorPane parentPane;
-    @FXML
-    AnchorPane contentPane;
+    AnchorPane rootPane;
 
     ToggleGroup genderToggleGroup = new ToggleGroup();
     DataService dataService = new DataService();
 
 
-    public SignUpController(AnchorPane parent, AnchorPane content) {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/SignUpView.fxml"));
-
-        fxmlLoader.setRoot(this);
-        fxmlLoader.setController(this);
-
-        parentPane = parent;
-        contentPane = content;
-
-        try {
-            fxmlLoader.load();
-        } catch (IOException exception) {
-            throw new RuntimeException(exception);
-        }
+    public SignUpController() {
 
     }
 
@@ -70,7 +58,7 @@ public class SignUpController extends AnchorPane implements Initializable {
     }
 
     @FXML
-    void signUp(MouseEvent event) {
+    void signUp(MouseEvent event) throws IOException {
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
         Gender gender = (Gender) genderToggleGroup.getSelectedToggle().getUserData();
@@ -81,15 +69,13 @@ public class SignUpController extends AnchorPane implements Initializable {
         double weight = Double.parseDouble(weightTextField.getText());
         LocalDate birthDate = birthDatePicker.getValue();
 
-        User newUser = new User(username, firstName, lastName, gender, email, height, birthDate, weight);
+        User newUser = new User(username, password, firstName, lastName, gender, email, height, birthDate, weight);
 
-        if (dataService.checkIfUsernameExists(username)) {
-            System.out.println("Username already exists");
-        } else {
-            dataService.insertUser(newUser, password);
+        if (!dataService.checkIfUsernameExists(username)) {
+            dataService.insertUser(newUser);
             LoggedInUser.createInstance(dataService.getUser(username, password));
-            parentPane.getChildren().remove(this);
-            contentPane.getChildren().add(new DashboardViewController());
+            FXMLLoader fxmlLoader = new FXMLLoader(ChalmersWellnessApp.class.getResource("/fxml/MainView.fxml"));
+            rootPane.getChildren().setAll((Node) fxmlLoader.load());
         }
     }
 

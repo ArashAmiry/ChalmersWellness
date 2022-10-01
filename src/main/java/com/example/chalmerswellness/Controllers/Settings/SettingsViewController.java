@@ -60,6 +60,7 @@ public class SettingsViewController extends AnchorPane implements Initializable 
         User user = LoggedInUser.getInstance();
 
         usernameTextField.setText(user.getUsername());
+        passwordTextField.setText(user.getPassword());
         firstNameTextField.setText(user.getFirstName());
         lastNameTextField.setText(user.getLastName());
         emailTextField.setText(user.getEmail());
@@ -82,18 +83,20 @@ public class SettingsViewController extends AnchorPane implements Initializable 
 
     @FXML
     void saveChanges() {
+        User user = LoggedInUser.getInstance();
         String username = usernameTextField.getText();
+        String password = passwordTextField.getText();
         String firstName = firstNameTextField.getText();
         String lastName = lastNameTextField.getText();
         String email = emailTextField.getText();
         double weight = Double.parseDouble(weightTextField.getText());
         int height = Integer.parseInt(heightTextField.getText());
-        String password = passwordTextField.getText();
         LocalDate birthDate = birthDatePicker.getValue();
         Gender gender = (Gender) genderToggleGroup.getSelectedToggle().getUserData();
 
         DataService dataService = new DataService();
-        dataService.updateUser(LoggedInUser.getInstance().getId(), username, password, firstName, lastName, gender, email, birthDate, height, weight);
+        dataService.updateUser(user.getId(), username, password, firstName, lastName, gender, email, birthDate, height, weight);
+        LoggedInUser.updateInstance(dataService.getUser(user.getId()));
     }
 
 }

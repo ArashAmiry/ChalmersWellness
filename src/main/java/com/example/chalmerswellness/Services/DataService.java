@@ -122,12 +122,12 @@ public class DataService {
         }
     }
 
-    public void insertUser(User user, String password) {
+    public void insertUser(User user) {
         String sql = "INSERT INTO users (username, password, firstName, lastName, gender, email, birthDate, height, weight) VALUES(?,?,?,?,?,?,?,?,?)";
         try (Connection conn = connect(dbPath);
              PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
             preparedStatement.setString(1, user.getUsername());
-            preparedStatement.setString(2, password);
+            preparedStatement.setString(2, user.getPassword());
             preparedStatement.setString(3, user.getFirstName());
             preparedStatement.setString(4, user.getLastName());
             preparedStatement.setString(5, String.valueOf(user.getGender()));
@@ -183,7 +183,7 @@ public class DataService {
                 preparedStatement.setString(2, password);
                 ResultSet rs = preparedStatement.executeQuery();
                 if (rs.next()) {
-                    user = new User(rs.getInt("id"), rs.getString("username"), rs.getString("firstName"), rs.getString("lastName"), Gender.valueOf(rs.getString("gender")), rs.getString("email"), rs.getInt("height"),rs.getDate("birthDate").toLocalDate(), rs.getDouble("weight"), rs.getInt("calorieGoal"));
+                    user = new User(rs.getInt("id"), rs.getString("username"), rs.getString("password"), rs.getString("firstName"), rs.getString("lastName"), Gender.valueOf(rs.getString("gender")), rs.getString("email"), rs.getInt("height"),rs.getDate("birthDate").toLocalDate(), rs.getDouble("weight"), rs.getInt("calorieGoal"));
                 }
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
@@ -199,7 +199,7 @@ public class DataService {
             preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
             if (rs.next()) {
-                user = new User(rs.getInt("id"), rs.getString("username"), rs.getString("firstName"), rs.getString("lastName"), Gender.valueOf(rs.getString("gender")), rs.getString("email"), rs.getInt("height"),rs.getDate("birthDate").toLocalDate(), rs.getDouble("weight"), rs.getInt("calorieGoal"));
+                user = new User(rs.getInt("id"), rs.getString("username"), rs.getString("password"), rs.getString("firstName"), rs.getString("lastName"), Gender.valueOf(rs.getString("gender")), rs.getString("email"), rs.getInt("height"),rs.getDate("birthDate").toLocalDate(), rs.getDouble("weight"), rs.getInt("calorieGoal"));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -221,21 +221,6 @@ public class DataService {
             System.out.println(e.getMessage());
         }
         return false;
-    }
-
-    public int getUserId(String username) {
-        String sql = "SELECT id FROM users WHERE username = ?";
-        try (Connection conn = connect(dbPath);
-             PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
-            preparedStatement.setString(1, username);
-            ResultSet rs = preparedStatement.executeQuery();
-            if (rs.next()) {
-                return rs.getInt("id");
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return 0;
     }
 
     public boolean checkIfUsernameExists(String username) {
@@ -266,19 +251,6 @@ public class DataService {
         }
     }
 
-    public boolean checkIfUsersExist() {
-        String sql = "SELECT * FROM users";
-        try (Connection conn = connect(dbPath);
-             Statement stmt = conn.createStatement()) {
-            ResultSet rs = stmt.executeQuery(sql);
-            if (rs.next()) {
-                return true;
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return false;
-    }
     public void setWeightGoal(int id, double weightGoal) {
         String sql = "UPDATE users SET weightGoal = ? WHERE id = ?";
         try (Connection conn = connect(dbPath);

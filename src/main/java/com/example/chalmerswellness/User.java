@@ -5,6 +5,7 @@ import java.time.LocalDate;
 public class User {
     private int id;
     private String username;
+    private String password;
     private String firstName;
     private String lastName;
     private Gender gender;
@@ -15,8 +16,9 @@ public class User {
     private int calorieGoal;
     private double weightGoal;
 
-    public User(String username, String firstName, String lastName, Gender gender, String email, int height, LocalDate birthDate, double weight) {
+    public User(String username, String password, String firstName, String lastName, Gender gender, String email, int height, LocalDate birthDate, double weight) {
         this.username = username;
+        this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
@@ -26,9 +28,10 @@ public class User {
         this.weight = weight;
     }
 
-    public User(int id, String username, String firstName, String lastName, Gender gender, String email, int height, LocalDate birthDate, double weight, int calorieGoal) {
+    public User(int id, String username, String password, String firstName, String lastName, Gender gender, String email, int height, LocalDate birthDate, double weight, int calorieGoal) {
         this.id = id;
         this.username = username;
+        this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
@@ -85,6 +88,9 @@ public class User {
         return calorieGoal;
     }
 
+    public String getPassword() {
+        return password;
+    }
 }
 
 
