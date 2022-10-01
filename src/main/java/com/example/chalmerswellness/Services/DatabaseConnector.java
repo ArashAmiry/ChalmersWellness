@@ -14,17 +14,17 @@ public class DatabaseConnector {
     public DatabaseConnector() {
         createUsersTable();
         createNutritionTable();
-        createAddedExercisesTable();
-        createExerciseItemTable();
-        createExercisesTable();
-        createMyExercisesTable();
-        createExerciseSetsTable();
+        //createAddedExercisesTable();
+        //createExerciseItemTable();
+        //createExercisesTable();
+        //createMyExercisesTable();
+        //createExerciseSetsTable();
 
         createExerciseTable();
         createCompletedExerciseTable();
         createCompletedSetTable();
         createCreatedWorkoutTable();
-        createWorkoutExerciseTable()
+        createWorkoutExerciseTable();
     }
 
     static Connection connect() {
