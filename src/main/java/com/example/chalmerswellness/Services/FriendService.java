@@ -1,10 +1,13 @@
 package com.example.chalmerswellness.Services;
 
+import com.example.chalmerswellness.Gender;
 import com.example.chalmerswellness.LoggedInUser;
-import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.User;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +23,7 @@ public class FriendService {
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
-                User user = new User(rs.getInt("id"), rs.getString("username"), rs.getString("firstName"), rs.getString("lastName"), rs.getString("email"), rs.getInt("height"),rs.getDate("birthDate").toLocalDate(), rs.getDouble("weight"), rs.getInt("calorieGoal"));
+                User user = new User(rs.getInt("id"), rs.getString("username"), rs.getString("password"), rs.getString("firstName"), rs.getString("lastName"), Gender.valueOf(rs.getString("gender")), rs.getString("email"), rs.getInt("height"),rs.getDate("birthDate").toLocalDate(), rs.getDouble("weight"), rs.getInt("calorieGoal"));
                 users.add(user);
             }
         } catch (SQLException e) {
