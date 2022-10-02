@@ -8,6 +8,7 @@ public class Exercise {
     private final String equipment;
     private final String difficulty;
     private final String instructions;
+    private int sets_count;
 
     public Exercise(int id, String name, String type, String muscle, String equipment, String difficulty, String instructions){
         this.id = id;
@@ -27,6 +28,14 @@ public class Exercise {
         this.equipment = exercise.getEquipment();
         this.difficulty = exercise.getDifficulty();
         this.instructions = exercise.getInstructions();
+    }
+
+    public void setSets(int sets){
+        this.sets_count = sets;
+    }
+
+    public int getSets(){
+        return sets_count;
     }
 
     public int getId() {

@@ -1,4 +1,4 @@
-package com.example.chalmerswellness.Controllers.Workout;
+package com.example.chalmerswellness.Controllers.Workout.CreateWorkout;
 
 import com.example.chalmerswellness.Controllers.Workout.TodaysWorkout.ExerciseItemController;
 import com.example.chalmerswellness.Models.WorkoutModel;
@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CreateWorkoutController extends AnchorPane implements Observer {
-    private ObservableList<ExerciseItemController> exercisesList = FXCollections.observableArrayList();
+    private ObservableList<CreateExerciseItemController> exercisesList = FXCollections.observableArrayList();
     private WorkoutModel model;
     @FXML public ListView mainContent;
     @FXML TextField workoutNameField;
@@ -43,13 +43,13 @@ public class CreateWorkoutController extends AnchorPane implements Observer {
         exercisesList.clear();
 
         for (var exercise: exercises) {
-            ExerciseItemController exerciseController = new ExerciseItemController(exercise, model, this);
+            CreateExerciseItemController exerciseController = new CreateExerciseItemController(exercise, model, this);
             exercisesList.add(exerciseController);
         }
         mainContent.getItems().setAll(exercisesList);
     }
 
-    private Workout createWorkoutObject(List<ExerciseItemController> exercises){
+    private Workout createWorkoutObject(List<CreateExerciseItemController> exercises){
         String workoutName = workoutNameField.getText();
         List<Exercise> workoutExercises = new ArrayList<>();
         for (var exercise: exercises) {
@@ -59,9 +59,16 @@ public class CreateWorkoutController extends AnchorPane implements Observer {
     }
 
     @FXML public void saveWorkout(){
+        saveSets();
         Workout workoutObject = createWorkoutObject(exercisesList);
         model.addWorkout(workoutObject);
         clearWorkoutListView();
+    }
+
+    private void saveSets(){
+        for (CreateExerciseItemController c : exercisesList){
+            c.setSets();
+        }
     }
 
     private void clearWorkoutListView(){

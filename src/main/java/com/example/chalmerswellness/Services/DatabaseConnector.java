@@ -145,6 +145,7 @@ public class DatabaseConnector {
                 + "	id INTEGER PRIMARY KEY,\n"
                 + "	workout_id INTEGER,\n"
                 + "	exercise_id INTEGER,\n"
+                + "	sets_count INTEGER,\n"
                 + " FOREIGN KEY ('workout_id') REFERENCES 'created_workout' ('id')\n"
                 + " ON UPDATE CASCADE ON DELETE CASCADE\n"
 
