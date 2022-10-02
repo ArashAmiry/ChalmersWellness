@@ -29,7 +29,7 @@ public class FriendService {
         return users;
     }
 
-    public void insertFollow(int followerID, int followingID ){
+    public void insertFollow(int followerID, int followingID){
         //TODO Make each row in table unique?
         String sql = "INSERT INTO friend (follower_id, following_id) VALUES(?,?)";
         try (Connection conn = DatabaseConnector.connect();
@@ -41,5 +41,21 @@ public class FriendService {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public boolean alreadyFollowing(int followerID, int followingID){
+        String sql = "SELECT * FROM friend WHERE follower_id = ? AND following_id = ?";
+        try (Connection conn = DatabaseConnector.connect();
+             PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+            preparedStatement.setInt(1, followerID);
+            preparedStatement.setInt(2, followingID);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
     }
 }

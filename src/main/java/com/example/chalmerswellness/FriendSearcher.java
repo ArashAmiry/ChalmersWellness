@@ -13,7 +13,12 @@ public class FriendSearcher {
 
     public void followFriend(int friendID){
         int followerID = LoggedInUser.getInstance().getId();
+        if (friendService.alreadyFollowing(followerID, friendID)){
+            
+        }
+        else{
+            friendService.insertFollow(followerID, friendID);
+        }
 
-        friendService.insertFollow(followerID, friendID);
     }
 }

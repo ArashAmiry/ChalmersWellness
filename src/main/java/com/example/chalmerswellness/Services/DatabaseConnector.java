@@ -131,6 +131,7 @@ public class DatabaseConnector {
 
     private void createFriendTable() {
         String sql = "CREATE TABLE IF NOT EXISTS friend (\n"
+                + "	id INTEGER PRIMARY KEY,\n"
                 + "	follower_id INTEGER,\n"
                 + "	following_id INTEGER,\n"
                 + " FOREIGN KEY ('follower_id') REFERENCES 'users' ('id')\n"
