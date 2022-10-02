@@ -2,6 +2,7 @@ package com.example.chalmerswellness.calorieAPI;
 
 import com.example.chalmerswellness.Interfaces.Observable;
 import com.example.chalmerswellness.Interfaces.Observer;
+import com.example.chalmerswellness.LoggedInUser;
 import com.example.chalmerswellness.Services.DataService;
 import com.example.chalmerswellness.Services.DatabaseConnector;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -58,6 +59,32 @@ public class FoodFacade implements Observable {
         }
         return true;
     }
+
+    /*public int getTodaysCalories(){
+        int todaysCalories = 0;
+        for (Meal meal : Meal.values()){
+            todaysCalories = caloriesForMealOfDay(todaysCalories, dataService, meal);
+        }
+
+        return todaysCalories;
+    }
+
+    public int caloriesLeftToday(){
+        if ()
+            return LoggedInUser.getInstance().getCalorieGoal() - this.getTodaysCalories();
+    }
+
+    public double caloriesEatenInPercentage(){
+        return this.getTodaysCalories() / LoggedInUser.getInstance().getCalorieGoal();
+    }
+
+    private int caloriesForMealOfDay(int todaysCalories, DataService dataService, Meal meal) {
+        List<Food> foods = dataService.getTodaysNutrition(meal);
+        for (Food food : foods){
+            todaysCalories += food.getCalories();
+        }
+        return todaysCalories;
+    }*/
 
     @Override
     public void notifyObservers() {
