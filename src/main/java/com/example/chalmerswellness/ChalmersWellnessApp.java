@@ -11,7 +11,7 @@ import java.io.IOException;
 public class ChalmersWellnessApp extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(ChalmersWellnessApp.class.getResource("/fxml/MainView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(ChalmersWellnessApp.class.getResource("/fxml/LoginView.fxml"));
         DatabaseConnector databaseConnector = new DatabaseConnector();
         Scene scene = new Scene(fxmlLoader.load(), 1920, 1080);
         stage.setTitle("Chalmers Wellness");

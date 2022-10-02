@@ -34,19 +34,17 @@ public class SignUpController extends AnchorPane implements Initializable {
     RadioButton maleRadioButton;
     @FXML
     RadioButton femaleRadioButton;
-    @FXML AnchorPane parentPane;
     @FXML AnchorPane navigationPane;
     ToggleGroup genderToggleGroup = new ToggleGroup();
     DataService dataService = new DataService();
 
+    AnchorPane rootpane;
 
-    public SignUpController(AnchorPane parent) {
+    public SignUpController(AnchorPane pane) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/SignUpView.fxml"));
 
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
-
-        parentPane = parent;
 
         try {
             fxmlLoader.load();
@@ -54,6 +52,7 @@ public class SignUpController extends AnchorPane implements Initializable {
             throw new RuntimeException(exception);
         }
 
+        this.rootpane = pane;
     }
 
     @Override
@@ -76,14 +75,16 @@ public class SignUpController extends AnchorPane implements Initializable {
         double weight = Double.parseDouble(weightTextField.getText());
         LocalDate birthDate = birthDatePicker.getValue();
 
-        User newUser = new User(username, firstName, lastName, gender, email, height, birthDate, weight);
+        User newUser = new User(username, password, firstName, lastName, gender, email, height, birthDate, weight);
 
         if (dataService.checkIfUsernameExists(username)) {
             System.out.println("Username already exists");
+            rootpane.getChildren().remove(this);
         } else {
-            dataService.insertUser(newUser, password);
+            dataService.insertUser(newUser);
             LoggedInUser.createInstance(dataService.getUser(username, password));
-            parentPane.getChildren().remove(this);
+            rootpane.getChildren().clear();
+            rootpane.getChildren().add(new MainView());
         }
     }
 

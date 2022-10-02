@@ -5,7 +5,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1460.0" styleClass="dashboard" stylesheets="@../css/dashboard.css" type="AnchorPane" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1460.0" styleClass="dashboard" stylesheets="@../css/dashboard.css" type="AnchorPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <AnchorPane layoutX="214.0" layoutY="155.0" prefHeight="200.0" prefWidth="400.0" styleClass="workout">
          <children>
@@ -45,7 +45,7 @@
                   <Font size="14.0" />
                </font>
             </Text>
-            <Text layoutX="127.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="calorieLabel" text="1200 kcal">
+            <Text fx:id="calorieLeft" layoutX="127.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="calorieLabel" text="1200 kcal">
                <font>
                   <Font size="36.0" />
                </font>
