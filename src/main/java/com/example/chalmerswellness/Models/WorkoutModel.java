@@ -99,6 +99,7 @@ public class WorkoutModel implements Observable {
     public void removeExercise(Exercise exercise){
         workoutService.removeCompletedExercise(exercise);
         addedExercises.remove(exercise);
+        addedWorkoutExercises.remove(exercise);
         notifyObservers();
     }
 

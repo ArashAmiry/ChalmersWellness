@@ -339,13 +339,14 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
     }
 
     private void insertWorkoutExercises(List<Exercise> exercises, int id) {
-        String sql = "INSERT INTO workout_exercise(exercise_id, workout_id) VALUES(?,?)";
+        String sql = "INSERT INTO workout_exercise(exercise_id, workout_id, sets_count) VALUES(?,?,?)";
         try (Connection conn = DatabaseConnector.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             for (Exercise exercise : exercises) {
                 pstmt.setInt(1, exercise.getId());
                 pstmt.setInt(2, id);
+                pstmt.setInt(3, exercise.getSets());
 
                 pstmt.executeUpdate();
             }

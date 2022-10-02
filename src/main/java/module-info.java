@@ -36,4 +36,6 @@ module com.example.chalmerswellness {
     opens com.example.chalmerswellness.calorieAPI to javafx.fxml;
     exports com.example.chalmerswellness.Controllers.Friends;
     opens com.example.chalmerswellness.Controllers.Friends;
+    exports com.example.chalmerswellness.Controllers.Workout.CreateWorkout;
+    opens com.example.chalmerswellness.Controllers.Workout.CreateWorkout to javafx.fxml;
 }
