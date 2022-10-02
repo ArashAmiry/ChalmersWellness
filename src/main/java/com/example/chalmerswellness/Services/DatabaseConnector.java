@@ -19,6 +19,7 @@ public class DatabaseConnector {
         createCompletedSetTable();
         createCreatedWorkoutTable();
         createWorkoutExerciseTable();
+        createFriendTable();
     }
 
     static Connection connect() {
@@ -117,6 +118,25 @@ public class DatabaseConnector {
                 + " dateOfInsert DATE DEFAULT CURRENT_DATE,\n"
                 + " mealOfDay text NOT NULL, \n"
                 + " FOREIGN KEY ('userID') REFERENCES 'users' ('id') \n"
+                + " ON UPDATE CASCADE ON DELETE CASCADE\n"
+                + ");";
+
+        try (Connection conn = connect();
+             Statement stmt = conn.createStatement()) {
+            stmt.execute(sql);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void createFriendTable() {
+        String sql = "CREATE TABLE IF NOT EXISTS friend (\n"
+                + "	follower_id INTEGER,\n"
+                + "	following_id INTEGER,\n"
+                + " FOREIGN KEY ('follower_id') REFERENCES 'users' ('id')\n"
+                + " ON UPDATE CASCADE ON DELETE CASCADE\n"
+
+                + " FOREIGN KEY ('following_id') REFERENCES 'users' ('id')\n"
                 + " ON UPDATE CASCADE ON DELETE CASCADE\n"
                 + ");";
 

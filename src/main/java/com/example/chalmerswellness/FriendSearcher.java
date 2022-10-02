@@ -10,4 +10,10 @@ public class FriendSearcher {
     public List<User> findFriends(String friendName){
         return friendService.findFriends(friendName);
     }
+
+    public void followFriend(int friendID){
+        int followerID = LoggedInUser.getInstance().getId();
+
+        friendService.insertFollow(followerID, friendID);
+    }
 }

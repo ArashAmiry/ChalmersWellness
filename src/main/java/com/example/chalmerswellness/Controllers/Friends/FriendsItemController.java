@@ -1,5 +1,6 @@
 package com.example.chalmerswellness.Controllers.Friends;
 
+import com.example.chalmerswellness.FriendSearcher;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -8,6 +9,8 @@ import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 
 public class FriendsItemController extends AnchorPane {
+
+    FriendSearcher friendSearcher = new FriendSearcher();
 
     int userId;
     String firstName;
@@ -34,4 +37,8 @@ public class FriendsItemController extends AnchorPane {
         this.lastName = lastName;
     }
 
+    @FXML
+    private void followFriend(){
+        friendSearcher.followFriend(userId);
+    }
 }

@@ -14,6 +14,6 @@
          </image>
       </ImageView>
       <Label fx:id="name" layoutX="156.0" layoutY="23.0" prefHeight="54.0" prefWidth="279.0" styleClass="friendName" text="Gustav BERNZSTEN" AnchorPane.topAnchor="27.0" />
-      <Button layoutX="500.0" layoutY="42.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="160.0" styleClass="followButton" text="Follow" AnchorPane.topAnchor="37.0" />
+      <Button layoutX="500.0" layoutY="42.0" mnemonicParsing="false" onAction="#followFriend" prefHeight="20.0" prefWidth="160.0" styleClass="followButton" text="Follow" AnchorPane.topAnchor="37.0" />
    </children>
 </fx:root>

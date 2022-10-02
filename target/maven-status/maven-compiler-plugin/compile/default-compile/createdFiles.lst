@@ -9,6 +9,7 @@ com\example\chalmerswellness\Interfaces\Observable.class
 com\example\chalmerswellness\Controllers\Workout\ManageWorkoutController.class
 com\example\chalmerswellness\Controllers\Workout\TodaysWorkout\ExerciseItemSetController.class
 com\example\chalmerswellness\Services\NutritionService.class
+com\example\chalmerswellness\Services\FriendService.class
 com\example\chalmerswellness\Controllers\Workout\TodaysWorkout\TodayWorkoutController.class
 com\example\chalmerswellness\calorieAPI\NutritionAPIConnector.class
 com\example\chalmerswellness\CalorieIntakeCalculatorController$1.class
@@ -19,9 +20,11 @@ com\example\chalmerswellness\Services\DataService.class
 com\example\chalmerswellness\ChalmersWellnessApp.class
 com\example\chalmerswellness\Interfaces\WorkoutState.class
 com\example\chalmerswellness\Controllers\Workout\SearchPane\ExerciseSearchItemController.class
+com\example\chalmerswellness\Controllers\Workout\TodaysWorkout\WorkoutListController.class
 com\example\chalmerswellness\calorieAPI\FoodFacade.class
 com\example\chalmerswellness\ObjectModels\Workout.class
 com\example\chalmerswellness\Controllers\Dashboard\QuotesAPIConnector.class
+com\example\chalmerswellness\FriendSearcher.class
 com\example\chalmerswellness\Controllers\Workout\States\CreateState.class
 com\example\chalmerswellness\Services\DatabaseConnector.class
 com\example\chalmerswellness\Controllers\Dashboard\DashboardViewController.class
