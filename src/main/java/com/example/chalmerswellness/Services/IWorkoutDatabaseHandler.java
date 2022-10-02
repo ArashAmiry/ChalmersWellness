@@ -7,16 +7,15 @@ import com.example.chalmerswellness.ObjectModels.Workout;
 import java.util.List;
 
 public interface IWorkoutDatabaseHandler {
-    Exercise insertExerciseItem(Exercise exercise);
+    List<Exercise> getCompletedExercises();
+    List<ExerciseItemSet> getCompletedSets(int exerciseItemId);
     Exercise insertCompletedExercise(Exercise exercise);
-    List<Workout> getWorkouts();
-    void insertWorkout(Workout workout);
-    void removeAddedExercise(Exercise exercise);
-    void insertExerciseSet(ExerciseItemSet set);
-    List<Exercise> getTodayAddedExercises();
+    void insertCompletedSet(ExerciseItemSet set);
+    void removeCompletedExercise(Exercise exercise);
     void removeSet(int setId);
-    List<ExerciseItemSet> getExerciseSets(int exerciseItemId);
-    List<Exercise> getMyExercises();
-    void insertSets(int exerciseId, List<ExerciseItemSet> sets);
-    void removeExerciseItem(Exercise exercise);
+    List<Exercise> getExercises();
+    void insertCompletedSets(int exerciseId, List<ExerciseItemSet> sets);
+    void insertWorkout(Workout workout);
+    List<Workout> getWorkouts();
+    void insertCompletedExercises(List<Exercise> exercises);
 }

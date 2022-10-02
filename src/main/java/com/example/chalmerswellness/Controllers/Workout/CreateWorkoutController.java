@@ -1,8 +1,6 @@
 package com.example.chalmerswellness.Controllers.Workout;
 
 import com.example.chalmerswellness.Controllers.Workout.TodaysWorkout.ExerciseItemController;
-import com.example.chalmerswellness.Services.DataService;
-import com.example.chalmerswellness.Controllers.Workout.SearchPane.ExerciseSearchItemController;
 import com.example.chalmerswellness.Models.WorkoutModel;
 import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.ObjectModels.Workout;
@@ -68,7 +66,7 @@ public class CreateWorkoutController extends AnchorPane implements Observer {
 
     private void clearWorkoutListView(){
         workoutNameField.deleteText(0,workoutNameField.getText().length());
-        model.removeAllExercises();
+        model.removeAllWorkoutExercises();
         mainContent.getItems().clear();
     }
 
@@ -76,7 +74,6 @@ public class CreateWorkoutController extends AnchorPane implements Observer {
     public void update(Observable observable) {
         model = (WorkoutModel) observable;
         var exercises = model.getAddedWorkoutExercises();
-
         updateExerciseList(exercises);
     }
 }

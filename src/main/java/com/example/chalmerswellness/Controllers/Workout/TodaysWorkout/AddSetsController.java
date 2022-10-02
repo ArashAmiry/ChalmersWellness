@@ -52,6 +52,8 @@ public class AddSetsController extends AnchorPane implements Initializable, Obse
 
 
     @FXML private void addSet(){
+        saveSets();
+
         ExerciseItemSet set = new ExerciseItemSet(exercise.getId(), 0, 0);
 
         model.addSet(set);
@@ -85,6 +87,7 @@ public class AddSetsController extends AnchorPane implements Initializable, Obse
     }
 
     @FXML private void close(){
+        saveSets();
         anchorPane.getChildren().remove(this);
     }
 

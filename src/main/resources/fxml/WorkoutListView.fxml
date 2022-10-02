@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#close" prefHeight="1140.0" prefWidth="1551.0" style="-fx-background-color: rgba(0,0,0,0.7);" type="AnchorPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ListView fx:id="workoutList" layoutX="261.0" layoutY="129.0" prefHeight="753.0" prefWidth="900.0" />
+   </children>
+</fx:root>

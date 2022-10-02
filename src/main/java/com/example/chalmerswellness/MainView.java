@@ -1,54 +1,75 @@
 package com.example.chalmerswellness;
 
 import com.example.chalmerswellness.Controllers.Dashboard.DashboardViewController;
+import com.example.chalmerswellness.Controllers.Friends.FriendsItemController;
+import com.example.chalmerswellness.Controllers.Friends.FriendsViewController;
 import com.example.chalmerswellness.Controllers.Nutrition.NutritionViewController;
 import com.example.chalmerswellness.Controllers.Settings.SettingsViewController;
 import com.example.chalmerswellness.Controllers.Workout.WorkoutController;
 import com.example.chalmerswellness.Services.DataService;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Text;
+
+import java.io.IOException;
 
 public class MainView extends AnchorPane {
     @FXML AnchorPane contentRootAnchorPane;
     @FXML AnchorPane navigationAnchorPane;
     @FXML AnchorPane templateRootAnchorPane;
     @FXML Button workoutBtn;
-    @FXML Text firstNameText;
+
+    WorkoutController workoutView = new WorkoutController();
+    NutritionViewController nutritionViewController = new NutritionViewController();
+    FriendsViewController friendsViewController = new FriendsViewController();
+    CalorieIntakeCalculatorController calorieIntakeCalculatorController = new CalorieIntakeCalculatorController();
+    DashboardViewController dashboardViewController = new DashboardViewController();
+    SettingsViewController settingsViewController = new SettingsViewController();
     DataService dataService = new DataService();
 
     public MainView(){
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/MainView.fxml"));
+
+        fxmlLoader.setRoot(this);
+        fxmlLoader.setController(this);
+
+        try {
+            fxmlLoader.load();
+        } catch (IOException exception) {
+            throw new RuntimeException(exception);
+        }
     }
 
     @FXML
     public void initialize(){
-        User user = LoggedInUser.getInstance();
-        firstNameText.setText(user.getFirstName());
         navigateToDashboardView();
     }
 
     @FXML
     public void navigateToWorkout() {
-        setViewTo(new WorkoutController());
+        setViewTo(workoutView);
     }
 
    @FXML
    public void navigateToNutritionView() {
         if (LoggedInUser.getInstance().getCalorieGoal() == 0) {
-            setViewTo(new CalorieIntakeCalculatorController());
+            setViewTo(calorieIntakeCalculatorController);
         } else {
-            setViewTo(new NutritionViewController());
+            setViewTo(nutritionViewController);
         }
    }
    @FXML
-   public void navigateToSettingsView() {
-        setViewTo(new SettingsViewController());
-    }
+   public void navigateToSettingsView() { setViewTo(settingsViewController);}
 
     @FXML
     public void navigateToDashboardView() {
-        setViewTo(new DashboardViewController());
+        setViewTo(dashboardViewController);
+    }
+
+    @FXML
+    public void navigateToFriendsView() {
+        setViewTo(friendsViewController);
     }
 
     private void setViewTo(AnchorPane pane){
@@ -60,11 +81,4 @@ public class MainView extends AnchorPane {
         contentRootAnchorPane.setBottomAnchor(pane, 0.0);
     }
 
-    private void openLoginScreen() {
-        //templateRootAnchorPane.getChildren().add(new LoginController(templateRootAnchorPane, contentRootAnchorPane));
-    }
-
-    private void openSignUpScreen() {
-       // templateRootAnchorPane.getChildren().add(new SignUpController(templateRootAnchorPane, contentRootAnchorPane));
-    }
 }
