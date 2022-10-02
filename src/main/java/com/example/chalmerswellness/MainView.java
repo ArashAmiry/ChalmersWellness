@@ -1,7 +1,6 @@
 package com.example.chalmerswellness;
 
 import com.example.chalmerswellness.Controllers.Dashboard.DashboardViewController;
-import com.example.chalmerswellness.Controllers.Friends.FriendsItemController;
 import com.example.chalmerswellness.Controllers.Friends.FriendsViewController;
 import com.example.chalmerswellness.Controllers.Nutrition.NutritionViewController;
 import com.example.chalmerswellness.Controllers.Settings.SettingsViewController;
@@ -11,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 
 import java.io.IOException;
 
@@ -19,6 +19,7 @@ public class MainView extends AnchorPane {
     @FXML AnchorPane navigationAnchorPane;
     @FXML AnchorPane templateRootAnchorPane;
     @FXML Button workoutBtn;
+    @FXML Text firstNameText;
 
     WorkoutController workoutView = new WorkoutController();
     NutritionViewController nutritionViewController = new NutritionViewController();
@@ -43,6 +44,7 @@ public class MainView extends AnchorPane {
 
     @FXML
     public void initialize(){
+        firstNameText.setText(LoggedInUser.getInstance().getFirstName());
         navigateToDashboardView();
     }
 
