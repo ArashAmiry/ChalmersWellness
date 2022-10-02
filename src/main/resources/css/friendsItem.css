@@ -22,4 +22,5 @@
     -fx-border-radius: 100px;
     -fx-background-radius: 100px;
     -fx-background-color: #ffffff;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 7, 0, 0, 0);
 }

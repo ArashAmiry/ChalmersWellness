@@ -1,12 +1,22 @@
 package com.example.chalmerswellness.Controllers.Friends;
 
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 
 public class FriendsItemController extends AnchorPane {
-    public FriendsItemController(){
+
+    int userId;
+    String firstName;
+    String lastName;
+
+    @FXML
+    Label name;
+
+    public FriendsItemController(int userId, String firstName, String lastName){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/FriendsItem.fxml"));
 
         fxmlLoader.setRoot(this);
@@ -17,5 +27,11 @@ public class FriendsItemController extends AnchorPane {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
+
+        name.setText(firstName + " " + lastName);
+        this.userId = userId;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
+
 }
