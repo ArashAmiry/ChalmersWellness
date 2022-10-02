@@ -6,14 +6,12 @@ import com.example.chalmerswellness.LoggedInUser;
 import com.example.chalmerswellness.Services.DataService;
 import com.example.chalmerswellness.Services.DatabaseConnector;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class FoodFacade implements Observable {
-    private final ObjectMapper objectMapper = new ObjectMapper();
     private final NutritionAPIConnector apiConnector = new NutritionAPIConnector();
     private static List<Observer> observers = new ArrayList<>();
     private DataService dataService = new DataService();
@@ -60,7 +58,7 @@ public class FoodFacade implements Observable {
         return true;
     }
 
-    /*public int getTodaysCalories(){
+    public int getTodaysCalories(){
         int todaysCalories = 0;
         for (Meal meal : Meal.values()){
             todaysCalories = caloriesForMealOfDay(todaysCalories, dataService, meal);
@@ -70,12 +68,22 @@ public class FoodFacade implements Observable {
     }
 
     public int caloriesLeftToday(){
-        if ()
+        if (LoggedInUser.getInstance().getCalorieGoal() - this.getTodaysCalories() <= 0){
+            return 0;
+        }
+        else{
             return LoggedInUser.getInstance().getCalorieGoal() - this.getTodaysCalories();
+        }
+
     }
 
     public double caloriesEatenInPercentage(){
-        return this.getTodaysCalories() / LoggedInUser.getInstance().getCalorieGoal();
+        if (LoggedInUser.getInstance().getCalorieGoal() == 0){
+            return 0;
+        }
+        else{
+            return (double) this.getTodaysCalories() / LoggedInUser.getInstance().getCalorieGoal();
+        }
     }
 
     private int caloriesForMealOfDay(int todaysCalories, DataService dataService, Meal meal) {
@@ -84,7 +92,7 @@ public class FoodFacade implements Observable {
             todaysCalories += food.getCalories();
         }
         return todaysCalories;
-    }*/
+    }
 
     @Override
     public void notifyObservers() {

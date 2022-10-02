@@ -44,11 +44,6 @@ public class MainView extends AnchorPane {
     @FXML
     public void initialize(){
         navigateToDashboardView();
-        if (dataService.checkIfUsersExist()) {
-            openLoginScreen();
-        } else {
-            openSignUpScreen();
-        }
     }
 
     @FXML
@@ -86,13 +81,4 @@ public class MainView extends AnchorPane {
         contentRootAnchorPane.setBottomAnchor(pane, 0.0);
     }
 
-    private void openLoginScreen() {
-        /*LoginController loginController = new LoginController();
-        templateRootAnchorPane.getChildren().add(loginController);*/
-    }
-
-    private void openSignUpScreen() {
-        /*SignUpController signUpController = new SignUpController(templateRootAnchorPane);
-        templateRootAnchorPane.getChildren().add(signUpController);*/
-    }
 }

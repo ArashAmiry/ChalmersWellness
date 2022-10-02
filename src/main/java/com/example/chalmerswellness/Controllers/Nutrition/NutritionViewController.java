@@ -3,6 +3,7 @@ package com.example.chalmerswellness.Controllers.Nutrition;
 import com.example.chalmerswellness.CalorieIntakeCalculatorController;
 import com.example.chalmerswellness.Interfaces.Observable;
 import com.example.chalmerswellness.Interfaces.Observer;
+import com.example.chalmerswellness.calorieAPI.FoodFacade;
 import com.example.chalmerswellness.calorieAPI.Meal;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,6 +27,8 @@ public class NutritionViewController extends AnchorPane implements Initializable
     @FXML
     private Text progressBarText;
 
+    FoodFacade foodFacade = new FoodFacade();
+
     public NutritionViewController() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/NutritionView.fxml"));
 
@@ -38,12 +41,12 @@ public class NutritionViewController extends AnchorPane implements Initializable
             throw new RuntimeException(exception);
         }
 
+        foodFacade.subscribe(this);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        /*progressBarText.setText(profile.calorieGoal() - profile.caloriesConsumed() + " Kcal Left");
-        progressBar.setProgress((double) profile.caloriesConsumed() / profile.calorieGoal());*/
+        updateProgressBar();
         CalorieIntakeCalculatorController calorieIntakeCalculatorController = new CalorieIntakeCalculatorController();
         calorieIntakeCalculatorController.subscribe(this);
     }
@@ -51,6 +54,12 @@ public class NutritionViewController extends AnchorPane implements Initializable
     private void loadNutritionSearchView(Meal meal) {
         rootPane.getChildren().add(new NutritionSearchViewController(rootPane, meal));
         rootPane.setDisable(false);
+    }
+
+    private void updateProgressBar(){
+        progressBarText.setText(foodFacade.caloriesLeftToday() + " Kcal Left");
+        double percentage = foodFacade.caloriesEatenInPercentage();
+        progressBar.setProgress(percentage);
     }
 
     @FXML
@@ -75,7 +84,6 @@ public class NutritionViewController extends AnchorPane implements Initializable
 
     @Override
     public void update(Observable observable) {
-        /*progressBarText.setText(profile.calorieGoal() - profile.caloriesConsumed() + " Kcal Left");
-        progressBar.setProgress((double) profile.caloriesConsumed() / profile.calorieGoal());*/
+        updateProgressBar();
     }
 }
