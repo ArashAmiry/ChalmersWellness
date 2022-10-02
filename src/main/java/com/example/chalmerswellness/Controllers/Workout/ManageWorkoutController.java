@@ -52,6 +52,7 @@ public class ManageWorkoutController extends AnchorPane implements Observer {
         }
         workoutList.getItems().setAll(workoutsList);
     }
+
     void updateExerciseList(List<Exercise> exercises){
         exercisesList.clear();
 

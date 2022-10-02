@@ -4,8 +4,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1460.0" type="AnchorPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fx:id="mainRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1460.0" type="AnchorPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
+      <Button fx:id="addedWorkoutsBtn" layoutX="914.0" layoutY="43.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="178.0" text="Workouts">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
       <AnchorPane layoutX="14.0" layoutY="102.0" prefHeight="890.0" prefWidth="1402.0">
          <children>
             <AnchorPane fx:id="anchorPaneSearch" layoutX="1072.0" prefHeight="812.0" prefWidth="330.0" />
