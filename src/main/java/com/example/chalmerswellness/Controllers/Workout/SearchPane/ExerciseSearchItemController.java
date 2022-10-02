@@ -49,9 +49,9 @@ public class ExerciseSearchItemController extends AnchorPane implements Initiali
         model.addExercise(exercise, workoutState);
     }
 
-    @FXML public void removeFromWorkout(){
+/*    @FXML public void removeFromWorkout(){
         model.removeExercise(exercise);
-    }
+    }*/
 
     public Exercise getExercise(){
         return this.exercise;

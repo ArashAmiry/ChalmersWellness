@@ -56,20 +56,9 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
         return new ExerciseItem(generatedKey, exercise);
     }
 
-    public void insertCompletedExercises(List<Exercise> exercises){
-        String sql = "INSERT INTO completed_exercise(exercise_id) VALUES(?)";
-        removeCompletedExercises();
-
-        try (Connection conn = DatabaseConnector.connect();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            for (Exercise exercise : exercises) {
-                pstmt.setInt(1, exercise.getId());
-                pstmt.executeUpdate();
-            }
-
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+    public void insertCompletedExercises(List<ExerciseItem> exercises){
+        for (ExerciseItem exerciseItem: exercises) {
+            insertCompletedExercise(exerciseItem);
         }
     }
 
@@ -107,12 +96,16 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
     }
 
 
-    public void removeCompletedExercise(Exercise exercise) {
+    public void removeCompletedExercise(ExerciseItem exercise) {
         String sql = "DELETE FROM completed_exercise WHERE id = ?";
+
+        removeCompletedSets(exercise.getExerciseItemId());
 
         try (Connection conn = DatabaseConnector.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-                pstmt.setInt(1, exercise.getId());
+            //TODO JUST CHANGED
+
+                pstmt.setInt(1, exercise.getExerciseItemId());
                 pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -121,6 +114,7 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
 
 
 
+    //TODO THIS IS NEW
     public void updateCompletedExercise(ExerciseItem exerciseItem) {
         String sql = "INSERT INTO completed_set(completed_exercise_id, weight, reps) VALUES ((SELECT id from completed_exercise WHERE id = ?), ?,?)";
 

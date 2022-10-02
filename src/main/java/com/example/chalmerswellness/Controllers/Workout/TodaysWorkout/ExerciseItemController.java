@@ -67,7 +67,7 @@ public class ExerciseItemController extends AnchorPane implements Initializable{
     }
 
     private int getSetCount(){
-        return model.getSets(exerciseItem.getId()).size();
+        return model.getSets(exerciseItem.getExerciseItemId()).size();
     }
 
     @FXML

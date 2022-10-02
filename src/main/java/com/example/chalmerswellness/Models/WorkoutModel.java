@@ -119,9 +119,11 @@ public class WorkoutModel implements Observable {
        // return sortedList;
     }
 
-    public void removeExercise(Exercise exercise){
-        workoutService.removeCompletedExercise(exercise);
-        addedExercises.remove(exercise);
+
+
+    public void removeExercise(ExerciseItem exerciseItem){
+        workoutService.removeCompletedExercise(exerciseItem);
+        addedExercises.remove(exerciseItem);
         notifyObservers();
     }
 
@@ -139,7 +141,15 @@ public class WorkoutModel implements Observable {
     //TODO show promt if exercises are already added
     public void addExercisesFromWorkout(Workout workout){
         addedExercises.clear();
-        workoutService.insertCompletedExercises(workout.getExercises());
+        List<ExerciseItem> exerciseItems = new ArrayList<>();
+        for (Exercise exercise: workout.getExercises()) {
+            //convert
+            ExerciseItem exerciseItem = new ExerciseItem(exercise);
+            exerciseItems.add(exerciseItem);
+        }
+
+        workoutService.insertCompletedExercises(exerciseItems);
+
         getTodayCompletedExercises();
         notifyObservers();
     }
