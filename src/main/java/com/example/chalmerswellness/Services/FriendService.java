@@ -1,5 +1,6 @@
 package com.example.chalmerswellness.Services;
 
+import com.example.chalmerswellness.LoggedInUser;
 import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.User;
 
@@ -29,15 +30,29 @@ public class FriendService {
         return users;
     }
 
-    public void insertFollow(int followerID, int followingID){
+    public void insertFollow(int followingID){
         //TODO Make each row in table unique?
         String sql = "INSERT INTO friend (follower_id, following_id) VALUES(?,?)";
         try (Connection conn = DatabaseConnector.connect();
              PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
-            preparedStatement.setInt(1, followerID);
+            preparedStatement.setInt(1, LoggedInUser.getInstance().getId());
             preparedStatement.setInt(2, followingID);
 
             preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void removeFollow(int following_id){
+        String sql = "DELETE FROM friend WHERE follower_id = ? AND following_id = ?";
+
+        try (Connection conn = DatabaseConnector.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, LoggedInUser.getInstance().getId());
+            pstmt.setInt(2, following_id);
+            pstmt.executeUpdate();
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
