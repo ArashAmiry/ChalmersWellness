@@ -3,6 +3,7 @@ package com.example.chalmerswellness.Controllers.Workout;
 import com.example.chalmerswellness.Controllers.Workout.TodaysWorkout.ExerciseItemController;
 import com.example.chalmerswellness.Models.WorkoutModel;
 import com.example.chalmerswellness.ObjectModels.Exercise;
+import com.example.chalmerswellness.ObjectModels.ExerciseItem;
 import com.example.chalmerswellness.ObjectModels.Workout;
 import com.example.chalmerswellness.Interfaces.Observable;
 import com.example.chalmerswellness.Interfaces.Observer;
@@ -39,7 +40,7 @@ public class CreateWorkoutController extends AnchorPane implements Observer {
         }
     }
 
-    void updateExerciseList(List<Exercise> exercises){
+    void updateExerciseList(List<ExerciseItem> exercises){
         exercisesList.clear();
 
         for (var exercise: exercises) {
@@ -53,7 +54,7 @@ public class CreateWorkoutController extends AnchorPane implements Observer {
         String workoutName = workoutNameField.getText();
         List<Exercise> workoutExercises = new ArrayList<>();
         for (var exercise: exercises) {
-            workoutExercises.add(exercise.getExercise());
+            workoutExercises.add(exercise.getExerciseItem());
         }
         return new Workout(workoutName, workoutExercises);
     }

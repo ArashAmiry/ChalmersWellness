@@ -4,6 +4,7 @@ import com.example.chalmerswellness.Models.WorkoutModel;
 import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.Interfaces.Observable;
 import com.example.chalmerswellness.Interfaces.Observer;
+import com.example.chalmerswellness.ObjectModels.ExerciseItem;
 import com.example.chalmerswellness.Services.DatabaseConnector;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -48,7 +49,7 @@ public class TodayWorkoutController extends AnchorPane implements Observer, Init
         populateExerciseList();
     }
 
-    private void updateExerciseList(List<Exercise> exercises){
+    private void updateExerciseList(List<ExerciseItem> exercises){
         exerciseList.getItems().clear();
 
         for (var exercise: exercises) {

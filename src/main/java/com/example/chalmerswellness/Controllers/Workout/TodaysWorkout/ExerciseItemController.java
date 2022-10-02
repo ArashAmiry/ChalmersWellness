@@ -2,6 +2,7 @@ package com.example.chalmerswellness.Controllers.Workout.TodaysWorkout;
 
 import com.example.chalmerswellness.Models.WorkoutModel;
 import com.example.chalmerswellness.ObjectModels.Exercise;
+import com.example.chalmerswellness.ObjectModels.ExerciseItem;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -14,7 +15,7 @@ import java.util.ResourceBundle;
 public class ExerciseItemController extends AnchorPane implements Initializable{
 
     private final WorkoutModel model;
-    private final Exercise exercise;
+    private final ExerciseItem exerciseItem;
     private final AnchorPane anchorPane;
 
     @FXML private Label setsAmount;
@@ -25,8 +26,8 @@ public class ExerciseItemController extends AnchorPane implements Initializable{
     // TODO Substitute plannedSets
     private int plannedSets = 3;
 
-    public ExerciseItemController(Exercise exercise, WorkoutModel model, AnchorPane anchorPane){
-        this.exercise = exercise;
+    public ExerciseItemController(ExerciseItem exerciseItem, WorkoutModel model, AnchorPane anchorPane){
+        this.exerciseItem = exerciseItem;
         this.model = model;
         this.anchorPane = anchorPane;
 
@@ -47,7 +48,7 @@ public class ExerciseItemController extends AnchorPane implements Initializable{
     }
 
     private void setInfo(){
-        exerciseName.textProperty().set(exercise.getName());
+        exerciseName.textProperty().set(exerciseItem.getName());
         setsAmount.textProperty().set("Sets " + getSetCount());
 
         if(isExerciseDone()){
@@ -66,20 +67,20 @@ public class ExerciseItemController extends AnchorPane implements Initializable{
     }
 
     private int getSetCount(){
-        return model.getSets(exercise.getId()).size();
+        return model.getSets(exerciseItem.getId()).size();
     }
 
     @FXML
     private void removeFromWorkout(){
-        model.removeExercise(exercise);
+        model.removeExercise(exerciseItem);
     }
 
     @FXML private void openSetsWindow(){
-        AddSetsController addSetsController = new AddSetsController(model, exercise, anchorPane);
+        AddSetsController addSetsController = new AddSetsController(model, exerciseItem, anchorPane);
         anchorPane.getChildren().add(addSetsController);
     }
 
-    public Exercise getExercise() {
-        return exercise;
+    public Exercise getExerciseItem() {
+        return exerciseItem;
     }
 }

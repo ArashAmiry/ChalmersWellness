@@ -29,6 +29,7 @@ public class Exercise {
         this.instructions = exercise.getInstructions();
     }
 
+
     public int getId() {
         return id;
     }

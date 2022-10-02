@@ -1,8 +1,10 @@
 package com.example.chalmerswellness.Services;
 
 import com.example.chalmerswellness.ObjectModels.Exercise;
+import com.example.chalmerswellness.ObjectModels.ExerciseItem;
 import com.example.chalmerswellness.ObjectModels.ExerciseItemSet;
 import com.example.chalmerswellness.ObjectModels.Workout;
+import com.example.chalmerswellness.calorieAPI.Food;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -34,7 +36,7 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
 
      */
 
-    public Exercise insertCompletedExercise(Exercise exercise){
+    public ExerciseItem insertCompletedExercise(ExerciseItem exercise){
         String sql = "INSERT INTO completed_exercise(exercise_id) VALUES(?)";
         int generatedKey = 0;
 
@@ -51,7 +53,7 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
             System.out.println(e.getMessage());
         }
 
-        return new Exercise(generatedKey, exercise);
+        return new ExerciseItem(generatedKey, exercise);
     }
 
     public void insertCompletedExercises(List<Exercise> exercises){
@@ -82,9 +84,9 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
         }
     }
 
-    public List<Exercise> getCompletedExercises() {
+    public List<ExerciseItem> getCompletedExercises() {
         String sql = "SELECT * FROM completed_exercise WHERE insert_date = CURRENT_DATE";
-        List<Exercise> exercises = new ArrayList<>();
+        List<ExerciseItem> exerciseItems = new ArrayList<>();
 
         try (Connection conn = DatabaseConnector.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -95,13 +97,13 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
                 var id = rs.getInt("id");
                 var exercise_id = rs.getInt("exercise_id");
 
-                Exercise exerciseItem = new Exercise(id, getExercise(exercise_id));
-                exercises.add(exerciseItem);
+                ExerciseItem exerciseItem = new ExerciseItem(id, getExercise(exercise_id));
+                exerciseItems.add(exerciseItem);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return exercises;
+        return exerciseItems;
     }
 
 
@@ -116,6 +118,30 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
             System.out.println(e.getMessage());
         }
     }
+
+
+
+    public void updateCompletedExercise(ExerciseItem exerciseItem) {
+        String sql = "INSERT INTO completed_set(completed_exercise_id, weight, reps) VALUES ((SELECT id from completed_exercise WHERE id = ?), ?,?)";
+
+        //remove sets
+        if(exerciseItem.getSets() != null){
+            //removeCompletedSets(exerciseItem.getId());
+            try (Connection conn = DatabaseConnector.connect();
+                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                for (var set: exerciseItem.getSets()) {
+
+                    pstmt.setInt(1, exerciseItem.getExerciseItemId());
+                    pstmt.setInt(2, set.getReps());
+                    pstmt.setDouble(3, set.getWeight());
+                }
+                    pstmt.executeUpdate();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
 
     public void insertCompletedSet(ExerciseItemSet set) {
         String sql = "INSERT INTO completed_set VALUES(?,?,?,?)";

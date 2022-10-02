@@ -1,15 +1,16 @@
 package com.example.chalmerswellness.Services;
 
 import com.example.chalmerswellness.ObjectModels.Exercise;
+import com.example.chalmerswellness.ObjectModels.ExerciseItem;
 import com.example.chalmerswellness.ObjectModels.ExerciseItemSet;
 import com.example.chalmerswellness.ObjectModels.Workout;
 
 import java.util.List;
 
 public interface IWorkoutDatabaseHandler {
-    List<Exercise> getCompletedExercises();
+    List<ExerciseItem> getCompletedExercises();
     List<ExerciseItemSet> getCompletedSets(int exerciseItemId);
-    Exercise insertCompletedExercise(Exercise exercise);
+    ExerciseItem insertCompletedExercise(ExerciseItem exercise);
     void insertCompletedSet(ExerciseItemSet set);
     void removeCompletedExercise(Exercise exercise);
     void removeSet(int setId);
@@ -18,4 +19,6 @@ public interface IWorkoutDatabaseHandler {
     void insertWorkout(Workout workout);
     List<Workout> getWorkouts();
     void insertCompletedExercises(List<Exercise> exercises);
+
+    void updateCompletedExercise(ExerciseItem exerciseItem);
 }

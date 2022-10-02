@@ -2,6 +2,7 @@ package com.example.chalmerswellness.Models;
 
 import com.example.chalmerswellness.Controllers.Workout.WorkoutStates;
 import com.example.chalmerswellness.ObjectModels.Exercise;
+import com.example.chalmerswellness.ObjectModels.ExerciseItem;
 import com.example.chalmerswellness.ObjectModels.Workout;
 import com.example.chalmerswellness.ObjectModels.ExerciseItemSet;
 import com.example.chalmerswellness.Interfaces.Observable;
@@ -17,7 +18,7 @@ public class WorkoutModel implements Observable {
     private List<Exercise> exercises = new ArrayList<>();
     private List<Exercise> addedExercises = new ArrayList<>();
     private List<ExerciseItemSet> sets = new ArrayList<>();
-    private List<Exercise> addedWorkoutExercises = new ArrayList<>();
+    private List<ExerciseItem> addedWorkoutExercises = new ArrayList<>();
 
     public WorkoutModel(){
         workoutService = new WorkoutService();
@@ -37,20 +38,21 @@ public class WorkoutModel implements Observable {
     }*/
 
 
-    public List<Exercise> getAddedWorkoutExercises() {
+    public List<ExerciseItem> getAddedWorkoutExercises() {
         return addedWorkoutExercises;
     }
     public void addExercise(Exercise exercise, WorkoutStates workoutState){
+        ExerciseItem newExerciseItem = new ExerciseItem(exercise);
 
         //TODO ENUM STATES
         if(workoutState.equals(WorkoutStates.ACTIVEWORKOUT)){
-            Exercise exerciseItem = workoutService.insertCompletedExercise(exercise);
+            ExerciseItem exerciseItem = workoutService.insertCompletedExercise(newExerciseItem);
 
             //TODO remove
             addedExercises.add(exerciseItem);
 
         } else if(workoutState.equals(WorkoutStates.CREATEWORKOUT)){
-            addedWorkoutExercises.add(exercise);
+            addedWorkoutExercises.add(newExerciseItem);
         }
 
         notifyObservers();
@@ -66,9 +68,14 @@ public class WorkoutModel implements Observable {
         return searchResult;
     }
 
-    public void addSet(ExerciseItemSet set){
-        sets.add(set);
-        workoutService.insertCompletedSet(set);
+    //public void addSet(ExerciseItemSet set){
+    public void addSet(ExerciseItem exerciseItem){
+        //sets.add(set);
+        //workoutService.insertCompletedSet(set);
+
+        //TODO instead update exerciseItem obj
+        workoutService.updateCompletedExercise(exerciseItem);
+
         notifyObservers();
     }
 
@@ -90,26 +97,26 @@ public class WorkoutModel implements Observable {
         return workoutService.getExercises();
     }
 
-    public List<Exercise> getTodayCompletedExercises(){
-        var completedExercises = workoutService.getCompletedExercises();
+    public List<ExerciseItem> getTodayCompletedExercises(){
+        List<ExerciseItem> completedExercises = workoutService.getCompletedExercises();
         sortCompletedExercises(completedExercises);
 
 
         return workoutService.getCompletedExercises();
     }
 
-    private List<Exercise> sortCompletedExercises(List<Exercise> exercises){
+    private List<ExerciseItem> sortCompletedExercises(List<ExerciseItem> exercises){
         List<Exercise> sortedList = new ArrayList<>();
 
         for (var exercise: exercises) {
-/*            if(isDone){
+        /*  if(isDone){
                 //Put Last in list
 
             }*/
         }
 
-
-        return sortedList;
+        return null;
+       // return sortedList;
     }
 
     public void removeExercise(Exercise exercise){
