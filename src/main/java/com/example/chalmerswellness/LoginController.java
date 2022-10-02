@@ -18,26 +18,14 @@ public class LoginController extends AnchorPane implements Initializable {
     @FXML
     TextField passwordTextField;
     @FXML
-    AnchorPane parentPane;
-    @FXML
     AnchorPane navigationPane;
+    @FXML
+    AnchorPane rootPane;
+
     DataService dataService = new DataService();
 
 
-    public LoginController(AnchorPane parent) {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/LoginView.fxml"));
-
-        fxmlLoader.setRoot(this);
-        fxmlLoader.setController(this);
-
-        parentPane = parent;
-
-        try {
-            fxmlLoader.load();
-        } catch (IOException exception) {
-            throw new RuntimeException(exception);
-        }
-
+    public LoginController() {
     }
 
     @Override
@@ -52,7 +40,8 @@ public class LoginController extends AnchorPane implements Initializable {
         if(dataService.loginUser(username, password)) {
             System.out.println("Login successful");
             LoggedInUser.createInstance(dataService.getUser(username,password));
-            parentPane.getChildren().remove(this);
+            rootPane.getChildren().clear();
+            rootPane.getChildren().add(new MainView());
         } else {
             System.out.println("Login failed");
         }
@@ -60,9 +49,7 @@ public class LoginController extends AnchorPane implements Initializable {
 
     @FXML
     void createNewAccount(MouseEvent event) {
-        SignUpController signUpController = new SignUpController(parentPane);
-        parentPane.getChildren().remove(this);
-        parentPane.getChildren().add(signUpController);
+        rootPane.getChildren().add(new SignUpController(rootPane));
     }
 
 }

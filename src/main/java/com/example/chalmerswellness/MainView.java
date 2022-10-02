@@ -8,8 +8,11 @@ import com.example.chalmerswellness.Controllers.Settings.SettingsViewController;
 import com.example.chalmerswellness.Controllers.Workout.WorkoutController;
 import com.example.chalmerswellness.Services.DataService;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+
+import java.io.IOException;
 
 public class MainView extends AnchorPane {
     @FXML AnchorPane contentRootAnchorPane;
@@ -26,16 +29,21 @@ public class MainView extends AnchorPane {
     DataService dataService = new DataService();
 
     public MainView(){
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/MainView.fxml"));
+
+        fxmlLoader.setRoot(this);
+        fxmlLoader.setController(this);
+
+        try {
+            fxmlLoader.load();
+        } catch (IOException exception) {
+            throw new RuntimeException(exception);
+        }
     }
 
     @FXML
     public void initialize(){
         navigateToDashboardView();
-        if (dataService.checkIfUsersExist()) {
-            openLoginScreen();
-        } else {
-            openSignUpScreen();
-        }
     }
 
     @FXML
@@ -73,13 +81,4 @@ public class MainView extends AnchorPane {
         contentRootAnchorPane.setBottomAnchor(pane, 0.0);
     }
 
-    private void openLoginScreen() {
-        LoginController loginController = new LoginController(templateRootAnchorPane);
-        templateRootAnchorPane.getChildren().add(loginController);
-    }
-
-    private void openSignUpScreen() {
-        SignUpController signUpController = new SignUpController(templateRootAnchorPane);
-        templateRootAnchorPane.getChildren().add(signUpController);
-    }
 }
