@@ -3,6 +3,7 @@ package com.example.chalmerswellness.Controllers.Nutrition;
 import com.example.chalmerswellness.CalorieIntakeCalculatorController;
 import com.example.chalmerswellness.Interfaces.Observable;
 import com.example.chalmerswellness.Interfaces.Observer;
+import com.example.chalmerswellness.LoggedInUser;
 import com.example.chalmerswellness.calorieAPI.FoodFacade;
 import com.example.chalmerswellness.calorieAPI.Meal;
 import javafx.fxml.FXML;
@@ -26,6 +27,14 @@ public class NutritionViewController extends AnchorPane implements Initializable
     private ProgressBar progressBar;
     @FXML
     private Text progressBarText;
+    @FXML
+    private Text breakfastRecommendedCaloriesText;
+    @FXML
+    private Text lunchRecommendedCaloriesText;
+    @FXML
+    private Text dinnerRecommendedCaloriesText;
+    @FXML
+    private Text snackRecommendedCaloriesText;
 
     FoodFacade foodFacade = new FoodFacade();
 
@@ -49,6 +58,13 @@ public class NutritionViewController extends AnchorPane implements Initializable
         updateProgressBar();
         CalorieIntakeCalculatorController calorieIntakeCalculatorController = new CalorieIntakeCalculatorController();
         calorieIntakeCalculatorController.subscribe(this);
+
+        int calorieIntake = LoggedInUser.getInstance().getCalorieGoal();
+        breakfastRecommendedCaloriesText.setText((int) (calorieIntake * 0.25) + " - " + (int) (calorieIntake * 0.3));
+        lunchRecommendedCaloriesText.setText((int) (calorieIntake * 0.35) + " - " + (int) (calorieIntake * 0.4));
+        dinnerRecommendedCaloriesText.setText((int) (calorieIntake * 0.25) + " - " + (int) (calorieIntake * 0.3));
+        snackRecommendedCaloriesText.setText((int) (calorieIntake * 0.05) + " - " + (int) (calorieIntake * 0.1));
+
     }
 
     private void loadNutritionSearchView(Meal meal) {
