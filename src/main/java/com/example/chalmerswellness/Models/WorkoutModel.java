@@ -74,8 +74,16 @@ public class WorkoutModel implements Observable {
         //workoutService.insertCompletedSet(set);
 
         //TODO instead update exerciseItem obj
-        workoutService.updateCompletedExercise(exerciseItem);
 
+        //var ex = exerciseItem;
+        workoutService.updateCompletedExerciseSets(exerciseItem);
+        //workoutService.updateCompletedExercise(exerciseItem);
+
+        notifyObservers();
+    }
+
+    public void updateCompletedExercise(ExerciseItem exerciseItem){
+        workoutService.updateCompletedExercise(exerciseItem);
         notifyObservers();
     }
 
@@ -99,24 +107,26 @@ public class WorkoutModel implements Observable {
 
     public List<ExerciseItem> getTodayCompletedExercises(){
         List<ExerciseItem> completedExercises = workoutService.getCompletedExercises();
-        sortCompletedExercises(completedExercises);
-
-
-        return workoutService.getCompletedExercises();
+        return sortCompletedExercises(completedExercises);
     }
 
     private List<ExerciseItem> sortCompletedExercises(List<ExerciseItem> exercises){
-        List<Exercise> sortedList = new ArrayList<>();
+        List<ExerciseItem> sortedList = new ArrayList<>();
+        List<ExerciseItem> sortedList2 = exercises;
 
-        for (var exercise: exercises) {
-        /*  if(isDone){
-                //Put Last in list
 
-            }*/
+
+
+        for (ExerciseItem exerciseItem: exercises) {
+          if(exerciseItem.getIsDone()){
+              sortedList.add(exerciseItem);
+            }
+          else{
+              sortedList.add(0, exerciseItem);
+          }
         }
 
-        return null;
-       // return sortedList;
+       return sortedList;
     }
 
 
@@ -143,7 +153,6 @@ public class WorkoutModel implements Observable {
         addedExercises.clear();
         List<ExerciseItem> exerciseItems = new ArrayList<>();
         for (Exercise exercise: workout.getExercises()) {
-            //convert
             ExerciseItem exerciseItem = new ExerciseItem(exercise);
             exerciseItems.add(exerciseItem);
         }

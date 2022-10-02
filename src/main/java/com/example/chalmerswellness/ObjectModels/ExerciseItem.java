@@ -29,6 +29,10 @@ public class ExerciseItem extends Exercise{
         isDone = done;
     }
 
+    public boolean getIsDone() {
+        return isDone;
+    }
+
     public void addSet(ExerciseItemSet set){
         sets.add(set);
     }

@@ -13,13 +13,14 @@ public interface IWorkoutDatabaseHandler {
     ExerciseItem insertCompletedExercise(ExerciseItem exercise);
     void insertCompletedSet(ExerciseItemSet set);
     void removeCompletedExercise(ExerciseItem exercise);
-    //void removeCompletedExercise(Exercise exercise);
     void removeSet(int setId);
     List<Exercise> getExercises();
     void insertCompletedSets(int exerciseId, List<ExerciseItemSet> sets);
     void insertWorkout(Workout workout);
     List<Workout> getWorkouts();
     void insertCompletedExercises(List<ExerciseItem> exercises);
+
+    void updateCompletedExerciseSets(ExerciseItem exerciseItem);
 
     void updateCompletedExercise(ExerciseItem exerciseItem);
 }

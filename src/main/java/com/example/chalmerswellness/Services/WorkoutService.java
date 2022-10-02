@@ -4,10 +4,9 @@ import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.ObjectModels.ExerciseItem;
 import com.example.chalmerswellness.ObjectModels.ExerciseItemSet;
 import com.example.chalmerswellness.ObjectModels.Workout;
-import com.example.chalmerswellness.calorieAPI.Food;
-
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class WorkoutService implements IWorkoutDatabaseHandler {
@@ -37,12 +36,13 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
      */
 
     public ExerciseItem insertCompletedExercise(ExerciseItem exercise){
-        String sql = "INSERT INTO completed_exercise(exercise_id) VALUES(?)";
+        String sql = "INSERT INTO completed_exercise(exercise_id, is_done) VALUES(?,?)";
         int generatedKey = 0;
 
         try (Connection conn = DatabaseConnector.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setInt(1, exercise.getId());
+                pstmt.setBoolean(2, exercise.getIsDone());
                 pstmt.executeUpdate();
 
             ResultSet rs = pstmt.getGeneratedKeys();
@@ -54,6 +54,22 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
         }
 
         return new ExerciseItem(generatedKey, exercise);
+    }
+
+
+    public void updateCompletedExercise(ExerciseItem exercise){
+        String sql = "UPDATE completed_exercise SET is_done = ? WHERE id = ?";
+
+        try (Connection conn = DatabaseConnector.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                var t = exercise.getIsDone();
+                pstmt.setBoolean(1, exercise.getIsDone());
+                pstmt.setInt(2, exercise.getExerciseItemId());
+                pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 
     public void insertCompletedExercises(List<ExerciseItem> exercises){
@@ -84,14 +100,19 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 var id = rs.getInt("id");
-                var exercise_id = rs.getInt("exercise_id");
+                var exerciseId = rs.getInt("exercise_id");
+                var isDone = rs.getBoolean("is_done");
 
-                ExerciseItem exerciseItem = new ExerciseItem(id, getExercise(exercise_id));
+                ExerciseItem exerciseItem = new ExerciseItem(id, getExercise(exerciseId));
+                exerciseItem.setDone(isDone);
+
                 exerciseItems.add(exerciseItem);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+        Collections.reverse(exerciseItems);
         return exerciseItems;
     }
 
@@ -115,7 +136,7 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
 
 
     //TODO THIS IS NEW
-    public void updateCompletedExercise(ExerciseItem exerciseItem) {
+    public void updateCompletedExerciseSets(ExerciseItem exerciseItem) {
         String sql = "INSERT INTO completed_set(completed_exercise_id, weight, reps) VALUES ((SELECT id from completed_exercise WHERE id = ?), ?,?)";
 
         //remove sets
