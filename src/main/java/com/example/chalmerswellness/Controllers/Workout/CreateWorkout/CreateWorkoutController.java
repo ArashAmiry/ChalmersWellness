@@ -59,15 +59,22 @@ public class CreateWorkoutController extends AnchorPane implements Observer {
     }
 
     @FXML public void saveWorkout(){
-        saveSets();
-        Workout workoutObject = createWorkoutObject(exercisesList);
-        model.addWorkout(workoutObject);
-        clearWorkoutListView();
+        try {
+            saveSets();
+            Workout workoutObject = createWorkoutObject(exercisesList);
+            model.addWorkout(workoutObject);
+            clearWorkoutListView();
+        }catch(NumberFormatException nfe){}
     }
 
     private void saveSets(){
         for (CreateExerciseItemController c : exercisesList){
-            c.setSets();
+            try {
+                c.setSets();
+            }catch (NumberFormatException nfe){
+                c.displayErrorLabel();
+                throw new NumberFormatException();
+            }
         }
     }
 

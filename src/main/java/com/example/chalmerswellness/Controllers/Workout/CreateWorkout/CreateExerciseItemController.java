@@ -38,7 +38,7 @@ public class CreateExerciseItemController extends AnchorPane implements Initiali
     @Override
     public void initialize(URL arg0, ResourceBundle arg1){
         setName();
-        errorLabel.setVisible(false);
+        hideErrorLabel();
     }
 
     private void setName(){
@@ -46,7 +46,20 @@ public class CreateExerciseItemController extends AnchorPane implements Initiali
     }
 
     void setSets(){
-        this.exercise.setSets(Integer.parseInt(setsField.getText()));
+        try {
+            this.exercise.setSets(Integer.parseInt(setsField.getText()));
+        }catch (NumberFormatException nfe){
+            throw new NumberFormatException();
+        }
+    }
+
+    void displayErrorLabel(){
+        errorLabel.setVisible(true);
+    }
+
+    @FXML
+    void hideErrorLabel(){
+        errorLabel.setVisible(false);
     }
 
     @FXML
