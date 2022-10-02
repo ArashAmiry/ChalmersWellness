@@ -22,7 +22,6 @@ public class WorkoutModel implements Observable {
 
     public WorkoutModel(){
         workoutService = new WorkoutService();
-
         exercises = getMyExercises();
     }
 
@@ -59,26 +58,17 @@ public class WorkoutModel implements Observable {
     }
 
     public List<Exercise> searchExercises(String exerciseName){
-
         List<Exercise> searchResult = new ArrayList<>();
         for (var exercise: exercises) {
             if(exercise.getName().toLowerCase().replaceAll("\\s+","").contains(exerciseName))
                 searchResult.add(exercise);
         }
+
         return searchResult;
     }
 
-    //public void addSet(ExerciseItemSet set){
     public void addSet(ExerciseItem exerciseItem){
-        //sets.add(set);
-        //workoutService.insertCompletedSet(set);
-
-        //TODO instead update exerciseItem obj
-
-        //var ex = exerciseItem;
         workoutService.updateCompletedExerciseSets(exerciseItem);
-        //workoutService.updateCompletedExercise(exerciseItem);
-
         notifyObservers();
     }
 
@@ -112,24 +102,19 @@ public class WorkoutModel implements Observable {
 
     private List<ExerciseItem> sortCompletedExercises(List<ExerciseItem> exercises){
         List<ExerciseItem> sortedList = new ArrayList<>();
-        List<ExerciseItem> sortedList2 = exercises;
-
-
-
+        List<ExerciseItem> completedExercises = new ArrayList<>();
 
         for (ExerciseItem exerciseItem: exercises) {
-          if(exerciseItem.getIsDone()){
-              sortedList.add(exerciseItem);
+            if(exerciseItem.getIsDone()){
+                completedExercises.add(0,exerciseItem);
+            }else{
+                sortedList.add(0, exerciseItem);
             }
-          else{
-              sortedList.add(0, exerciseItem);
-          }
         }
 
-       return sortedList;
+        sortedList.addAll(completedExercises);
+        return sortedList;
     }
-
-
 
     public void removeExercise(ExerciseItem exerciseItem){
         workoutService.removeCompletedExercise(exerciseItem);
