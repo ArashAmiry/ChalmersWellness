@@ -12,3 +12,7 @@
     -fx-background-repeat: no-repeat;
     -fx-background-position: 50%;
 }
+
+.friendlist{
+    -fx-spacing: 10px;
+}
