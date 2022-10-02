@@ -147,7 +147,6 @@ public class DatabaseConnector {
                 + "	exercise_id INTEGER,\n"
                 + " FOREIGN KEY ('workout_id') REFERENCES 'created_workout' ('id')\n"
                 + " ON UPDATE CASCADE ON DELETE CASCADE\n"
-
                 + " FOREIGN KEY ('exercise_id') REFERENCES 'exercise' ('id')\n"
                 + " ON UPDATE CASCADE ON DELETE CASCADE\n"
                 + ");";
