@@ -58,13 +58,15 @@ public class NutritionViewController extends AnchorPane implements Initializable
         updateProgressBar();
         CalorieIntakeCalculatorController calorieIntakeCalculatorController = new CalorieIntakeCalculatorController();
         calorieIntakeCalculatorController.subscribe(this);
+        setRecommendedCaloriesText();
+    }
 
+    private void setRecommendedCaloriesText() {
         int calorieIntake = LoggedInUser.getInstance().getCalorieGoal();
-        breakfastRecommendedCaloriesText.setText((int) (calorieIntake * 0.25) + " - " + (int) (calorieIntake * 0.3));
-        lunchRecommendedCaloriesText.setText((int) (calorieIntake * 0.35) + " - " + (int) (calorieIntake * 0.4));
-        dinnerRecommendedCaloriesText.setText((int) (calorieIntake * 0.25) + " - " + (int) (calorieIntake * 0.3));
-        snackRecommendedCaloriesText.setText((int) (calorieIntake * 0.05) + " - " + (int) (calorieIntake * 0.1));
-
+        breakfastRecommendedCaloriesText.setText((int) (calorieIntake * 0.25) + " - " + (int) (calorieIntake * 0.3) + " kcal");
+        lunchRecommendedCaloriesText.setText((int) (calorieIntake * 0.35) + " - " + (int) (calorieIntake * 0.4) + " kcal");
+        dinnerRecommendedCaloriesText.setText((int) (calorieIntake * 0.25) + " - " + (int) (calorieIntake * 0.3) + " kcal");
+        snackRecommendedCaloriesText.setText((int) (calorieIntake * 0.05) + " - " + (int) (calorieIntake * 0.1) + " kcal");
     }
 
     private void loadNutritionSearchView(Meal meal) {
@@ -101,5 +103,6 @@ public class NutritionViewController extends AnchorPane implements Initializable
     @Override
     public void update(Observable observable) {
         updateProgressBar();
+        setRecommendedCaloriesText();
     }
 }
