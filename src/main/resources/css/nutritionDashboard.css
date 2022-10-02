@@ -21,6 +21,12 @@
     -fx-background-position: 95%;
 }
 
+.recommendedCaloriesText {
+    -fx-text-fill: #5d5d5d;
+    -fx-font-family: Koulen;
+    -fx-font-size: 20px;
+}
+
 .addButton:hover{
     -fx-background-color: #c7c7c7;
 }
