@@ -12,12 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WorkoutModel implements Observable {
-    private List<Exercise> addedExercises = new ArrayList<>();
-    private List<Observer> observers = new ArrayList<>();
     private final IWorkoutDatabaseHandler workoutService;
-    private List<ExerciseItemSet> sets = new ArrayList<>();
+    private List<Observer> observers = new ArrayList<>();
     private List<Exercise> exercises = new ArrayList<>();
-
+    private List<Exercise> addedExercises = new ArrayList<>();
+    private List<ExerciseItemSet> sets = new ArrayList<>();
     private List<Exercise> addedWorkoutExercises = new ArrayList<>();
 
     public WorkoutModel(){
@@ -31,21 +30,25 @@ public class WorkoutModel implements Observable {
         return workoutService.getWorkouts();
     }
 
-    public List<Exercise> getAddedExercises() {
+
+    //TODO remove
+    /*public List<Exercise> getAddedExercises() {
         return addedExercises;
-    }
+    }*/
+
+
     public List<Exercise> getAddedWorkoutExercises() {
         return addedWorkoutExercises;
     }
     public void addExercise(Exercise exercise, WorkoutStates workoutState){
-        //DOES IT STORE IN SAME db?
-        Exercise exerciseItem;
-
 
         //TODO ENUM STATES
         if(workoutState.equals(WorkoutStates.ACTIVEWORKOUT)){
-            exerciseItem = workoutService.insertCompletedExercise(exercise);
+            Exercise exerciseItem = workoutService.insertCompletedExercise(exercise);
+
+            //TODO remove
             addedExercises.add(exerciseItem);
+
         } else if(workoutState.equals(WorkoutStates.CREATEWORKOUT)){
             addedWorkoutExercises.add(exercise);
         }
@@ -61,12 +64,6 @@ public class WorkoutModel implements Observable {
                 searchResult.add(exercise);
         }
         return searchResult;
-    }
-
-    public void getTodaysExercises(){
-        var exerciseItems = getTodayExerciseItems();
-        addedExercises.addAll(exerciseItems);
-        notifyObservers();
     }
 
     public void addSet(ExerciseItemSet set){
@@ -93,9 +90,28 @@ public class WorkoutModel implements Observable {
         return workoutService.getExercises();
     }
 
-    public List<Exercise> getTodayExerciseItems(){
+    public List<Exercise> getTodayCompletedExercises(){
+        var completedExercises = workoutService.getCompletedExercises();
+        sortCompletedExercises(completedExercises);
+
+
         return workoutService.getCompletedExercises();
     }
+
+    private List<Exercise> sortCompletedExercises(List<Exercise> exercises){
+        List<Exercise> sortedList = new ArrayList<>();
+
+        for (var exercise: exercises) {
+/*            if(isDone){
+                //Put Last in list
+
+            }*/
+        }
+
+
+        return sortedList;
+    }
+
     public void removeExercise(Exercise exercise){
         workoutService.removeCompletedExercise(exercise);
         addedExercises.remove(exercise);
@@ -117,7 +133,7 @@ public class WorkoutModel implements Observable {
     public void addExercisesFromWorkout(Workout workout){
         addedExercises.clear();
         workoutService.insertCompletedExercises(workout.getExercises());
-        getTodaysExercises();
+        getTodayCompletedExercises();
         notifyObservers();
     }
 
@@ -125,7 +141,6 @@ public class WorkoutModel implements Observable {
         addedWorkoutExercises.clear();
         notifyObservers();
     }
-
 
     @Override
     public void notifyObservers() {

@@ -37,13 +37,23 @@ public class TodayWorkoutController extends AnchorPane implements Observer, Init
         }
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        populateExerciseList();
+    }
+
+    @Override
+    public void update(Observable observable) {
+        model = (WorkoutModel) observable;
+        populateExerciseList();
+    }
+
     private void updateExerciseList(List<Exercise> exercises){
         exerciseList.getItems().clear();
 
         for (var exercise: exercises) {
             exerciseList.getItems().add(new ExerciseItemController(exercise, model, mainRoot));
         }
-
         displayNoResult(isExerciseListEmpty());
     }
 
@@ -55,15 +65,8 @@ public class TodayWorkoutController extends AnchorPane implements Observer, Init
         return exerciseList.getItems().size() <= 0;
     }
 
-    @Override
-    public void update(Observable observable) {
-        model = (WorkoutModel) observable;
-        var exercises = model.getAddedExercises();
-        updateExerciseList(exercises);
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        model.getTodaysExercises();
+    private void populateExerciseList(){
+        var todaysExercises = model.getTodayCompletedExercises();
+        updateExerciseList(todaysExercises);
     }
 }

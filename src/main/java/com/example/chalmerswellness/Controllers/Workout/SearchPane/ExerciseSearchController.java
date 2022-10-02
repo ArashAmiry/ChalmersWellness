@@ -20,10 +20,8 @@ public class ExerciseSearchController extends AnchorPane implements Initializabl
     @FXML public TextField searchField;
     @FXML public ListView<ExerciseSearchItemController> searchListView;
     @FXML public Label noResultLabel;
-
     private WorkoutStates workoutState;
 
-    //TODO string should be enum
     public ExerciseSearchController(WorkoutModel model){
         this.model = model;
 

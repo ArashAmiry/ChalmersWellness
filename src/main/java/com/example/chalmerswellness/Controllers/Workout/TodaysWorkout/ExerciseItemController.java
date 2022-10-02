@@ -22,6 +22,9 @@ public class ExerciseItemController extends AnchorPane implements Initializable{
     @FXML
     Label exerciseName;
 
+    // TODO Substitute plannedSets
+    private int plannedSets = 3;
+
     public ExerciseItemController(Exercise exercise, WorkoutModel model, AnchorPane anchorPane){
         this.exercise = exercise;
         this.model = model;
@@ -45,7 +48,25 @@ public class ExerciseItemController extends AnchorPane implements Initializable{
 
     private void setInfo(){
         exerciseName.textProperty().set(exercise.getName());
-        setsAmount.textProperty().set("Sets " + model.getSets(exercise.getId()).size());
+        setsAmount.textProperty().set("Sets " + getSetCount());
+
+        if(isExerciseDone()){
+            indicateDone();
+        }
+    }
+
+    private void indicateDone(){
+        this.setStyle("-fx-background-color: #CBFFB7");
+
+        //TODO show done button
+    }
+
+    private boolean isExerciseDone(){
+        return getSetCount() >= plannedSets;
+    }
+
+    private int getSetCount(){
+        return model.getSets(exercise.getId()).size();
     }
 
     @FXML
