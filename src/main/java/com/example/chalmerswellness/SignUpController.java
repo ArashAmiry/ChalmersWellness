@@ -75,13 +75,13 @@ public class SignUpController extends AnchorPane implements Initializable {
         double weight = Double.parseDouble(weightTextField.getText());
         LocalDate birthDate = birthDatePicker.getValue();
 
-        User newUser = new User(username, firstName, lastName, gender, email, height, birthDate, weight);
+        User newUser = new User(username, password, firstName, lastName, gender, email, height, birthDate, weight);
 
         if (dataService.checkIfUsernameExists(username)) {
             System.out.println("Username already exists");
             rootpane.getChildren().remove(this);
         } else {
-            dataService.insertUser(newUser, password);
+            dataService.insertUser(newUser);
             LoggedInUser.createInstance(dataService.getUser(username, password));
             rootpane.getChildren().clear();
             rootpane.getChildren().add(new MainView());

@@ -1,16 +1,16 @@
 package com.example.chalmerswellness.Controllers.Workout.TodaysWorkout;
 
-import com.example.chalmerswellness.Models.WorkoutModel;
-import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.Interfaces.Observable;
 import com.example.chalmerswellness.Interfaces.Observer;
-import com.example.chalmerswellness.Services.DatabaseConnector;
+import com.example.chalmerswellness.Models.WorkoutModel;
+import com.example.chalmerswellness.ObjectModels.Exercise;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -44,11 +44,13 @@ public class TodayWorkoutController extends AnchorPane implements Observer, Init
             exerciseList.getItems().add(new ExerciseItemController(exercise, model, mainRoot));
         }
 
-        displayNoResult(isExerciseListEmpty());
+        if (isExerciseListEmpty()) {
+            displayNoResult();
+        }
     }
 
-    private void displayNoResult(boolean isNoResult){
-        noResult.visibleProperty().set(isNoResult);
+    private void displayNoResult(){
+        noResult.visibleProperty().set(true);
     }
 
     private boolean isExerciseListEmpty(){
