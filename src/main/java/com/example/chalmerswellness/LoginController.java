@@ -1,5 +1,6 @@
 package com.example.chalmerswellness;
 
+import com.example.chalmerswellness.Controllers.Profile.ProfileController;
 import com.example.chalmerswellness.Services.DataService;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -39,7 +40,7 @@ public class LoginController extends AnchorPane implements Initializable {
             System.out.println("Login successful");
             LoggedInUser.createInstance(dataService.getUser(username,password));
             rootPane.getChildren().clear();
-            rootPane.getChildren().add(new MainView());
+            rootPane.getChildren().add(new ProfileController());
         } else {
             System.out.println("Login failed");
         }

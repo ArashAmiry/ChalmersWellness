@@ -38,4 +38,6 @@ module com.example.chalmerswellness {
     opens com.example.chalmerswellness.Controllers.Friends;
     exports com.example.chalmerswellness.Controllers.Workout.CreateWorkout;
     opens com.example.chalmerswellness.Controllers.Workout.CreateWorkout to javafx.fxml;
+    exports com.example.chalmerswellness.Controllers.Profile;
+    opens com.example.chalmerswellness.Controllers.Profile;
 }
