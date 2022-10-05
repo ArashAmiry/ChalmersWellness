@@ -103,7 +103,7 @@ public class DatabaseConnector {
     private void createNutritionTable() {
         String sql = "CREATE TABLE IF NOT EXISTS nutrition (\n"
                 + "	id INTEGER PRIMARY KEY,\n"
-                + " userID INTEGER,\n"
+                + " userID INTEGER NOT NULL,\n"
                 + "	mealName text NOT NULL,\n"
                 + "	calories DOUBLE NOT NULL,\n"
                 + "	servingSize DOUBLE NOT NULL,\n"

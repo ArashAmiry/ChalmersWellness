@@ -1,6 +1,7 @@
 package com.example.chalmerswellness.Controllers.Workout;
 
 import com.example.chalmerswellness.Controllers.Workout.CreateWorkout.CreateWorkoutController;
+import com.example.chalmerswellness.Controllers.Workout.ManageWorkout.ManageWorkoutController;
 import com.example.chalmerswellness.Controllers.Workout.SearchPane.ExerciseSearchController;
 import com.example.chalmerswellness.Controllers.Workout.States.ActiveWorkoutState;
 import com.example.chalmerswellness.Controllers.Workout.States.CreateState;
