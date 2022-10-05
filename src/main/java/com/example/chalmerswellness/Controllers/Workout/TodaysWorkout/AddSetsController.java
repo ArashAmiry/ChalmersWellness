@@ -3,7 +3,6 @@ package com.example.chalmerswellness.Controllers.Workout.TodaysWorkout;
 import com.example.chalmerswellness.Interfaces.Observable;
 import com.example.chalmerswellness.Interfaces.Observer;
 import com.example.chalmerswellness.Models.WorkoutModel;
-import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.ObjectModels.ExerciseItem;
 import com.example.chalmerswellness.ObjectModels.ExerciseItemSet;
 import javafx.collections.FXCollections;
@@ -17,7 +16,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class AddSetsController extends AnchorPane implements Initializable, Observer {
@@ -62,7 +60,6 @@ public class AddSetsController extends AnchorPane implements Initializable, Obse
 
         ExerciseItemSet exerciseSet = new ExerciseItemSet(exerciseItem.getExerciseItemId(), 0, 0);
         exerciseItem.addSet(exerciseSet);
-
         model.addSet(exerciseItem);
     }
 
