@@ -1,6 +1,7 @@
 package com.example.chalmerswellness.Models;
 
-import com.example.chalmerswellness.Controllers.Workout.WorkoutStates;
+import com.example.chalmerswellness.Controllers.Workout.States.ActiveWorkoutState;
+import com.example.chalmerswellness.Controllers.Workout.States.WorkoutState;
 import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.ObjectModels.ExerciseItem;
 import com.example.chalmerswellness.ObjectModels.Workout;
@@ -20,11 +21,21 @@ public class WorkoutModel implements Observable {
     private List<ExerciseItemSet> sets = new ArrayList<>();
     private List<ExerciseItem> addedWorkoutExercises = new ArrayList<>();
 
+
+
+    private WorkoutState state;
+
     public WorkoutModel(){
         workoutService = new WorkoutService();
-
+        changeState(new ActiveWorkoutState(this));
         exercises = getMyExercises();
     }
+
+    public void changeState(WorkoutState state){
+        this.state = state;
+    }
+
+
 
     public List<Workout> getSavedWorkouts(){
         return workoutService.getWorkouts();
@@ -40,20 +51,22 @@ public class WorkoutModel implements Observable {
     public List<ExerciseItem> getAddedWorkoutExercises() {
         return addedWorkoutExercises;
     }
-    public void addExercise(Exercise exercise, WorkoutStates workoutState){
+
+
+    public void addExercise(Exercise exercise){
+        state.addExercise(exercise);
+    }
+
+    public void addExerciseToActiveWorkout(Exercise exercise){
         ExerciseItem newExerciseItem = new ExerciseItem(exercise);
+        ExerciseItem exerciseItem = workoutService.insertCompletedExercise(newExerciseItem);
+        addedExercises.add(exerciseItem);
+        notifyObservers();
+    }
 
-        //TODO ENUM STATES
-        if(workoutState.equals(WorkoutStates.ACTIVEWORKOUT)){
-            ExerciseItem exerciseItem = workoutService.insertCompletedExercise(newExerciseItem);
-
-            //TODO remove
-            addedExercises.add(exerciseItem);
-
-        } else if(workoutState.equals(WorkoutStates.CREATEWORKOUT)){
-            addedWorkoutExercises.add(newExerciseItem);
-        }
-
+    public void addExerciseToWorkout(Exercise exercise){
+        ExerciseItem newExerciseItem = new ExerciseItem(exercise);
+        addedWorkoutExercises.add(newExerciseItem);
         notifyObservers();
     }
 
@@ -137,16 +150,7 @@ public class WorkoutModel implements Observable {
     //TODO show promt if exercises are already added
     public void addExercisesFromWorkout(Workout workout){
         addedExercises.clear();
-        //List<ExerciseItem> exerciseItems = new ArrayList<>();
         List<ExerciseItem> exerciseItems = workout.getExercises();
-
-        /*for (Exercise exercise: workout.getExercises()) {
-
-            ExerciseItem exerciseItem = new ExerciseItem(exercise);
-            exerciseItems.add(exerciseItem);
-        }
-         */
-
         workoutService.insertCompletedExercises(exerciseItems);
 
         getTodayCompletedExercises();

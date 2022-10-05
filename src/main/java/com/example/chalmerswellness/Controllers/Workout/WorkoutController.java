@@ -2,6 +2,8 @@ package com.example.chalmerswellness.Controllers.Workout;
 
 import com.example.chalmerswellness.Controllers.Workout.CreateWorkout.CreateWorkoutController;
 import com.example.chalmerswellness.Controllers.Workout.SearchPane.ExerciseSearchController;
+import com.example.chalmerswellness.Controllers.Workout.States.ActiveWorkoutState;
+import com.example.chalmerswellness.Controllers.Workout.States.CreateState;
 import com.example.chalmerswellness.Controllers.Workout.TodaysWorkout.TodayWorkoutController;
 import com.example.chalmerswellness.Controllers.Workout.TodaysWorkout.WorkoutListController;
 import com.example.chalmerswellness.Models.WorkoutModel;
@@ -67,13 +69,16 @@ public class WorkoutController extends AnchorPane implements Initializable {
     }
 
     @FXML void openWorkoutTab(){
-        exerciseSearchController.setState(WorkoutStates.ACTIVEWORKOUT);
+        //exerciseSearchController.setState(WorkoutStates.ACTIVEWORKOUT);
+        workoutModel.changeState(new ActiveWorkoutState(workoutModel));
         setTabTo(todayWorkoutView);
         addedWorkoutsBtn.setVisible(true);
     }
 
     @FXML void openCreateWorkoutTab(){
-        exerciseSearchController.setState(WorkoutStates.CREATEWORKOUT);
+        workoutModel.changeState(new CreateState(workoutModel));
+
+        //exerciseSearchController.setState(WorkoutStates.CREATEWORKOUT);
         setTabTo(createWorkoutView);
     }
 
