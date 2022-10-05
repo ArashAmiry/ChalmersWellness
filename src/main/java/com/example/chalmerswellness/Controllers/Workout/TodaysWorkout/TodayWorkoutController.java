@@ -60,6 +60,8 @@ public class TodayWorkoutController extends AnchorPane implements Observer, Init
 
         if (isExerciseListEmpty()) {
             displayNoResult();
+        } else {
+            noResult.visibleProperty().set(false);
         }
     }
 
