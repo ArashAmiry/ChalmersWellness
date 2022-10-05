@@ -52,7 +52,7 @@ public class CreateWorkoutController extends AnchorPane implements Observer {
 
     private Workout createWorkoutObject(List<CreateExerciseItemController> exercises){
         String workoutName = workoutNameField.getText();
-        List<Exercise> workoutExercises = new ArrayList<>();
+        List<ExerciseItem> workoutExercises = new ArrayList<>();
         for (var exercise: exercises) {
             workoutExercises.add(exercise.getExerciseItem());
         }

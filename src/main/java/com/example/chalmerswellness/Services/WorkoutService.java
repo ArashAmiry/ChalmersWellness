@@ -323,7 +323,7 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String workoutName = rs.getString("workoutName");
-                List<Exercise> exercises = getWorkoutExercises(id);
+                List<ExerciseItem> exercises = getWorkoutExercises(id);
 
                 Workout workout = new Workout(workoutName, exercises);
                 workouts.add(workout);
@@ -335,10 +335,10 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
         return workouts;
     }
 
-    public List<Exercise> getWorkoutExercises(int workoutId) throws SQLException {
+    public List<ExerciseItem> getWorkoutExercises(int workoutId) throws SQLException {
         String sql = "SELECT * FROM workout_exercise WHERE workout_id = ?";
 
-        List<Exercise> exercises = new ArrayList<>();
+        List<ExerciseItem> exercises = new ArrayList<>();
         try (Connection conn = DatabaseConnector.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, workoutId);
@@ -349,8 +349,9 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
                 var exerciseId  =rs.getInt("exercise_id");
 
                 Exercise exercise = getExercise(exerciseId);
+                ExerciseItem exerciseItem = new ExerciseItem(exercise);
                 //Exercise exercise = new Exercise(id, exerciseName, type, muscle, equipment, difficulty, instructions);
-                exercises.add(exercise);
+                exercises.add(exerciseItem);
             }
         }
 
@@ -379,15 +380,15 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
         }
     }
 
-    private void insertWorkoutExercises(List<Exercise> exercises, int id) {
+    private void insertWorkoutExercises(List<ExerciseItem> exercises, int id) {
         String sql = "INSERT INTO workout_exercise(exercise_id, workout_id, sets_count) VALUES(?,?,?)";
         try (Connection conn = DatabaseConnector.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            for (Exercise exercise : exercises) {
+            for (ExerciseItem exercise : exercises) {
                 pstmt.setInt(1, exercise.getId());
                 pstmt.setInt(2, id);
-                pstmt.setInt(3, exercise.getSets());
+                pstmt.setInt(3, exercise.getSetsCount());
 
                 pstmt.executeUpdate();
             }
