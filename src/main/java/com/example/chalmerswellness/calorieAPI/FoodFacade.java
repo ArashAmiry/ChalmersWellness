@@ -3,8 +3,8 @@ package com.example.chalmerswellness.calorieAPI;
 import com.example.chalmerswellness.Interfaces.Observable;
 import com.example.chalmerswellness.Interfaces.Observer;
 import com.example.chalmerswellness.LoggedInUser;
-import com.example.chalmerswellness.Services.DataService;
-import com.example.chalmerswellness.Services.DatabaseConnector;
+import com.example.chalmerswellness.Services.INutritionDatabaseHandler;
+import com.example.chalmerswellness.Services.NutritionService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.json.JSONException;
 
@@ -14,7 +14,11 @@ import java.util.List;
 public class FoodFacade implements Observable {
     private final NutritionAPIConnector apiConnector = new NutritionAPIConnector();
     private static List<Observer> observers = new ArrayList<>();
-    private DataService dataService = new DataService();
+    private final INutritionDatabaseHandler nutritionService;
+
+    public FoodFacade() {
+        nutritionService = new NutritionService();
+    }
 
     public Food createFood(String foodName) throws JsonProcessingException {
         Food food = getFood(foodName);
@@ -36,13 +40,12 @@ public class FoodFacade implements Observable {
     }
 
     public void addFoodEaten(String grams, String foodName, Meal meal) throws JsonProcessingException {
-        dataService.insertNutrition(this.createFood(grams + "g " + foodName), meal);
+        nutritionService.insertNutrition(this.createFood(grams + "g " + foodName), meal);
         notifyObservers();
     }
 
     public void removeFood(int foodId){
-        DatabaseConnector dataService = new DatabaseConnector();
-        dataService.removeNutrition(foodId);
+        nutritionService.removeNutrition(foodId);
         notifyObservers();
     }
 
@@ -61,7 +64,7 @@ public class FoodFacade implements Observable {
     public int getTodaysCalories(){
         int todaysCalories = 0;
         for (Meal meal : Meal.values()){
-            todaysCalories = caloriesForMealOfDay(todaysCalories, dataService, meal);
+            todaysCalories = caloriesForMealOfDay(todaysCalories, meal);
         }
 
         return todaysCalories;
@@ -86,8 +89,8 @@ public class FoodFacade implements Observable {
         }
     }
 
-    private int caloriesForMealOfDay(int todaysCalories, DataService dataService, Meal meal) {
-        List<Food> foods = dataService.getTodaysNutrition(meal);
+    private int caloriesForMealOfDay(int todaysCalories, Meal meal) {
+        List<Food> foods = nutritionService.getTodaysNutrition(meal);
         for (Food food : foods){
             todaysCalories += food.getCalories();
         }
