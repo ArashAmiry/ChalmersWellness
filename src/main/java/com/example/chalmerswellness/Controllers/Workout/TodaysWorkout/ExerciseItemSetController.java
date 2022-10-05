@@ -44,8 +44,12 @@ public class ExerciseItemSetController extends AnchorPane implements Initializab
     }
 
     public void setValues(){
-        exerciseItemSet.setWeight(Double.parseDouble(weightField.textProperty().getValue()));
-        exerciseItemSet.setReps(Integer.parseInt(repsField.textProperty().getValue()));
+        try {
+            exerciseItemSet.setWeight(Double.parseDouble(weightField.textProperty().getValue()));
+            exerciseItemSet.setReps(Integer.parseInt(repsField.textProperty().getValue()));
+        }catch (NumberFormatException e){
+            System.out.println(e);
+        }
     }
 
     @FXML private void removeSet(){

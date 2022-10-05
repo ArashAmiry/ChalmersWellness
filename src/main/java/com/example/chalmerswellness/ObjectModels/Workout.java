@@ -6,9 +6,9 @@ import java.util.List;
 public class Workout {
     private int id;
     private String workoutName;
-    private List<Exercise> exercises = new ArrayList<>();
+    private List<ExerciseItem> exercises = new ArrayList<>();
 
-    public Workout(String name, List<Exercise> exerciseList){
+    public Workout(String name, List<ExerciseItem> exerciseList){
         this.workoutName = name;
         this.exercises = exerciseList;
     }
@@ -20,7 +20,7 @@ public class Workout {
         return workoutName;
     }
 
-    public List<Exercise> getExercises() {
+    public List<ExerciseItem> getExercises() {
         return exercises;
     }
 }
