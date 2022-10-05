@@ -27,7 +27,7 @@ public class WorkoutModel implements Observable {
 
     public WorkoutModel(){
         workoutService = new WorkoutService();
-        changeState(new ActiveWorkoutState(this));
+        //changeState(new ActiveWorkoutState(this));
         exercises = getMyExercises();
     }
 
@@ -35,18 +35,9 @@ public class WorkoutModel implements Observable {
         this.state = state;
     }
 
-
-
     public List<Workout> getSavedWorkouts(){
         return workoutService.getWorkouts();
     }
-
-
-    //TODO remove
-    /*public List<Exercise> getAddedExercises() {
-        return addedExercises;
-    }*/
-
 
     public List<ExerciseItem> getAddedWorkoutExercises() {
         return addedWorkoutExercises;

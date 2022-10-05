@@ -1,6 +1,5 @@
 package com.example.chalmerswellness.Controllers.Workout.SearchPane;
 
-import com.example.chalmerswellness.Controllers.Workout.WorkoutStates;
 import com.example.chalmerswellness.Models.WorkoutModel;
 import com.example.chalmerswellness.ObjectModels.Exercise;
 import javafx.fxml.FXML;
@@ -20,7 +19,6 @@ public class ExerciseSearchController extends AnchorPane implements Initializabl
     @FXML public TextField searchField;
     @FXML public ListView<ExerciseSearchItemController> searchListView;
     @FXML public Label noResultLabel;
-    private WorkoutStates workoutState;
 
     public ExerciseSearchController(WorkoutModel model){
         this.model = model;
@@ -44,7 +42,7 @@ public class ExerciseSearchController extends AnchorPane implements Initializabl
     private void updateSearchResult(List<Exercise> exercises){
         searchListView.getItems().clear();
         for (var exercise: exercises) {
-            ExerciseSearchItemController exerciseController = new ExerciseSearchItemController(exercise, model, workoutState);
+            ExerciseSearchItemController exerciseController = new ExerciseSearchItemController(exercise, model);
             searchListView.getItems().add(exerciseController);
         }
         isNoResult();
@@ -59,11 +57,5 @@ public class ExerciseSearchController extends AnchorPane implements Initializabl
 
     void isNoResult(){
         noResultLabel.visibleProperty().set(searchListView.getItems().size() <= 0);
-    }
-
-
-    public void setState(WorkoutStates state){
-        this.workoutState = state;
-        searchExercise();
     }
 }
