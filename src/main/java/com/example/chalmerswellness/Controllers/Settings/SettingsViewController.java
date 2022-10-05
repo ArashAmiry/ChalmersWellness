@@ -2,7 +2,8 @@ package com.example.chalmerswellness.Controllers.Settings;
 
 import com.example.chalmerswellness.Gender;
 import com.example.chalmerswellness.LoggedInUser;
-import com.example.chalmerswellness.Services.DataService;
+import com.example.chalmerswellness.Services.IUserDatabaseHandler;
+import com.example.chalmerswellness.Services.UserService;
 import com.example.chalmerswellness.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -40,9 +41,12 @@ public class SettingsViewController extends AnchorPane implements Initializable 
     @FXML
     RadioButton femaleRadioButton;
     ToggleGroup genderToggleGroup = new ToggleGroup();
+    private final IUserDatabaseHandler userService;
 
     public SettingsViewController(){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/SettingsView.fxml"));
+
+        userService = new UserService();
 
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -94,9 +98,8 @@ public class SettingsViewController extends AnchorPane implements Initializable 
         LocalDate birthDate = birthDatePicker.getValue();
         Gender gender = (Gender) genderToggleGroup.getSelectedToggle().getUserData();
 
-        DataService dataService = new DataService();
-        dataService.updateUser(user.getId(), username, password, firstName, lastName, gender, email, birthDate, height, weight);
-        LoggedInUser.updateInstance(dataService.getUser(user.getId()));
+        userService.updateUser(user.getId(), username, password, firstName, lastName, gender, email, birthDate, height, weight);
+        LoggedInUser.updateInstance(userService.getUser(user.getId()));
     }
 
 }
