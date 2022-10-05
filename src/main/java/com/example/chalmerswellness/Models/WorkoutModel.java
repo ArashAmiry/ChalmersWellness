@@ -137,11 +137,15 @@ public class WorkoutModel implements Observable {
     //TODO show promt if exercises are already added
     public void addExercisesFromWorkout(Workout workout){
         addedExercises.clear();
-        List<ExerciseItem> exerciseItems = new ArrayList<>();
-        for (Exercise exercise: workout.getExercises()) {
+        //List<ExerciseItem> exerciseItems = new ArrayList<>();
+        List<ExerciseItem> exerciseItems = workout.getExercises();
+
+        /*for (Exercise exercise: workout.getExercises()) {
+
             ExerciseItem exerciseItem = new ExerciseItem(exercise);
             exerciseItems.add(exerciseItem);
         }
+         */
 
         workoutService.insertCompletedExercises(exerciseItems);
 

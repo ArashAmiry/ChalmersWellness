@@ -24,7 +24,7 @@ public class ExerciseItemController extends AnchorPane implements Initializable{
     Label exerciseName;
 
     // TODO Substitute plannedSets
-    private int plannedSets = 3;
+    //private int plannedSets = 3;
 
     public ExerciseItemController(ExerciseItem exerciseItem, WorkoutModel model, AnchorPane anchorPane){
         this.exerciseItem = exerciseItem;
@@ -67,7 +67,7 @@ public class ExerciseItemController extends AnchorPane implements Initializable{
     }
 
     private boolean isExerciseDone(){
-        return getSetCount() >= plannedSets;
+        return getSetCount() >= exerciseItem.getSetsCount();
     }
 
     private int getSetCount(){

@@ -36,13 +36,14 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
      */
 
     public ExerciseItem insertCompletedExercise(ExerciseItem exercise){
-        String sql = "INSERT INTO completed_exercise(exercise_id, is_done) VALUES(?,?)";
+        String sql = "INSERT INTO completed_exercise(exercise_id, is_done, planned_sets) VALUES(?,?,?)";
         int generatedKey = 0;
 
         try (Connection conn = DatabaseConnector.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setInt(1, exercise.getId());
                 pstmt.setBoolean(2, exercise.getIsDone());
+                pstmt.setInt(3, exercise.getSetsCount());
                 pstmt.executeUpdate();
 
             ResultSet rs = pstmt.getGeneratedKeys();
@@ -102,9 +103,11 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
                 var id = rs.getInt("id");
                 var exerciseId = rs.getInt("exercise_id");
                 var isDone = rs.getBoolean("is_done");
+                var planned_Sets = rs.getInt("planned_sets");
 
                 ExerciseItem exerciseItem = new ExerciseItem(id, getExercise(exerciseId));
                 exerciseItem.setDone(isDone);
+                exerciseItem.setSets(planned_Sets);
 
                 exerciseItems.add(exerciseItem);
             }
@@ -346,10 +349,12 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 //var id = rs.getInt("id");
-                var exerciseId  =rs.getInt("exercise_id");
+                var exerciseId  = rs.getInt("exercise_id");
+                int setCount = rs.getInt("sets_count");
 
                 Exercise exercise = getExercise(exerciseId);
                 ExerciseItem exerciseItem = new ExerciseItem(exercise);
+                exerciseItem.setSets(setCount);
                 //Exercise exercise = new Exercise(id, exerciseName, type, muscle, equipment, difficulty, instructions);
                 exercises.add(exerciseItem);
             }
