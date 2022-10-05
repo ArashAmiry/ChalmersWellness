@@ -1,16 +1,15 @@
 package com.example.chalmerswellness.Controllers.Workout.TodaysWorkout;
 
+import com.example.chalmerswellness.Models.WorkoutModel;
 import com.example.chalmerswellness.Interfaces.Observable;
 import com.example.chalmerswellness.Interfaces.Observer;
-import com.example.chalmerswellness.Models.WorkoutModel;
-import com.example.chalmerswellness.ObjectModels.Exercise;
+import com.example.chalmerswellness.ObjectModels.ExerciseItem;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -37,7 +36,18 @@ public class TodayWorkoutController extends AnchorPane implements Observer, Init
         }
     }
 
-    private void updateExerciseList(List<Exercise> exercises){
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        populateExerciseList();
+    }
+
+    @Override
+    public void update(Observable observable) {
+        model = (WorkoutModel) observable;
+        populateExerciseList();
+    }
+
+    private void updateExerciseList(List<ExerciseItem> exercises){
         exerciseList.getItems().clear();
 
         for (var exercise: exercises) {
@@ -46,6 +56,8 @@ public class TodayWorkoutController extends AnchorPane implements Observer, Init
 
         if (isExerciseListEmpty()) {
             displayNoResult();
+        } else {
+            noResult.visibleProperty().set(false);
         }
     }
 
@@ -57,15 +69,8 @@ public class TodayWorkoutController extends AnchorPane implements Observer, Init
         return exerciseList.getItems().size() <= 0;
     }
 
-    @Override
-    public void update(Observable observable) {
-        model = (WorkoutModel) observable;
-        var exercises = model.getAddedExercises();
-        updateExerciseList(exercises);
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        model.getTodaysExercises();
+    private void populateExerciseList(){
+        var todaysExercises = model.getTodayCompletedExercises();
+        updateExerciseList(todaysExercises);
     }
 }

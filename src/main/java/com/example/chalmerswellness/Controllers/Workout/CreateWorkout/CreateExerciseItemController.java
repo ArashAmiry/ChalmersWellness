@@ -2,6 +2,7 @@ package com.example.chalmerswellness.Controllers.Workout.CreateWorkout;
 
 import com.example.chalmerswellness.Models.WorkoutModel;
 import com.example.chalmerswellness.ObjectModels.Exercise;
+import com.example.chalmerswellness.ObjectModels.ExerciseItem;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -15,13 +16,13 @@ import java.util.ResourceBundle;
 public class CreateExerciseItemController extends AnchorPane implements Initializable{
 
     private final WorkoutModel model;
-    private final Exercise exercise;
+    private ExerciseItem exerciseItem;
     @FXML private TextField setsField;
     @FXML
     Label exerciseName, errorLabel;
 
-    public CreateExerciseItemController(Exercise exercise, WorkoutModel model, AnchorPane anchorPane){
-        this.exercise = exercise;
+    public CreateExerciseItemController(ExerciseItem exercise, WorkoutModel model, AnchorPane anchorPane){
+        this.exerciseItem = exercise;
         this.model = model;
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/CreateExerciseItem.fxml"));
@@ -42,12 +43,12 @@ public class CreateExerciseItemController extends AnchorPane implements Initiali
     }
 
     private void setName(){
-        exerciseName.textProperty().set(exercise.getName());
+        exerciseName.textProperty().set(exerciseItem.getName());
     }
 
     void setSets(){
         try {
-            this.exercise.setSets(Integer.parseInt(setsField.getText()));
+            this.exerciseItem.setSets(Integer.parseInt(setsField.getText()));
         }catch (NumberFormatException nfe){
             throw new NumberFormatException();
         }
@@ -64,10 +65,10 @@ public class CreateExerciseItemController extends AnchorPane implements Initiali
 
     @FXML
     private void removeFromWorkout(){
-        model.removeExercise(exercise);
+        model.removeExercise(exerciseItem);
     }
 
-    public Exercise getExercise() {
-        return exercise;
+    public ExerciseItem getExerciseItem() {
+        return exerciseItem;
     }
 }
