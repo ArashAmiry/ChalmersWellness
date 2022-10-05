@@ -62,9 +62,14 @@ public class ExerciseItemController extends AnchorPane implements Initializable{
     }
 
     @FXML private void markAsDone(){
-        this.setStyle("-fx-background-color: #CBFFB7");
+        if(isExerciseDone()){
+            exerciseItem.setDone(false);
+            this.setStyle("-fx-background-color: #FFFFFF");
+        } else {
+            exerciseItem.setDone(true);
+            this.setStyle("-fx-background-color: #CBFFB7");
+        }
 
-        exerciseItem.setDone(true);
         model.updateCompletedExercise(exerciseItem);
     }
 
