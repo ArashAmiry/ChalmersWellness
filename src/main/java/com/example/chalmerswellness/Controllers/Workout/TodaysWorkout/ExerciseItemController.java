@@ -2,9 +2,11 @@ package com.example.chalmerswellness.Controllers.Workout.TodaysWorkout;
 
 import com.example.chalmerswellness.Models.WorkoutModel;
 import com.example.chalmerswellness.ObjectModels.Exercise;
+import com.example.chalmerswellness.ObjectModels.ExerciseItem;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
@@ -14,16 +16,15 @@ import java.util.ResourceBundle;
 public class ExerciseItemController extends AnchorPane implements Initializable{
 
     private final WorkoutModel model;
-    private final Exercise exercise;
+    private final ExerciseItem exerciseItem;
     private final AnchorPane anchorPane;
-
     @FXML private Label setsAmount;
+    @FXML private Button doneBtn;
+    @FXML private Label exerciseName;
 
-    @FXML
-    Label exerciseName;
 
-    public ExerciseItemController(Exercise exercise, WorkoutModel model, AnchorPane anchorPane){
-        this.exercise = exercise;
+    public ExerciseItemController(ExerciseItem exerciseItem, WorkoutModel model, AnchorPane anchorPane){
+        this.exerciseItem = exerciseItem;
         this.model = model;
         this.anchorPane = anchorPane;
 
@@ -44,21 +45,66 @@ public class ExerciseItemController extends AnchorPane implements Initializable{
     }
 
     private void setInfo(){
-        exerciseName.textProperty().set(exercise.getName());
-        setsAmount.textProperty().set("Sets " + model.getSets(exercise.getId()).size());
+        exerciseName.textProperty().set(exerciseItem.getName());
+        setsAmount.textProperty().set("Sets " + getSetCount());
+
+        if(exerciseItem.getSetsCount() == 0){
+            if(exerciseItem.getIsDone()){
+                indicateDone();
+            }
+        } else {
+            if(isExerciseDone()){
+                indicateDone();
+            } else {
+                doneBtn.setVisible(false);
+            }
+        }
+    }
+
+    @FXML private void markAsDone(){
+        if(isExerciseDone()){
+            exerciseItem.setDone(false);
+            this.setStyle("-fx-background-color: #FFFFFF");
+        } else {
+            exerciseItem.setDone(true);
+            this.setStyle("-fx-background-color: #CBFFB7");
+        }
+
+        model.updateCompletedExercise(exerciseItem);
+    }
+
+    private void indicateDone(){
+        this.setStyle("-fx-background-color: #CBFFB7");
+        doneBtn.setVisible(true);
+    }
+
+    private boolean isExerciseDone(){
+        if(exerciseItem.getSetsCount() == 0){
+            if (exerciseItem.getIsDone()){
+                return true;
+            }
+
+            return false;
+        }
+
+        return getSetCount() >= exerciseItem.getSetsCount();
+    }
+
+    private int getSetCount(){
+        return model.getSets(exerciseItem.getExerciseItemId()).size();
     }
 
     @FXML
     private void removeFromWorkout(){
-        model.removeExercise(exercise);
+        model.removeExercise(exerciseItem);
     }
 
     @FXML private void openSetsWindow(){
-        AddSetsController addSetsController = new AddSetsController(model, exercise, anchorPane);
+        AddSetsController addSetsController = new AddSetsController(model, exerciseItem, anchorPane);
         anchorPane.getChildren().add(addSetsController);
     }
 
-    public Exercise getExercise() {
-        return exercise;
+    public Exercise getExerciseItem() {
+        return exerciseItem;
     }
 }

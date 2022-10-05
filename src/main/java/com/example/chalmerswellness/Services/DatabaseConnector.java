@@ -170,7 +170,6 @@ public class DatabaseConnector {
                 + "	sets_count INTEGER,\n"
                 + " FOREIGN KEY ('workout_id') REFERENCES 'created_workout' ('id')\n"
                 + " ON UPDATE CASCADE ON DELETE CASCADE\n"
-
                 + " FOREIGN KEY ('exercise_id') REFERENCES 'exercise' ('id')\n"
                 + " ON UPDATE CASCADE ON DELETE CASCADE\n"
                 + ");";
@@ -220,6 +219,8 @@ public class DatabaseConnector {
                 + "	id INTEGER PRIMARY KEY,\n"
                 + " exercise_id INTEGER,\n"
                 + " insert_date DATE DEFAULT CURRENT_DATE,\n"
+                + " is_done bool,\n"
+                + " planned_sets INTEGER,\n"
                 + " FOREIGN KEY ('exercise_id') REFERENCES 'exercise' ('id')\n"
                 + " ON UPDATE CASCADE ON DELETE CASCADE\n"
                 + ");";
