@@ -15,9 +15,7 @@ public class ExerciseSearchItemController extends AnchorPane implements Initiali
 
     private final WorkoutModel model;
     private final Exercise exercise;
-
-    @FXML
-    Label exerciseName;
+    @FXML Label exerciseName;
 
     public ExerciseSearchItemController(Exercise exercise, WorkoutModel model){
         this.exercise = exercise;
@@ -39,23 +37,8 @@ public class ExerciseSearchItemController extends AnchorPane implements Initiali
         setExerciseName();
     }
 
-
     @FXML public void addToWorkout(){
         model.addExercise(exercise);
-    }
-
-    /*@FXML public void addToWorkout(){
-        model.addExercise(exercise, workoutState);
-    }
-
-     */
-
-/*    @FXML public void removeFromWorkout(){
-        model.removeExercise(exercise);
-    }*/
-
-    public Exercise getExercise(){
-        return this.exercise;
     }
 
     private void setExerciseName(){
