@@ -21,13 +21,10 @@ public class WorkoutModel implements Observable {
     private List<ExerciseItemSet> sets = new ArrayList<>();
     private List<ExerciseItem> addedWorkoutExercises = new ArrayList<>();
 
-
-
     private WorkoutState state;
 
     public WorkoutModel(){
         workoutService = new WorkoutService();
-        //changeState(new ActiveWorkoutState(this));
         exercises = getMyExercises();
     }
 

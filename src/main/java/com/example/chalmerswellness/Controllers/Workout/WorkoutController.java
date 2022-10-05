@@ -69,7 +69,6 @@ public class WorkoutController extends AnchorPane implements Initializable {
     }
 
     @FXML void openWorkoutTab(){
-        //exerciseSearchController.setState(WorkoutStates.ACTIVEWORKOUT);
         workoutModel.changeState(new ActiveWorkoutState(workoutModel));
         setTabTo(todayWorkoutView);
         addedWorkoutsBtn.setVisible(true);
@@ -77,13 +76,10 @@ public class WorkoutController extends AnchorPane implements Initializable {
 
     @FXML void openCreateWorkoutTab(){
         workoutModel.changeState(new CreateState(workoutModel));
-
-        //exerciseSearchController.setState(WorkoutStates.CREATEWORKOUT);
         setTabTo(createWorkoutView);
     }
 
     @FXML void openManageWorkoutTab(){
-        //todayWorkoutView.textProperty().set("ManageWorkout Tab");
         setTabTo(manageWorkoutView);
     }
 
@@ -97,6 +93,4 @@ public class WorkoutController extends AnchorPane implements Initializable {
         mainContent.getChildren().clear();
         mainContent.getChildren().add(pane);
     }
-
-
 }

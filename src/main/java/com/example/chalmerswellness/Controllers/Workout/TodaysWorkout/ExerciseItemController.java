@@ -48,21 +48,23 @@ public class ExerciseItemController extends AnchorPane implements Initializable{
         exerciseName.textProperty().set(exerciseItem.getName());
         setsAmount.textProperty().set("Sets " + getSetCount());
 
+        if(exerciseItem.getIsDone()){
+            this.setStyle("-fx-background-color: #CBFFB7");
+            doneBtn.setVisible(true);
+        }
+
         if(exerciseItem.getSetsCount() == 0){
-            if(exerciseItem.getIsDone()){
-                indicateDone();
-            }
+            doneBtn.setVisible(true);
         } else {
-            if(isExerciseDone()){
-                indicateDone();
-            } else {
-                doneBtn.setVisible(false);
+            doneBtn.setVisible(false);
+            if(getSetCount() >= exerciseItem.getSetsCount()){
+                doneBtn.setVisible(true);
             }
         }
     }
 
     @FXML private void markAsDone(){
-        if(!isExerciseDone()){
+        if(!exerciseItem.getIsDone()){
             exerciseItem.setDone(true);
             this.setStyle("-fx-background-color: #CBFFB7");
         } else {
@@ -71,23 +73,6 @@ public class ExerciseItemController extends AnchorPane implements Initializable{
         }
 
         model.updateCompletedExercise(exerciseItem);
-    }
-
-    private void indicateDone(){
-        this.setStyle("-fx-background-color: #CBFFB7");
-        doneBtn.setVisible(true);
-    }
-
-    private boolean isExerciseDone(){
-        if(exerciseItem.getSetsCount() == 0){
-            if (exerciseItem.getIsDone()){
-                return true;
-            }
-
-            return false;
-        }
-
-        return getSetCount() >= exerciseItem.getSetsCount();
     }
 
     private int getSetCount(){
