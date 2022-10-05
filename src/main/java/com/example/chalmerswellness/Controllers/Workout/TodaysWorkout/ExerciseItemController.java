@@ -6,6 +6,7 @@ import com.example.chalmerswellness.ObjectModels.ExerciseItem;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
@@ -19,9 +20,9 @@ public class ExerciseItemController extends AnchorPane implements Initializable{
     private final AnchorPane anchorPane;
 
     @FXML private Label setsAmount;
+    @FXML private Button doneBtn;
 
-    @FXML
-    Label exerciseName;
+    @FXML private Label exerciseName;
 
     // TODO Substitute plannedSets
     //private int plannedSets = 3;
@@ -53,6 +54,8 @@ public class ExerciseItemController extends AnchorPane implements Initializable{
 
         if(isExerciseDone()){
             indicateDone();
+        } else {
+            doneBtn.setVisible(false);
         }
     }
 
@@ -63,10 +66,14 @@ public class ExerciseItemController extends AnchorPane implements Initializable{
 
     private void indicateDone(){
         this.setStyle("-fx-background-color: #CBFFB7");
-        //TODO show done button
+        doneBtn.setVisible(true);
     }
 
     private boolean isExerciseDone(){
+        if(exerciseItem.getSetsCount() == 0){
+            return false;
+        }
+
         return getSetCount() >= exerciseItem.getSetsCount();
     }
 
