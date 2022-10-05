@@ -22,7 +22,6 @@ public class ExerciseItemController extends AnchorPane implements Initializable{
     @FXML private Button doneBtn;
     @FXML private Label exerciseName;
 
-
     public ExerciseItemController(ExerciseItem exerciseItem, WorkoutModel model, AnchorPane anchorPane){
         this.exerciseItem = exerciseItem;
         this.model = model;
@@ -47,47 +46,37 @@ public class ExerciseItemController extends AnchorPane implements Initializable{
     private void setInfo(){
         exerciseName.textProperty().set(exerciseItem.getName());
         setsAmount.textProperty().set("Sets " + getSetCount());
+        showDoneButton();
+    }
 
+    private void showDoneButton(){
+        completedItem();
         if(exerciseItem.getSetsCount() == 0){
-            if(exerciseItem.getIsDone()){
-                indicateDone();
-            }
+            doneBtn.setVisible(true);
         } else {
-            if(isExerciseDone()){
-                indicateDone();
-            } else {
-                doneBtn.setVisible(false);
+            if(getSetCount() >= exerciseItem.getSetsCount()){
+                doneBtn.setVisible(true);
             }
+        }
+    }
+
+    private void completedItem(){
+        if(exerciseItem.getIsDone()){
+            this.setStyle("-fx-background-color: #CBFFB7");
+            doneBtn.setVisible(true);
+        } else {
+            doneBtn.setVisible(false);
         }
     }
 
     @FXML private void markAsDone(){
-        if(isExerciseDone()){
-            exerciseItem.setDone(false);
-            this.setStyle("-fx-background-color: #FFFFFF");
-        } else {
+        if(!exerciseItem.getIsDone()){
             exerciseItem.setDone(true);
-            this.setStyle("-fx-background-color: #CBFFB7");
+        } else {
+            exerciseItem.setDone(false);
         }
 
         model.updateCompletedExercise(exerciseItem);
-    }
-
-    private void indicateDone(){
-        this.setStyle("-fx-background-color: #CBFFB7");
-        doneBtn.setVisible(true);
-    }
-
-    private boolean isExerciseDone(){
-        if(exerciseItem.getSetsCount() == 0){
-            if (exerciseItem.getIsDone()){
-                return true;
-            }
-
-            return false;
-        }
-
-        return getSetCount() >= exerciseItem.getSetsCount();
     }
 
     private int getSetCount(){

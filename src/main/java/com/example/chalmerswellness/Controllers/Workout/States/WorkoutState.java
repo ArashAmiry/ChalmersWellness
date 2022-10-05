@@ -3,14 +3,13 @@ package com.example.chalmerswellness.Controllers.Workout.States;
 import com.example.chalmerswellness.Models.WorkoutModel;
 import com.example.chalmerswellness.ObjectModels.Exercise;
 
-public class ActiveWorkoutState extends WorkoutState{
+public abstract class WorkoutState {
+    protected WorkoutModel model;
 
-
-    public ActiveWorkoutState(WorkoutModel model) {
-        super(model);
+    public WorkoutState(WorkoutModel model){
+        this.model = model;
     }
 
-    @Override
     public void addExercise(Exercise exercise) {
         model.addExerciseToActiveWorkout(exercise);
     }

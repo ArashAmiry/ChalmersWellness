@@ -2,6 +2,8 @@ package com.example.chalmerswellness.Controllers.Workout;
 
 import com.example.chalmerswellness.Controllers.Workout.CreateWorkout.CreateWorkoutController;
 import com.example.chalmerswellness.Controllers.Workout.SearchPane.ExerciseSearchController;
+import com.example.chalmerswellness.Controllers.Workout.States.ActiveWorkoutState;
+import com.example.chalmerswellness.Controllers.Workout.States.CreateState;
 import com.example.chalmerswellness.Controllers.Workout.TodaysWorkout.TodayWorkoutController;
 import com.example.chalmerswellness.Controllers.Workout.TodaysWorkout.WorkoutListController;
 import com.example.chalmerswellness.Models.WorkoutModel;
@@ -11,7 +13,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -32,7 +33,6 @@ public class WorkoutController extends AnchorPane implements Initializable {
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
         workoutModel = new WorkoutModel();
-
 
         //TODO remove
         DatabaseConnector d = new DatabaseConnector();
@@ -67,18 +67,17 @@ public class WorkoutController extends AnchorPane implements Initializable {
     }
 
     @FXML void openWorkoutTab(){
-        exerciseSearchController.setState(WorkoutStates.ACTIVEWORKOUT);
+        workoutModel.changeState(new ActiveWorkoutState(workoutModel));
         setTabTo(todayWorkoutView);
         addedWorkoutsBtn.setVisible(true);
     }
 
     @FXML void openCreateWorkoutTab(){
-        exerciseSearchController.setState(WorkoutStates.CREATEWORKOUT);
+        workoutModel.changeState(new CreateState(workoutModel));
         setTabTo(createWorkoutView);
     }
 
     @FXML void openManageWorkoutTab(){
-        //todayWorkoutView.textProperty().set("ManageWorkout Tab");
         setTabTo(manageWorkoutView);
     }
 
@@ -92,6 +91,4 @@ public class WorkoutController extends AnchorPane implements Initializable {
         mainContent.getChildren().clear();
         mainContent.getChildren().add(pane);
     }
-
-
 }
