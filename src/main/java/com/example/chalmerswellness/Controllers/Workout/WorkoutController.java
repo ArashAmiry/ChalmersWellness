@@ -13,7 +13,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -34,7 +33,6 @@ public class WorkoutController extends AnchorPane implements Initializable {
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
         workoutModel = new WorkoutModel();
-
 
         //TODO remove
         DatabaseConnector d = new DatabaseConnector();

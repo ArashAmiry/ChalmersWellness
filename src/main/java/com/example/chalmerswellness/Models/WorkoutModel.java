@@ -1,6 +1,5 @@
 package com.example.chalmerswellness.Models;
 
-import com.example.chalmerswellness.Controllers.Workout.States.ActiveWorkoutState;
 import com.example.chalmerswellness.Controllers.Workout.States.WorkoutState;
 import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.ObjectModels.ExerciseItem;
@@ -20,7 +19,6 @@ public class WorkoutModel implements Observable {
     private List<Exercise> exercises = new ArrayList<>();
     private List<ExerciseItemSet> sets = new ArrayList<>();
     private List<ExerciseItem> addedWorkoutExercises = new ArrayList<>();
-
     private WorkoutState state;
 
     public WorkoutModel(){
@@ -140,7 +138,6 @@ public class WorkoutModel implements Observable {
         addedExercises.clear();
         List<ExerciseItem> exerciseItems = workout.getExercises();
         workoutService.insertCompletedExercises(exerciseItems);
-
         getTodayCompletedExercises();
         notifyObservers();
     }
@@ -149,7 +146,6 @@ public class WorkoutModel implements Observable {
         addedWorkoutExercises.clear();
         notifyObservers();
     }
-
 
     @Override
     public void notifyObservers() {

@@ -22,7 +22,6 @@ public class ExerciseItemController extends AnchorPane implements Initializable{
     @FXML private Button doneBtn;
     @FXML private Label exerciseName;
 
-
     public ExerciseItemController(ExerciseItem exerciseItem, WorkoutModel model, AnchorPane anchorPane){
         this.exerciseItem = exerciseItem;
         this.model = model;
@@ -47,29 +46,34 @@ public class ExerciseItemController extends AnchorPane implements Initializable{
     private void setInfo(){
         exerciseName.textProperty().set(exerciseItem.getName());
         setsAmount.textProperty().set("Sets " + getSetCount());
+        showDoneButton();
+    }
 
-        if(exerciseItem.getIsDone()){
-            this.setStyle("-fx-background-color: #CBFFB7");
-            doneBtn.setVisible(true);
-        }
-
+    private void showDoneButton(){
+        completedItem();
         if(exerciseItem.getSetsCount() == 0){
             doneBtn.setVisible(true);
         } else {
-            doneBtn.setVisible(false);
             if(getSetCount() >= exerciseItem.getSetsCount()){
                 doneBtn.setVisible(true);
             }
         }
     }
 
+    private void completedItem(){
+        if(exerciseItem.getIsDone()){
+            this.setStyle("-fx-background-color: #CBFFB7");
+            doneBtn.setVisible(true);
+        } else {
+            doneBtn.setVisible(false);
+        }
+    }
+
     @FXML private void markAsDone(){
         if(!exerciseItem.getIsDone()){
             exerciseItem.setDone(true);
-            this.setStyle("-fx-background-color: #CBFFB7");
         } else {
             exerciseItem.setDone(false);
-            this.setStyle("-fx-background-color: #FFFFFF");
         }
 
         model.updateCompletedExercise(exerciseItem);
