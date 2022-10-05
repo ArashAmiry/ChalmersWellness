@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<fx:root fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1460.0" styleClass="rootpane" stylesheets="@../css/nutritionDashboard.css" type="AnchorPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1460.0" styleClass="rootpane" stylesheets="@../css/nutritionDashboard.css" type="AnchorPane" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Circle fill="WHITE" layoutX="605.0" layoutY="500.0" radius="55.0" stroke="BLACK" strokeType="INSIDE" styleClass="nutritionIndicator" AnchorPane.topAnchor="446.0" />
       <Text layoutX="587.0" layoutY="473.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="nutritionLabel" text="Carbs">
@@ -22,22 +22,22 @@
             <Font size="13.0" />
          </font>
       </Text>
-      <Button layoutX="249.0" layoutY="605.0" mnemonicParsing="false" onAction="#loadBreakfastSearchView" prefHeight="86.0" prefWidth="440.0" styleClass="addButton" text="Add breakfast&#10;Recommended: 665 - 953 kcal&#10;">
+      <Button layoutX="249.0" layoutY="605.0" mnemonicParsing="false" onAction="#loadBreakfastSearchView" prefHeight="86.0" prefWidth="440.0" styleClass="addButton" text="Add breakfast&#10;Recommended: &#10;&#10;">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button layoutX="803.0" layoutY="605.0" mnemonicParsing="false" onMouseClicked="#loadLunchSearchView" prefHeight="86.0" prefWidth="440.0" styleClass="addButton" text="Add lunch&#10;Recommended: 1303 - 1564 kcal">
+      <Button layoutX="803.0" layoutY="605.0" mnemonicParsing="false" onMouseClicked="#loadLunchSearchView" prefHeight="86.0" prefWidth="440.0" styleClass="addButton" text="Add lunch&#10;Recommended: ">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button layoutX="249.0" layoutY="799.0" mnemonicParsing="false" onMouseClicked="#loadDinnerSearchView" prefHeight="86.0" prefWidth="440.0" styleClass="addButton" text="Add dinner&#10;Recommended: 864 - 933 kcal">
+      <Button layoutX="249.0" layoutY="799.0" mnemonicParsing="false" onMouseClicked="#loadDinnerSearchView" prefHeight="86.0" prefWidth="440.0" styleClass="addButton" text="Add dinner&#10;Recommended: ">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button layoutX="803.0" layoutY="799.0" mnemonicParsing="false" onMouseClicked="#loadSnackSearchView" prefHeight="86.0" prefWidth="440.0" styleClass="addButton" text="Add snack&#10;Recommended: 532 - 645 kcal">
+      <Button layoutX="803.0" layoutY="799.0" mnemonicParsing="false" onMouseClicked="#loadSnackSearchView" prefHeight="86.0" prefWidth="440.0" styleClass="addButton" text="Add snack&#10;Recommended: ">
          <font>
             <Font size="20.0" />
          </font>
@@ -82,8 +82,12 @@
       </Text>
       <ImageView fitHeight="39.0" fitWidth="44.0" layoutX="866.0" layoutY="482.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/breadIcon.png" />
+            <Image url="@../img/chicken.png" />
          </image>
       </ImageView>
+      <Text fx:id="breakfastRecommendedCaloriesText" layoutX="397.0" layoutY="676.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="recommendedCaloriesText" text="Text" />
+      <Text fx:id="lunchRecommendedCaloriesText" layoutX="950.0" layoutY="676.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="recommendedCaloriesText" text="Text" />
+      <Text fx:id="snackRecommendedCaloriesText" layoutX="950.0" layoutY="870.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="recommendedCaloriesText" text="Text" wrappingWidth="222.470703125" />
+      <Text fx:id="dinnerRecommendedCaloriesText" layoutX="397.0" layoutY="870.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="recommendedCaloriesText" text="Text" wrappingWidth="222.470703125" />
    </children>
 </fx:root>

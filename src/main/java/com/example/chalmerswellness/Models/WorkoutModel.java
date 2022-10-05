@@ -13,20 +13,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WorkoutModel implements Observable {
-    private final IWorkoutDatabaseHandler workoutService;
-    private List<Observer> observers = new ArrayList<>();
-    private List<Exercise> exercises = new ArrayList<>();
     private List<Exercise> addedExercises = new ArrayList<>();
+    private List<Observer> observers = new ArrayList<>();
+    private final IWorkoutDatabaseHandler workoutService;
+    private List<Exercise> exercises = new ArrayList<>();
     private List<ExerciseItemSet> sets = new ArrayList<>();
     private List<ExerciseItem> addedWorkoutExercises = new ArrayList<>();
 
     public WorkoutModel(){
         workoutService = new WorkoutService();
+
         exercises = getMyExercises();
     }
 
     public List<Workout> getSavedWorkouts(){
-        //return null;
         return workoutService.getWorkouts();
     }
 
@@ -58,6 +58,7 @@ public class WorkoutModel implements Observable {
     }
 
     public List<Exercise> searchExercises(String exerciseName){
+
         List<Exercise> searchResult = new ArrayList<>();
         for (var exercise: exercises) {
             if(exercise.getName().toLowerCase().replaceAll("\\s+","").contains(exerciseName))
@@ -152,6 +153,7 @@ public class WorkoutModel implements Observable {
         addedWorkoutExercises.clear();
         notifyObservers();
     }
+
 
     @Override
     public void notifyObservers() {

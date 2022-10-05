@@ -3,6 +3,8 @@ package com.example.chalmerswellness.Controllers.Nutrition;
 import com.example.chalmerswellness.CalorieIntakeCalculatorController;
 import com.example.chalmerswellness.Interfaces.Observable;
 import com.example.chalmerswellness.Interfaces.Observer;
+import com.example.chalmerswellness.LoggedInUser;
+import com.example.chalmerswellness.calorieAPI.FoodFacade;
 import com.example.chalmerswellness.calorieAPI.Meal;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,6 +27,16 @@ public class NutritionViewController extends AnchorPane implements Initializable
     private ProgressBar progressBar;
     @FXML
     private Text progressBarText;
+    @FXML
+    private Text breakfastRecommendedCaloriesText;
+    @FXML
+    private Text lunchRecommendedCaloriesText;
+    @FXML
+    private Text dinnerRecommendedCaloriesText;
+    @FXML
+    private Text snackRecommendedCaloriesText;
+
+    FoodFacade foodFacade = new FoodFacade();
 
     public NutritionViewController() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/NutritionView.fxml"));
@@ -38,19 +50,34 @@ public class NutritionViewController extends AnchorPane implements Initializable
             throw new RuntimeException(exception);
         }
 
+        foodFacade.subscribe(this);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        /*progressBarText.setText(profile.calorieGoal() - profile.caloriesConsumed() + " Kcal Left");
-        progressBar.setProgress((double) profile.caloriesConsumed() / profile.calorieGoal());*/
+        updateProgressBar();
         CalorieIntakeCalculatorController calorieIntakeCalculatorController = new CalorieIntakeCalculatorController();
         calorieIntakeCalculatorController.subscribe(this);
+        setRecommendedCaloriesText();
+    }
+
+    private void setRecommendedCaloriesText() {
+        int calorieIntake = LoggedInUser.getInstance().getCalorieGoal();
+        breakfastRecommendedCaloriesText.setText((int) (calorieIntake * 0.25) + " - " + (int) (calorieIntake * 0.3) + " kcal");
+        lunchRecommendedCaloriesText.setText((int) (calorieIntake * 0.35) + " - " + (int) (calorieIntake * 0.4) + " kcal");
+        dinnerRecommendedCaloriesText.setText((int) (calorieIntake * 0.25) + " - " + (int) (calorieIntake * 0.3) + " kcal");
+        snackRecommendedCaloriesText.setText((int) (calorieIntake * 0.05) + " - " + (int) (calorieIntake * 0.1) + " kcal");
     }
 
     private void loadNutritionSearchView(Meal meal) {
         rootPane.getChildren().add(new NutritionSearchViewController(rootPane, meal));
         rootPane.setDisable(false);
+    }
+
+    private void updateProgressBar(){
+        progressBarText.setText(foodFacade.caloriesLeftToday() + " Kcal Left");
+        double percentage = foodFacade.caloriesEatenInPercentage();
+        progressBar.setProgress(percentage);
     }
 
     @FXML
@@ -75,7 +102,7 @@ public class NutritionViewController extends AnchorPane implements Initializable
 
     @Override
     public void update(Observable observable) {
-        /*progressBarText.setText(profile.calorieGoal() - profile.caloriesConsumed() + " Kcal Left");
-        progressBar.setProgress((double) profile.caloriesConsumed() / profile.calorieGoal());*/
+        updateProgressBar();
+        setRecommendedCaloriesText();
     }
 }

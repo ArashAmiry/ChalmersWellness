@@ -1,42 +1,118 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1460.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" type="AnchorPane">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1460.0" type="AnchorPane" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane layoutX="110.0" layoutY="66.0" prefHeight="815.0" prefWidth="1176.0">
+      <AnchorPane layoutX="110.0" layoutY="66.0" prefHeight="893.0" prefWidth="1176.0">
          <children>
-            <TextField layoutX="51.0" layoutY="145.0" prefHeight="86.0" prefWidth="322.0" />
-            <Text layoutX="51.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PERSONAL INFORMATION">
+            <TextField fx:id="firstNameTextField" layoutX="51.0" layoutY="108.0" prefHeight="86.0" prefWidth="322.0">
+               <font>
+                  <Font size="22.0" />
+               </font></TextField>
+            <Text layoutX="50.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PERSONAL INFORMATION">
                <font>
                   <Font size="42.0" />
                </font>
             </Text>
-            <TextField layoutX="409.0" layoutY="145.0" prefHeight="86.0" prefWidth="322.0" />
-            <TextField layoutX="768.0" layoutY="145.0" prefHeight="86.0" prefWidth="322.0" />
-            <TextField layoutX="51.0" layoutY="270.0" prefHeight="86.0" prefWidth="322.0" />
-            <Text layoutX="51.0" layoutY="435.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ACCOUNT">
+            <TextField fx:id="lastNameTextField" layoutX="409.0" layoutY="108.0" prefHeight="86.0" prefWidth="322.0">
+               <font>
+                  <Font size="22.0" />
+               </font></TextField>
+            <TextField fx:id="emailTextField" layoutX="51.0" layoutY="233.0" prefHeight="86.0" prefWidth="322.0">
+               <font>
+                  <Font size="22.0" />
+               </font></TextField>
+            <Text layoutX="51.0" layoutY="492.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ACCOUNT">
                <font>
                   <Font size="42.0" />
                </font>
             </Text>
-            <TextField layoutX="51.0" layoutY="493.0" prefHeight="86.0" prefWidth="322.0" />
-            <TextField layoutX="51.0" layoutY="609.0" prefHeight="86.0" prefWidth="322.0" />
-            <Button layoutX="51.0" layoutY="722.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="168.0" text="Log out">
+            <TextField fx:id="usernameTextField" layoutX="51.0" layoutY="540.0" prefHeight="86.0" prefWidth="322.0">
+               <font>
+                  <Font size="22.0" />
+               </font></TextField>
+            <TextField fx:id="passwordTextField" layoutX="51.0" layoutY="666.0" prefHeight="86.0" prefWidth="322.0">
+               <font>
+                  <Font size="22.0" />
+               </font></TextField>
+            <Button layoutX="941.0" layoutY="779.0" mnemonicParsing="false" onMouseClicked="#saveChanges" prefHeight="46.0" prefWidth="168.0" text="Save">
                <font>
                   <Font size="35.0" />
                </font>
             </Button>
-            <Button layoutX="941.0" layoutY="722.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="168.0" text="Save">
+            <DatePicker fx:id="birthDatePicker" layoutX="768.0" layoutY="108.0" prefHeight="86.0" prefWidth="322.0" />
+            <Text layoutX="51.0" layoutY="656.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password">
                <font>
-                  <Font size="35.0" />
+                  <Font size="22.0" />
                </font>
-            </Button>
-            <TextField layoutX="397.0" layoutY="609.0" prefHeight="86.0" prefWidth="322.0" />
+            </Text>
+            <Text layoutX="51.0" layoutY="534.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Text>
+            <Text layoutX="51.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Text>
+            <Text layoutX="409.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Text>
+            <Text layoutX="768.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Birth Date">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Text>
+            <Text layoutX="50.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Text>
+            <TextField fx:id="heightTextField" layoutX="409.0" layoutY="233.0" prefHeight="86.0" prefWidth="322.0">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </TextField>
+            <Text layoutX="409.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Height">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Text>
+            <TextField fx:id="weightTextField" layoutX="768.0" layoutY="233.0" prefHeight="86.0" prefWidth="322.0">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </TextField>
+            <Text layoutX="768.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Weight">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Text>
+            <RadioButton fx:id="maleRadioButton" layoutX="51.0" layoutY="364.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="322.0" text="Male">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </RadioButton>
+            <RadioButton fx:id="femaleRadioButton" layoutX="409.0" layoutY="364.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="322.0" text="Female">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </RadioButton>
+            <Text layoutX="50.0" layoutY="360.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gender">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
    </children>

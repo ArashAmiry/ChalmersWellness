@@ -19,6 +19,7 @@ public class DatabaseConnector {
         createCompletedSetTable();
         createCreatedWorkoutTable();
         createWorkoutExerciseTable();
+        createFriendTable();
     }
 
     static Connection connect() {
@@ -102,6 +103,7 @@ public class DatabaseConnector {
     private void createNutritionTable() {
         String sql = "CREATE TABLE IF NOT EXISTS nutrition (\n"
                 + "	id INTEGER PRIMARY KEY,\n"
+                + " userID INTEGER,\n"
                 + "	mealName text NOT NULL,\n"
                 + "	calories DOUBLE NOT NULL,\n"
                 + "	servingSize DOUBLE NOT NULL,\n"
@@ -116,6 +118,26 @@ public class DatabaseConnector {
                 + " dateOfInsert DATE DEFAULT CURRENT_DATE,\n"
                 + " mealOfDay text NOT NULL, \n"
                 + " FOREIGN KEY ('userID') REFERENCES 'users' ('id') \n"
+                + " ON UPDATE CASCADE ON DELETE CASCADE\n"
+                + ");";
+
+        try (Connection conn = connect();
+             Statement stmt = conn.createStatement()) {
+            stmt.execute(sql);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void createFriendTable() {
+        String sql = "CREATE TABLE IF NOT EXISTS friend (\n"
+                + "	id INTEGER PRIMARY KEY,\n"
+                + "	follower_id INTEGER,\n"
+                + "	following_id INTEGER,\n"
+                + " FOREIGN KEY ('follower_id') REFERENCES 'users' ('id')\n"
+                + " ON UPDATE CASCADE ON DELETE CASCADE\n"
+
+                + " FOREIGN KEY ('following_id') REFERENCES 'users' ('id')\n"
                 + " ON UPDATE CASCADE ON DELETE CASCADE\n"
                 + ");";
 
@@ -145,6 +167,7 @@ public class DatabaseConnector {
                 + "	id INTEGER PRIMARY KEY,\n"
                 + "	workout_id INTEGER,\n"
                 + "	exercise_id INTEGER,\n"
+                + "	sets_count INTEGER,\n"
                 + " FOREIGN KEY ('workout_id') REFERENCES 'created_workout' ('id')\n"
                 + " ON UPDATE CASCADE ON DELETE CASCADE\n"
                 + " FOREIGN KEY ('exercise_id') REFERENCES 'exercise' ('id')\n"
