@@ -9,20 +9,25 @@ import com.example.chalmerswellness.Interfaces.Observable;
 import com.example.chalmerswellness.Interfaces.Observer;
 import com.example.chalmerswellness.Services.IWorkoutDatabaseHandler;
 import com.example.chalmerswellness.Services.WorkoutService;
+import com.example.chalmerswellness.Services.testImplement.WorkoutServiceTest;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class WorkoutModel implements Observable {
     private List<Exercise> addedExercises = new ArrayList<>();
     private List<Observer> observers = new ArrayList<>();
-    private final IWorkoutDatabaseHandler workoutService;
+    //private final IWorkoutDatabaseHandler workoutService;
+    private WorkoutServiceTest workoutService = WorkoutServiceTest.getInstance();
     private List<Exercise> exercises = new ArrayList<>();
     private List<ExerciseItemSet> sets = new ArrayList<>();
     private List<ExerciseItem> addedWorkoutExercises = new ArrayList<>();
     private WorkoutState state;
 
     public WorkoutModel(){
-        workoutService = new WorkoutService();
+        //workoutService = new WorkoutServiceTest(WorkoutServiceTest.RepositoryType.Database);
+
+        //workoutService = new WorkoutService();
         exercises = getMyExercises();
     }
 

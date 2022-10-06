@@ -22,7 +22,7 @@ public class DatabaseConnector {
         createFriendTable();
     }
 
-    static Connection connect() {
+    public static Connection connect() {
         String url = "jdbc:sqlite:" + dbPath;
         Connection conn = null;
         try {
