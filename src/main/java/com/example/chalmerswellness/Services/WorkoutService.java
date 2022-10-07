@@ -112,6 +112,12 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
                 exerciseItem.setDone(isDone);
                 exerciseItem.setSets(planned_Sets);
 
+                List<ExerciseItemSet> sets = getCompletedSets(id);
+
+                for (ExerciseItemSet set: sets) {
+                    exerciseItem.addSet(set);
+                }
+
                 exerciseItems.add(exerciseItem);
             }
         } catch (SQLException e) {
