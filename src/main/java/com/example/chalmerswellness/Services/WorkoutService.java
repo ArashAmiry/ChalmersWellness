@@ -110,7 +110,7 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
 
                 ExerciseItem exerciseItem = new ExerciseItem(id, getExercise(exerciseId));
                 exerciseItem.setDone(isDone);
-                exerciseItem.setSets(planned_Sets);
+                exerciseItem.setPlannedSetsCount(planned_Sets);
 
                 List<ExerciseItemSet> sets = getCompletedSets(id);
 
@@ -363,7 +363,7 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
 
                 Exercise exercise = getExercise(exerciseId);
                 ExerciseItem exerciseItem = new ExerciseItem(exercise);
-                exerciseItem.setSets(setCount);
+                exerciseItem.setPlannedSetsCount(setCount);
                 //Exercise exercise = new Exercise(id, exerciseName, type, muscle, equipment, difficulty, instructions);
                 exercises.add(exerciseItem);
             }

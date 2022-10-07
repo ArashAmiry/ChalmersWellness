@@ -13,7 +13,7 @@ public interface IDatabaseWorkoutRepository {
     ExerciseItem insertCompletedExercise(ExerciseItem exercise);
     void insertCompletedSet(ExerciseItemSet set);
     void removeCompletedExercise(ExerciseItem exercise);
-    void removeSet(int setId);
+    void removeSet(ExerciseItemSet set);
     List<Exercise> getExercises();
     void insertCompletedSets(int exerciseId, List<ExerciseItemSet> sets);
     void insertWorkout(Workout workout);

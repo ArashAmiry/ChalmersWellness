@@ -56,9 +56,9 @@ public class WorkoutServiceTest {
     {
         repository.removeCompletedExercise(exerciseItem);
     }
-    public void removeSet(int setId)
+    public void removeSet(ExerciseItemSet set)
     {
-        repository.removeSet(setId);
+        repository.removeSet(set);
     }
     public List<Exercise> getExercises()
     {

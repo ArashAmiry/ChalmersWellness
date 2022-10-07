@@ -12,9 +12,6 @@ import java.util.List;
 public class MemoryRepository implements IDatabaseWorkoutRepository {
 
     private List<Exercise> exercises = new ArrayList<>();
-
-
-    //Should remove or change
     private List<ExerciseItem> completedExercises = new ArrayList<>();
     private List<ExerciseItemSet> completedSets = new ArrayList<>();
     private List<Workout> workouts = new ArrayList<>();
@@ -53,8 +50,8 @@ public class MemoryRepository implements IDatabaseWorkoutRepository {
     }
 
     @Override
-    public void removeSet(int setId) {
-        completedSets.remove(setId);
+    public void removeSet(ExerciseItemSet set) {
+        completedSets.remove(set);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.example.chalmerswellness.Controllers.Workout.TodaysWorkout;
 
 import com.example.chalmerswellness.Models.WorkoutModel;
+import com.example.chalmerswellness.ObjectModels.ExerciseItem;
 import com.example.chalmerswellness.ObjectModels.ExerciseItemSet;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,16 +17,18 @@ public class ExerciseItemSetController extends AnchorPane implements Initializab
 
     private WorkoutModel model;
     private ExerciseItemSet exerciseItemSet;
+    private ExerciseItem exerciseItem;
     private int setNumber;
     @FXML private Label exerciseName;
     @FXML private Label setLabel;
     @FXML private TextField weightField;
     @FXML private TextField repsField;
 
-    public ExerciseItemSetController(WorkoutModel model, ExerciseItemSet exerciseItemSet, int setNumber){
+    public ExerciseItemSetController(WorkoutModel model, ExerciseItem exerciseItem, ExerciseItemSet exerciseItemSet){
         this.model = model;
         this.exerciseItemSet = exerciseItemSet;
-        this.setNumber = setNumber;
+        this.exerciseItem = exerciseItem;
+        this.setNumber = exerciseItemSetNumber();
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/ExerciseSet.fxml"));
         fxmlLoader.setRoot(this);
@@ -41,24 +44,27 @@ public class ExerciseItemSetController extends AnchorPane implements Initializab
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setInfo();
-    }
 
-    public void setValues(){
-        try {
-            exerciseItemSet.setWeight(Double.parseDouble(weightField.textProperty().getValue()));
-            exerciseItemSet.setReps(Integer.parseInt(repsField.textProperty().getValue()));
-        }catch (NumberFormatException e){
-            System.out.println(e);
-        }
+        weightField.textProperty().addListener((observable, oldValue, newValue) -> {
+            exerciseItemSet.setWeight(Double.parseDouble(newValue));
+        });
+        repsField.textProperty().addListener((observable, oldValue, newValue) -> {
+            exerciseItemSet.setReps(Integer.parseInt(newValue));
+        });
     }
 
     @FXML private void removeSet(){
-        model.removeSet(exerciseItemSet.getId());
+        //exerciseItem.getSets().remove(exerciseItemSet);
+        model.removeSet(exerciseItem, exerciseItemSet);
     }
 
     private void setInfo(){
         setLabel.textProperty().set("Set " + setNumber);
         weightField.textProperty().set(String.valueOf(exerciseItemSet.getWeight()));
         repsField.textProperty().set(String.valueOf(exerciseItemSet.getReps()));
+    }
+
+    private int exerciseItemSetNumber(){
+        return exerciseItem.getSets().indexOf(exerciseItemSet) + 1;
     }
 }
