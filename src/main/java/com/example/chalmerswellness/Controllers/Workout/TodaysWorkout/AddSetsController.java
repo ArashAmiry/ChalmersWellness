@@ -56,11 +56,16 @@ public class AddSetsController extends AnchorPane implements Initializable, Obse
     }
 
     @FXML private void addSet(){
-        saveSets();
+        //saveSets();
 
         ExerciseItemSet exerciseSet = new ExerciseItemSet(exerciseItem.getExerciseItemId(), 0, 0);
         exerciseItem.addSet(exerciseSet);
-        model.addSet(exerciseItem);
+
+        //New Version
+        model.updateCompletedExercise(exerciseItem);
+
+        //Old Version
+        //model.addSet(exerciseItem);
     }
 
     @FXML private void saveSets(){
@@ -68,12 +73,19 @@ public class AddSetsController extends AnchorPane implements Initializable, Obse
             item.setValues();
         }
 
-        model.saveSets(exerciseItem.getExerciseItemId());
+        //model.saveSets(exerciseItem.getExerciseItemId());
+        model.updateCompletedExercise(exerciseItem);
     }
 
     private void updateSets(){
         setsList.clear();
-        var sets = model.getSets(exerciseItem.getExerciseItemId());
+
+
+        //Old Version
+        //var sets = model.getSets(exerciseItem.getExerciseItemId());
+
+        //New Version
+        var sets = exerciseItem.getSets();
         int setNumber = 1;
 
         for (var set: sets) {
