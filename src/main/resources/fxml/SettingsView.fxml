@@ -113,6 +113,11 @@
                   <Font size="22.0" />
                </font>
             </Text>
+            <Button layoutX="51.0" layoutY="779.0" mnemonicParsing="false" onMouseClicked="#logOut" prefHeight="46.0" prefWidth="168.0" text="Log out">
+               <font>
+                  <Font size="35.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
    </children>

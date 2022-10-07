@@ -40,7 +40,7 @@ public class LoginController extends AnchorPane implements Initializable {
             System.out.println("Login successful");
             LoggedInUser.createInstance(userService.getUser(username,password));
             rootPane.getChildren().clear();
-            rootPane.getChildren().add(new MainView());
+            rootPane.getChildren().setAll(new MainView());
         } else {
             System.out.println("Login failed");
         }
