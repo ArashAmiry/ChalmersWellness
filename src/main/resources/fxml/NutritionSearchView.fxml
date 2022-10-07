@@ -20,9 +20,9 @@
                   <Image url="@../img/closebutton.png" />
                </image>
             </ImageView>
-            <ScrollPane layoutX="42.0" layoutY="207.0" prefWidth="616.0" styleClass="foodScrollPane">
+            <ScrollPane hbarPolicy="NEVER" layoutX="42.0" layoutY="207.0" prefWidth="616.0" styleClass="foodScrollPane">
                <content>
-                  <VBox fx:id="meals" prefHeight="458.0" prefWidth="600.0" styleClass="foodVBox" />
+                  <VBox fx:id="meals" prefHeight="458.0" prefWidth="616.0" styleClass="foodVBox" />
                </content>
             </ScrollPane>
             <Label fx:id="mealOfDay" layoutX="42.0" layoutY="152.0" prefHeight="17.0" prefWidth="247.0" styleClass="mealOfDay" text="Breakfast" />

@@ -84,7 +84,7 @@ public class CalorieIntakeCalculatorController extends AnchorPane implements Ini
         double weightGoal = Double.parseDouble(weightGoalTextField.getText());
         int pace = (int) paceGroup.getSelectedToggle().getUserData();
         double activityLevel = activityLevels.get(activityComboBox.getValue());
-        if (Integer.parseInt(weightGoalTextField.getText()) - weight < 0) {
+        if (Double.parseDouble(weightGoalTextField.getText()) - weight < 0) {
             pace = -pace;
         }
         if (weight == weightGoal) {
