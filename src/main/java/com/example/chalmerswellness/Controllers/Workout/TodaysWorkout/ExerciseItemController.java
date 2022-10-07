@@ -16,7 +16,7 @@ import java.util.ResourceBundle;
 public class ExerciseItemController extends AnchorPane implements Initializable{
 
     private final WorkoutModel model;
-    private final ExerciseItem exerciseItem;
+    private ExerciseItem exerciseItem;
     private final AnchorPane anchorPane;
     @FXML private Label setsAmount;
     @FXML private Button doneBtn;
@@ -80,7 +80,10 @@ public class ExerciseItemController extends AnchorPane implements Initializable{
     }
 
     private int getSetCount(){
-        return model.getSets(exerciseItem.getExerciseItemId()).size();
+        //return model.getSets(exerciseItem.getExerciseItemId()).size();
+
+        //New Version
+        return exerciseItem.getSetsCount();
     }
 
     @FXML

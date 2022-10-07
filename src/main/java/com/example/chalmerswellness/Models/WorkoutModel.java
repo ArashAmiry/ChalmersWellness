@@ -77,19 +77,21 @@ public class WorkoutModel implements Observable {
         notifyObservers();
     }
 
-    public void saveSets(int setId){
+    /*public void saveSets(int setId){
         workoutService.insertCompletedSets(setId, sets);
-    }
+    }*/
 
     public void removeSet(int setId){
         workoutService.removeSet(setId);
         notifyObservers();
     }
 
-    public List<ExerciseItemSet> getSets(int exerciseItemId){
+    /*public List<ExerciseItemSet> getSets(int exerciseItemId){
         sets = workoutService.getCompletedSets(exerciseItemId);
         return sets;
     }
+
+     */
 
     public List<Exercise> getMyExercises(){
         return workoutService.getExercises();
