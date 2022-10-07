@@ -44,8 +44,6 @@ public class ExerciseItemController extends AnchorPane implements Initializable{
     }
 
     private void setInfo(){
-        var t= exerciseItem.getSets();
-        var b = getSetCount();
         exerciseName.textProperty().set(exerciseItem.getName());
         setsAmount.textProperty().set("Sets " + getSetCount());
         showDoneButton();

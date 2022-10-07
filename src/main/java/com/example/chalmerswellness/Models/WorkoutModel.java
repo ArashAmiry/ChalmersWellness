@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WorkoutModel implements Observable {
-    private List<Exercise> addedExercises = new ArrayList<>();
     private List<Observer> observers = new ArrayList<>();
     private final IWorkoutDatabaseHandler workoutService;
     private List<Exercise> exercises = new ArrayList<>();
@@ -43,8 +42,8 @@ public class WorkoutModel implements Observable {
 
     public void addExerciseToActiveWorkout(Exercise exercise){
         ExerciseItem newExerciseItem = new ExerciseItem(exercise);
-        ExerciseItem exerciseItem = workoutService.insertCompletedExercise(newExerciseItem);
-        addedExercises.add(exerciseItem);
+        workoutService.insertCompletedExercise(newExerciseItem);
+        //ExerciseItem exerciseItem = workoutService.insertCompletedExercise(newExerciseItem);
         notifyObservers();
     }
 
@@ -106,7 +105,6 @@ public class WorkoutModel implements Observable {
 
     public void removeExercise(ExerciseItem exerciseItem){
         workoutService.removeCompletedExercise(exerciseItem);
-        addedExercises.remove(exerciseItem);
         notifyObservers();
     }
 
@@ -123,7 +121,6 @@ public class WorkoutModel implements Observable {
 
     //TODO show promt if exercises are already added
     public void addExercisesFromWorkout(Workout workout){
-        addedExercises.clear();
         List<ExerciseItem> exerciseItems = workout.getExercises();
         workoutService.insertCompletedExercises(exerciseItems);
         getTodayCompletedExercises();
