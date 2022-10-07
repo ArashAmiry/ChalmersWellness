@@ -14,9 +14,7 @@ public class ChalmersWellnessApp extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ChalmersWellnessApp.class.getResource("/fxml/LoginView.fxml"));
         DatabaseConnector databaseConnector = new DatabaseConnector();
-
-        //DOESNT WORK
-        WorkoutServiceTest workoutServiceTest = new WorkoutServiceTest(WorkoutServiceTest.RepositoryType.Database);
+        WorkoutServiceTest.createInstance(new WorkoutServiceTest(WorkoutServiceTest.RepositoryType.MockDatabase));
 
         Scene scene = new Scene(fxmlLoader.load(), 1920, 1080);
         stage.setTitle("Chalmers Wellness");

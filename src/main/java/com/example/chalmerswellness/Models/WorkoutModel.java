@@ -18,16 +18,14 @@ public class WorkoutModel implements Observable {
     private List<Exercise> addedExercises = new ArrayList<>();
     private List<Observer> observers = new ArrayList<>();
     //private final IWorkoutDatabaseHandler workoutService;
-    private WorkoutServiceTest workoutService = WorkoutServiceTest.getInstance();
+    private WorkoutServiceTest workoutService;
     private List<Exercise> exercises = new ArrayList<>();
     private List<ExerciseItemSet> sets = new ArrayList<>();
     private List<ExerciseItem> addedWorkoutExercises = new ArrayList<>();
     private WorkoutState state;
 
     public WorkoutModel(){
-        //workoutService = new WorkoutServiceTest(WorkoutServiceTest.RepositoryType.Database);
-
-        //workoutService = new WorkoutService();
+        workoutService = WorkoutServiceTest.getInstance();
         exercises = getMyExercises();
     }
 

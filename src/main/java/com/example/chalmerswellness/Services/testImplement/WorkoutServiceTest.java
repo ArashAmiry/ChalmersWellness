@@ -4,6 +4,7 @@ import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.ObjectModels.ExerciseItem;
 import com.example.chalmerswellness.ObjectModels.ExerciseItemSet;
 import com.example.chalmerswellness.ObjectModels.Workout;
+import com.example.chalmerswellness.User;
 
 import java.util.List;
 
@@ -15,24 +16,24 @@ public class WorkoutServiceTest {
     }
 
 
-    IDatabaseWorkoutRepository repository;
+    private IDatabaseWorkoutRepository repository;
     public WorkoutServiceTest(RepositoryType repositoryType)
     {
         switch (repositoryType){
             case Database -> repository = new DatabaseRepository();
-            //case MockDatabase -> repository = new MemoryRepository();
+            case MockDatabase -> repository = new MemoryRepository();
+        }
+    }
+    private static WorkoutServiceTest single_instance = null;
+
+    public static void createInstance(WorkoutServiceTest serviceTest){
+        if(single_instance == null){
+            single_instance = serviceTest;
         }
     }
 
-    private static WorkoutServiceTest single_instance = null;
-
     public static WorkoutServiceTest getInstance()
     {
-        /*
-       if (single_instance == null)
-            single_instance = new WorkoutServiceTest();
-         */
-
         return single_instance;
     }
 
