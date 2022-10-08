@@ -13,6 +13,6 @@ public interface IDatabaseWorkoutRepository {
     ExerciseItem insertCompletedExercise(ExerciseItem exercise);
     void insertCompletedExercises(List<ExerciseItem> exercises);
     void insertWorkout(Workout workout);
-    void deleteCompletedExercise(ExerciseItem exercise);
     void updateCompletedExercise(ExerciseItem exerciseItem);
+    void deleteCompletedExercise(ExerciseItem exercise);
 }

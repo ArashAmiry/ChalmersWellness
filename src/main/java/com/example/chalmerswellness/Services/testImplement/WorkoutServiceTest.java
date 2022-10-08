@@ -21,6 +21,7 @@ public class WorkoutServiceTest {
             case MockDatabase -> repository = new MemoryRepository();
         }
     }
+
     private static WorkoutServiceTest single_instance = null;
 
     public static void createInstance(WorkoutServiceTest serviceTest){
