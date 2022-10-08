@@ -3,9 +3,7 @@ package com.example.chalmerswellness.Services.testImplement;
 
 import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.ObjectModels.ExerciseItem;
-import com.example.chalmerswellness.ObjectModels.ExerciseItemSet;
 import com.example.chalmerswellness.ObjectModels.Workout;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +11,6 @@ public class MemoryRepository implements IDatabaseWorkoutRepository {
 
     private List<Exercise> exercises = new ArrayList<>();
     private List<ExerciseItem> completedExercises = new ArrayList<>();
-    private List<ExerciseItemSet> completedSets = new ArrayList<>();
     private List<Workout> workouts = new ArrayList<>();
 
     public MemoryRepository(){
@@ -28,40 +25,19 @@ public class MemoryRepository implements IDatabaseWorkoutRepository {
     }
 
     @Override
-    public List<ExerciseItemSet> getCompletedSets(int exerciseItemId) {
-        return completedSets;
-    }
-
-    @Override
     public ExerciseItem insertCompletedExercise(ExerciseItem exerciseItem) {
         completedExercises.add(exerciseItem);
         return exerciseItem;
     }
 
     @Override
-    public void insertCompletedSet(ExerciseItemSet set) {
-
-        completedSets.add(set);
-    }
-
-    @Override
-    public void removeCompletedExercise(ExerciseItem exercise) {
+    public void deleteCompletedExercise(ExerciseItem exercise) {
         completedExercises.remove(exercise);
-    }
-
-    @Override
-    public void removeSet(ExerciseItemSet set) {
-        completedSets.remove(set);
     }
 
     @Override
     public List<Exercise> getExercises() {
         return exercises;
-    }
-
-    @Override
-    public void insertCompletedSets(int exerciseId, List<ExerciseItemSet> sets) {
-        sets.addAll(sets);
     }
 
     @Override
@@ -80,14 +56,8 @@ public class MemoryRepository implements IDatabaseWorkoutRepository {
     }
 
     @Override
-    public void updateCompletedExerciseSets(ExerciseItem exerciseItem) {
-
-        //exerciseItem.addSet(exerciseIte);
-        //completedSets.addAll(exerciseItem.getSets());
-    }
-
-    @Override
     public void updateCompletedExercise(ExerciseItem exerciseItem) {
+        //TODO add functionality
         //remove and add again
     }
 }

@@ -136,8 +136,6 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
 
         try (Connection conn = DatabaseConnector.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            //TODO JUST CHANGED
-
                 pstmt.setInt(1, exercise.getExerciseItemId());
                 pstmt.executeUpdate();
         } catch (SQLException e) {
@@ -145,23 +143,18 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
         }
     }
 
-
-
-    //TODO THIS IS NEW
     public void updateCompletedExerciseSets(ExerciseItem exerciseItem) {
         String sql = "INSERT INTO completed_set(completed_exercise_id, weight, reps) VALUES ((SELECT id from completed_exercise WHERE id = ?), ?,?)";
 
-        //remove sets
         if(exerciseItem.getSets() != null){
-            //removeCompletedSets(exerciseItem.getId());
             try (Connection conn = DatabaseConnector.connect();
                  PreparedStatement pstmt = conn.prepareStatement(sql)) {
-                for (var set: exerciseItem.getSets()) {
+                    for (var set: exerciseItem.getSets()) {
 
-                    pstmt.setInt(1, exerciseItem.getExerciseItemId());
-                    pstmt.setInt(2, set.getReps());
-                    pstmt.setDouble(3, set.getWeight());
-                }
+                        pstmt.setInt(1, exerciseItem.getExerciseItemId());
+                        pstmt.setInt(2, set.getReps());
+                        pstmt.setDouble(3, set.getWeight());
+                    }
                     pstmt.executeUpdate();
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
@@ -169,16 +162,15 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
         }
     }
 
-
     public void insertCompletedSet(ExerciseItemSet set) {
         String sql = "INSERT INTO completed_set VALUES(?,?,?,?)";
 
         try (Connection conn = DatabaseConnector.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(2, set.getId());
-            pstmt.setDouble(3, set.getWeight());
-            pstmt.setDouble(4, set.getReps());
-            pstmt.executeUpdate();
+                pstmt.setInt(2, set.getId());
+                pstmt.setDouble(3, set.getWeight());
+                pstmt.setDouble(4, set.getReps());
+                pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

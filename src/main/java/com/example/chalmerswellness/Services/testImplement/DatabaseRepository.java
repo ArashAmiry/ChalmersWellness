@@ -5,7 +5,6 @@ import com.example.chalmerswellness.ObjectModels.ExerciseItem;
 import com.example.chalmerswellness.ObjectModels.ExerciseItemSet;
 import com.example.chalmerswellness.ObjectModels.Workout;
 import com.example.chalmerswellness.Services.DatabaseConnector;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,41 +12,16 @@ import java.util.List;
 
 public class DatabaseRepository implements IDatabaseWorkoutRepository {
 
-
-    /*public Exercise insertWorkoutExercise(Exercise exercise){
-        String sql = "INSERT INTO workout_exercise VALUES(?,?,?)";
-            String date = LocalDate.now().toString();
-            int generatedKey = 0;
-
-            try (Connection conn = DatabaseConnector.connect();
-                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
-                    pstmt.setInt(2, exercise.getId());
-                    pstmt.setString(3, date);
-                    pstmt.executeUpdate();
-
-                ResultSet rs = pstmt.getGeneratedKeys();
-                if (rs.next()) {
-                    generatedKey = rs.getInt(1);
-                }
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-            }
-
-        return new Exercise(generatedKey, exercise);
-    }
-
-     */
-
     public ExerciseItem insertCompletedExercise(ExerciseItem exercise){
         String sql = "INSERT INTO completed_exercise(exercise_id, is_done, planned_sets) VALUES(?,?,?)";
         int generatedKey = 0;
 
         try (Connection conn = DatabaseConnector.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, exercise.getId());
-            pstmt.setBoolean(2, exercise.getIsDone());
-            pstmt.setInt(3, exercise.getSetsCount());
-            pstmt.executeUpdate();
+                pstmt.setInt(1, exercise.getId());
+                pstmt.setBoolean(2, exercise.getIsDone());
+                pstmt.setInt(3, exercise.getSetsCount());
+                pstmt.executeUpdate();
 
             ResultSet rs = pstmt.getGeneratedKeys();
             if (rs.next()) {
@@ -60,7 +34,6 @@ public class DatabaseRepository implements IDatabaseWorkoutRepository {
         return new ExerciseItem(generatedKey, exercise);
     }
 
-
     public void updateCompletedExercise(ExerciseItem exerciseItem){
         String sql = "UPDATE completed_exercise SET is_done = ? WHERE id = ?";
         int exerciseItemId = exerciseItem.getExerciseItemId();
@@ -72,12 +45,11 @@ public class DatabaseRepository implements IDatabaseWorkoutRepository {
                 pstmt.executeUpdate();
 
                 removeCompletedSets(exerciseItemId);
-                insertCompletedSets(exerciseItemId, exerciseItem.getSets());
+                updateCompletedSets(exerciseItemId, exerciseItem.getSets());
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-
     }
 
     public void insertCompletedExercises(List<ExerciseItem> exercises){
@@ -86,12 +58,12 @@ public class DatabaseRepository implements IDatabaseWorkoutRepository {
         }
     }
 
-    public void removeCompletedExercises() {
+    public void deleteCompletedExercises() {
         String sql = "DELETE FROM completed_exercise WHERE insert_date = CURRENT_DATE";
 
         try (Connection conn = DatabaseConnector.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.executeUpdate();
+                pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -103,7 +75,7 @@ public class DatabaseRepository implements IDatabaseWorkoutRepository {
 
         try (Connection conn = DatabaseConnector.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.executeQuery();
+                pstmt.executeQuery();
 
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
@@ -115,8 +87,6 @@ public class DatabaseRepository implements IDatabaseWorkoutRepository {
                 ExerciseItem exerciseItem = new ExerciseItem(id, getExercise(exerciseId), getCompletedSets(id));
                 exerciseItem.setDone(isDone);
                 exerciseItem.setPlannedSetsCount(planned_Sets);
-
-
                 exerciseItems.add(exerciseItem);
             }
         } catch (SQLException e) {
@@ -127,73 +97,20 @@ public class DatabaseRepository implements IDatabaseWorkoutRepository {
         return exerciseItems;
     }
 
-
-    public void removeCompletedExercise(ExerciseItem exercise) {
+    public void deleteCompletedExercise(ExerciseItem exercise) {
         String sql = "DELETE FROM completed_exercise WHERE id = ?";
 
         removeCompletedSets(exercise.getExerciseItemId());
-
         try (Connection conn = DatabaseConnector.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            //TODO JUST CHANGED
-
-            pstmt.setInt(1, exercise.getExerciseItemId());
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    //TODO THIS IS NEW
-    public void updateCompletedExerciseSets(ExerciseItem exerciseItem) {
-        String sql = "INSERT INTO completed_set(completed_exercise_id, weight, reps) VALUES ((SELECT id from completed_exercise WHERE id = ?), ?,?)";
-
-        //remove sets
-        if(exerciseItem.getSets() != null){
-            //removeCompletedSets(exerciseItem.getId());
-            try (Connection conn = DatabaseConnector.connect();
-                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
-                for (var set: exerciseItem.getSets()) {
-
-                    pstmt.setInt(1, exerciseItem.getExerciseItemId());
-                    pstmt.setInt(2, set.getReps());
-                    pstmt.setDouble(3, set.getWeight());
-                }
+                pstmt.setInt(1, exercise.getExerciseItemId());
                 pstmt.executeUpdate();
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-            }
-        }
-    }
-
-    public void insertCompletedSet(ExerciseItemSet set) {
-        String sql = "INSERT INTO completed_set VALUES(?,?,?,?)";
-
-        try (Connection conn = DatabaseConnector.connect();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(2, set.getId());
-            pstmt.setDouble(3, set.getWeight());
-            pstmt.setDouble(4, set.getReps());
-            pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
 
-    public void removeSet(ExerciseItemSet set) {
-        String sql = "DELETE FROM completed_set WHERE id = ?";
-
-        try (Connection conn = DatabaseConnector.connect();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, set.getId());
-            pstmt.executeUpdate();
-
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    public List<ExerciseItemSet> getCompletedSets(int exerciseItemId) {
+    private List<ExerciseItemSet> getCompletedSets(int exerciseItemId) {
         String sql = "SELECT * FROM completed_set WHERE completed_exercise_id = ?";
         List<ExerciseItemSet> sets = new ArrayList<>();
 
@@ -273,15 +190,14 @@ public class DatabaseRepository implements IDatabaseWorkoutRepository {
 
         try (Connection conn = DatabaseConnector.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, exerciseId);
-            pstmt.executeUpdate();
-
+                pstmt.setInt(1, exerciseId);
+                pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
 
-    public void insertCompletedSets(int exerciseId, List<ExerciseItemSet> sets){
+    private void updateCompletedSets(int exerciseId, List<ExerciseItemSet> sets){
         String sql = "INSERT INTO completed_set VALUES(?,?,?,?)";
         removeCompletedSets(exerciseId);
 
@@ -332,7 +248,6 @@ public class DatabaseRepository implements IDatabaseWorkoutRepository {
                 int id = rs.getInt("id");
                 String workoutName = rs.getString("workoutName");
                 List<ExerciseItem> exercises = getWorkoutExercises(id);
-
                 Workout workout = new Workout(workoutName, exercises);
                 workouts.add(workout);
             }
@@ -349,42 +264,38 @@ public class DatabaseRepository implements IDatabaseWorkoutRepository {
         List<ExerciseItem> exercises = new ArrayList<>();
         try (Connection conn = DatabaseConnector.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, workoutId);
+                pstmt.setInt(1, workoutId);
 
-            ResultSet rs = pstmt.executeQuery();
-            while (rs.next()) {
-                //var id = rs.getInt("id");
-                var exerciseId  = rs.getInt("exercise_id");
-                int setCount = rs.getInt("sets_count");
+                ResultSet rs = pstmt.executeQuery();
+                while (rs.next()) {
+                    var exerciseId  = rs.getInt("exercise_id");
+                    int setCount = rs.getInt("sets_count");
 
-                Exercise exercise = getExercise(exerciseId);
-                ExerciseItem exerciseItem = new ExerciseItem(exercise);
-                exerciseItem.setPlannedSetsCount(setCount);
-                //Exercise exercise = new Exercise(id, exerciseName, type, muscle, equipment, difficulty, instructions);
-                exercises.add(exerciseItem);
+                    Exercise exercise = getExercise(exerciseId);
+                    ExerciseItem exerciseItem = new ExerciseItem(exercise);
+                    exerciseItem.setPlannedSetsCount(setCount);
+                    exercises.add(exerciseItem);
+                }
             }
-        }
 
         return exercises;
     }
-
 
     public void insertWorkout(Workout workout) {
         String sql = "INSERT INTO created_workout(workoutName) VALUES(?)";
 
         try (Connection conn = DatabaseConnector.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, workout.getWorkoutName());
-            pstmt.executeUpdate();
+                pstmt.setString(1, workout.getWorkoutName());
+                pstmt.executeUpdate();
 
-            ResultSet rs = pstmt.getGeneratedKeys();
-            int generatedKey = 0;
-            if (rs.next()) {
-                generatedKey = rs.getInt(1);
-            }
+                ResultSet rs = pstmt.getGeneratedKeys();
+                int generatedKey = 0;
+                if (rs.next()) {
+                    generatedKey = rs.getInt(1);
+                }
 
-            insertWorkoutExercises(workout.getExercises(), generatedKey);
-
+                insertWorkoutExercises(workout.getExercises(), generatedKey);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -399,10 +310,8 @@ public class DatabaseRepository implements IDatabaseWorkoutRepository {
                 pstmt.setInt(1, exercise.getId());
                 pstmt.setInt(2, id);
                 pstmt.setInt(3, exercise.getSetsCount());
-
                 pstmt.executeUpdate();
             }
-
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -423,17 +332,27 @@ public class DatabaseRepository implements IDatabaseWorkoutRepository {
         }
     }*/
 
-    private void removeExercises(int workoutId) {
-        String sql = "DELETE FROM workout_exercise WHERE workoutId = ?";
 
-        try (Connection conn = DatabaseConnector.connect();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, workoutId);
-            pstmt.executeUpdate();
+    /*public Exercise insertWorkoutExercise(Exercise exercise){
+        String sql = "INSERT INTO workout_exercise VALUES(?,?,?)";
+            String date = LocalDate.now().toString();
+            int generatedKey = 0;
 
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+            try (Connection conn = DatabaseConnector.connect();
+                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                    pstmt.setInt(2, exercise.getId());
+                    pstmt.setString(3, date);
+                    pstmt.executeUpdate();
+
+                ResultSet rs = pstmt.getGeneratedKeys();
+                if (rs.next()) {
+                    generatedKey = rs.getInt(1);
+                }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+
+        return new Exercise(generatedKey, exercise);
     }
-
+     */
 }
