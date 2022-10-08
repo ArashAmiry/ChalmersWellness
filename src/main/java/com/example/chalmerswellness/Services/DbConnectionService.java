@@ -1,26 +1,48 @@
 package com.example.chalmerswellness.Services;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 
 public class DbConnectionService {
-
     private static String dbPath;
     private static DbConnectionService single_instance = null;
 
-    public String getDbPath(){
-        return dbPath;
-    }
-
-    private DbConnectionService(String dbPath)
+    private DbConnectionService(boolean useActualDb)
     {
-        this.dbPath = dbPath;
+        dbPath = getDbUrl(useActualDb);
     }
 
-    public static void createInstance(String dbPath){
+    private String getDbUrl(boolean useActualDb) {
+        Properties p = new Properties();
+        try{
+            InputStream is = new FileInputStream("src/main/resources/dbConfig.txt");
+            p.load(is);
+
+            var url = p.getProperty("dbUrl");
+            var testUrl = p.getProperty("testDbUrl");
+
+            if(useActualDb){
+                return url;
+            } else {
+                return testUrl;
+            }
+
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void createInstance(boolean useActualDb){
         if(single_instance == null){
-            single_instance = new DbConnectionService(dbPath);
+            single_instance = new DbConnectionService(useActualDb);
         } else {
             System.out.println("Already Created Instance!");
         }
@@ -44,5 +66,4 @@ public class DbConnectionService {
         }
         return conn;
     }
-
 }
