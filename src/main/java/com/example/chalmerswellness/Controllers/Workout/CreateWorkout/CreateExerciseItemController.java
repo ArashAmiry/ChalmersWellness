@@ -1,7 +1,6 @@
 package com.example.chalmerswellness.Controllers.Workout.CreateWorkout;
 
 import com.example.chalmerswellness.Models.WorkoutModel;
-import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.ObjectModels.ExerciseItem;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -65,7 +64,7 @@ public class CreateExerciseItemController extends AnchorPane implements Initiali
 
     @FXML
     private void removeFromWorkout(){
-        model.removeExercise(exerciseItem);
+        model.removeCompletedExercise(exerciseItem);
     }
 
     public ExerciseItem getExerciseItem() {

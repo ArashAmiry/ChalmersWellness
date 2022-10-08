@@ -85,7 +85,7 @@ public class ExerciseItemController extends AnchorPane implements Initializable{
 
     @FXML
     private void removeFromWorkout(){
-        model.removeExercise(exerciseItem);
+        model.removeCompletedExercise(exerciseItem);
     }
 
     @FXML private void openSetsWindow(){
