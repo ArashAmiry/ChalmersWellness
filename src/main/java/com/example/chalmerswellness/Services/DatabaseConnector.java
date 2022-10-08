@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DatabaseConnector {
-    private static String dbPath = "src/main/resources/ChalmersWellness.db";
 
     public DatabaseConnector() {
         createUsersTable();
@@ -22,6 +21,8 @@ public class DatabaseConnector {
         createFriendTable();
     }
 
+
+    private static String dbPath = "src/main/resources/ChalmersWellness.db";
     static Connection connect() {
         String url = "jdbc:sqlite:" + dbPath;
         Connection conn = null;
