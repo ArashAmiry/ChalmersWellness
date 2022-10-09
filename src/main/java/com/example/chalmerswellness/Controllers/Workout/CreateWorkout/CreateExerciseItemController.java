@@ -47,7 +47,7 @@ public class CreateExerciseItemController extends AnchorPane implements Initiali
 
     void setSets(){
         try {
-            this.exerciseItem.setSets(Integer.parseInt(setsField.getText()));
+            this.exerciseItem.setPlannedSetsCount(Integer.parseInt(setsField.getText()));
         }catch (NumberFormatException nfe){
             throw new NumberFormatException();
         }

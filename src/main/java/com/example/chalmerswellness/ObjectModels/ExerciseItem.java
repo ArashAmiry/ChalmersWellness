@@ -18,6 +18,12 @@ public class ExerciseItem extends Exercise{
         this.id = id;
     }
 
+    public ExerciseItem(int id, Exercise exercise, List<ExerciseItemSet> sets){
+        super(exercise.getId(), exercise);
+        this.id = id;
+        this.sets = sets;
+    }
+
     public int getExerciseItemId(){
         return this.id;
     }
@@ -26,7 +32,7 @@ public class ExerciseItem extends Exercise{
         return sets;
     }
 
-    public void setSets(int setsCount){
+    public void setPlannedSetsCount(int setsCount){
         this.sets_count = setsCount;
     }
 

@@ -3,23 +3,25 @@ package com.example.chalmerswellness.Models;
 import com.example.chalmerswellness.Controllers.Workout.States.WorkoutState;
 import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.ObjectModels.ExerciseItem;
+import com.example.chalmerswellness.ObjectModels.ExerciseItemSet;
 import com.example.chalmerswellness.ObjectModels.Workout;
 import com.example.chalmerswellness.Interfaces.Observable;
 import com.example.chalmerswellness.Interfaces.Observer;
-import com.example.chalmerswellness.Services.IWorkoutDatabaseHandler;
-import com.example.chalmerswellness.Services.WorkoutService;
+import com.example.chalmerswellness.Services.WorkoutServices.WorkoutService;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class WorkoutModel implements Observable {
     private List<Observer> observers = new ArrayList<>();
-    private final IWorkoutDatabaseHandler workoutService;
+    //private final IWorkoutDatabaseHandler workoutService;
+    private WorkoutService workoutService;
     private List<Exercise> exercises = new ArrayList<>();
     private List<ExerciseItem> addedWorkoutExercises = new ArrayList<>();
     private WorkoutState state;
 
     public WorkoutModel(){
-        workoutService = new WorkoutService();
+        workoutService = WorkoutService.getInstance();
         exercises = getMyExercises();
     }
 
@@ -78,8 +80,11 @@ public class WorkoutModel implements Observable {
         notifyObservers();
     }
 
-    public void removeSet(int setId){
-        workoutService.removeSet(setId);
+    public void removeSet(ExerciseItem exerciseItem, ExerciseItemSet set){
+        exerciseItem.getSets().remove(set);
+        //workoutService.removeSet(set);
+        updateCompletedExercise(exerciseItem);
+
         notifyObservers();
     }
 
