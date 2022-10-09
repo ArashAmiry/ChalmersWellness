@@ -1,11 +1,11 @@
-package com.example.chalmerswellness.Services;
+package com.example.chalmerswellness.Services.UserServices;
 
 import com.example.chalmerswellness.Gender;
 import com.example.chalmerswellness.User;
 
 import java.time.LocalDate;
 
-public interface IUserDatabaseHandler {
+public interface IDatabaseUserRepository {
 
     void insertUser(User user);
 
@@ -22,4 +22,6 @@ public interface IUserDatabaseHandler {
     void setCalorieGoal(int id, double calorieGoal);
 
     void setWeightGoal(int id, double weightGoal);
+
+    void deleteAllUsers();
 }

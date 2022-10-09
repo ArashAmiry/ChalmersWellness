@@ -2,8 +2,8 @@ package com.example.chalmerswellness;
 
 import com.example.chalmerswellness.Interfaces.Observable;
 import com.example.chalmerswellness.Interfaces.Observer;
-import com.example.chalmerswellness.Services.IUserDatabaseHandler;
-import com.example.chalmerswellness.Services.UserService;
+import com.example.chalmerswellness.Services.UserServices.IDatabaseUserRepository;
+import com.example.chalmerswellness.Services.UserServices.DatabaseUserRepository;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -42,12 +42,12 @@ public class CalorieIntakeCalculatorController extends AnchorPane implements Ini
     private ToggleGroup gender = new ToggleGroup();
     private ToggleGroup paceGroup = new ToggleGroup();
     private static List<Observer> observers = new ArrayList<>();
-    private final IUserDatabaseHandler userService;
+    private final IDatabaseUserRepository userService;
 
     public CalorieIntakeCalculatorController(){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/CalorieIntakeCalculator.fxml"));
 
-        userService = new UserService();
+        userService = new DatabaseUserRepository();
 
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
