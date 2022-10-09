@@ -56,42 +56,22 @@ public class AddSetsController extends AnchorPane implements Initializable, Obse
     }
 
     @FXML private void addSet(){
-        //saveSets();
-
         ExerciseItemSet exerciseSet = new ExerciseItemSet(exerciseItem.getExerciseItemId(), 0, 0);
         exerciseItem.addSet(exerciseSet);
-
-        //New Version
-        model.updateCompletedExercise(exerciseItem);
-
-        //Old Version
-        //model.addSet(exerciseItem);
+        saveExerciseItem();
     }
 
-    @FXML private void saveSets(){
-        for (var item: setsList) {
-            item.setValues();
-        }
-
-        //model.saveSets(exerciseItem.getExerciseItemId());
+    @FXML private void saveExerciseItem(){
         model.updateCompletedExercise(exerciseItem);
     }
 
     private void updateSets(){
         setsList.clear();
 
-
-        //Old Version
-        //var sets = model.getSets(exerciseItem.getExerciseItemId());
-
-        //New Version
         var sets = exerciseItem.getSets();
-        int setNumber = 1;
-
-        for (var set: sets) {
-            ExerciseItemSetController setsController = new ExerciseItemSetController(model, set, setNumber);
+        for (ExerciseItemSet set: sets) {
+            ExerciseItemSetController setsController = new ExerciseItemSetController(model, exerciseItem, set);
             setsList.add(setsController);
-            setNumber++;
         }
 
         setsListView.getItems().setAll(setsList);
@@ -102,7 +82,7 @@ public class AddSetsController extends AnchorPane implements Initializable, Obse
     }
 
     @FXML private void close(){
-        saveSets();
+        saveExerciseItem();
         anchorPane.getChildren().remove(this);
     }
     @FXML private void mouseTrap(Event event){

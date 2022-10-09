@@ -22,7 +22,7 @@ public class DatabaseConnector {
         createFriendTable();
     }
 
-    static Connection connect() {
+    public static Connection connect() {
         String url = "jdbc:sqlite:" + dbPath;
         Connection conn = null;
         try {
@@ -198,21 +198,6 @@ public class DatabaseConnector {
             System.out.println(e.getMessage());
         }
     }
-
-/*    private static void createExercisesTable() {
-        String sql = "CREATE TABLE IF NOT EXISTS exercises (\n"
-                + "	id INTEGER PRIMARY KEY,\n"
-                + ");";
-
-        try (Connection conn = connect();
-             Statement stmt = conn.createStatement()) {
-                stmt.execute(sql);
-            stmt.execute(sql);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }*/
-
 
     public static void createCompletedExerciseTable() {
         String sql = "CREATE TABLE IF NOT EXISTS completed_exercise (\n"
