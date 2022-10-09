@@ -4,19 +4,19 @@ import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.ObjectModels.ExerciseItem;
 import com.example.chalmerswellness.ObjectModels.ExerciseItemSet;
 import com.example.chalmerswellness.ObjectModels.Workout;
-import com.example.chalmerswellness.Services.DatabaseConnector;
+import com.example.chalmerswellness.Services.DbConnectionService;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class DatabaseRepository implements IDatabaseWorkoutRepository {
+public class DatabaseWorkoutRepository implements IDatabaseWorkoutRepository {
 
     public List<Exercise> getExercises() {
         String sql = "SELECT * FROM exercise";
         List<Exercise> exercises = new ArrayList<>();
 
-        try (Connection conn = DatabaseConnector.connect();
+        try (Connection conn = DbConnectionService.connect();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
@@ -43,7 +43,7 @@ public class DatabaseRepository implements IDatabaseWorkoutRepository {
         String sql = "SELECT * FROM completed_exercise WHERE insert_date = CURRENT_DATE";
         List<ExerciseItem> exerciseItems = new ArrayList<>();
 
-        try (Connection conn = DatabaseConnector.connect();
+        try (Connection conn = DbConnectionService.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.executeQuery();
 
@@ -71,7 +71,7 @@ public class DatabaseRepository implements IDatabaseWorkoutRepository {
         String sql = "SELECT * FROM created_workout";
         List<Workout> workouts = new ArrayList<>();
 
-        try (Connection conn = DatabaseConnector.connect();
+        try (Connection conn = DbConnectionService.connect();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
@@ -93,7 +93,7 @@ public class DatabaseRepository implements IDatabaseWorkoutRepository {
         String sql = "INSERT INTO completed_exercise(exercise_id, is_done, planned_sets) VALUES(?,?,?)";
         int generatedKey = 0;
 
-        try (Connection conn = DatabaseConnector.connect();
+        try (Connection conn = DbConnectionService.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setInt(1, exercise.getId());
                 pstmt.setBoolean(2, exercise.getIsDone());
@@ -120,7 +120,7 @@ public class DatabaseRepository implements IDatabaseWorkoutRepository {
     public void insertWorkout(Workout workout) {
         String sql = "INSERT INTO created_workout(workoutName) VALUES(?)";
 
-        try (Connection conn = DatabaseConnector.connect();
+        try (Connection conn = DbConnectionService.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, workout.getWorkoutName());
             pstmt.executeUpdate();
@@ -141,7 +141,7 @@ public class DatabaseRepository implements IDatabaseWorkoutRepository {
         String sql = "UPDATE completed_exercise SET is_done = ? WHERE id = ?";
         int exerciseItemId = exerciseItem.getExerciseItemId();
 
-        try (Connection conn = DatabaseConnector.connect();
+        try (Connection conn = DbConnectionService.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setBoolean(1, exerciseItem.getIsDone());
                 pstmt.setInt(2, exerciseItemId);
@@ -158,7 +158,7 @@ public class DatabaseRepository implements IDatabaseWorkoutRepository {
     public void deleteCompletedExercise(ExerciseItem exercise) {
         String sql = "DELETE FROM completed_exercise WHERE id = ?";
 
-        try (Connection conn = DatabaseConnector.connect();
+        try (Connection conn = DbConnectionService.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setInt(1, exercise.getExerciseItemId());
                 pstmt.executeUpdate();
@@ -171,7 +171,7 @@ public class DatabaseRepository implements IDatabaseWorkoutRepository {
         String sql = "SELECT * FROM completed_set WHERE completed_exercise_id = ?";
         List<ExerciseItemSet> sets = new ArrayList<>();
 
-        try (Connection conn = DatabaseConnector.connect();
+        try (Connection conn = DbConnectionService.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, exerciseItemId);
             pstmt.executeQuery();
@@ -190,14 +190,10 @@ public class DatabaseRepository implements IDatabaseWorkoutRepository {
         return sets;
     }
 
-
-
-
-
     private static Exercise getExercise(int exercise_id) throws SQLException {
         String sql = "SELECT * FROM exercise WHERE id = ?";
 
-        try (Connection conn = DatabaseConnector.connect();
+        try (Connection conn = DbConnectionService.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, exercise_id);
 
@@ -220,7 +216,7 @@ public class DatabaseRepository implements IDatabaseWorkoutRepository {
     private static void removeCompletedSets(int exerciseId){
         String sql = "DELETE FROM completed_set WHERE completed_exercise_id = ?";
 
-        try (Connection conn = DatabaseConnector.connect();
+        try (Connection conn = DbConnectionService.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setInt(1, exerciseId);
                 pstmt.executeUpdate();
@@ -233,7 +229,7 @@ public class DatabaseRepository implements IDatabaseWorkoutRepository {
         String sql = "INSERT INTO completed_set VALUES(?,?,?,?)";
         removeCompletedSets(exerciseId);
 
-        try (Connection conn = DatabaseConnector.connect();
+        try (Connection conn = DbConnectionService.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             for (ExerciseItemSet set : sets) {
@@ -250,7 +246,7 @@ public class DatabaseRepository implements IDatabaseWorkoutRepository {
     public void insertExercises(List<Exercise> exercises) {
         String sql = "INSERT INTO exercise(exerciseName, exerciseType, exerciseMuscle, exerciseEquipment, exerciseDifficulty, exerciseInstructions) VALUES(?,?,?,?,?,?)";
 
-        try (Connection conn = DatabaseConnector.connect();
+        try (Connection conn = DbConnectionService.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             for (Exercise exercise : exercises) {
@@ -272,7 +268,7 @@ public class DatabaseRepository implements IDatabaseWorkoutRepository {
         String sql = "SELECT * FROM workout_exercise WHERE workout_id = ?";
 
         List<ExerciseItem> exercises = new ArrayList<>();
-        try (Connection conn = DatabaseConnector.connect();
+        try (Connection conn = DbConnectionService.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setInt(1, workoutId);
 
@@ -293,7 +289,7 @@ public class DatabaseRepository implements IDatabaseWorkoutRepository {
 
     private void insertWorkoutExercises(List<ExerciseItem> exercises, int id) {
         String sql = "INSERT INTO workout_exercise(exercise_id, workout_id, sets_count) VALUES(?,?,?)";
-        try (Connection conn = DatabaseConnector.connect();
+        try (Connection conn = DbConnectionService.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             for (ExerciseItem exercise : exercises) {
@@ -310,7 +306,7 @@ public class DatabaseRepository implements IDatabaseWorkoutRepository {
     public void deleteTodaysCompletedExercises() {
         String sql = "DELETE FROM completed_exercise WHERE insert_date = CURRENT_DATE";
 
-        try (Connection conn = DatabaseConnector.connect();
+        try (Connection conn = DbConnectionService.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.executeUpdate();
         } catch (SQLException e) {
@@ -321,7 +317,7 @@ public class DatabaseRepository implements IDatabaseWorkoutRepository {
     /*public void removeWorkout(int workoutId) {
         String sql = "DELETE FROM created_workout WHERE id = ?";
 
-        try (Connection conn = DatabaseConnector.connect();
+        try (Connection conn = DbConnectionService.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, workoutId);
             pstmt.executeUpdate();
@@ -339,7 +335,7 @@ public class DatabaseRepository implements IDatabaseWorkoutRepository {
             String date = LocalDate.now().toString();
             int generatedKey = 0;
 
-            try (Connection conn = DatabaseConnector.connect();
+            try (Connection conn = DbConnectionService.connect();
                  PreparedStatement pstmt = conn.prepareStatement(sql)) {
                     pstmt.setInt(2, exercise.getId());
                     pstmt.setString(3, date);

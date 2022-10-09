@@ -24,13 +24,13 @@ public class DbConnectionService {
             InputStream is = new FileInputStream("src/main/resources/dbConfig.txt");
             p.load(is);
 
-            var url = p.getProperty("dbUrl");
-            var testUrl = p.getProperty("testDbUrl");
+            var dbUrl = p.getProperty("dbUrl");
+            var testDbUrl = p.getProperty("testDbUrl");
 
             if(useActualDb){
-                return url;
+                return dbUrl;
             } else {
-                return testUrl;
+                return testDbUrl;
             }
 
         } catch (FileNotFoundException e) {
@@ -50,9 +50,11 @@ public class DbConnectionService {
 
     public static DbConnectionService getInstance()
     {
-        if (single_instance != null)
+        if (single_instance != null) {
             return single_instance;
-        return null;
+        } else {
+            throw new RuntimeException("No created instance of " + DbConnectionService.class);
+        }
     }
 
     public static Connection connect() {

@@ -8,13 +8,11 @@ import com.example.chalmerswellness.ObjectModels.Workout;
 import com.example.chalmerswellness.Interfaces.Observable;
 import com.example.chalmerswellness.Interfaces.Observer;
 import com.example.chalmerswellness.Services.WorkoutServices.WorkoutService;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class WorkoutModel implements Observable {
     private List<Observer> observers = new ArrayList<>();
-    //private final IWorkoutDatabaseHandler workoutService;
     private WorkoutService workoutService;
     private List<Exercise> exercises = new ArrayList<>();
     private List<ExerciseItem> addedWorkoutExercises = new ArrayList<>();
@@ -22,7 +20,7 @@ public class WorkoutModel implements Observable {
 
     public WorkoutModel(){
         workoutService = WorkoutService.getInstance();
-        exercises = getMyExercises();
+        exercises = getExercises();
     }
 
     public void changeState(WorkoutState state){
@@ -82,16 +80,24 @@ public class WorkoutModel implements Observable {
 
     public void removeSet(ExerciseItem exerciseItem, ExerciseItemSet set){
         exerciseItem.getSets().remove(set);
-        //workoutService.removeSet(set);
         updateCompletedExercise(exerciseItem);
-
         notifyObservers();
     }
 
-    public List<Exercise> getMyExercises(){
+    /**
+     * This method is used to get all the exercises that is stored in the workoutService repository.
+     * <p>
+     * @return List<Exercise> This returns a list of all exercises from the service.
+     */
+    public List<Exercise> getExercises(){
         return workoutService.getExercises();
     }
 
+    /**
+     * This method is used to get all the completed exercises for the day in a sorted list.
+     * <p>
+     * @return List<ExerciseItem> This returns a list of sorted exerciseItems for the day.
+     */
     public List<ExerciseItem> getTodayCompletedExercises(){
         List<ExerciseItem> completedExercises = workoutService.getCompletedExercises();
         return sortCompletedExercises(completedExercises);

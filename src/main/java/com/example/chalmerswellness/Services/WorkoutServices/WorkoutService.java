@@ -14,19 +14,19 @@ public class WorkoutService {
     }
 
     private IDatabaseWorkoutRepository repository;
-    public WorkoutService(RepositoryType repositoryType)
+    private WorkoutService(RepositoryType repositoryType)
     {
         switch (repositoryType){
-            case Database -> repository = new DatabaseRepository();
+            case Database -> repository = new DatabaseWorkoutRepository();
             //case MockDatabase -> repository = new MemoryRepository();
         }
     }
 
     private static WorkoutService single_instance = null;
 
-    public static void createInstance(WorkoutService serviceTest){
+    public static void createInstance(RepositoryType repositoryType){
         if(single_instance == null){
-            single_instance = serviceTest;
+            single_instance = new WorkoutService(repositoryType);
         }
     }
 
