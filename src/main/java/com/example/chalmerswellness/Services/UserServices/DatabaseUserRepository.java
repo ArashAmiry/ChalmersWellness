@@ -1,17 +1,18 @@
-package com.example.chalmerswellness.Services;
+package com.example.chalmerswellness.Services.UserServices;
 
 import com.example.chalmerswellness.Gender;
+import com.example.chalmerswellness.Services.DbConnectionService;
 import com.example.chalmerswellness.User;
 
 import java.sql.*;
 import java.time.LocalDate;
 
-public class UserService implements IUserDatabaseHandler{
+public class DatabaseUserRepository implements IDatabaseUserRepository {
 
     @Override
     public void insertUser(User user) {
         String sql = "INSERT INTO users (username, password, firstName, lastName, gender, email, birthDate, height, weight) VALUES(?,?,?,?,?,?,?,?,?)";
-        try (Connection conn = DatabaseConnector.connect();
+        try (Connection conn = DbConnectionService.connect();
              PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
             preparedStatement.setString(1, user.getUsername());
             preparedStatement.setString(2, user.getPassword());
@@ -41,7 +42,7 @@ public class UserService implements IUserDatabaseHandler{
                 + "height = ?,"
                 + "weight = ?"
                 + "WHERE id = ?";
-        try (Connection conn = DatabaseConnector.connect();
+        try (Connection conn = DbConnectionService.connect();
              PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, password);
@@ -63,7 +64,7 @@ public class UserService implements IUserDatabaseHandler{
     public User getUser(String username, String password) {
         String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
         User user = null;
-        try (Connection conn = DatabaseConnector.connect();
+        try (Connection conn = DbConnectionService.connect();
              PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, password);
@@ -78,7 +79,7 @@ public class UserService implements IUserDatabaseHandler{
     public User getUser(int id) {
         String sql = "SELECT * FROM users WHERE id = ?";
         User user = null;
-        try (Connection conn = DatabaseConnector.connect();
+        try (Connection conn = DbConnectionService.connect();
              PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
             preparedStatement.setInt(1, id);
             user = getUserFromRow(user, preparedStatement);
@@ -91,7 +92,7 @@ public class UserService implements IUserDatabaseHandler{
     private User getUserFromRow(User user, PreparedStatement preparedStatement) throws SQLException {
         ResultSet rs = preparedStatement.executeQuery();
         if (rs.next()) {
-            user = new User(rs.getInt("id"), rs.getString("username"), rs.getString("password"), rs.getString("firstName"), rs.getString("lastName"), Gender.valueOf(rs.getString("gender")), rs.getString("email"), rs.getInt("height"),rs.getDate("birthDate").toLocalDate(), rs.getDouble("weight"), rs.getInt("calorieGoal"));
+            user = new User(rs.getInt("id"), rs.getString("username"), rs.getString("password"), rs.getString("firstName"), rs.getString("lastName"), Gender.valueOf(rs.getString("gender")), rs.getString("email"), rs.getInt("height"),rs.getDate("birthDate").toLocalDate(), rs.getDouble("weight"), rs.getInt("calorieGoal"), rs.getDouble("weightGoal"));
         }
         return user;
     }
@@ -99,7 +100,7 @@ public class UserService implements IUserDatabaseHandler{
     @Override
     public boolean checkIfCredentialsAreCorrect(String username, String password) {
         String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
-        try (Connection conn = DatabaseConnector.connect();
+        try (Connection conn = DbConnectionService.connect();
              PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, password);
@@ -116,7 +117,7 @@ public class UserService implements IUserDatabaseHandler{
     @Override
     public boolean checkIfUsernameExists(String username) {
         String sql = "SELECT * FROM users WHERE username = ?";
-        try (Connection conn = DatabaseConnector.connect();
+        try (Connection conn = DbConnectionService.connect();
              PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
             preparedStatement.setString(1, username);
             ResultSet rs = preparedStatement.executeQuery();
@@ -132,7 +133,7 @@ public class UserService implements IUserDatabaseHandler{
     @Override
     public void setCalorieGoal(int id, double calorieGoal) {
         String sql = "UPDATE users SET calorieGoal = ? WHERE id = ?";
-        try (Connection conn = DatabaseConnector.connect();
+        try (Connection conn = DbConnectionService.connect();
              PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
             preparedStatement.setDouble(1, calorieGoal);
             preparedStatement.setInt(2, id);
@@ -145,10 +146,21 @@ public class UserService implements IUserDatabaseHandler{
     @Override
     public void setWeightGoal(int id, double weightGoal) {
         String sql = "UPDATE users SET weightGoal = ? WHERE id = ?";
-        try (Connection conn = DatabaseConnector.connect();
+        try (Connection conn = DbConnectionService.connect();
              PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
             preparedStatement.setDouble(1, weightGoal);
             preparedStatement.setInt(2, id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @Override
+    public void deleteAllUsers() {
+        String sql = "DELETE FROM users";
+        try (Connection conn = DbConnectionService.connect();
+             PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
