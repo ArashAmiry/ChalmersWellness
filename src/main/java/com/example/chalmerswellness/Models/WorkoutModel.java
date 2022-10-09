@@ -35,15 +35,19 @@ public class WorkoutModel implements Observable {
         return addedWorkoutExercises;
     }
 
-
+    /**
+     * This method adds an exercise to either the activeWorkout day or to the created workout.
+     * <p>
+     * @param exercise an exercise that will be added to activeWorkout day or created workout.
+     */
     public void addExercise(Exercise exercise){
         state.addExercise(exercise);
     }
 
     /**
-     * This method inserts a exerciseItem to the database.
+     * This method converts an exercise to a exerciseItem and then inserts that exerciseItem to the database.
      * <p>
-     * @param  exercise  an exercise that will be used to insert to database
+     * @param exercise an exercise that will be converted to a exerciseItem
      */
     public void addExerciseToActiveWorkout(Exercise exercise){
         ExerciseItem newExerciseItem = new ExerciseItem(exercise);
@@ -73,13 +77,25 @@ public class WorkoutModel implements Observable {
         return searchResult;
     }
 
+    /**
+     * This method updates a exerciseItem in the repostory, with the objects newly added data.
+     * <p>
+     * @param exerciseItem
+     */
     public void updateCompletedExercise(ExerciseItem exerciseItem){
         workoutService.updateCompletedExercise(exerciseItem);
         notifyObservers();
     }
 
-    public void removeSet(ExerciseItem exerciseItem, ExerciseItemSet set){
-        exerciseItem.getSets().remove(set);
+    /**
+     * This method removes a exerciseItemSet from the exerciseItem, and then updates the
+     * exerciseItem in the repository.
+     * <p>
+     * @param exerciseItem
+     * @param exerciseItemSet
+     */
+    public void removeSet(ExerciseItem exerciseItem, ExerciseItemSet exerciseItemSet){
+        exerciseItem.getSets().remove(exerciseItemSet);
         updateCompletedExercise(exerciseItem);
         notifyObservers();
     }
@@ -127,7 +143,7 @@ public class WorkoutModel implements Observable {
     }
 
     /**
-     * This method removes a completedExercise
+     * This method removes a completedExercise from the repository
      * <p>
      * @param exerciseItem
      */
@@ -155,7 +171,6 @@ public class WorkoutModel implements Observable {
     public void addExercisesFromWorkout(Workout workout){
         List<ExerciseItem> exerciseItems = workout.getExercises();
         workoutService.insertCompletedExercises(exerciseItems);
-        //getTodayCompletedExercises();
         notifyObservers();
     }
 

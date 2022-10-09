@@ -17,11 +17,16 @@ public class ExerciseSearchItemController extends AnchorPane implements Initiali
     private final WorkoutModel model;
     private final Exercise exercise;
     @FXML Label exerciseName;
-    @FXML private Button btn;
 
-    public ExerciseSearchItemController(Exercise exercise, WorkoutModel model){
+    /**
+     * This is a constructor for ExerciseSearchItemController.
+     * <p>
+     * @param exercise this is the exercise which will be displayed as search result.
+     * @param workoutModel this is the model which will be bound to ExerciseSearchItemController.
+     */
+    public ExerciseSearchItemController(Exercise exercise, WorkoutModel workoutModel){
         this.exercise = exercise;
-        this.model = model;
+        this.model = workoutModel;
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/ExerciseSearchItem.fxml"));
         fxmlLoader.setRoot(this);
@@ -34,16 +39,22 @@ public class ExerciseSearchItemController extends AnchorPane implements Initiali
         }
     }
 
+    /**
+     * This method set the label to display the exerciseName
+     * <p>
+     * @param arg0
+     * @param arg1
+     */
     @Override
     public void initialize(URL arg0, ResourceBundle arg1){
-        setExerciseName();
+        exerciseName.textProperty().set(exercise.getName());
     }
 
+    /**
+     * This method adds an exercise to the active workout or to the created workout
+     * <p>
+     */
     @FXML public void addToWorkout(){
         model.addExercise(exercise);
-    }
-
-    private void setExerciseName(){
-        exerciseName.textProperty().set(exercise.getName());
     }
 }

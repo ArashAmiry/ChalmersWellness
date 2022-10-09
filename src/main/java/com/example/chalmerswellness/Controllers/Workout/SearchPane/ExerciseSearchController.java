@@ -20,8 +20,13 @@ public class ExerciseSearchController extends AnchorPane implements Initializabl
     @FXML public ListView<ExerciseSearchItemController> searchListView;
     @FXML public Label noResultLabel;
 
-    public ExerciseSearchController(WorkoutModel model){
-        this.model = model;
+    /**
+     * Constructor for ExerciseSearchController
+     * <p>
+     * @param workoutModel binds workoutModel to this controller
+     */
+    public ExerciseSearchController(WorkoutModel workoutModel){
+        this.model = workoutModel;
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/ExerciseSearchView.fxml"));
         fxmlLoader.setRoot(this);
@@ -34,11 +39,22 @@ public class ExerciseSearchController extends AnchorPane implements Initializabl
         }
     }
 
+    /**
+     * This method searches for all exercises on initialization
+     * <p>
+     * @param arg0
+     * @param arg1
+     */
     @Override
     public void initialize(URL arg0, ResourceBundle arg1){
         searchExercise();
     }
 
+    /**
+     * This method updates all the searchListView with the list of exercises
+     * <p>
+     * @param exercises is the list that will fill the searchListView
+     */
     private void updateSearchResult(List<Exercise> exercises){
         searchListView.getItems().clear();
         for (var exercise: exercises) {
@@ -48,14 +64,22 @@ public class ExerciseSearchController extends AnchorPane implements Initializabl
         isNoResult();
     }
 
+    /**
+     * This method take the input from the searchField then updates the search result.
+     * <p>
+     */
     @FXML
-    void searchExercise(){
+    private void searchExercise(){
         String input = searchField.getText();
-        var searchResult = model.searchExercises(input);
+        List<Exercise> searchResult = model.searchExercises(input);
         updateSearchResult(searchResult);
     }
 
-    void isNoResult(){
+    /**
+     * This method displays a label if no results where found.
+     * <p>
+     */
+    private void isNoResult(){
         noResultLabel.visibleProperty().set(searchListView.getItems().size() <= 0);
     }
 }
