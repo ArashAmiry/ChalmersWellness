@@ -1,6 +1,7 @@
 package com.example.chalmerswellness;
 
-import com.example.chalmerswellness.Services.DataService;
+import com.example.chalmerswellness.Services.IUserDatabaseHandler;
+import com.example.chalmerswellness.Services.UserService;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
@@ -19,11 +20,11 @@ public class LoginController extends AnchorPane implements Initializable {
     AnchorPane navigationPane;
     @FXML
     AnchorPane rootPane;
-
-    DataService dataService = new DataService();
+    private final IUserDatabaseHandler userService;
 
 
     public LoginController() {
+        userService = new UserService();
     }
 
     @Override
@@ -35,11 +36,11 @@ public class LoginController extends AnchorPane implements Initializable {
     void login(MouseEvent event) {
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
-        if(dataService.checkIfCredentialsMatch(username, password)) {
+        if(userService.checkIfCredentialsAreCorrect(username, password)) {
             System.out.println("Login successful");
-            LoggedInUser.createInstance(dataService.getUser(username,password));
+            LoggedInUser.createInstance(userService.getUser(username,password));
             rootPane.getChildren().clear();
-            rootPane.getChildren().add(new MainView());
+            rootPane.getChildren().setAll(new MainView());
         } else {
             System.out.println("Login failed");
         }

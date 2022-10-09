@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#close" prefHeight="1152.0" prefWidth="1779.0" style="-fx-background-color: rgba(0, 0, 0, 0.7);" type="AnchorPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#close" prefHeight="1152.0" prefWidth="1779.0" style="-fx-background-color: rgba(0, 0, 0, 0.7);" type="AnchorPane" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <AnchorPane layoutX="156.0" layoutY="220.0" onMouseClicked="#mouseTrap" prefHeight="377.0" prefWidth="762.0" style="-fx-background-color: white;">
          <children>
@@ -23,7 +23,7 @@
                   <Font size="24.0" />
                </font>
             </Button>
-            <Button layoutX="446.0" layoutY="325.0" mnemonicParsing="false" onMouseClicked="#saveSets" prefHeight="51.0" prefWidth="300.0" style="-fx-background-color: limegreen; -fx-text-fill: white;" text="Save">
+            <Button layoutX="446.0" layoutY="325.0" mnemonicParsing="false" onMouseClicked="#saveExerciseItem" prefHeight="51.0" prefWidth="300.0" style="-fx-background-color: limegreen; -fx-text-fill: white;" text="Save">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>

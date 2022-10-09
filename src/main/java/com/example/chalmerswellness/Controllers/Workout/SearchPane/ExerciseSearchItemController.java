@@ -5,6 +5,7 @@ import com.example.chalmerswellness.ObjectModels.Exercise;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
@@ -15,9 +16,8 @@ public class ExerciseSearchItemController extends AnchorPane implements Initiali
 
     private final WorkoutModel model;
     private final Exercise exercise;
-
-    @FXML
-    Label exerciseName;
+    @FXML Label exerciseName;
+    @FXML private Button btn;
 
     public ExerciseSearchItemController(Exercise exercise, WorkoutModel model){
         this.exercise = exercise;
@@ -39,23 +39,8 @@ public class ExerciseSearchItemController extends AnchorPane implements Initiali
         setExerciseName();
     }
 
-
     @FXML public void addToWorkout(){
         model.addExercise(exercise);
-    }
-
-    /*@FXML public void addToWorkout(){
-        model.addExercise(exercise, workoutState);
-    }
-
-     */
-
-/*    @FXML public void removeFromWorkout(){
-        model.removeExercise(exercise);
-    }*/
-
-    public Exercise getExercise(){
-        return this.exercise;
     }
 
     private void setExerciseName(){

@@ -1,0 +1,2 @@
+dbUrl=src/main/resources/ChalmersWellness.db
+testDbUrl=src/test/TestChalmersWellness.db

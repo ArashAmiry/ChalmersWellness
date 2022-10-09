@@ -5,7 +5,6 @@ import com.example.chalmerswellness.ObjectModels.Exercise;
 
 public class ActiveWorkoutState extends WorkoutState{
 
-
     public ActiveWorkoutState(WorkoutModel model) {
         super(model);
     }

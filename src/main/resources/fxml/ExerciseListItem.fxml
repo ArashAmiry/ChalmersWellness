@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="1043.0" type="AnchorPane" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="1033.0" type="AnchorPane" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label fx:id="exerciseName" layoutX="72.0" onMouseClicked="#openSetsWindow" prefHeight="50.0" prefWidth="342.0" text="Deadlift">
          <font>
@@ -19,7 +19,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <ImageView fitHeight="34.0" fitWidth="28.0" layoutX="1005.0" layoutY="11.0" onMouseClicked="#removeFromWorkout" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="34.0" fitWidth="28.0" layoutX="995.0" layoutY="11.0" onMouseClicked="#removeFromWorkout" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/icons8-trash-48.png" />
          </image>
