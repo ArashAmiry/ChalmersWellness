@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+
+
+<fx:root mnemonicParsing="false" prefHeight="30.0" prefWidth="31.0" text="1" type="Button" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" />

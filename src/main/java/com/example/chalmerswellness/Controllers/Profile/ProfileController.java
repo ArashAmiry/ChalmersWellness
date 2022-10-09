@@ -77,9 +77,9 @@ public class ProfileController extends AnchorPane {
                 dayOfWeek = 1;
                 row++;
             }
-            Text tDate = new Text(String.valueOf(day));
-            gridPane.add(tDate, dayOfWeek - 1, row);
-            GridPane.setHalignment(tDate, HPos.CENTER);
+            CalendarItemController calendarItemController = new CalendarItemController(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, day);
+            gridPane.add(calendarItemController, dayOfWeek - 1, row);
+            GridPane.setHalignment(calendarItemController, HPos.CENTER);
             day++;
             dayOfWeek++;
         }
@@ -117,22 +117,24 @@ public class ProfileController extends AnchorPane {
     }
 
     private void addTextToGridPane(GridPane gridPane, int columnCounter, int day) {
-        Text tDate = new Text(String.valueOf(day));
-        gridPane.add(tDate, columnCounter, 0);
-        GridPane.setHalignment(tDate, HPos.CENTER);
+        CalendarItemController calendarItemController = new CalendarItemController(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, day);
+        gridPane.add(calendarItemController, columnCounter, 0);
+        GridPane.setHalignment(calendarItemController, HPos.CENTER);
     }
 
     private void drawDaysInNextMonth(int daysInMonth, int dayOfWeek, int firstDayOfWeek, int row, GridPane gridPane){
+        calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) + 1);
         int daysInMonthLeft = Math.abs(daysInMonth + firstDayOfWeek - 43);
         for (int day = 1; day <= daysInMonthLeft; day++) {
             if (dayOfWeek == 8) {
                 dayOfWeek = 1;
                 row++;
             }
-            Text tDate = new Text(String.valueOf(day));
-            gridPane.add(tDate, dayOfWeek - 1, row);
-            GridPane.setHalignment(tDate, HPos.CENTER);
+            CalendarItemController calendarItemController = new CalendarItemController(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, day);
+            gridPane.add(calendarItemController, dayOfWeek - 1, row);
+            GridPane.setHalignment(calendarItemController, HPos.CENTER);
             dayOfWeek++;
         }
+        calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) - 1);
     }
 }
