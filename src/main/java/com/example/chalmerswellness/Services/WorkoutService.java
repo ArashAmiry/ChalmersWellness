@@ -104,6 +104,29 @@ public class WorkoutService implements IWorkoutDatabaseHandler {
         return exercises;
     }
 
+    public List<Exercise> getCompletedExercises(Date date) {
+        String sql = "SELECT * FROM completed_exercise WHERE insert_date = ?";
+        List<Exercise> exercises = new ArrayList<>();
+
+        try (Connection conn = DatabaseConnector.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setDate(1, date);
+            pstmt.executeQuery();
+
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                var id = rs.getInt("id");
+                var exercise_id = rs.getInt("exercise_id");
+
+                Exercise exerciseItem = new Exercise(id, getExercise(exercise_id));
+                exercises.add(exerciseItem);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return exercises;
+    }
+
 
     public void removeCompletedExercise(Exercise exercise) {
         String sql = "DELETE FROM completed_exercise WHERE id = ?";

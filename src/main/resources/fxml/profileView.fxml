@@ -6,93 +6,98 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1460.0" styleClass="rootpane" stylesheets="@../css/profile.css" type="AnchorPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+
+<fx:root fx:id="rootpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1460.0" type="AnchorPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane layoutX="145.0" layoutY="414.0" prefHeight="408.0" prefWidth="1218.0" styleClass="months">
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1460.0" styleClass="rootpane" stylesheets="@../css/profile.css">
          <children>
-            <GridPane fx:id="firstMonth" gridLinesVisible="true" layoutX="53.0" layoutY="119.0" prefHeight="230.0" prefWidth="341.0">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-            </GridPane>
-            <Label fx:id="firstMonthLabel" alignment="CENTER" layoutX="59.0" layoutY="39.0" prefHeight="30.0" prefWidth="329.0" styleClass="monthLabels" text="MonthName" />
-            <Label layoutX="57.0" layoutY="81.0" styleClass="monthLabels" text="Mon" AnchorPane.topAnchor="81.0" />
-            <Label layoutX="110.0" layoutY="81.0" styleClass="monthLabels" text="Tue" AnchorPane.topAnchor="81.0" />
-            <Label layoutX="154.0" layoutY="81.0" styleClass="monthLabels" text="Wed" AnchorPane.topAnchor="81.0" />
-            <Label layoutX="207.0" layoutY="81.0" styleClass="monthLabels" text="Thu" AnchorPane.topAnchor="81.0" />
-            <Label layoutX="257.0" layoutY="81.0" styleClass="monthLabels" text="Fri" AnchorPane.topAnchor="81.0" />
-            <Label layoutX="303.0" layoutY="81.0" styleClass="monthLabels" text="Sat" AnchorPane.topAnchor="81.0" />
-            <Label layoutX="357.0" layoutY="81.0" styleClass="monthLabels" text="Sun" AnchorPane.topAnchor="81.0" />
-            <GridPane fx:id="secondMonth" gridLinesVisible="true" layoutX="439.0" layoutY="119.0" prefHeight="230.0" prefWidth="341.0">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-            </GridPane>
-            <GridPane fx:id="thirdMonth" gridLinesVisible="true" layoutX="820.0" layoutY="119.0" prefHeight="230.0" prefWidth="341.0">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-            </GridPane>
-            <Label layoutX="824.0" layoutY="80.0" styleClass="monthLabels" text="Mon" AnchorPane.topAnchor="81.0" />
-            <Label layoutX="877.0" layoutY="80.0" styleClass="monthLabels" text="Tue" AnchorPane.topAnchor="81.0" />
-            <Label layoutX="921.0" layoutY="80.0" styleClass="monthLabels" text="Wed" AnchorPane.topAnchor="81.0" />
-            <Label layoutX="974.0" layoutY="80.0" styleClass="monthLabels" text="Thu" AnchorPane.topAnchor="81.0" />
-            <Label layoutX="1024.0" layoutY="80.0" styleClass="monthLabels" text="Fri" AnchorPane.topAnchor="81.0" />
-            <Label layoutX="1070.0" layoutY="80.0" styleClass="monthLabels" text="Sat" AnchorPane.topAnchor="81.0" />
-            <Label layoutX="1124.0" layoutY="80.0" styleClass="monthLabels" text="Sun" AnchorPane.topAnchor="81.0" />
-            <Label fx:id="secondMonthLabel" alignment="CENTER" layoutX="436.0" layoutY="39.0" prefHeight="30.0" prefWidth="329.0" styleClass="monthLabels" text="MonthName" />
-            <Label fx:id="thirdMonthLabel" alignment="CENTER" layoutX="817.0" layoutY="39.0" prefHeight="30.0" prefWidth="329.0" styleClass="monthLabels" text="MonthName" />
-            <Label layoutX="447.0" layoutY="71.0" styleClass="monthLabels" text="Mon" AnchorPane.topAnchor="81.0" />
-            <Label layoutX="500.0" layoutY="71.0" styleClass="monthLabels" text="Tue" AnchorPane.topAnchor="81.0" />
-            <Label layoutX="544.0" layoutY="71.0" styleClass="monthLabels" text="Wed" AnchorPane.topAnchor="81.0" />
-            <Label layoutX="597.0" layoutY="71.0" styleClass="monthLabels" text="Thu" AnchorPane.topAnchor="81.0" />
-            <Label layoutX="647.0" layoutY="71.0" styleClass="monthLabels" text="Fri" AnchorPane.topAnchor="81.0" />
-            <Label layoutX="693.0" layoutY="71.0" styleClass="monthLabels" text="Sat" AnchorPane.topAnchor="81.0" />
-            <Label layoutX="747.0" layoutY="71.0" styleClass="monthLabels" text="Sun" AnchorPane.topAnchor="81.0" />
+            <AnchorPane layoutX="145.0" layoutY="414.0" prefHeight="408.0" prefWidth="1218.0" styleClass="months">
+               <children>
+                  <GridPane fx:id="firstMonth" gridLinesVisible="true" layoutX="53.0" layoutY="119.0" prefHeight="230.0" prefWidth="341.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                  </GridPane>
+                  <Label fx:id="firstMonthLabel" alignment="CENTER" layoutX="59.0" layoutY="39.0" prefHeight="30.0" prefWidth="329.0" styleClass="monthLabels" text="MonthName" />
+                  <Label layoutX="57.0" layoutY="81.0" styleClass="monthLabels" text="Mon" AnchorPane.topAnchor="81.0" />
+                  <Label layoutX="110.0" layoutY="81.0" styleClass="monthLabels" text="Tue" AnchorPane.topAnchor="81.0" />
+                  <Label layoutX="154.0" layoutY="81.0" styleClass="monthLabels" text="Wed" AnchorPane.topAnchor="81.0" />
+                  <Label layoutX="207.0" layoutY="81.0" styleClass="monthLabels" text="Thu" AnchorPane.topAnchor="81.0" />
+                  <Label layoutX="257.0" layoutY="81.0" styleClass="monthLabels" text="Fri" AnchorPane.topAnchor="81.0" />
+                  <Label layoutX="303.0" layoutY="81.0" styleClass="monthLabels" text="Sat" AnchorPane.topAnchor="81.0" />
+                  <Label layoutX="357.0" layoutY="81.0" styleClass="monthLabels" text="Sun" AnchorPane.topAnchor="81.0" />
+                  <GridPane fx:id="secondMonth" gridLinesVisible="true" layoutX="439.0" layoutY="119.0" prefHeight="230.0" prefWidth="341.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                  </GridPane>
+                  <GridPane fx:id="thirdMonth" gridLinesVisible="true" layoutX="820.0" layoutY="119.0" prefHeight="230.0" prefWidth="341.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                  </GridPane>
+                  <Label layoutX="824.0" layoutY="80.0" styleClass="monthLabels" text="Mon" AnchorPane.topAnchor="81.0" />
+                  <Label layoutX="877.0" layoutY="80.0" styleClass="monthLabels" text="Tue" AnchorPane.topAnchor="81.0" />
+                  <Label layoutX="921.0" layoutY="80.0" styleClass="monthLabels" text="Wed" AnchorPane.topAnchor="81.0" />
+                  <Label layoutX="974.0" layoutY="80.0" styleClass="monthLabels" text="Thu" AnchorPane.topAnchor="81.0" />
+                  <Label layoutX="1024.0" layoutY="80.0" styleClass="monthLabels" text="Fri" AnchorPane.topAnchor="81.0" />
+                  <Label layoutX="1070.0" layoutY="80.0" styleClass="monthLabels" text="Sat" AnchorPane.topAnchor="81.0" />
+                  <Label layoutX="1124.0" layoutY="80.0" styleClass="monthLabels" text="Sun" AnchorPane.topAnchor="81.0" />
+                  <Label fx:id="secondMonthLabel" alignment="CENTER" layoutX="436.0" layoutY="39.0" prefHeight="30.0" prefWidth="329.0" styleClass="monthLabels" text="MonthName" />
+                  <Label fx:id="thirdMonthLabel" alignment="CENTER" layoutX="817.0" layoutY="39.0" prefHeight="30.0" prefWidth="329.0" styleClass="monthLabels" text="MonthName" />
+                  <Label layoutX="447.0" layoutY="71.0" styleClass="monthLabels" text="Mon" AnchorPane.topAnchor="81.0" />
+                  <Label layoutX="500.0" layoutY="71.0" styleClass="monthLabels" text="Tue" AnchorPane.topAnchor="81.0" />
+                  <Label layoutX="544.0" layoutY="71.0" styleClass="monthLabels" text="Wed" AnchorPane.topAnchor="81.0" />
+                  <Label layoutX="597.0" layoutY="71.0" styleClass="monthLabels" text="Thu" AnchorPane.topAnchor="81.0" />
+                  <Label layoutX="647.0" layoutY="71.0" styleClass="monthLabels" text="Fri" AnchorPane.topAnchor="81.0" />
+                  <Label layoutX="693.0" layoutY="71.0" styleClass="monthLabels" text="Sat" AnchorPane.topAnchor="81.0" />
+                  <Label layoutX="747.0" layoutY="71.0" styleClass="monthLabels" text="Sun" AnchorPane.topAnchor="81.0" />
+               </children>
+            </AnchorPane>
+            <Label fx:id="profileName" layoutX="154.0" layoutY="125.0" styleClass="welcomeLabel" text="Hello, I'm Nils Svanstedt" />
          </children>
       </AnchorPane>
-      <Label fx:id="profileName" layoutX="154.0" layoutY="125.0" styleClass="welcomeLabel" text="Hello, I'm Nils Svanstedt" />
    </children>
 </fx:root>
