@@ -25,7 +25,7 @@ public class MainView extends AnchorPane {
     FriendsViewController friendsViewController = new FriendsViewController();
     CalorieIntakeCalculatorController calorieIntakeCalculatorController = new CalorieIntakeCalculatorController();
     DashboardViewController dashboardViewController = new DashboardViewController();
-    SettingsViewController settingsViewController = new SettingsViewController();
+    SettingsViewController settingsViewController;
 
     public MainView(){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/MainView.fxml"));
@@ -44,6 +44,7 @@ public class MainView extends AnchorPane {
     public void initialize(){
         firstNameText.setText(LoggedInUser.getInstance().getFirstName());
         navigateToDashboardView();
+        settingsViewController = new SettingsViewController(templateRootAnchorPane);
     }
 
     @FXML
@@ -59,6 +60,7 @@ public class MainView extends AnchorPane {
             setViewTo(nutritionViewController);
         }
    }
+
    @FXML
    public void navigateToSettingsView() { setViewTo(settingsViewController);}
 

@@ -8,6 +8,7 @@ import com.example.chalmerswellness.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
@@ -40,13 +41,16 @@ public class SettingsViewController extends AnchorPane implements Initializable 
     RadioButton maleRadioButton;
     @FXML
     RadioButton femaleRadioButton;
+    @FXML
+    AnchorPane rootPane;
     ToggleGroup genderToggleGroup = new ToggleGroup();
     private final IUserDatabaseHandler userService;
 
-    public SettingsViewController(){
+    public SettingsViewController(AnchorPane templateRootAnchorPane){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/SettingsView.fxml"));
 
         userService = new UserService();
+        this.rootPane = templateRootAnchorPane;
 
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -82,9 +86,6 @@ public class SettingsViewController extends AnchorPane implements Initializable 
             genderToggleGroup.selectToggle(femaleRadioButton);
         }
     }
-
-
-
     @FXML
     void saveChanges() {
         User user = LoggedInUser.getInstance();
@@ -100,6 +101,12 @@ public class SettingsViewController extends AnchorPane implements Initializable 
 
         userService.updateUser(user.getId(), username, password, firstName, lastName, gender, email, birthDate, height, weight);
         LoggedInUser.updateInstance(userService.getUser(user.getId()));
+    }
+
+    @FXML
+    void logOut() throws IOException {
+        LoggedInUser.destroyInstance();
+        rootPane.getChildren().setAll((Node) new FXMLLoader(getClass().getResource("/fxml/LoginView.fxml")).load());
     }
 
 }
