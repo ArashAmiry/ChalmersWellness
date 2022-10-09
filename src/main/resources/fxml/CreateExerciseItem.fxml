@@ -19,7 +19,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="setsField" layoutX="734.0" layoutY="13.0" onMouseClicked="#hideErrorLabel" prefHeight="25.0" prefWidth="48.0" />
+      <TextField fx:id="setsField" layoutX="734.0" layoutY="13.0" onKeyTyped="#setsListener" prefHeight="25.0" prefWidth="48.0" />
       <Label fx:id="errorLabel" layoutX="788.0" layoutY="16.0" text="Enter a number!" textFill="#f80606" />
       <ImageView fitHeight="34.0" fitWidth="28.0" layoutX="907.0" layoutY="12.0" onMouseClicked="#removeFromWorkout" pickOnBounds="true" preserveRatio="true">
          <image>

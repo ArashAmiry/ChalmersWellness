@@ -2,15 +2,19 @@ package com.example.chalmerswellness.Controllers.Workout.CreateWorkout;
 
 import com.example.chalmerswellness.Models.WorkoutModel;
 import com.example.chalmerswellness.ObjectModels.ExerciseItem;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
 
 public class CreateExerciseItemController extends AnchorPane implements Initializable{
 
@@ -39,6 +43,7 @@ public class CreateExerciseItemController extends AnchorPane implements Initiali
     public void initialize(URL arg0, ResourceBundle arg1){
         setName();
         hideErrorLabel();
+        setsField.textProperty().set(this.exerciseItem.getSetsCount() + "");
     }
 
     private void setName(){
@@ -69,5 +74,17 @@ public class CreateExerciseItemController extends AnchorPane implements Initiali
 
     public ExerciseItem getExerciseItem() {
         return exerciseItem;
+    }
+
+    @FXML
+    private void setsListener(KeyEvent e){
+        if(!e.getCharacter().equals(KeyCode.BACK_SPACE.getChar())){
+            try {
+                setSets();
+                hideErrorLabel();
+            }catch (NumberFormatException nfe){
+                displayErrorLabel();
+            }
+        }
     }
 }
