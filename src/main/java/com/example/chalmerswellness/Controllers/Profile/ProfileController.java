@@ -64,6 +64,7 @@ public class ProfileController extends AnchorPane {
         int day = calendar.get(Calendar.DAY_OF_MONTH);
         int daysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
         int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK) - 1;
+        drawPreviousMonthDays(dayOfWeek, gridPane);
         int row = 0;
         for (int i = day; i <= daysInMonth; i++) {
             if (dayOfWeek == 8) {
@@ -75,5 +76,40 @@ public class ProfileController extends AnchorPane {
             day++;
             dayOfWeek++;
         }
+    }
+
+    private void drawPreviousMonthDays(int dayOfWeek, GridPane gridPane){
+        calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) - 1);
+        int daysInPreviousMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+
+        if (dayOfWeek != 1){
+            drawDaysInPreviousMonth(gridPane, daysInPreviousMonth, dayOfWeek);
+        }
+        calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) + 1);
+    }
+
+    private void drawDaysInPreviousMonth(GridPane gridPane, int daysInPreviousMonth, int dayOfWeek) {
+        int columnCounter = 0;
+        if (daysInPreviousMonth == 31){
+            drawDaysInCurrentMonth(gridPane, daysInPreviousMonth, dayOfWeek, columnCounter);
+        }
+        else if (daysInPreviousMonth == 30){
+            drawDaysInCurrentMonth(gridPane, daysInPreviousMonth, dayOfWeek, columnCounter);
+        }
+        else if (daysInPreviousMonth == 28){
+            drawDaysInCurrentMonth(gridPane, daysInPreviousMonth, dayOfWeek, columnCounter);
+        }
+    }
+
+    private void drawDaysInCurrentMonth(GridPane gridPane, int daysInPreviousMonth, int dayOfWeek, int columnCounter) {
+        for (int day = daysInPreviousMonth + 1 - Math.abs(dayOfWeek - 1); day <= daysInPreviousMonth; day++){
+            addTextToGridPane(gridPane, columnCounter, day);
+            columnCounter++;
+        }
+    }
+
+    private void addTextToGridPane(GridPane gridPane, int columnCounter, int day) {
+        Text tDate = new Text(String.valueOf(day));
+        gridPane.add(tDate, columnCounter, 0);
     }
 }
