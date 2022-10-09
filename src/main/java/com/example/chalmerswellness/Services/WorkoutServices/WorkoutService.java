@@ -1,4 +1,4 @@
-package com.example.chalmerswellness.Services.testImplement;
+package com.example.chalmerswellness.Services.WorkoutServices;
 
 import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.ObjectModels.ExerciseItem;
@@ -6,7 +6,7 @@ import com.example.chalmerswellness.ObjectModels.Workout;
 
 import java.util.List;
 
-public class WorkoutServiceTest {
+public class WorkoutService {
 
     public enum RepositoryType{
         Database,
@@ -14,23 +14,23 @@ public class WorkoutServiceTest {
     }
 
     private IDatabaseWorkoutRepository repository;
-    public WorkoutServiceTest(RepositoryType repositoryType)
+    public WorkoutService(RepositoryType repositoryType)
     {
         switch (repositoryType){
             case Database -> repository = new DatabaseRepository();
-            case MockDatabase -> repository = new MemoryRepository();
+            //case MockDatabase -> repository = new MemoryRepository();
         }
     }
 
-    private static WorkoutServiceTest single_instance = null;
+    private static WorkoutService single_instance = null;
 
-    public static void createInstance(WorkoutServiceTest serviceTest){
+    public static void createInstance(WorkoutService serviceTest){
         if(single_instance == null){
             single_instance = serviceTest;
         }
     }
 
-    public static WorkoutServiceTest getInstance()
+    public static WorkoutService getInstance()
     {
         return single_instance;
     }

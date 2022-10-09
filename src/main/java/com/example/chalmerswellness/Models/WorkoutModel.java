@@ -7,9 +7,7 @@ import com.example.chalmerswellness.ObjectModels.ExerciseItemSet;
 import com.example.chalmerswellness.ObjectModels.Workout;
 import com.example.chalmerswellness.Interfaces.Observable;
 import com.example.chalmerswellness.Interfaces.Observer;
-import com.example.chalmerswellness.Services.IWorkoutDatabaseHandler;
-import com.example.chalmerswellness.Services.WorkoutService;
-import com.example.chalmerswellness.Services.testImplement.WorkoutServiceTest;
+import com.example.chalmerswellness.Services.WorkoutServices.WorkoutService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,13 +15,13 @@ import java.util.List;
 public class WorkoutModel implements Observable {
     private List<Observer> observers = new ArrayList<>();
     //private final IWorkoutDatabaseHandler workoutService;
-    private WorkoutServiceTest workoutService;
+    private WorkoutService workoutService;
     private List<Exercise> exercises = new ArrayList<>();
     private List<ExerciseItem> addedWorkoutExercises = new ArrayList<>();
     private WorkoutState state;
 
     public WorkoutModel(){
-        workoutService = WorkoutServiceTest.getInstance();
+        workoutService = WorkoutService.getInstance();
         exercises = getMyExercises();
     }
 

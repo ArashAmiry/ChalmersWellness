@@ -1,4 +1,4 @@
-package com.example.chalmerswellness.Services.testImplement;
+package com.example.chalmerswellness.Services.WorkoutServices;
 
 import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.ObjectModels.ExerciseItem;

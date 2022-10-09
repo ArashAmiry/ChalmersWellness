@@ -1,7 +1,7 @@
 package com.example.chalmerswellness;
 
 import com.example.chalmerswellness.Services.DatabaseConnector;
-import com.example.chalmerswellness.Services.testImplement.WorkoutServiceTest;
+import com.example.chalmerswellness.Services.WorkoutServices.WorkoutService;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,7 +14,7 @@ public class ChalmersWellnessApp extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ChalmersWellnessApp.class.getResource("/fxml/LoginView.fxml"));
         DatabaseConnector databaseConnector = new DatabaseConnector();
-        WorkoutServiceTest.createInstance(new WorkoutServiceTest(WorkoutServiceTest.RepositoryType.Database));
+        WorkoutService.createInstance(new WorkoutService(WorkoutService.RepositoryType.Database));
 
         Scene scene = new Scene(fxmlLoader.load(), 1920, 1080);
         stage.setTitle("Chalmers Wellness");
