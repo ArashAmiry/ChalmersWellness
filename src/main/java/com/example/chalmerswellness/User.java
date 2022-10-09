@@ -16,7 +16,7 @@ public class User {
     private int calorieGoal;
     private double weightGoal;
 
-    public User(String username, String password, String firstName, String lastName, Gender gender, String email, int height, LocalDate birthDate, double weight) {
+    public User(String username, String password, String firstName, String lastName, Gender gender, String email, LocalDate birthDate, int height, double weight) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
@@ -28,7 +28,7 @@ public class User {
         this.weight = weight;
     }
 
-    public User(int id, String username, String password, String firstName, String lastName, Gender gender, String email, int height, LocalDate birthDate, double weight, int calorieGoal) {
+    public User(int id, String username, String password, String firstName, String lastName, Gender gender, String email, int height, LocalDate birthDate, double weight, int calorieGoal, double weightGoal) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -40,6 +40,7 @@ public class User {
         this.birthDate = birthDate;
         this.weight = weight;
         this.calorieGoal = calorieGoal;
+        this.weightGoal = weightGoal;
     }
 
 
@@ -90,6 +91,10 @@ public class User {
 
     public String getPassword() {
         return password;
+    }
+
+    public double getWeightGoal() {
+        return weightGoal;
     }
 }
 
