@@ -2,6 +2,7 @@ package com.example.chalmerswellness.Controllers.Profile;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.HPos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -63,6 +64,7 @@ public class ProfileController extends AnchorPane {
         monthLabel.setText(calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.UK));
         int day = calendar.get(Calendar.DAY_OF_MONTH);
         int daysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+        int firstDayOfWeek = calendar.get(Calendar.DAY_OF_WEEK) - 1;
         int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK) - 1;
         drawPreviousMonthDays(dayOfWeek, gridPane);
         int row = 0;
@@ -73,9 +75,11 @@ public class ProfileController extends AnchorPane {
             }
             Text tDate = new Text(String.valueOf(day));
             gridPane.add(tDate, dayOfWeek - 1, row);
+            GridPane.setHalignment(tDate, HPos.CENTER);
             day++;
             dayOfWeek++;
         }
+        drawDaysInNextMonth(daysInMonth, dayOfWeek, firstDayOfWeek,  row, gridPane);
     }
 
     private void drawPreviousMonthDays(int dayOfWeek, GridPane gridPane){
@@ -111,5 +115,20 @@ public class ProfileController extends AnchorPane {
     private void addTextToGridPane(GridPane gridPane, int columnCounter, int day) {
         Text tDate = new Text(String.valueOf(day));
         gridPane.add(tDate, columnCounter, 0);
+        GridPane.setHalignment(tDate, HPos.CENTER);
+    }
+
+    private void drawDaysInNextMonth(int daysInMonth, int dayOfWeek, int firstDayOfWeek, int row, GridPane gridPane){
+        int daysInMonthLeft = Math.abs(daysInMonth + firstDayOfWeek - 43);
+        for (int day = 1; day <= daysInMonthLeft; day++) {
+            if (dayOfWeek == 8) {
+                dayOfWeek = 1;
+                row++;
+            }
+            Text tDate = new Text(String.valueOf(day));
+            gridPane.add(tDate, dayOfWeek - 1, row);
+            GridPane.setHalignment(tDate, HPos.CENTER);
+            dayOfWeek++;
+        }
     }
 }
