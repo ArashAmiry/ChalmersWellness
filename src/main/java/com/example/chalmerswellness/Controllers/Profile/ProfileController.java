@@ -35,7 +35,10 @@ public class ProfileController extends AnchorPane {
     @FXML
     GridPane thirdMonth;
 
-    public ProfileController() {
+    @FXML
+    Label profileName;
+
+    public ProfileController(String firstName, String lastName) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/profileView.fxml"));
 
         fxmlLoader.setRoot(this);
@@ -47,6 +50,7 @@ public class ProfileController extends AnchorPane {
             throw new RuntimeException(exception);
         }
 
+        profileName.setText("Hello, I'm " + firstName + " " + lastName);
         drawCalendar();
     }
 

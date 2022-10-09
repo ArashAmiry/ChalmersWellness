@@ -6,10 +6,9 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
 <fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1460.0" type="AnchorPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane layoutX="134.0" layoutY="628.0" prefHeight="408.0" prefWidth="1218.0">
+      <AnchorPane layoutX="145.0" layoutY="414.0" prefHeight="408.0" prefWidth="1218.0">
          <children>
             <GridPane fx:id="firstMonth" gridLinesVisible="true" layoutX="53.0" layoutY="119.0" prefHeight="230.0" prefWidth="341.0">
               <columnConstraints>
@@ -94,5 +93,6 @@
             <Label fx:id="thirdMonthLabel" alignment="CENTER" layoutX="817.0" layoutY="39.0" prefHeight="30.0" prefWidth="329.0" text="MonthName" />
          </children>
       </AnchorPane>
+      <Label fx:id="profileName" layoutX="213.0" layoutY="185.0" text="Hello, I'm Nils Svanstedt" />
    </children>
 </fx:root>

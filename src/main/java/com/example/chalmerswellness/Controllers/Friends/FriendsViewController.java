@@ -18,6 +18,9 @@ import java.util.ResourceBundle;
 public class FriendsViewController extends AnchorPane{
 
     @FXML
+    AnchorPane rootpane;
+
+    @FXML
     VBox friendList;
 
     @FXML
@@ -49,7 +52,7 @@ public class FriendsViewController extends AnchorPane{
         friendList.getChildren().clear();
 
         for (User user : users){
-            friendList.getChildren().add(new FriendsItemController(user.getId(), user.getFirstName(), user.getLastName()));
+            friendList.getChildren().add(new FriendsItemController(user.getId(), user.getFirstName(), user.getLastName(), rootpane));
         }
     }
 }
