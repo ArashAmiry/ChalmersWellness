@@ -1,6 +1,5 @@
 package com.example.chalmerswellness.Models;
 
-import com.example.chalmerswellness.Controllers.Workout.States.WorkoutState;
 import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.ObjectModels.ExerciseItem;
 import com.example.chalmerswellness.ObjectModels.ExerciseItemSet;
@@ -16,15 +15,10 @@ public class WorkoutModel implements Observable {
     private WorkoutService workoutService;
     private List<Exercise> exercises = new ArrayList<>();
     private List<ExerciseItem> addedWorkoutExercises = new ArrayList<>();
-    private WorkoutState state;
 
     public WorkoutModel(){
         workoutService = WorkoutService.getInstance();
         exercises = getExercises();
-    }
-
-    public void changeState(WorkoutState state){
-        this.state = state;
     }
 
     public List<Workout> getSavedWorkouts(){
@@ -33,11 +27,6 @@ public class WorkoutModel implements Observable {
 
     public List<ExerciseItem> getAddedWorkoutExercises() {
         return addedWorkoutExercises;
-    }
-
-
-    public void addExercise(Exercise exercise){
-        state.addExercise(exercise);
     }
 
     /**
