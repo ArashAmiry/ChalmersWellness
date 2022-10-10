@@ -1,8 +1,10 @@
 package com.example.chalmerswellness.Controllers.Workout.TodaysWorkout;
 
+import com.example.chalmerswellness.Interfaces.IWorkoutController;
 import com.example.chalmerswellness.Models.WorkoutModel;
 import com.example.chalmerswellness.Interfaces.Observable;
 import com.example.chalmerswellness.Interfaces.Observer;
+import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.ObjectModels.ExerciseItem;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,11 +17,11 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class TodayWorkoutController extends AnchorPane implements Observer, Initializable {
+public class TodayWorkoutController extends AnchorPane implements Observer, IWorkoutController, Initializable {
     private WorkoutModel model;
+    private AnchorPane mainRoot;
     @FXML private ListView exerciseList;
     @FXML private Label noResult;
-    private AnchorPane mainRoot;
 
     public TodayWorkoutController(WorkoutModel workoutModel, AnchorPane mainRoot){
         this.model = workoutModel;
@@ -34,6 +36,10 @@ public class TodayWorkoutController extends AnchorPane implements Observer, Init
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
+    }
+
+    public void addExercise(Exercise exercise){
+        model.addExerciseToActiveWorkout(exercise);
     }
 
     @Override

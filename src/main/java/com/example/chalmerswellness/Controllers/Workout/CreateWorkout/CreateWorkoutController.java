@@ -1,6 +1,6 @@
 package com.example.chalmerswellness.Controllers.Workout.CreateWorkout;
 
-import com.example.chalmerswellness.Controllers.Workout.TodaysWorkout.ExerciseItemController;
+import com.example.chalmerswellness.Interfaces.IWorkoutController;
 import com.example.chalmerswellness.Models.WorkoutModel;
 import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.ObjectModels.ExerciseItem;
@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CreateWorkoutController extends AnchorPane implements Observer {
+public class CreateWorkoutController extends AnchorPane implements Observer, IWorkoutController {
     private ObservableList<CreateExerciseItemController> exercisesList = FXCollections.observableArrayList();
     private WorkoutModel model;
     @FXML public ListView mainContent;
@@ -38,6 +38,12 @@ public class CreateWorkoutController extends AnchorPane implements Observer {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
+    }
+
+    //TODO should be able to add to model
+    @Override
+    public void addExercise(Exercise exercise){
+        model.addExerciseToWorkout(exercise);
     }
 
     void updateExerciseList(List<ExerciseItem> exercises){
