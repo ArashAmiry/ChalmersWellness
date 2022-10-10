@@ -3,30 +3,19 @@ package com.example.chalmerswellness.Services.WorkoutServices;
 import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.ObjectModels.ExerciseItem;
 import com.example.chalmerswellness.ObjectModels.Workout;
-
 import java.util.List;
 
 public class WorkoutService {
-
-    public enum RepositoryType{
-        Database,
-        MockDatabase
-    }
-
-    private IDatabaseWorkoutRepository repository;
-    private WorkoutService(RepositoryType repositoryType)
-    {
-        switch (repositoryType){
-            case Database -> repository = new DatabaseWorkoutRepository();
-            //case MockDatabase -> repository = new MemoryRepository();
-        }
-    }
-
     private static WorkoutService single_instance = null;
+    private IDatabaseWorkoutRepository repository;
+    private WorkoutService(IDatabaseWorkoutRepository workoutRepository)
+    {
+        repository = workoutRepository;
+    }
 
-    public static void createInstance(RepositoryType repositoryType){
+    public static void createInstance(IDatabaseWorkoutRepository workoutRepository){
         if(single_instance == null){
-            single_instance = new WorkoutService(repositoryType);
+            single_instance = new WorkoutService(workoutRepository);
         }
     }
 
