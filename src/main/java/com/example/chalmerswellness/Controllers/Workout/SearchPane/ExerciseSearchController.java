@@ -1,6 +1,6 @@
 package com.example.chalmerswellness.Controllers.Workout.SearchPane;
 
-import com.example.chalmerswellness.Controllers.Workout.WorkoutStates;
+import com.example.chalmerswellness.Interfaces.IWorkoutController;
 import com.example.chalmerswellness.Models.WorkoutModel;
 import com.example.chalmerswellness.ObjectModels.Exercise;
 import javafx.fxml.FXML;
@@ -17,15 +17,14 @@ import java.util.ResourceBundle;
 
 public class ExerciseSearchController extends AnchorPane implements Initializable {
     private final WorkoutModel model;
+    private IWorkoutController workoutController;
     @FXML public TextField searchField;
     @FXML public ListView<ExerciseSearchItemController> searchListView;
     @FXML public Label noResultLabel;
 
-    private WorkoutStates workoutState;
-
-    //TODO string should be enum
-    public ExerciseSearchController(WorkoutModel model){
+    public ExerciseSearchController(WorkoutModel model, IWorkoutController workoutController){
         this.model = model;
+        this.workoutController = workoutController;
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/ExerciseSearchView.fxml"));
         fxmlLoader.setRoot(this);
@@ -38,6 +37,11 @@ public class ExerciseSearchController extends AnchorPane implements Initializabl
         }
     }
 
+    public void changeController(IWorkoutController workoutController){
+        this.workoutController = workoutController;
+        searchExercise();
+    }
+
     @Override
     public void initialize(URL arg0, ResourceBundle arg1){
         searchExercise();
@@ -46,7 +50,7 @@ public class ExerciseSearchController extends AnchorPane implements Initializabl
     private void updateSearchResult(List<Exercise> exercises){
         searchListView.getItems().clear();
         for (var exercise: exercises) {
-            ExerciseSearchItemController exerciseController = new ExerciseSearchItemController(exercise, model, workoutState);
+            ExerciseSearchItemController exerciseController = new ExerciseSearchItemController(exercise, workoutController);
             searchListView.getItems().add(exerciseController);
         }
         isNoResult();
@@ -61,11 +65,5 @@ public class ExerciseSearchController extends AnchorPane implements Initializabl
 
     void isNoResult(){
         noResultLabel.visibleProperty().set(searchListView.getItems().size() <= 0);
-    }
-
-
-    public void setState(WorkoutStates state){
-        this.workoutState = state;
-        searchExercise();
     }
 }

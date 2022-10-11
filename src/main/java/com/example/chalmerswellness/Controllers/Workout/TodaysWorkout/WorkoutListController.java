@@ -16,8 +16,8 @@ import java.util.ResourceBundle;
 
 public class WorkoutListController extends AnchorPane implements Initializable {
 
-    private WorkoutModel model;
-    private AnchorPane mainContent;
+    private final WorkoutModel model;
+    private final AnchorPane mainContent;
     @FXML private ListView workoutList;
     public WorkoutListController(WorkoutModel model, AnchorPane mainContent){
         this.model = model;
@@ -38,7 +38,6 @@ public class WorkoutListController extends AnchorPane implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         List<Workout> workouts = model.getSavedWorkouts();
-
         for (Workout workout: workouts) {
             WorkoutItemController workoutController = new WorkoutItemController(workout, model);
             workoutList.getItems().add(workoutController);

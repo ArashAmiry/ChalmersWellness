@@ -1,8 +1,9 @@
 package com.example.chalmerswellness.Controllers.Workout.CreateWorkout;
 
-import com.example.chalmerswellness.Controllers.Workout.TodaysWorkout.ExerciseItemController;
+import com.example.chalmerswellness.Interfaces.IWorkoutController;
 import com.example.chalmerswellness.Models.WorkoutModel;
 import com.example.chalmerswellness.ObjectModels.Exercise;
+import com.example.chalmerswellness.ObjectModels.ExerciseItem;
 import com.example.chalmerswellness.ObjectModels.Workout;
 import com.example.chalmerswellness.Interfaces.Observable;
 import com.example.chalmerswellness.Interfaces.Observer;
@@ -18,7 +19,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CreateWorkoutController extends AnchorPane implements Observer {
+public class CreateWorkoutController extends AnchorPane implements Observer, IWorkoutController {
     private ObservableList<CreateExerciseItemController> exercisesList = FXCollections.observableArrayList();
     private WorkoutModel model;
     @FXML public ListView mainContent;
@@ -39,7 +40,13 @@ public class CreateWorkoutController extends AnchorPane implements Observer {
         }
     }
 
-    void updateExerciseList(List<Exercise> exercises){
+    //TODO should be able to add to model
+    @Override
+    public void addExercise(Exercise exercise){
+        model.addExerciseToWorkout(exercise);
+    }
+
+    void updateExerciseList(List<ExerciseItem> exercises){
         exercisesList.clear();
 
         for (var exercise: exercises) {
@@ -51,9 +58,9 @@ public class CreateWorkoutController extends AnchorPane implements Observer {
 
     private Workout createWorkoutObject(List<CreateExerciseItemController> exercises){
         String workoutName = workoutNameField.getText();
-        List<Exercise> workoutExercises = new ArrayList<>();
+        List<ExerciseItem> workoutExercises = new ArrayList<>();
         for (var exercise: exercises) {
-            workoutExercises.add(exercise.getExercise());
+            workoutExercises.add(exercise.getExerciseItem());
         }
         return new Workout(workoutName, workoutExercises);
     }

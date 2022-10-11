@@ -1,10 +1,14 @@
 package com.example.chalmerswellness;
 
-import com.example.chalmerswellness.Services.DataService;
+import com.example.chalmerswellness.Services.UserServices.IDatabaseUserRepository;
+import com.example.chalmerswellness.Services.UserServices.DatabaseUserRepository;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
@@ -36,12 +40,15 @@ public class SignUpController extends AnchorPane implements Initializable {
     RadioButton femaleRadioButton;
     @FXML AnchorPane navigationPane;
     ToggleGroup genderToggleGroup = new ToggleGroup();
-    DataService dataService = new DataService();
+    private final IDatabaseUserRepository userService;
 
     AnchorPane rootpane;
 
     public SignUpController(AnchorPane pane) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/SignUpView.fxml"));
+
+        userService = new DatabaseUserRepository();
+        this.rootpane = pane;
 
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -51,8 +58,6 @@ public class SignUpController extends AnchorPane implements Initializable {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
-
-        this.rootpane = pane;
     }
 
     @Override
@@ -75,14 +80,14 @@ public class SignUpController extends AnchorPane implements Initializable {
         double weight = Double.parseDouble(weightTextField.getText());
         LocalDate birthDate = birthDatePicker.getValue();
 
-        User newUser = new User(username, password, firstName, lastName, gender, email, height, birthDate, weight);
+        User newUser = new User(username, password, firstName, lastName, gender, email, birthDate, height, weight);
 
-        if (dataService.checkIfUsernameExists(username)) {
+        if (userService.checkIfUsernameExists(username)) {
             System.out.println("Username already exists");
             rootpane.getChildren().remove(this);
         } else {
-            dataService.insertUser(newUser);
-            LoggedInUser.createInstance(dataService.getUser(username, password));
+            userService.insertUser(newUser);
+            LoggedInUser.createInstance(userService.getUser(username, password));
             rootpane.getChildren().clear();
             rootpane.getChildren().add(new MainView());
         }

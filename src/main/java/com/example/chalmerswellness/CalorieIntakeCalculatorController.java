@@ -2,7 +2,8 @@ package com.example.chalmerswellness;
 
 import com.example.chalmerswellness.Interfaces.Observable;
 import com.example.chalmerswellness.Interfaces.Observer;
-import com.example.chalmerswellness.Services.DataService;
+import com.example.chalmerswellness.Services.UserServices.IDatabaseUserRepository;
+import com.example.chalmerswellness.Services.UserServices.DatabaseUserRepository;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -41,11 +42,12 @@ public class CalorieIntakeCalculatorController extends AnchorPane implements Ini
     private ToggleGroup gender = new ToggleGroup();
     private ToggleGroup paceGroup = new ToggleGroup();
     private static List<Observer> observers = new ArrayList<>();
-    DataService dataService = new DataService();
-
+    private final IDatabaseUserRepository userService;
 
     public CalorieIntakeCalculatorController(){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/CalorieIntakeCalculator.fxml"));
+
+        userService = new DatabaseUserRepository();
 
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -82,7 +84,7 @@ public class CalorieIntakeCalculatorController extends AnchorPane implements Ini
         double weightGoal = Double.parseDouble(weightGoalTextField.getText());
         int pace = (int) paceGroup.getSelectedToggle().getUserData();
         double activityLevel = activityLevels.get(activityComboBox.getValue());
-        if (Integer.parseInt(weightGoalTextField.getText()) - weight < 0) {
+        if (Double.parseDouble(weightGoalTextField.getText()) - weight < 0) {
             pace = -pace;
         }
         if (weight == weightGoal) {
@@ -93,9 +95,9 @@ public class CalorieIntakeCalculatorController extends AnchorPane implements Ini
         calorieIntakeText.setText("Your recommended calorie intake is " + calorieIntake + " calories per day.");
         calorieIntakeText.setVisible(true);
 
-        dataService.setCalorieGoal(loggedInUser.getId(), calorieIntake);
-        dataService.setWeightGoal(loggedInUser.getId(), weightGoal);
-        LoggedInUser.updateInstance(dataService.getUser(loggedInUser.getId()));
+        userService.setCalorieGoal(loggedInUser.getId(), calorieIntake);
+        userService.setWeightGoal(loggedInUser.getId(), weightGoal);
+        LoggedInUser.updateInstance(userService.getUser(loggedInUser.getId()));
 
         notifyObservers();
     }

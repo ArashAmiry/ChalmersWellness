@@ -11,7 +11,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -19,34 +18,22 @@ import java.util.ResourceBundle;
 public class WorkoutController extends AnchorPane implements Initializable {
 
     private WorkoutModel workoutModel;
-    @FXML public AnchorPane anchorPaneSearch;
-    @FXML public AnchorPane mainContent;
+    private CreateWorkoutController createWorkoutView;
+    private TodayWorkoutController todayWorkoutView;
+    private ExerciseSearchController exerciseSearchController;
+    private ManageWorkoutController manageWorkoutView;
+    @FXML private AnchorPane anchorPaneSearch;
+    @FXML private AnchorPane mainContent;
     @FXML private Button addedWorkoutsBtn;
-    CreateWorkoutController createWorkoutView;
-    TodayWorkoutController todayWorkoutView;
-    ExerciseSearchController exerciseSearchController;
-    ManageWorkoutController manageWorkoutView;
 
     public WorkoutController(){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/WorkoutView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
         workoutModel = new WorkoutModel();
-
-
-        //TODO remove
-        DatabaseConnector d = new DatabaseConnector();
-
-        //TodayWorkoutView
         todayWorkoutView = new TodayWorkoutController(workoutModel, this);
-
-        //SearchPanel
-        exerciseSearchController = new ExerciseSearchController(workoutModel);
-
-        //CreateWorkoutView
+        exerciseSearchController = new ExerciseSearchController(workoutModel, todayWorkoutView);
         createWorkoutView = new CreateWorkoutController(workoutModel);
-
-        //ManageWorkoutView
         manageWorkoutView = new ManageWorkoutController(workoutModel);
 
         try {
@@ -67,18 +54,17 @@ public class WorkoutController extends AnchorPane implements Initializable {
     }
 
     @FXML void openWorkoutTab(){
-        exerciseSearchController.setState(WorkoutStates.ACTIVEWORKOUT);
+        exerciseSearchController.changeController(todayWorkoutView);
         setTabTo(todayWorkoutView);
         addedWorkoutsBtn.setVisible(true);
     }
 
     @FXML void openCreateWorkoutTab(){
-        exerciseSearchController.setState(WorkoutStates.CREATEWORKOUT);
+        exerciseSearchController.changeController(createWorkoutView);
         setTabTo(createWorkoutView);
     }
 
     @FXML void openManageWorkoutTab(){
-        //todayWorkoutView.textProperty().set("ManageWorkout Tab");
         setTabTo(manageWorkoutView);
     }
 
@@ -92,6 +78,4 @@ public class WorkoutController extends AnchorPane implements Initializable {
         mainContent.getChildren().clear();
         mainContent.getChildren().add(pane);
     }
-
-
 }

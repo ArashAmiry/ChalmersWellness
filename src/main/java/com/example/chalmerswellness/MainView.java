@@ -5,7 +5,6 @@ import com.example.chalmerswellness.Controllers.Friends.FriendsViewController;
 import com.example.chalmerswellness.Controllers.Nutrition.NutritionViewController;
 import com.example.chalmerswellness.Controllers.Settings.SettingsViewController;
 import com.example.chalmerswellness.Controllers.Workout.WorkoutController;
-import com.example.chalmerswellness.Services.DataService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -26,8 +25,7 @@ public class MainView extends AnchorPane {
     FriendsViewController friendsViewController = new FriendsViewController();
     CalorieIntakeCalculatorController calorieIntakeCalculatorController = new CalorieIntakeCalculatorController();
     DashboardViewController dashboardViewController = new DashboardViewController();
-    SettingsViewController settingsViewController = new SettingsViewController();
-    DataService dataService = new DataService();
+    SettingsViewController settingsViewController;
 
     public MainView(){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/MainView.fxml"));
@@ -46,6 +44,7 @@ public class MainView extends AnchorPane {
     public void initialize(){
         firstNameText.setText(LoggedInUser.getInstance().getFirstName());
         navigateToDashboardView();
+        settingsViewController = new SettingsViewController(templateRootAnchorPane);
     }
 
     @FXML
@@ -61,6 +60,7 @@ public class MainView extends AnchorPane {
             setViewTo(nutritionViewController);
         }
    }
+
    @FXML
    public void navigateToSettingsView() { setViewTo(settingsViewController);}
 

@@ -1,7 +1,7 @@
 package com.example.chalmerswellness;
 
-import com.example.chalmerswellness.Controllers.Profile.ProfileController;
-import com.example.chalmerswellness.Services.DataService;
+import com.example.chalmerswellness.Services.UserServices.IDatabaseUserRepository;
+import com.example.chalmerswellness.Services.UserServices.DatabaseUserRepository;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
@@ -20,11 +20,11 @@ public class LoginController extends AnchorPane implements Initializable {
     AnchorPane navigationPane;
     @FXML
     AnchorPane rootPane;
-
-    DataService dataService = new DataService();
+    private final IDatabaseUserRepository userService;
 
 
     public LoginController() {
+        userService = new DatabaseUserRepository();
     }
 
     @Override
@@ -36,11 +36,11 @@ public class LoginController extends AnchorPane implements Initializable {
     void login(MouseEvent event) {
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
-        if(dataService.checkIfCredentialsMatch(username, password)) {
+        if(userService.checkIfCredentialsAreCorrect(username, password)) {
             System.out.println("Login successful");
-            LoggedInUser.createInstance(dataService.getUser(username,password));
+            LoggedInUser.createInstance(userService.getUser(username,password));
             rootPane.getChildren().clear();
-            rootPane.getChildren().add(new ProfileController("a", "a") /*new MainView()*/);
+            rootPane.getChildren().setAll(new MainView());
         } else {
             System.out.println("Login failed");
         }
