@@ -25,5 +25,9 @@ public class ProfileExercisesController extends AnchorPane {
         }
 
         this.exercises = exercises;
+
+        if (exercises.isEmpty()){
+            System.out.print("Empty");
+        }
     }
 }

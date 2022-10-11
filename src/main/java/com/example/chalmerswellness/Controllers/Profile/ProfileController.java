@@ -52,6 +52,10 @@ public class ProfileController extends AnchorPane {
         }
 
         profileName.setText("Hello, I'm " + firstName + " " + lastName);
+    }
+
+    @FXML
+    public void initialize(){
         drawCalendar();
     }
 

@@ -43,10 +43,6 @@ public class FriendsViewController extends AnchorPane{
     }
 
     @FXML
-    public void initialize(){
-    }
-
-    @FXML
     private void searchFriend(){
         List<User> users = friendSearcher.findFriends(search.getText());
         friendList.getChildren().clear();
