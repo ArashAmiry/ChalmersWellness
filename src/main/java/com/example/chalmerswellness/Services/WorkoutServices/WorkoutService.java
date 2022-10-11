@@ -3,6 +3,9 @@ package com.example.chalmerswellness.Services.WorkoutServices;
 import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.ObjectModels.ExerciseItem;
 import com.example.chalmerswellness.ObjectModels.Workout;
+
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public class WorkoutService {
@@ -27,6 +30,11 @@ public class WorkoutService {
     public List<ExerciseItem> getCompletedExercises()
     {
         return repository.getCompletedExercises();
+    }
+
+    public List<ExerciseItem> getCompletedExercises(LocalDate date)
+    {
+        return repository.getCompletedExercises(date);
     }
 
     public ExerciseItem insertCompletedExercise(ExerciseItem exerciseItem) {

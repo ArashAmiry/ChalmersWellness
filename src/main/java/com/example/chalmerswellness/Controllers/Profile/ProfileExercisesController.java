@@ -1,6 +1,7 @@
 package com.example.chalmerswellness.Controllers.Profile;
 
 import com.example.chalmerswellness.ObjectModels.Exercise;
+import com.example.chalmerswellness.ObjectModels.ExerciseItem;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 
@@ -9,9 +10,9 @@ import java.util.List;
 
 public class ProfileExercisesController extends AnchorPane {
 
-    List<Exercise> exercises;
+    List<ExerciseItem> exercises;
 
-    public ProfileExercisesController(List<Exercise> exercises){
+    public ProfileExercisesController(List<ExerciseItem> exercises){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/profileExercisesView.fxml"));
 
         fxmlLoader.setRoot(this);

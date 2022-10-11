@@ -1,16 +1,16 @@
 package com.example.chalmerswellness;
 
-import com.example.chalmerswellness.ObjectModels.Exercise;
-import com.example.chalmerswellness.Services.WorkoutService;
+import com.example.chalmerswellness.ObjectModels.ExerciseItem;
+import com.example.chalmerswellness.Services.WorkoutServices.WorkoutService;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public class ProfileModel {
 
-    WorkoutService workoutService = new WorkoutService();
+    WorkoutService workoutService = WorkoutService.getInstance();
 
-    public List<Exercise> getCompletedExercises(Date date){
+    public List<ExerciseItem> getCompletedExercises(LocalDate date){
         return  workoutService.getCompletedExercises(date);
     }
 }

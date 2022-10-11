@@ -1,20 +1,18 @@
 package com.example.chalmerswellness.Controllers.Profile;
-
-import com.example.chalmerswellness.ObjectModels.Exercise;
-import com.example.chalmerswellness.Services.WorkoutService;
+import com.example.chalmerswellness.ObjectModels.ExerciseItem;
+import com.example.chalmerswellness.ProfileModel;
+import com.example.chalmerswellness.Services.WorkoutServices.WorkoutService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
-import java.sql.Date;
-import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.List;
 
 public class CalendarItemController extends Button {
-
-    WorkoutService workoutService = new WorkoutService();
+    ProfileModel profileModel = new ProfileModel();
     AnchorPane rootpane;
 
     int year;
@@ -44,8 +42,8 @@ public class CalendarItemController extends Button {
     @FXML
     private void viewProfileExercises(){
         rootpane.getChildren().clear();
-        String date = String.valueOf(year + "-" + month + "-" + day);
-        List<Exercise> exercises = workoutService.getCompletedExercises(Date.valueOf(date));
+        LocalDate date = LocalDate.of(year, month, day);
+        List<ExerciseItem> exercises = profileModel.getCompletedExercises(date);
         rootpane.getChildren().add(new ProfileExercisesController(exercises));
     }
 }
