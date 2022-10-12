@@ -1,5 +1,7 @@
 package com.example.chalmerswellness.ObjectModels;
 
+import com.example.chalmerswellness.Controllers.Workout.CreateWorkout.CreateWorkoutController;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +15,15 @@ public class Workout {
         this.exercises = exerciseList;
     }
     public Workout(){
-        this.workoutName = "Empty";
+    }
+
+    public void addExercise(Exercise exercise){
+        ExerciseItem newExerciseItem = new ExerciseItem(exercise);
+        exercises.add(newExerciseItem);
+    }
+
+    public void removeExercise(ExerciseItem exercise){
+        exercises.remove(exercise);
     }
 
     public String getWorkoutName() {

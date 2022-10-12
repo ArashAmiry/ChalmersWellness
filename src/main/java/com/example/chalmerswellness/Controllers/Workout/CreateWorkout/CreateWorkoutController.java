@@ -5,8 +5,6 @@ import com.example.chalmerswellness.Models.WorkoutModel;
 import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.ObjectModels.ExerciseItem;
 import com.example.chalmerswellness.ObjectModels.Workout;
-import com.example.chalmerswellness.Interfaces.Observable;
-import com.example.chalmerswellness.Interfaces.Observer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -16,10 +14,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
-public class CreateWorkoutController extends AnchorPane implements Observer, IWorkoutController {
+public class CreateWorkoutController extends AnchorPane implements IWorkoutController {
     private ObservableList<CreateExerciseItemController> exercisesList = FXCollections.observableArrayList();
     private WorkoutModel model;
     @FXML public ListView mainContent;
@@ -29,7 +26,6 @@ public class CreateWorkoutController extends AnchorPane implements Observer, IWo
 
     public CreateWorkoutController(WorkoutModel workoutModel){
         this.model = workoutModel;
-        workoutModel.subscribe(this);
         workout = new Workout();
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/CreateWorkoutView.fxml"));
@@ -43,36 +39,31 @@ public class CreateWorkoutController extends AnchorPane implements Observer, IWo
         }
     }
 
-    //TODO should be able to add to model
     @Override
     public void addExercise(Exercise exercise){
-        model.addExerciseToWorkout(exercise);
+        workout.addExercise(exercise);
+        update();
+    }
+
+    public void removeExercise(ExerciseItem exercise){
+        workout.removeExercise(exercise);
+        update();
     }
 
     void updateExerciseList(List<ExerciseItem> exercises){
         exercisesList.clear();
 
         for (var exercise: exercises) {
-            CreateExerciseItemController exerciseController = new CreateExerciseItemController(exercise, model, this);
+            CreateExerciseItemController exerciseController = new CreateExerciseItemController(exercise, this);
             exercisesList.add(exerciseController);
         }
         mainContent.getItems().setAll(exercisesList);
     }
 
-    private Workout createWorkoutObject(List<CreateExerciseItemController> exercises){
-        String workoutName = workoutNameField.getText();
-        List<ExerciseItem> workoutExercises = new ArrayList<>();
-        for (var exercise: exercises) {
-            workoutExercises.add(exercise.getExerciseItem());
-        }
-        return new Workout(workoutName, workoutExercises);
-    }
-
     @FXML public void saveWorkout(){
         try {
             saveSets();
-            Workout workoutObject = createWorkoutObject(exercisesList);
-            model.addWorkout(workoutObject);
+            model.addWorkout(new Workout(workoutNameField.getText(), workout.getExercises()));
             clearWorkoutListView();
         }catch(NumberFormatException nfe){}
     }
@@ -90,14 +81,12 @@ public class CreateWorkoutController extends AnchorPane implements Observer, IWo
 
     private void clearWorkoutListView(){
         workoutNameField.deleteText(0,workoutNameField.getText().length());
-        model.removeAllWorkoutExercises();
+        workout = new Workout();
         mainContent.getItems().clear();
     }
 
-    @Override
-    public void update(Observable observable) {
-        model = (WorkoutModel) observable;
-        var exercises = model.getAddedWorkoutExercises();
+    private void update() {
+        var exercises = workout.getExercises();
         updateExerciseList(exercises);
     }
 }

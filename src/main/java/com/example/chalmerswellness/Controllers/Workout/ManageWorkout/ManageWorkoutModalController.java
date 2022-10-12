@@ -45,15 +45,15 @@ public class ManageWorkoutModalController extends AnchorPane {
         }
 
         workoutNameLabel.textProperty().set(workout.getWorkoutName());
-        populateExerciseList(model.getAddedWorkoutExercises());
+        //populateExerciseList(model.getAddedWorkoutExercises());
     }
 
     void populateExerciseList(List<ExerciseItem> exercises){
         exercisesList.clear();
 
         for (var exercise: exercises) {
-            CreateExerciseItemController exerciseController = new CreateExerciseItemController(exercise, model, this);
-            exercisesList.add(exerciseController);
+            //CreateExerciseItemController exerciseController = new CreateExerciseItemController(exercise, model, this);
+            //exercisesList.add(exerciseController);
         }
         exerciseListView.getItems().setAll(exercisesList);
     }

@@ -14,7 +14,6 @@ public class WorkoutModel implements Observable {
     private List<Observer> observers = new ArrayList<>();
     private WorkoutService workoutService;
     private List<Exercise> exercises = new ArrayList<>();
-    private List<ExerciseItem> addedWorkoutExercises = new ArrayList<>();
 
     public WorkoutModel(){
         workoutService = WorkoutService.getInstance();
@@ -25,9 +24,9 @@ public class WorkoutModel implements Observable {
         return workoutService.getWorkouts();
     }
 
-    public List<ExerciseItem> getAddedWorkoutExercises() {
+    /*public List<ExerciseItem> getAddedWorkoutExercises() {
         return addedWorkoutExercises;
-    }
+    }*/
 
     /**
      * This method inserts a exerciseItem to the database.
@@ -40,11 +39,11 @@ public class WorkoutModel implements Observable {
         notifyObservers();
     }
 
-    public void addExerciseToWorkout(Exercise exercise){
+    /*public void addExerciseToWorkout(Exercise exercise){
         ExerciseItem newExerciseItem = new ExerciseItem(exercise);
         addedWorkoutExercises.add(newExerciseItem);
         notifyObservers();
-    }
+    }*/
 
     /**
      * This method searches through a list of exercises to find matching exercises with similar names.
@@ -126,7 +125,7 @@ public class WorkoutModel implements Observable {
     }
 
     public void addWorkout(Workout workout){
-        addedWorkoutExercises.clear();
+        //addedWorkoutExercises.clear();
         workoutService.insertWorkout(workout);
         notifyObservers();
     }
@@ -148,10 +147,10 @@ public class WorkoutModel implements Observable {
         notifyObservers();
     }
 
-    public void removeAllWorkoutExercises(){
+    /*public void removeAllWorkoutExercises(){
         addedWorkoutExercises.clear();
         notifyObservers();
-    }
+    }*/
 
     @Override
     public void notifyObservers() {
