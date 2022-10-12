@@ -6,23 +6,15 @@ import com.example.chalmerswellness.calorieAPI.Meal;
 import java.util.List;
 
 public class NutritionService {
-    public enum RepositoryType{
-        Database,
-        MockDatabase
-    }
-
     private IDatabaseNutritionRepository repository;
-    private NutritionService(RepositoryType repositoryType)
+    private NutritionService(IDatabaseNutritionRepository repositoryType)
     {
-        switch (repositoryType){
-            case Database -> repository = new DatabaseNutritionRepository();
-            //case MockDatabase -> repository = new MemoryRepository();
-        }
+        repository = repositoryType;
     }
 
     private static NutritionService single_instance = null;
 
-    public static void createInstance(RepositoryType repositoryType){
+    public static void createInstance(IDatabaseNutritionRepository repositoryType){
         if(single_instance == null){
             single_instance = new NutritionService(repositoryType);
         }

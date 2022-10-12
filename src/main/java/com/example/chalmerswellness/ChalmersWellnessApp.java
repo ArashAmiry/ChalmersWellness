@@ -2,6 +2,10 @@ package com.example.chalmerswellness;
 
 import com.example.chalmerswellness.Services.DatabaseConnector;
 import com.example.chalmerswellness.Services.DbConnectionService;
+import com.example.chalmerswellness.Services.FriendServices.DatabaseFriendRepository;
+import com.example.chalmerswellness.Services.FriendServices.FriendService;
+import com.example.chalmerswellness.Services.NutritionServices.DatabaseNutritionRepository;
+import com.example.chalmerswellness.Services.NutritionServices.NutritionService;
 import com.example.chalmerswellness.Services.UserServices.DatabaseUserRepository;
 import com.example.chalmerswellness.Services.UserServices.UserService;
 import com.example.chalmerswellness.Services.WorkoutServices.DatabaseWorkoutRepository;
@@ -22,6 +26,9 @@ public class ChalmersWellnessApp extends Application {
         DbConnectionService.createInstance(true);
         WorkoutService.createInstance(new DatabaseWorkoutRepository());
         UserService.createInstance(new DatabaseUserRepository());
+        FriendService.createInstance(new DatabaseFriendRepository());
+        NutritionService.createInstance(new DatabaseNutritionRepository());
+
 
         Scene scene = new Scene(fxmlLoader.load(), 1920, 1080);
         stage.setTitle("Chalmers Wellness");

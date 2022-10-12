@@ -1,7 +1,9 @@
 package com.example.chalmerswellness;
 
 import com.example.chalmerswellness.Services.DbConnectionService;
+import com.example.chalmerswellness.Services.NutritionServices.DatabaseNutritionRepository;
 import com.example.chalmerswellness.Services.NutritionServices.NutritionService;
+import com.example.chalmerswellness.Services.UserServices.DatabaseUserRepository;
 import com.example.chalmerswellness.Services.UserServices.UserService;
 import com.example.chalmerswellness.calorieAPI.FoodFacade;
 import com.example.chalmerswellness.calorieAPI.Meal;
@@ -21,11 +23,11 @@ public class NutritionServiceTest {
     @BeforeAll
     static void setup() {
         DbConnectionService.createInstance(false);
-        UserService.createInstance(UserService.RepositoryType.Database);
+        UserService.createInstance(new DatabaseUserRepository());
         UserService.getInstance().deleteAllUsers();
         UserService.getInstance().insertUser(new User("username", "password", "firstName", "lastName", Gender.Male, "email", LocalDate.now(),1, 1));
         LoggedInUser.createInstance(UserService.getInstance().getUser("username", "password"));
-        NutritionService.createInstance(NutritionService.RepositoryType.Database);
+        NutritionService.createInstance(new DatabaseNutritionRepository());
         nutritionService = NutritionService.getInstance();
     }
 
