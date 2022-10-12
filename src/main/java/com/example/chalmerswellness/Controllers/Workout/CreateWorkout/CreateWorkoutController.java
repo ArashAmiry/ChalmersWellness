@@ -25,9 +25,12 @@ public class CreateWorkoutController extends AnchorPane implements Observer, IWo
     @FXML public ListView mainContent;
     @FXML TextField workoutNameField;
 
+    private Workout workout;
+
     public CreateWorkoutController(WorkoutModel workoutModel){
         this.model = workoutModel;
         workoutModel.subscribe(this);
+        workout = new Workout();
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/CreateWorkoutView.fxml"));
         fxmlLoader.setRoot(this);

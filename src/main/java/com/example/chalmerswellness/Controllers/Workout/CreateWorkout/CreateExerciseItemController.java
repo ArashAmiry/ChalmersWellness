@@ -76,6 +76,7 @@ public class CreateExerciseItemController extends AnchorPane implements Initiali
         return exerciseItem;
     }
 
+    //TODO fix sort of bug where letter in setsfield sets to 0
     @FXML
     private void setsListener(KeyEvent e){
         if(!e.getCharacter().equals(KeyCode.BACK_SPACE.getChar())){
