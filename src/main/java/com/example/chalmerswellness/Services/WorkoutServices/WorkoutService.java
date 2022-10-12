@@ -4,29 +4,21 @@ import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.ObjectModels.ExerciseItem;
 import com.example.chalmerswellness.ObjectModels.Workout;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public class WorkoutService {
-
-    public enum RepositoryType{
-        Database,
-        MockDatabase
-    }
-
-    private IDatabaseWorkoutRepository repository;
-    private WorkoutService(RepositoryType repositoryType)
-    {
-        switch (repositoryType){
-            case Database -> repository = new DatabaseWorkoutRepository();
-            //case MockDatabase -> repository = new MemoryRepository();
-        }
-    }
-
     private static WorkoutService single_instance = null;
+    private IDatabaseWorkoutRepository repository;
+    private WorkoutService(IDatabaseWorkoutRepository workoutRepository)
+    {
+        repository = workoutRepository;
+    }
 
-    public static void createInstance(RepositoryType repositoryType){
+    public static void createInstance(IDatabaseWorkoutRepository workoutRepository){
         if(single_instance == null){
-            single_instance = new WorkoutService(repositoryType);
+            single_instance = new WorkoutService(workoutRepository);
         }
     }
 
@@ -38,6 +30,11 @@ public class WorkoutService {
     public List<ExerciseItem> getCompletedExercises()
     {
         return repository.getCompletedExercises();
+    }
+
+    public List<ExerciseItem> getCompletedExercises(LocalDate date, int userId)
+    {
+        return repository.getCompletedExercises(date, userId);
     }
 
     public ExerciseItem insertCompletedExercise(ExerciseItem exerciseItem) {

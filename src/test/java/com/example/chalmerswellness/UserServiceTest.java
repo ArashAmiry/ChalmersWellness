@@ -1,6 +1,7 @@
 package com.example.chalmerswellness;
 
 import com.example.chalmerswellness.Services.DbConnectionService;
+import com.example.chalmerswellness.Services.UserServices.DatabaseUserRepository;
 import com.example.chalmerswellness.Services.UserServices.UserService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -15,13 +16,14 @@ class UserServiceTest {
     @BeforeAll
     static void setup() {
         DbConnectionService.createInstance(false);
-        UserService.createInstance(UserService.RepositoryType.Database);
+        UserService.createInstance(new DatabaseUserRepository());
+        UserService.getInstance().deleteAllUsers();
     }
 
     @BeforeEach
     void setupEach() {
         UserService.getInstance().deleteAllUsers();
-        UserService.createInstance(UserService.RepositoryType.Database);
+        UserService.createInstance(new DatabaseUserRepository());
         userService = UserService.getInstance();
         userService.insertUser(new User("username", "password", "firstName", "lastName", Gender.Male, "email", LocalDate.now(),1, 1));
     }

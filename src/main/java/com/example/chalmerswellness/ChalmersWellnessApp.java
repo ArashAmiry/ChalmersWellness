@@ -2,6 +2,9 @@ package com.example.chalmerswellness;
 
 import com.example.chalmerswellness.Services.DatabaseConnector;
 import com.example.chalmerswellness.Services.DbConnectionService;
+import com.example.chalmerswellness.Services.UserServices.DatabaseUserRepository;
+import com.example.chalmerswellness.Services.UserServices.UserService;
+import com.example.chalmerswellness.Services.WorkoutServices.DatabaseWorkoutRepository;
 import com.example.chalmerswellness.Services.WorkoutServices.WorkoutService;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -17,7 +20,8 @@ public class ChalmersWellnessApp extends Application {
         DatabaseConnector databaseConnector = new DatabaseConnector();
 
         DbConnectionService.createInstance(true);
-        WorkoutService.createInstance(WorkoutService.RepositoryType.Database);
+        WorkoutService.createInstance(new DatabaseWorkoutRepository());
+        UserService.createInstance(new DatabaseUserRepository());
 
         Scene scene = new Scene(fxmlLoader.load(), 1920, 1080);
         stage.setTitle("Chalmers Wellness");

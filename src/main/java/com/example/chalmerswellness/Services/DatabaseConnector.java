@@ -34,7 +34,7 @@ public class DatabaseConnector {
     private void createNutritionTable() {
         String sql = "CREATE TABLE IF NOT EXISTS nutrition (\n"
                 + "	id INTEGER PRIMARY KEY,\n"
-                + " userID INTEGER,\n"
+                + " userID INTEGER NOT NULL,\n"
                 + "	mealName text NOT NULL,\n"
                 + "	calories DOUBLE NOT NULL,\n"
                 + "	servingSize DOUBLE NOT NULL,\n"
@@ -83,6 +83,7 @@ public class DatabaseConnector {
     private void createCreatedWorkoutTable() {
         String sql = "CREATE TABLE IF NOT EXISTS created_workout (\n"
                 + "	id INTEGER PRIMARY KEY,\n"
+                + "	user_id INTEGER,\n"
                 + "	workoutName TEXT\n"
                 + ");";
         try (Connection conn = connect();
@@ -134,6 +135,7 @@ public class DatabaseConnector {
         String sql = "CREATE TABLE IF NOT EXISTS completed_exercise (\n"
                 + "	id INTEGER PRIMARY KEY,\n"
                 + " exercise_id INTEGER,\n"
+                + " user_id INTEGER,\n"
                 + " insert_date DATE DEFAULT CURRENT_DATE,\n"
                 + " is_done bool,\n"
                 + " planned_sets INTEGER,\n"
