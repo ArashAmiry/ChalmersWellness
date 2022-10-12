@@ -3,8 +3,8 @@ package com.example.chalmerswellness.calorieAPI;
 import com.example.chalmerswellness.Interfaces.Observable;
 import com.example.chalmerswellness.Interfaces.Observer;
 import com.example.chalmerswellness.LoggedInUser;
-import com.example.chalmerswellness.Services.INutritionDatabaseHandler;
-import com.example.chalmerswellness.Services.NutritionService;
+import com.example.chalmerswellness.Services.NutritionServices.IDatabaseNutritionRepository;
+import com.example.chalmerswellness.Services.NutritionServices.DatabaseNutritionRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.json.JSONException;
 
@@ -14,10 +14,10 @@ import java.util.List;
 public class FoodFacade implements Observable {
     private final NutritionAPIConnector apiConnector = new NutritionAPIConnector();
     private static List<Observer> observers = new ArrayList<>();
-    private final INutritionDatabaseHandler nutritionService;
+    private final IDatabaseNutritionRepository nutritionService;
 
     public FoodFacade() {
-        nutritionService = new NutritionService();
+        nutritionService = new DatabaseNutritionRepository();
     }
 
     public Food createFood(String foodName) throws JsonProcessingException {

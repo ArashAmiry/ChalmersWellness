@@ -3,8 +3,8 @@ package com.example.chalmerswellness.Controllers.Nutrition;
 import com.example.chalmerswellness.FoodItemController;
 import com.example.chalmerswellness.Interfaces.Observable;
 import com.example.chalmerswellness.Interfaces.Observer;
-import com.example.chalmerswellness.Services.INutritionDatabaseHandler;
-import com.example.chalmerswellness.Services.NutritionService;
+import com.example.chalmerswellness.Services.NutritionServices.IDatabaseNutritionRepository;
+import com.example.chalmerswellness.Services.NutritionServices.DatabaseNutritionRepository;
 import com.example.chalmerswellness.calorieAPI.Food;
 import com.example.chalmerswellness.calorieAPI.FoodFacade;
 import com.example.chalmerswellness.calorieAPI.Meal;
@@ -26,7 +26,7 @@ public class NutritionSearchViewController extends AnchorPane implements Observe
     Meal meal;
     FoodFacade foodFacade = new FoodFacade();
     Food food = new Food();
-    INutritionDatabaseHandler nutritionService;
+    IDatabaseNutritionRepository nutritionService;
     List<Food> foods;
 
     @FXML
@@ -47,7 +47,7 @@ public class NutritionSearchViewController extends AnchorPane implements Observe
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 
-        nutritionService = new NutritionService();
+        nutritionService = new DatabaseNutritionRepository();
         this.meal = meal;
         foodFacade.subscribe(this);
         parentPane = pane;

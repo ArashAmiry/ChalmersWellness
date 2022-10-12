@@ -1,6 +1,7 @@
-package com.example.chalmerswellness.Services;
+package com.example.chalmerswellness.Services.NutritionServices;
 
 import com.example.chalmerswellness.LoggedInUser;
+import com.example.chalmerswellness.Services.DatabaseConnector;
 import com.example.chalmerswellness.calorieAPI.Food;
 import com.example.chalmerswellness.calorieAPI.Meal;
 
@@ -11,7 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NutritionService implements INutritionDatabaseHandler{
+public class DatabaseNutritionRepository implements IDatabaseNutritionRepository {
 
     @Override
     public void insertNutrition(Food nutritionModel, Meal meal) {

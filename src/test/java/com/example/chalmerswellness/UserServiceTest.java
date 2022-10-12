@@ -16,7 +16,6 @@ class UserServiceTest {
     static void setup() {
         DbConnectionService.createInstance(false);
         UserService.createInstance(UserService.RepositoryType.Database);
-        UserService.getInstance().deleteAllUsers();
     }
 
     @BeforeEach
