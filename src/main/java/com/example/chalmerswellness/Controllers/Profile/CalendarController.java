@@ -128,6 +128,7 @@ public class CalendarController extends AnchorPane {
                 dayOfWeek = 1;
                 row++;
             }
+
             CalendarItemController calendarItemController = new CalendarItemController(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, day, rootpane, userId);
             gridPane.add(calendarItemController, dayOfWeek - 1, row);
             GridPane.setHalignment(calendarItemController, HPos.CENTER);
