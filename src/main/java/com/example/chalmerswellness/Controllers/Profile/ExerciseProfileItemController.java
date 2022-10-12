@@ -23,8 +23,11 @@ public class ExerciseProfileItemController extends AnchorPane implements Initial
     @FXML private Button doneBtn;
     @FXML private Label exerciseName;
 
-    public ExerciseProfileItemController(ExerciseItem exerciseItem){
+    private AnchorPane parent;
+
+    public ExerciseProfileItemController(ExerciseItem exerciseItem, AnchorPane parent){
         this.exerciseItem = exerciseItem;
+        this.parent = parent;
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/ExerciseProfileItem.fxml"));
         fxmlLoader.setRoot(this);
@@ -48,7 +51,8 @@ public class ExerciseProfileItemController extends AnchorPane implements Initial
     }
 
     @FXML private void viewSets(){
-
+        AddSetsController setsController = new AddSetsController(new WorkoutModel(), exerciseItem, parent, false);
+        parent.getChildren().add(setsController);
     }
 
     private int getSetCount(){

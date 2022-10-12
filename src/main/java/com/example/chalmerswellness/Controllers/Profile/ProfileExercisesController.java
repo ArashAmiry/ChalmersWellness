@@ -14,6 +14,7 @@ import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -44,16 +45,16 @@ public class ProfileExercisesController extends AnchorPane implements Initializa
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
-
-
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         nameLabel.setText(name);
         dateLabel.setText("Exercises | " + date.getYear() + "-" + date.getMonthValue() + "-" + date.getDayOfMonth());
+
+        Collections.reverse(exercises);
         for (ExerciseItem exerciseItem: exercises) {
-            ExerciseProfileItemController controller = new ExerciseProfileItemController(exerciseItem);
+            ExerciseProfileItemController controller = new ExerciseProfileItemController(exerciseItem, this);
             exercisesListView.getItems().add(controller);
         }
     }

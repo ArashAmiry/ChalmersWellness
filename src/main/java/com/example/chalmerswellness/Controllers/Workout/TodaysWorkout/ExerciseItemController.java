@@ -89,7 +89,7 @@ public class ExerciseItemController extends AnchorPane implements Initializable{
     }
 
     @FXML private void openSetsWindow(){
-        AddSetsController addSetsController = new AddSetsController(model, exerciseItem, anchorPane);
+        AddSetsController addSetsController = new AddSetsController(model, exerciseItem, anchorPane, true);
         anchorPane.getChildren().add(addSetsController);
     }
 
