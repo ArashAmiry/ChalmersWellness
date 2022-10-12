@@ -81,4 +81,17 @@ public class DatabaseNutritionRepository implements IDatabaseNutritionRepository
 
         return foods;
     }
+
+    @Override
+    public void deleteNutritionData() {
+        String sql = "DELETE FROM nutrition";
+
+        try (Connection conn = DatabaseConnector.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }

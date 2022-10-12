@@ -44,4 +44,8 @@ public class NutritionService {
     public List<Food> getTodaysNutrition(Meal meal) {
         return repository.getTodaysNutrition(meal);
     }
+
+    public void deleteNutritionData() {
+        repository.deleteNutritionData();
+    }
 }

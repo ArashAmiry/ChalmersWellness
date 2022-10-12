@@ -13,5 +13,6 @@ public interface IDatabaseNutritionRepository {
 
     List<Food> getTodaysNutrition(Meal meal);
 
+    void deleteNutritionData();
 
 }
