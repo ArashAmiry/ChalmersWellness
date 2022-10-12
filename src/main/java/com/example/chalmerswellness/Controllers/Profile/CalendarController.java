@@ -8,6 +8,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Locale;
@@ -75,7 +76,9 @@ public class CalendarController extends AnchorPane {
                 dayOfWeek = 1;
                 row++;
             }
-            CalendarItemController calendarItemController = new CalendarItemController(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, day, rootpane, userId);
+
+            LocalDate date = LocalDate.of(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, day);
+            CalendarItemController calendarItemController = new CalendarItemController(date, rootpane, userId);
             gridPane.add(calendarItemController, dayOfWeek - 1, row);
             GridPane.setHalignment(calendarItemController, HPos.CENTER);
             day++;
@@ -115,7 +118,8 @@ public class CalendarController extends AnchorPane {
     }
 
     private void addTextToGridPane(GridPane gridPane, int columnCounter, int day) {
-        CalendarItemController calendarItemController = new CalendarItemController(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, day, rootpane, userId);
+        LocalDate date = LocalDate.of(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, day);
+        CalendarItemController calendarItemController = new CalendarItemController(date, rootpane, userId);
         gridPane.add(calendarItemController, columnCounter, 0);
         GridPane.setHalignment(calendarItemController, HPos.CENTER);
     }
@@ -128,7 +132,9 @@ public class CalendarController extends AnchorPane {
                 dayOfWeek = 1;
                 row++;
             }
-            CalendarItemController calendarItemController = new CalendarItemController(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, day, rootpane, userId);
+
+            LocalDate date = LocalDate.of(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, day);
+            CalendarItemController calendarItemController = new CalendarItemController(date, rootpane, userId);
             gridPane.add(calendarItemController, dayOfWeek - 1, row);
             GridPane.setHalignment(calendarItemController, HPos.CENTER);
             dayOfWeek++;
