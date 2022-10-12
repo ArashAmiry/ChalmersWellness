@@ -32,7 +32,6 @@ public class ManageWorkoutModalController extends AnchorPane {
     public ManageWorkoutModalController(WorkoutModel workoutModel, Workout workout){
         this.model = workoutModel;
         this.workout = workout;
-        //workoutModel.subscribe(this);
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/ManageWorkoutModal.fxml"));
         fxmlLoader.setRoot(this);
@@ -45,16 +44,7 @@ public class ManageWorkoutModalController extends AnchorPane {
         }
 
         workoutNameLabel.textProperty().set(workout.getWorkoutName());
-        //populateExerciseList(model.getAddedWorkoutExercises());
-    }
 
-    void populateExerciseList(List<ExerciseItem> exercises){
-        exercisesList.clear();
-
-        for (var exercise: exercises) {
-            //CreateExerciseItemController exerciseController = new CreateExerciseItemController(exercise, model, this);
-            //exercisesList.add(exerciseController);
-        }
-        exerciseListView.getItems().setAll(exercisesList);
     }
 }
+

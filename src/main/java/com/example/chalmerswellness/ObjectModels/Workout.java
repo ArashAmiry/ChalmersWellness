@@ -1,6 +1,5 @@
 package com.example.chalmerswellness.ObjectModels;
 
-import com.example.chalmerswellness.Controllers.Workout.CreateWorkout.CreateWorkoutController;
 
 import java.util.ArrayList;
 import java.util.List;
