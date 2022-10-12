@@ -1,6 +1,5 @@
 package com.example.chalmerswellness.Controllers.Nutrition;
 
-import com.example.chalmerswellness.Services.DatabaseConnector;
 import com.example.chalmerswellness.calorieAPI.Food;
 import com.example.chalmerswellness.calorieAPI.FoodFacade;
 import com.example.chalmerswellness.calorieAPI.Meal;
@@ -53,9 +52,6 @@ public class NutritionFoodItemController extends AnchorPane implements Initializ
     private AnchorPane parentPane;
     @FXML
     private AnchorPane rootPane;
-
-
-    DatabaseConnector dataService = new DatabaseConnector();
     Meal meal;
     FoodFacade foodFacade = new FoodFacade();
     Food food;

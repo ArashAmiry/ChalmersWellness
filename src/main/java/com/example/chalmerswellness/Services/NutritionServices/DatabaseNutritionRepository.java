@@ -1,6 +1,7 @@
-package com.example.chalmerswellness.Services;
+package com.example.chalmerswellness.Services.NutritionServices;
 
 import com.example.chalmerswellness.LoggedInUser;
+import com.example.chalmerswellness.Services.DbConnectionService;
 import com.example.chalmerswellness.calorieAPI.Food;
 import com.example.chalmerswellness.calorieAPI.Meal;
 
@@ -11,12 +12,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NutritionService implements INutritionDatabaseHandler{
+public class DatabaseNutritionRepository implements IDatabaseNutritionRepository {
 
     @Override
     public void insertNutrition(Food nutritionModel, Meal meal) {
         String sql = "INSERT INTO nutrition(userID, mealName, calories, servingSize, fatTotal, fatSaturated, protein, sodium, cholesterol, carbohydrates, fiber, sugar, mealOfDay) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
-        try (Connection conn = DatabaseConnector.connect();
+        try (Connection conn = DbConnectionService.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, LoggedInUser.getInstance().getId());
             pstmt.setString(2, nutritionModel.getName().substring(0, 1).toUpperCase() + nutritionModel.getName().substring(1));
@@ -42,7 +43,7 @@ public class NutritionService implements INutritionDatabaseHandler{
     public void removeNutrition(int foodId) {
         String sql = "DELETE FROM nutrition WHERE id = ? AND userID = ?";
 
-        try (Connection conn = DatabaseConnector.connect();
+        try (Connection conn = DbConnectionService.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, foodId);
             pstmt.setInt(2, LoggedInUser.getInstance().getId());
@@ -53,12 +54,78 @@ public class NutritionService implements INutritionDatabaseHandler{
         }
     }
 
+    // get specific nutrient today
+    public double getTodaysProtein() {
+        String sql = "SELECT protein FROM nutrition WHERE userID = ? AND dateOfInsert = CURRENT_DATE";
+        double total = 0;
+
+        try (Connection conn = DbConnectionService.connect();
+             PreparedStatement pstmt  = conn.prepareStatement(sql)){
+            pstmt.setInt(1, LoggedInUser.getInstance().getId());
+
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                total += rs.getDouble("protein");
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return total;
+    }
+
+    public double getTodaysCarbs() {
+        String sql = "SELECT carbohydrates FROM nutrition WHERE userID = ? AND dateOfInsert = CURRENT_DATE";
+        double total = 0;
+
+        try (Connection conn = DbConnectionService.connect();
+             PreparedStatement pstmt  = conn.prepareStatement(sql)){
+            pstmt.setInt(1, LoggedInUser.getInstance().getId());
+
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                total += rs.getDouble("carbohydrates");
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return total;
+    }
+
+    public double getTodaysFat() {
+        String sql = "SELECT fatTotal FROM nutrition WHERE userID = ? AND dateOfInsert = CURRENT_DATE";
+        double total = 0;
+
+        try (Connection conn = DbConnectionService.connect();
+             PreparedStatement pstmt  = conn.prepareStatement(sql)){
+            pstmt.setInt(1, LoggedInUser.getInstance().getId());
+
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                total += rs.getDouble("fatTotal");
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return total;
+    }
+
+
+
     @Override
     public List<Food> getTodaysNutrition(Meal meal) {
         String sql = "SELECT * FROM nutrition WHERE mealOfDay = ? AND userID = ? AND dateOfInsert = CURRENT_DATE";
         List<Food> foods = new ArrayList<>();
 
-        try (Connection conn = DatabaseConnector.connect();
+        try (Connection conn = DbConnectionService.connect();
              PreparedStatement pstmt  = conn.prepareStatement(sql)){
             pstmt.setString(1, String.valueOf(meal));
             pstmt.setInt(2, LoggedInUser.getInstance().getId());
@@ -79,5 +146,18 @@ public class NutritionService implements INutritionDatabaseHandler{
         }
 
         return foods;
+    }
+
+    @Override
+    public void deleteNutritionData() {
+        String sql = "DELETE FROM nutrition";
+
+        try (Connection conn = DbConnectionService.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

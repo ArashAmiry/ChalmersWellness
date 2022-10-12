@@ -42,4 +42,10 @@ module com.example.chalmerswellness {
     opens com.example.chalmerswellness.Controllers.Workout.ManageWorkout to javafx.fxml;
     exports com.example.chalmerswellness.Controllers.Profile;
     opens com.example.chalmerswellness.Controllers.Profile;
+    exports com.example.chalmerswellness.Services.UserServices;
+    opens com.example.chalmerswellness.Services.UserServices to javafx.fxml;
+    exports com.example.chalmerswellness.Services.NutritionServices;
+    opens com.example.chalmerswellness.Services.NutritionServices to javafx.fxml;
+    exports com.example.chalmerswellness.Services.FriendServices;
+    opens com.example.chalmerswellness.Services.FriendServices to javafx.fxml;
 }

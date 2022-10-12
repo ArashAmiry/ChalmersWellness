@@ -3,7 +3,7 @@ package com.example.chalmerswellness.Controllers.Friends;
 import com.example.chalmerswellness.Controllers.Profile.ProfileController;
 import com.example.chalmerswellness.FriendSearcher;
 import com.example.chalmerswellness.LoggedInUser;
-import com.example.chalmerswellness.Services.FriendService;
+import com.example.chalmerswellness.Services.FriendServices.DatabaseFriendRepository;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -15,7 +15,7 @@ import java.io.IOException;
 public class FriendsItemController extends AnchorPane {
 
     FriendSearcher friendSearcher = new FriendSearcher();
-    FriendService friendService = new FriendService();
+    DatabaseFriendRepository friendService = new DatabaseFriendRepository();
 
     int userId;
     String firstName;
