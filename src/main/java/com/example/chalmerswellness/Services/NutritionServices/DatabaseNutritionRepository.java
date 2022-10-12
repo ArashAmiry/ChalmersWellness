@@ -54,6 +54,72 @@ public class DatabaseNutritionRepository implements IDatabaseNutritionRepository
         }
     }
 
+    // get specific nutrient today
+    public double getTodaysProtein() {
+        String sql = "SELECT protein FROM nutrition WHERE userID = ? AND dateOfInsert = CURRENT_DATE";
+        double total = 0;
+
+        try (Connection conn = DbConnectionService.connect();
+             PreparedStatement pstmt  = conn.prepareStatement(sql)){
+            pstmt.setInt(1, LoggedInUser.getInstance().getId());
+
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                total += rs.getDouble("protein");
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return total;
+    }
+
+    public double getTodaysCarbs() {
+        String sql = "SELECT carbohydrates FROM nutrition WHERE userID = ? AND dateOfInsert = CURRENT_DATE";
+        double total = 0;
+
+        try (Connection conn = DbConnectionService.connect();
+             PreparedStatement pstmt  = conn.prepareStatement(sql)){
+            pstmt.setInt(1, LoggedInUser.getInstance().getId());
+
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                total += rs.getDouble("carbohydrates");
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return total;
+    }
+
+    public double getTodaysFat() {
+        String sql = "SELECT fatTotal FROM nutrition WHERE userID = ? AND dateOfInsert = CURRENT_DATE";
+        double total = 0;
+
+        try (Connection conn = DbConnectionService.connect();
+             PreparedStatement pstmt  = conn.prepareStatement(sql)){
+            pstmt.setInt(1, LoggedInUser.getInstance().getId());
+
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                total += rs.getDouble("fatTotal");
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return total;
+    }
+
+
+
     @Override
     public List<Food> getTodaysNutrition(Meal meal) {
         String sql = "SELECT * FROM nutrition WHERE mealOfDay = ? AND userID = ? AND dateOfInsert = CURRENT_DATE";

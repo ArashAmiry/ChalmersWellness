@@ -28,6 +28,18 @@ public class FoodFacade implements Observable {
         return new Food(nutritionJsonString);
     }
 
+    public double getConsumedProteinToday() {
+        return nutritionService.getTodaysProtein();
+    }
+
+    public double getConsumedCarbsToday() {
+        return nutritionService.getTodaysCarbs();
+    }
+
+    public double getConsumedFatToday() {
+        return nutritionService.getTodaysFat();
+    }
+
     public boolean isFoodExisting(String foodName) throws JsonProcessingException {
         try {
             Food food = getFood(foodName);

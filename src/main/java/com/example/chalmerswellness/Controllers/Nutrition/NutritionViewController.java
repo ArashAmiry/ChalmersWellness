@@ -35,6 +35,12 @@ public class NutritionViewController extends AnchorPane implements Initializable
     private Text dinnerRecommendedCaloriesText;
     @FXML
     private Text snackRecommendedCaloriesText;
+    @FXML
+    private Text carbohydrateAmountText;
+    @FXML
+    private Text proteinAmountText;
+    @FXML
+    private Text fatAmountText;
 
     FoodFacade foodFacade = new FoodFacade();
 
@@ -59,6 +65,13 @@ public class NutritionViewController extends AnchorPane implements Initializable
         CalorieIntakeCalculatorController calorieIntakeCalculatorController = new CalorieIntakeCalculatorController();
         calorieIntakeCalculatorController.subscribe(this);
         setRecommendedCaloriesText();
+        setMacroText();
+    }
+
+    private void setMacroText() {
+        carbohydrateAmountText.setText(String.valueOf(foodFacade.getConsumedCarbsToday()));
+        proteinAmountText.setText(String.valueOf(foodFacade.getConsumedProteinToday()));
+        fatAmountText.setText(String.valueOf(foodFacade.getConsumedFatToday()));
     }
 
     private void setRecommendedCaloriesText() {
@@ -104,5 +117,6 @@ public class NutritionViewController extends AnchorPane implements Initializable
     public void update(Observable observable) {
         updateProgressBar();
         setRecommendedCaloriesText();
+        setMacroText();
     }
 }

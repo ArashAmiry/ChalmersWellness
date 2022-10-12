@@ -12,6 +12,11 @@ public interface IDatabaseNutritionRepository {
     void removeNutrition(int foodId);
 
     List<Food> getTodaysNutrition(Meal meal);
+    double getTodaysProtein();
+
+    double getTodaysFat();
+
+    double getTodaysCarbs();
 
     void deleteNutritionData();
 

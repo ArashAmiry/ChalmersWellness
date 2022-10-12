@@ -37,6 +37,18 @@ public class NutritionService {
         return repository.getTodaysNutrition(meal);
     }
 
+    public double getTodaysProtein() {
+        return repository.getTodaysProtein();
+    }
+
+    public double getTodaysCarbs() {
+        return repository.getTodaysCarbs();
+    }
+
+    public double getTodaysFat() {
+        return repository.getTodaysFat();
+    }
+
     public void deleteNutritionData() {
         repository.deleteNutritionData();
     }
