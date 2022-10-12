@@ -22,56 +22,46 @@ public class CalendarItemController extends Button implements Initializable {
     private AnchorPane rootpane;
     private UserService userService;
 
-    int year;
-    int month;
-    int day;
+    private LocalDate date;
+
 
     int userId;
     String name;
 
-    public CalendarItemController(int year, int month, int day, AnchorPane rootpane, int userId){
+    public CalendarItemController(LocalDate date, AnchorPane rootpane, int userId){
+        this.date = date;
+
         this.profileModel = new ProfileModel();
         this.userService = UserService.getInstance();
-
         this.rootpane = rootpane;
-        this.year = year;
-        this.month = month;
-        this.day = day;
         this.userId = userId;
         this.name = userService.getUser(userId).getFirstName() + " " + userService.getUser(userId).getLastName();
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/calendarItem.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
-
         try {
             fxmlLoader.load();
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
-
     }
-
 
     @FXML
     private void viewProfileExercises(){
         rootpane.getChildren().clear();
-        LocalDate date = LocalDate.of(year, month, day);
         List<ExerciseItem> exercises = profileModel.getCompletedExercises(date, userId);
         rootpane.getChildren().add(new ProfileExercisesController(name, exercises, date));
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.setText(String.valueOf(day));
-
-        LocalDate date = LocalDate.of(year, month, day);
-        boolean activity = profileModel.getCompletedExercises(date, userId).size()>0;
-        wasActive(activity);
+        this.setText(String.valueOf(date.getDayOfMonth()));
+        indicateActive();
     }
 
-    private void wasActive(boolean wasActive){
-        if(wasActive){
+    private void indicateActive(){
+        if(profileModel.getCompletedExercises(date, userId).size()>0){
             this.setStyle("-fx-background-color: #34a1eb");
         }
     }
