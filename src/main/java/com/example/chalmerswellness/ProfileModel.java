@@ -10,7 +10,7 @@ public class ProfileModel {
 
     WorkoutService workoutService = WorkoutService.getInstance();
 
-    public List<ExerciseItem> getCompletedExercises(LocalDate date){
-        return  workoutService.getCompletedExercises(date);
+    public List<ExerciseItem> getCompletedExercises(LocalDate date, int userId){
+        return  workoutService.getCompletedExercises(date, userId);
     }
 }

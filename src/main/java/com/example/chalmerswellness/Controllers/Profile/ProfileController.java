@@ -39,7 +39,11 @@ public class ProfileController extends AnchorPane {
     @FXML
     AnchorPane rootpane;
 
-    public ProfileController(String firstName, String lastName) {
+    int userId;
+
+    String name;
+
+    public ProfileController(String firstName, String lastName, int userId) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/profileView.fxml"));
 
         fxmlLoader.setRoot(this);
@@ -52,10 +56,8 @@ public class ProfileController extends AnchorPane {
         }
 
         profileName.setText("Hello, I'm " + firstName + " " + lastName);
-    }
-
-    @FXML
-    public void initialize(){
+        this.userId = userId;
+        this.name = firstName + " " + lastName;
         drawCalendar();
     }
 
@@ -82,7 +84,7 @@ public class ProfileController extends AnchorPane {
                 dayOfWeek = 1;
                 row++;
             }
-            CalendarItemController calendarItemController = new CalendarItemController(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, day, rootpane);
+            CalendarItemController calendarItemController = new CalendarItemController(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, day, rootpane, userId, name);
             gridPane.add(calendarItemController, dayOfWeek - 1, row);
             GridPane.setHalignment(calendarItemController, HPos.CENTER);
             day++;
@@ -122,7 +124,7 @@ public class ProfileController extends AnchorPane {
     }
 
     private void addTextToGridPane(GridPane gridPane, int columnCounter, int day) {
-        CalendarItemController calendarItemController = new CalendarItemController(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, day, rootpane);
+        CalendarItemController calendarItemController = new CalendarItemController(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, day, rootpane, userId, name);
         gridPane.add(calendarItemController, columnCounter, 0);
         GridPane.setHalignment(calendarItemController, HPos.CENTER);
     }
@@ -135,7 +137,7 @@ public class ProfileController extends AnchorPane {
                 dayOfWeek = 1;
                 row++;
             }
-            CalendarItemController calendarItemController = new CalendarItemController(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, day, rootpane);
+            CalendarItemController calendarItemController = new CalendarItemController(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, day, rootpane, userId, name);
             gridPane.add(calendarItemController, dayOfWeek - 1, row);
             GridPane.setHalignment(calendarItemController, HPos.CENTER);
             dayOfWeek++;

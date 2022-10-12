@@ -32,9 +32,9 @@ public class WorkoutService {
         return repository.getCompletedExercises();
     }
 
-    public List<ExerciseItem> getCompletedExercises(LocalDate date)
+    public List<ExerciseItem> getCompletedExercises(LocalDate date, int userId)
     {
-        return repository.getCompletedExercises(date);
+        return repository.getCompletedExercises(date, userId);
     }
 
     public ExerciseItem insertCompletedExercise(ExerciseItem exerciseItem) {

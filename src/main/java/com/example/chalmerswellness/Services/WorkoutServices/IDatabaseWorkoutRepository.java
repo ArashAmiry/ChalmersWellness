@@ -10,7 +10,7 @@ import java.util.List;
 public interface IDatabaseWorkoutRepository {
     List<Exercise> getExercises();
     List<ExerciseItem> getCompletedExercises();
-    List<ExerciseItem> getCompletedExercises(LocalDate date);
+    List<ExerciseItem> getCompletedExercises(LocalDate date, int userId);
     List<Workout> getWorkouts();
     ExerciseItem insertCompletedExercise(ExerciseItem exercise);
     void insertCompletedExercises(List<ExerciseItem> exercises);

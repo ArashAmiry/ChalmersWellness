@@ -18,9 +18,10 @@ public class CalendarItemController extends Button {
     int year;
     int month;
     int day;
+    int userId;
+    String name;
 
-
-    public CalendarItemController(int year, int month, int day, AnchorPane rootpane){
+    public CalendarItemController(int year, int month, int day, AnchorPane rootpane, int userId, String name){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/calendarItem.fxml"));
 
         fxmlLoader.setRoot(this);
@@ -37,13 +38,15 @@ public class CalendarItemController extends Button {
         this.year = year;
         this.month = month;
         this.day = day;
+        this.userId = userId;
+        this.name = name;
     }
 
     @FXML
     private void viewProfileExercises(){
         rootpane.getChildren().clear();
         LocalDate date = LocalDate.of(year, month, day);
-        List<ExerciseItem> exercises = profileModel.getCompletedExercises(date);
-        rootpane.getChildren().add(new ProfileExercisesController(exercises));
+        List<ExerciseItem> exercises = profileModel.getCompletedExercises(date, userId);
+        rootpane.getChildren().add(new ProfileExercisesController(name, exercises, date));
     }
 }

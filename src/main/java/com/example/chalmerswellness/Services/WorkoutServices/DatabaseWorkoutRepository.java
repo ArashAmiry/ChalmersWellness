@@ -69,15 +69,14 @@ public class DatabaseWorkoutRepository implements IDatabaseWorkoutRepository {
         return exerciseItems;
     }
 
-    public List<ExerciseItem> getCompletedExercises(LocalDate date) {
-        Date dateInSQL = Date.valueOf(date);
-        String sql = "SELECT * FROM completed_exercise WHERE insert_date = '2022-10-11' AND user_id = ?";
+    public List<ExerciseItem> getCompletedExercises(LocalDate date, int userId) {
+        String sql = "SELECT * FROM completed_exercise WHERE insert_date = ? AND user_id = ?";
         List<ExerciseItem> exerciseItems = new ArrayList<>();
 
         try (Connection conn = DbConnectionService.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            /*pstmt.setDate(1, dateInSQL);*/
-            pstmt.setInt(1, LoggedInUser.getInstance().getId());
+            pstmt.setString(1, date.getYear() + "-" + date.getMonthValue() + "-" + date.getDayOfMonth());
+            pstmt.setInt(2, userId);
             pstmt.executeQuery();
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
