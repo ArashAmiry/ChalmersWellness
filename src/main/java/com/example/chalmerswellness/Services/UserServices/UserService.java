@@ -12,17 +12,14 @@ public class UserService {
     }
 
     private IDatabaseUserRepository repository;
-    private UserService(RepositoryType repositoryType)
+    private UserService(IDatabaseUserRepository repositoryType)
     {
-        switch (repositoryType){
-            case Database -> repository = new DatabaseUserRepository();
-            //case MockDatabase -> repository = new MemoryRepository();
-        }
+        repository = repositoryType;
     }
 
     private static UserService single_instance = null;
 
-    public static void createInstance(RepositoryType repositoryType){
+    public static void createInstance(IDatabaseUserRepository repositoryType){
         if(single_instance == null){
             single_instance = new UserService(repositoryType);
         }

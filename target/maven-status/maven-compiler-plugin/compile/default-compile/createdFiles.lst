@@ -12,6 +12,7 @@ com\example\chalmerswellness\Services\NutritionService.class
 com\example\chalmerswellness\Services\FriendService.class
 com\example\chalmerswellness\Controllers\Workout\TodaysWorkout\TodayWorkoutController.class
 com\example\chalmerswellness\calorieAPI\NutritionAPIConnector.class
+com\example\chalmerswellness\Controllers\Profile\ProfileController.class
 com\example\chalmerswellness\CalorieIntakeCalculatorController$1.class
 com\example\chalmerswellness\User.class
 com\example\chalmerswellness\Controllers\Workout\TodaysWorkout\AddSetsController.class
@@ -37,15 +38,16 @@ com\example\chalmerswellness\calorieAPI\Food.class
 com\example\chalmerswellness\Models\WorkoutModel.class
 com\example\chalmerswellness\Controllers\Workout\WorkoutItemController.class
 com\example\chalmerswellness\LoginController.class
-com\example\chalmerswellness\Controllers\Workout\CreateWorkoutController.class
 com\example\chalmerswellness\Controllers\Workout\SearchPane\ExerciseSearchController.class
 com\example\chalmerswellness\calorieAPI\Meal.class
 com\example\chalmerswellness\Controllers\Nutrition\NutritionFoodItemController.class
 com\example\chalmerswellness\ObjectModels\Exercise.class
 com\example\chalmerswellness\Gender.class
+com\example\chalmerswellness\Controllers\Workout\CreateWorkout\CreateWorkoutController.class
 com\example\chalmerswellness\Interfaces\Observer.class
 com\example\chalmerswellness\Services\IWorkoutDatabaseHandler.class
 com\example\chalmerswellness\Services\WorkoutService.class
+com\example\chalmerswellness\Controllers\Workout\CreateWorkout\CreateExerciseItemController.class
 com\example\chalmerswellness\SignUpController.class
 com\example\chalmerswellness\CalorieCalculator.class
 com\example\chalmerswellness\Controllers\Friends\FriendsItemController.class

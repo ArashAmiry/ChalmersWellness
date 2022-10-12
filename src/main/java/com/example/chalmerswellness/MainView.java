@@ -22,9 +22,7 @@ public class MainView extends AnchorPane {
 
     WorkoutController workoutView = new WorkoutController();
     NutritionViewController nutritionViewController = new NutritionViewController();
-    FriendsViewController friendsViewController = new FriendsViewController();
     CalorieIntakeCalculatorController calorieIntakeCalculatorController = new CalorieIntakeCalculatorController();
-    DashboardViewController dashboardViewController = new DashboardViewController();
     SettingsViewController settingsViewController;
 
     public MainView(){
@@ -66,12 +64,12 @@ public class MainView extends AnchorPane {
 
     @FXML
     public void navigateToDashboardView() {
-        setViewTo(dashboardViewController);
+        setViewTo(new DashboardViewController());
     }
 
     @FXML
     public void navigateToFriendsView() {
-        setViewTo(friendsViewController);
+        setViewTo(new FriendsViewController());
     }
 
     private void setViewTo(AnchorPane pane){

@@ -1,5 +1,6 @@
 package com.example.chalmerswellness.Controllers.Friends;
 
+import com.example.chalmerswellness.Controllers.Profile.ProfileController;
 import com.example.chalmerswellness.FriendSearcher;
 import com.example.chalmerswellness.LoggedInUser;
 import com.example.chalmerswellness.Services.FriendService;
@@ -19,6 +20,7 @@ public class FriendsItemController extends AnchorPane {
     int userId;
     String firstName;
     String lastName;
+    AnchorPane rootpane;
 
     @FXML
     Button followButton;
@@ -26,7 +28,7 @@ public class FriendsItemController extends AnchorPane {
     @FXML
     Label name;
 
-    public FriendsItemController(int userId, String firstName, String lastName){
+    public FriendsItemController(int userId, String firstName, String lastName, AnchorPane rootpane){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/FriendsItem.fxml"));
 
         fxmlLoader.setRoot(this);
@@ -42,7 +44,7 @@ public class FriendsItemController extends AnchorPane {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
-
+        this.rootpane = rootpane;
         checkFollow();
     }
 
@@ -61,5 +63,11 @@ public class FriendsItemController extends AnchorPane {
             followButton.setStyle("-fx-background-color: linear-gradient(to top left, #00d2ff, #0096FF); -fx-text-fill: white;");
             followButton.setText("Follow");
         }
+    }
+
+    @FXML
+    private void visitProfilePage(){
+        rootpane.getChildren().clear();
+        rootpane.getChildren().add(new ProfileController(userId));
     }
 }
