@@ -1,5 +1,6 @@
 package com.example.chalmerswellness;
 
+import com.example.chalmerswellness.Controllers.Profile.ProfileController;
 import com.example.chalmerswellness.Services.UserServices.IDatabaseUserRepository;
 import com.example.chalmerswellness.Services.UserServices.DatabaseUserRepository;
 import javafx.fxml.FXML;

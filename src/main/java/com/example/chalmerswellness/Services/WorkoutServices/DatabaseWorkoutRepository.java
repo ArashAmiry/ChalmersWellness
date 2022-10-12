@@ -7,6 +7,7 @@ import com.example.chalmerswellness.ObjectModels.ExerciseItemSet;
 import com.example.chalmerswellness.ObjectModels.Workout;
 import com.example.chalmerswellness.Services.DbConnectionService;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -48,6 +49,35 @@ public class DatabaseWorkoutRepository implements IDatabaseWorkoutRepository {
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setInt(1, LoggedInUser.getInstance().getId());
                 pstmt.executeQuery();
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                var id = rs.getInt("id");
+                var exerciseId = rs.getInt("exercise_id");
+                var isDone = rs.getBoolean("is_done");
+                var planned_Sets = rs.getInt("planned_sets");
+
+                ExerciseItem exerciseItem = new ExerciseItem(id, getExercise(exerciseId), getCompletedSets(id));
+                exerciseItem.setDone(isDone);
+                exerciseItem.setPlannedSetsCount(planned_Sets);
+                exerciseItems.add(exerciseItem);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        Collections.reverse(exerciseItems);
+        return exerciseItems;
+    }
+
+    public List<ExerciseItem> getCompletedExercises(LocalDate date, int userId) {
+        String sql = "SELECT * FROM completed_exercise WHERE insert_date = ? AND user_id = ?";
+        List<ExerciseItem> exerciseItems = new ArrayList<>();
+
+        try (Connection conn = DbConnectionService.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, date.getYear() + "-" + date.getMonthValue() + "-" + date.getDayOfMonth());
+            pstmt.setInt(2, userId);
+            pstmt.executeQuery();
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 var id = rs.getInt("id");

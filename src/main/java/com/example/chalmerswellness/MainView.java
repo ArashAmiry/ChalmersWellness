@@ -71,7 +71,7 @@ public class MainView extends AnchorPane {
 
     @FXML
     public void navigateToFriendsView() {
-        setViewTo(friendsViewController);
+        setViewTo(new FriendsViewController());
     }
 
     private void setViewTo(AnchorPane pane){
