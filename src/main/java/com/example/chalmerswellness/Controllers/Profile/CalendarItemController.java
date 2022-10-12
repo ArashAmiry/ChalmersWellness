@@ -1,6 +1,7 @@
 package com.example.chalmerswellness.Controllers.Profile;
 import com.example.chalmerswellness.ObjectModels.ExerciseItem;
 import com.example.chalmerswellness.ProfileModel;
+import com.example.chalmerswellness.Services.UserServices.UserService;
 import com.example.chalmerswellness.Services.WorkoutServices.WorkoutService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,16 +13,16 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class CalendarItemController extends Button {
-    ProfileModel profileModel = new ProfileModel();
+    ProfileModel profileModel;
     AnchorPane rootpane;
-
+    UserService userService;
     int year;
     int month;
     int day;
     int userId;
     String name;
 
-    public CalendarItemController(int year, int month, int day, AnchorPane rootpane, int userId, String name){
+    public CalendarItemController(int year, int month, int day, AnchorPane rootpane, int userId){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/calendarItem.fxml"));
 
         fxmlLoader.setRoot(this);
@@ -33,13 +34,15 @@ public class CalendarItemController extends Button {
             throw new RuntimeException(exception);
         }
 
+        this.profileModel = new ProfileModel();
+        this.userService = UserService.getInstance();
         this.setText(String.valueOf(day));
         this.rootpane = rootpane;
         this.year = year;
         this.month = month;
         this.day = day;
         this.userId = userId;
-        this.name = name;
+        this.name = userService.getUser(userId).getFirstName() + " " + userService.getUser(userId).getLastName();
     }
 
     @FXML

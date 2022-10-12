@@ -68,6 +68,6 @@ public class FriendsItemController extends AnchorPane {
     @FXML
     private void visitProfilePage(){
         rootpane.getChildren().clear();
-        rootpane.getChildren().add(new ProfileController(firstName, lastName, userId));
+        rootpane.getChildren().add(new ProfileController(userId));
     }
 }

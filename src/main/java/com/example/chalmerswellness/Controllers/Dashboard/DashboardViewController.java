@@ -1,7 +1,9 @@
 package com.example.chalmerswellness.Controllers.Dashboard;
 
+import com.example.chalmerswellness.Controllers.Profile.CalendarController;
 import com.example.chalmerswellness.Interfaces.Observable;
 import com.example.chalmerswellness.Interfaces.Observer;
+import com.example.chalmerswellness.LoggedInUser;
 import com.example.chalmerswellness.calorieAPI.FoodFacade;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,6 +22,11 @@ public class DashboardViewController extends AnchorPane implements Initializable
     Text dashboardQuote1;
     @FXML
     Text calorieLeft;
+    @FXML
+    AnchorPane rootpane;
+
+    @FXML
+    AnchorPane calendar;
 
     FoodFacade foodFacade = new FoodFacade();
 
@@ -46,6 +53,7 @@ public class DashboardViewController extends AnchorPane implements Initializable
         dashboardQuote2.setText(motivationalQuote);
         dashboardQuote1.setText(sportsAndCompetitionQuote);
         calorieLeft.setText(foodFacade.getTodaysCalories() + " KCAL");
+        calendar.getChildren().add(new CalendarController(rootpane, LoggedInUser.getInstance().getId()));
     }
 
     @Override
