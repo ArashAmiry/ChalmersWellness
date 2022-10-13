@@ -40,6 +40,7 @@ public class FriendsViewController extends AnchorPane{
             throw new RuntimeException(exception);
         }
 
+        searchFriend();
     }
 
     @FXML
