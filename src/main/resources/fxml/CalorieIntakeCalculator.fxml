@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1460.0" stylesheets="@../css/nutrition.css" type="AnchorPane" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1460.0" stylesheets="@../css/nutrition.css" type="AnchorPane" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Text layoutX="351.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Calorie Intake Calculator">
          <font>
@@ -55,11 +55,6 @@
             <Font size="30.0" />
          </font>
       </RadioButton>
-      <Text fx:id="calorieIntakeText" layoutX="310.0" layoutY="932.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" visible="false" wrappingWidth="893.682373046875">
-         <font>
-            <Font size="40.0" />
-         </font>
-      </Text>
       <ComboBox fx:id="activityComboBox" layoutX="388.0" layoutY="344.0" prefHeight="40.0" prefWidth="302.0" />
    </children>
 </fx:root>

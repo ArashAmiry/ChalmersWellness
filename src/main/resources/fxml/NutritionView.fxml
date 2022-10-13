@@ -89,5 +89,10 @@
       <Text fx:id="lunchRecommendedCaloriesText" layoutX="950.0" layoutY="676.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="recommendedCaloriesText" text="Text" />
       <Text fx:id="snackRecommendedCaloriesText" layoutX="950.0" layoutY="870.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="recommendedCaloriesText" text="Text" wrappingWidth="222.470703125" />
       <Text fx:id="dinnerRecommendedCaloriesText" layoutX="397.0" layoutY="870.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="recommendedCaloriesText" text="Text" wrappingWidth="222.470703125" />
+      <Button layoutX="1235.0" layoutY="21.0" mnemonicParsing="false" onMouseClicked="#openCalorieCalculator" prefHeight="54.0" prefWidth="203.0" text="Calculate new calorie goal">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
    </children>
 </fx:root>

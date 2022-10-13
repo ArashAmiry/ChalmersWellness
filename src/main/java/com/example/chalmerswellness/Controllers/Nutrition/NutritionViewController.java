@@ -62,8 +62,6 @@ public class NutritionViewController extends AnchorPane implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         updateProgressBar();
-        CalorieIntakeCalculatorController calorieIntakeCalculatorController = new CalorieIntakeCalculatorController();
-        calorieIntakeCalculatorController.subscribe(this);
         setRecommendedCaloriesText();
         setMacroText();
     }
@@ -94,6 +92,11 @@ public class NutritionViewController extends AnchorPane implements Initializable
     }
 
     @FXML
+    private void openCalorieCalculator() {
+        rootPane.getChildren().setAll(new CalorieIntakeCalculatorController());
+    }
+
+    @FXML
     private void loadBreakfastSearchView(){
         loadNutritionSearchView(Meal.BREAKFAST);
     }
@@ -116,7 +119,6 @@ public class NutritionViewController extends AnchorPane implements Initializable
     @Override
     public void update(Observable observable) {
         updateProgressBar();
-        setRecommendedCaloriesText();
         setMacroText();
     }
 }
