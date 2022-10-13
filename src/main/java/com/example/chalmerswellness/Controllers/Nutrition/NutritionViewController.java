@@ -76,10 +76,10 @@ public class NutritionViewController extends AnchorPane implements Initializable
 
     private void setRecommendedCaloriesText() {
         int calorieIntake = LoggedInUser.getInstance().getCalorieGoal();
-        breakfastRecommendedCaloriesText.setText((calorieIntake * 0.25) + " - " + (calorieIntake * 0.3) + " kcal");
-        lunchRecommendedCaloriesText.setText((calorieIntake * 0.35) + " - " + (calorieIntake * 0.4) + " kcal");
-        dinnerRecommendedCaloriesText.setText((calorieIntake * 0.25) + " - " + (calorieIntake * 0.3) + " kcal");
-        snackRecommendedCaloriesText.setText((calorieIntake * 0.05) + " - " + (calorieIntake * 0.1) + " kcal");
+        breakfastRecommendedCaloriesText.setText(Math.round(calorieIntake * 0.25) + " - " + Math.round(calorieIntake * 0.3) + " kcal");
+        lunchRecommendedCaloriesText.setText(Math.round(calorieIntake * 0.35) + " - " + Math.round(calorieIntake * 0.4) + " kcal");
+        dinnerRecommendedCaloriesText.setText(Math.round(calorieIntake * 0.25) + " - " + Math.round(calorieIntake * 0.3) + " kcal");
+        snackRecommendedCaloriesText.setText(Math.round(calorieIntake * 0.05) + " - " + Math.round(calorieIntake * 0.1) + " kcal");
     }
 
     private void loadNutritionSearchView(Meal meal) {
