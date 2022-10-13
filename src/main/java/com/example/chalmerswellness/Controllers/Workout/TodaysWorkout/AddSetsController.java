@@ -61,7 +61,7 @@ public class AddSetsController extends AnchorPane implements Initializable, Obse
     }
 
     private void addSet(){
-        ExerciseItemSet exerciseSet = new ExerciseItemSet(exerciseItem.getExerciseItemId(), 0, 0);
+        ExerciseItemSet exerciseSet = new ExerciseItemSet(0, 0);
         exerciseItem.addSet(exerciseSet);
         saveExerciseItem();
     }

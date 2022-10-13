@@ -216,7 +216,7 @@ public class DatabaseWorkoutRepository implements IDatabaseWorkoutRepository {
                 var id = rs.getInt("id");
                 double weight = rs.getDouble("weight");
                 int reps = rs.getInt("reps");
-                ExerciseItemSet set = new ExerciseItemSet(id, weight, reps);
+                ExerciseItemSet set = new ExerciseItemSet(weight, reps);
                 sets.add(set);
             }
         } catch (SQLException e) {

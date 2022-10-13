@@ -1,18 +1,12 @@
 package com.example.chalmerswellness.ObjectModels;
 
 public class ExerciseItemSet {
-    private int id;
     private double weight;
     private int reps;
 
-    public ExerciseItemSet(int id, double weight, int reps){
-        this.id = id;
+    public ExerciseItemSet(double weight, int reps){
         this.weight = weight;
         this.reps = reps;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public double getWeight() {
