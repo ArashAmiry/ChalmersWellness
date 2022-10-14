@@ -35,6 +35,12 @@ public class NutritionViewController extends AnchorPane implements Initializable
     private Text dinnerRecommendedCaloriesText;
     @FXML
     private Text snackRecommendedCaloriesText;
+    @FXML
+    private Text carbohydrateAmountText;
+    @FXML
+    private Text proteinAmountText;
+    @FXML
+    private Text fatAmountText;
 
     FoodFacade foodFacade = new FoodFacade();
 
@@ -56,17 +62,22 @@ public class NutritionViewController extends AnchorPane implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         updateProgressBar();
-        CalorieIntakeCalculatorController calorieIntakeCalculatorController = new CalorieIntakeCalculatorController();
-        calorieIntakeCalculatorController.subscribe(this);
         setRecommendedCaloriesText();
+        setMacroText();
+    }
+
+    private void setMacroText() {
+        carbohydrateAmountText.setText(String.valueOf(foodFacade.getConsumedCarbsToday()));
+        proteinAmountText.setText(String.valueOf(foodFacade.getConsumedProteinToday()));
+        fatAmountText.setText(String.valueOf(foodFacade.getConsumedFatToday()));
     }
 
     private void setRecommendedCaloriesText() {
         int calorieIntake = LoggedInUser.getInstance().getCalorieGoal();
-        breakfastRecommendedCaloriesText.setText((int) (calorieIntake * 0.25) + " - " + (int) (calorieIntake * 0.3) + " kcal");
-        lunchRecommendedCaloriesText.setText((int) (calorieIntake * 0.35) + " - " + (int) (calorieIntake * 0.4) + " kcal");
-        dinnerRecommendedCaloriesText.setText((int) (calorieIntake * 0.25) + " - " + (int) (calorieIntake * 0.3) + " kcal");
-        snackRecommendedCaloriesText.setText((int) (calorieIntake * 0.05) + " - " + (int) (calorieIntake * 0.1) + " kcal");
+        breakfastRecommendedCaloriesText.setText(Math.round(calorieIntake * 0.25) + " - " + Math.round(calorieIntake * 0.3) + " kcal");
+        lunchRecommendedCaloriesText.setText(Math.round(calorieIntake * 0.35) + " - " + Math.round(calorieIntake * 0.4) + " kcal");
+        dinnerRecommendedCaloriesText.setText(Math.round(calorieIntake * 0.25) + " - " + Math.round(calorieIntake * 0.3) + " kcal");
+        snackRecommendedCaloriesText.setText(Math.round(calorieIntake * 0.05) + " - " + Math.round(calorieIntake * 0.1) + " kcal");
     }
 
     private void loadNutritionSearchView(Meal meal) {
@@ -78,6 +89,11 @@ public class NutritionViewController extends AnchorPane implements Initializable
         progressBarText.setText(foodFacade.caloriesLeftToday() + " Kcal Left");
         double percentage = foodFacade.caloriesEatenInPercentage();
         progressBar.setProgress(percentage);
+    }
+
+    @FXML
+    private void openCalorieCalculator() {
+        rootPane.getChildren().setAll(new CalorieIntakeCalculatorController());
     }
 
     @FXML
@@ -103,6 +119,6 @@ public class NutritionViewController extends AnchorPane implements Initializable
     @Override
     public void update(Observable observable) {
         updateProgressBar();
-        setRecommendedCaloriesText();
+        setMacroText();
     }
 }

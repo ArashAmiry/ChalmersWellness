@@ -2,8 +2,7 @@ package com.example.chalmerswellness.Controllers.Settings;
 
 import com.example.chalmerswellness.Gender;
 import com.example.chalmerswellness.LoggedInUser;
-import com.example.chalmerswellness.Services.UserServices.IDatabaseUserRepository;
-import com.example.chalmerswellness.Services.UserServices.DatabaseUserRepository;
+import com.example.chalmerswellness.Services.UserServices.UserService;
 import com.example.chalmerswellness.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -44,12 +43,11 @@ public class SettingsViewController extends AnchorPane implements Initializable 
     @FXML
     AnchorPane rootPane;
     ToggleGroup genderToggleGroup = new ToggleGroup();
-    private final IDatabaseUserRepository userService;
+    private final UserService userService = UserService.getInstance();
 
     public SettingsViewController(AnchorPane templateRootAnchorPane){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/SettingsView.fxml"));
 
-        userService = new DatabaseUserRepository();
         this.rootPane = templateRootAnchorPane;
 
         fxmlLoader.setRoot(this);

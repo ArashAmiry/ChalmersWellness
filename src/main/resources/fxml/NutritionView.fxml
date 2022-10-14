@@ -17,7 +17,7 @@
             <Font size="15.0" />
          </font>
       </Text>
-      <Text layoutX="589.0" layoutY="540.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="nutritionLabel" text="69/80" wrappingWidth="34.359375">
+      <Text fx:id="carbohydrateAmountText" layoutX="589.0" layoutY="540.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="nutritionLabel" text="69/80" textAlignment="CENTER" wrappingWidth="34.359375">
          <font>
             <Font size="13.0" />
          </font>
@@ -59,7 +59,7 @@
             <Font size="15.0" />
          </font>
       </Text>
-      <Text layoutX="728.0" layoutY="541.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="nutritionLabel" text="23/92" wrappingWidth="34.359375">
+      <Text fx:id="fatAmountText" layoutX="728.0" layoutY="541.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="nutritionLabel" text="23/92" textAlignment="CENTER" wrappingWidth="34.359375">
          <font>
             <Font size="13.0" />
          </font>
@@ -75,7 +75,7 @@
             <Font size="15.0" />
          </font>
       </Text>
-      <Text layoutX="869.0" layoutY="541.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="nutritionLabel" text="52/63" wrappingWidth="34.359375">
+      <Text fx:id="proteinAmountText" layoutX="869.0" layoutY="541.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="nutritionLabel" text="52/63" textAlignment="CENTER" wrappingWidth="34.359375">
          <font>
             <Font size="13.0" />
          </font>
@@ -89,5 +89,10 @@
       <Text fx:id="lunchRecommendedCaloriesText" layoutX="950.0" layoutY="676.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="recommendedCaloriesText" text="Text" />
       <Text fx:id="snackRecommendedCaloriesText" layoutX="950.0" layoutY="870.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="recommendedCaloriesText" text="Text" wrappingWidth="222.470703125" />
       <Text fx:id="dinnerRecommendedCaloriesText" layoutX="397.0" layoutY="870.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="recommendedCaloriesText" text="Text" wrappingWidth="222.470703125" />
+      <Button layoutX="1235.0" layoutY="21.0" mnemonicParsing="false" onMouseClicked="#openCalorieCalculator" prefHeight="54.0" prefWidth="203.0" text="Calculate new calorie goal">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
    </children>
 </fx:root>

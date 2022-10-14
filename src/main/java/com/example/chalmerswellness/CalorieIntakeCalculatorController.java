@@ -1,9 +1,7 @@
 package com.example.chalmerswellness;
 
-import com.example.chalmerswellness.Interfaces.Observable;
-import com.example.chalmerswellness.Interfaces.Observer;
-import com.example.chalmerswellness.Services.UserServices.IDatabaseUserRepository;
-import com.example.chalmerswellness.Services.UserServices.DatabaseUserRepository;
+import com.example.chalmerswellness.Controllers.Nutrition.NutritionViewController;
+import com.example.chalmerswellness.Services.UserServices.UserService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -13,13 +11,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
-public class CalorieIntakeCalculatorController extends AnchorPane implements Initializable, Observable {
+public class CalorieIntakeCalculatorController extends AnchorPane implements Initializable{
     @FXML
     private RadioButton radioButtonSlowPace;
     @FXML
@@ -36,18 +33,17 @@ public class CalorieIntakeCalculatorController extends AnchorPane implements Ini
     @FXML
     private ComboBox<String> activityComboBox;
     @FXML
-    private Text calorieIntakeText;
-    @FXML
     private TextField weightGoalTextField;
+    @FXML
+    private AnchorPane rootPane;
+
     private ToggleGroup gender = new ToggleGroup();
     private ToggleGroup paceGroup = new ToggleGroup();
     private static List<Observer> observers = new ArrayList<>();
-    private final IDatabaseUserRepository userService;
+    private final UserService userService = UserService.getInstance();
 
-    public CalorieIntakeCalculatorController(){
+    public CalorieIntakeCalculatorController() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/CalorieIntakeCalculator.fxml"));
-
-        userService = new DatabaseUserRepository();
 
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -92,25 +88,12 @@ public class CalorieIntakeCalculatorController extends AnchorPane implements Ini
         }
 
         int calorieIntake = CalorieCalculator.calculateCalorieIntake(gender, weight, height, age, activityLevel, pace);
-        calorieIntakeText.setText("Your recommended calorie intake is " + calorieIntake + " calories per day.");
-        calorieIntakeText.setVisible(true);
 
         userService.setCalorieGoal(loggedInUser.getId(), calorieIntake);
         userService.setWeightGoal(loggedInUser.getId(), weightGoal);
         LoggedInUser.updateInstance(userService.getUser(loggedInUser.getId()));
 
-        notifyObservers();
+        rootPane.getChildren().setAll(new NutritionViewController());
     }
 
-    @Override
-    public void notifyObservers() {
-        for (var observer: observers) {
-            observer.update(this);
-        }
-    }
-
-
-    public void subscribe(Observer observer) {
-        observers.add(observer);
-    }
 }

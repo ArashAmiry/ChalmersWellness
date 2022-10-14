@@ -6,11 +6,6 @@ import com.example.chalmerswellness.User;
 import java.time.LocalDate;
 
 public class UserService {
-    public enum RepositoryType{
-        Database,
-        MockDatabase
-    }
-
     private IDatabaseUserRepository repository;
     private UserService(IDatabaseUserRepository repositoryType)
     {

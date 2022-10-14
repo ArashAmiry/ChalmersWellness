@@ -47,11 +47,8 @@ public class DashboardViewController extends AnchorPane implements Initializable
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        QuotesAPIConnector apiConnector = new QuotesAPIConnector();
-        String motivationalQuote = apiConnector.getRandomQuoteAsStringFromAPI("motivational");
-        String sportsAndCompetitionQuote = apiConnector.getRandomQuoteAsStringFromAPI("sports&competition");
-        dashboardQuote2.setText(motivationalQuote);
-        dashboardQuote1.setText(sportsAndCompetitionQuote);
+        dashboardQuote2.setText(DashboardQuotes.getInstance().getMotivationalQuote());
+        dashboardQuote1.setText(DashboardQuotes.getInstance().getSportsAndCompetitionQuote());
         calorieLeft.setText(foodFacade.getTodaysCalories() + " KCAL");
         calendar.getChildren().add(new CalendarController(rootpane, LoggedInUser.getInstance().getId()));
     }

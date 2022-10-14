@@ -22,3 +22,8 @@
     -fx-font-family: Koulen;
     -fx-font-size: 40px;
 }
+
+.name, .date{
+    -fx-font-family: Koulen;
+    -fx-font-size: 40px;
+}

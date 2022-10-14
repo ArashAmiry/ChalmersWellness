@@ -1,7 +1,6 @@
 package com.example.chalmerswellness;
 
-import com.example.chalmerswellness.Services.UserServices.IDatabaseUserRepository;
-import com.example.chalmerswellness.Services.UserServices.DatabaseUserRepository;
+import com.example.chalmerswellness.Services.UserServices.UserService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -40,14 +39,13 @@ public class SignUpController extends AnchorPane implements Initializable {
     RadioButton femaleRadioButton;
     @FXML AnchorPane navigationPane;
     ToggleGroup genderToggleGroup = new ToggleGroup();
-    private final IDatabaseUserRepository userService;
+    private final UserService userService = UserService.getInstance();
 
     AnchorPane rootpane;
 
     public SignUpController(AnchorPane pane) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/SignUpView.fxml"));
 
-        userService = new DatabaseUserRepository();
         this.rootpane = pane;
 
         fxmlLoader.setRoot(this);
@@ -91,6 +89,11 @@ public class SignUpController extends AnchorPane implements Initializable {
             rootpane.getChildren().clear();
             rootpane.getChildren().add(new MainView());
         }
+    }
+
+    @FXML
+    void openLoginPage(MouseEvent event) {
+        rootpane.getChildren().remove(this);
     }
 
 }

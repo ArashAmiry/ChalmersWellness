@@ -1,8 +1,6 @@
 package com.example.chalmerswellness;
 
-import com.example.chalmerswellness.Controllers.Profile.ProfileController;
-import com.example.chalmerswellness.Services.UserServices.IDatabaseUserRepository;
-import com.example.chalmerswellness.Services.UserServices.DatabaseUserRepository;
+import com.example.chalmerswellness.Services.UserServices.UserService;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
@@ -21,11 +19,11 @@ public class LoginController extends AnchorPane implements Initializable {
     AnchorPane navigationPane;
     @FXML
     AnchorPane rootPane;
-    private final IDatabaseUserRepository userService;
+    private final UserService userService = UserService.getInstance();
 
 
     public LoginController() {
-        userService = new DatabaseUserRepository();
+
     }
 
     @Override

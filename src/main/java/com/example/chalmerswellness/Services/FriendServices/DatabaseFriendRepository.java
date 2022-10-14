@@ -1,7 +1,8 @@
-package com.example.chalmerswellness.Services;
+package com.example.chalmerswellness.Services.FriendServices;
 
 import com.example.chalmerswellness.Gender;
 import com.example.chalmerswellness.LoggedInUser;
+import com.example.chalmerswellness.Services.DbConnectionService;
 import com.example.chalmerswellness.User;
 
 import java.sql.Connection;
@@ -11,13 +12,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FriendService {
+public class DatabaseFriendRepository implements IDatabaseFriendRepository{
 
     public List<User> findFriends(String friendName){
         String sql = "SELECT * FROM users WHERE username LIKE ?";
         List<User> users = new ArrayList<>();
 
-        try (Connection conn = DatabaseConnector.connect();
+        try (Connection conn = DbConnectionService.connect();
              PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
             preparedStatement.setString(1, "%" + friendName + "%");
             ResultSet rs = preparedStatement.executeQuery();
@@ -36,7 +37,7 @@ public class FriendService {
     public void insertFollow(int followingID){
         //TODO Make each row in table unique?
         String sql = "INSERT INTO friend (follower_id, following_id) VALUES(?,?)";
-        try (Connection conn = DatabaseConnector.connect();
+        try (Connection conn = DbConnectionService.connect();
              PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
             preparedStatement.setInt(1, LoggedInUser.getInstance().getId());
             preparedStatement.setInt(2, followingID);
@@ -50,7 +51,7 @@ public class FriendService {
     public void removeFollow(int following_id){
         String sql = "DELETE FROM friend WHERE follower_id = ? AND following_id = ?";
 
-        try (Connection conn = DatabaseConnector.connect();
+        try (Connection conn = DbConnectionService.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, LoggedInUser.getInstance().getId());
             pstmt.setInt(2, following_id);
@@ -63,7 +64,7 @@ public class FriendService {
 
     public boolean alreadyFollowing(int followerID, int followingID){
         String sql = "SELECT * FROM friend WHERE follower_id = ? AND following_id = ?";
-        try (Connection conn = DatabaseConnector.connect();
+        try (Connection conn = DbConnectionService.connect();
              PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
             preparedStatement.setInt(1, followerID);
             preparedStatement.setInt(2, followingID);
