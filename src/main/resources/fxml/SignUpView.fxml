@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<fx:root fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" type="AnchorPane">
+<fx:root fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: white;" type="AnchorPane" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Text layoutX="742.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign up">
          <font>
@@ -106,5 +106,10 @@
             <Font size="25.0" />
          </font>
       </RadioButton>
+      <Button layoutX="137.0" layoutY="70.0" mnemonicParsing="false" onMouseClicked="#openLoginPage" text="Go back">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Button>
    </children>
 </fx:root>

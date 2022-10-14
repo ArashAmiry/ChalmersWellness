@@ -91,4 +91,9 @@ public class SignUpController extends AnchorPane implements Initializable {
         }
     }
 
+    @FXML
+    void openLoginPage(MouseEvent event) {
+        rootpane.getChildren().remove(this);
+    }
+
 }
