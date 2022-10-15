@@ -112,7 +112,7 @@ public class DatabaseWorkoutRepository implements IDatabaseWorkoutRepository {
                 int id = rs.getInt("id");
                 String workoutName = rs.getString("workoutName");
                 List<ExerciseItem> exercises = getWorkoutExercises(id);
-                Workout workout = new Workout(workoutName, exercises);
+                Workout workout = new Workout(id, workoutName, exercises);
                 workouts.add(workout);
             }
         } catch (SQLException e) {
@@ -349,20 +349,17 @@ public class DatabaseWorkoutRepository implements IDatabaseWorkoutRepository {
         }
     }
 
-    /*public void removeWorkout(int workoutId) {
-        String sql = "DELETE FROM created_workout WHERE id = ?";
+    public void deleteSavedWorkout(Workout workout) {
 
+        String sql = "DELETE FROM created_workout WHERE id = ?";
         try (Connection conn = DbConnectionService.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, workoutId);
-            pstmt.executeUpdate();
-
-            removeExercises(workoutId);
-
+                pstmt.setInt(1, workout.getId());
+                pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-    }*/
+    }
 
 
     /*public Exercise insertWorkoutExercise(Exercise exercise){

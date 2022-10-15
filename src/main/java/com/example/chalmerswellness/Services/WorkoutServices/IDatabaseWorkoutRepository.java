@@ -18,4 +18,5 @@ public interface IDatabaseWorkoutRepository {
     void insertExercises(List<Exercise> exercises);
     void updateCompletedExercise(ExerciseItem exerciseItem);
     void deleteCompletedExercise(ExerciseItem exercise);
+    void deleteSavedWorkout(Workout workout);
 }

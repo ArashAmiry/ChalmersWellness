@@ -13,6 +13,13 @@ public class Workout {
         this.workoutName = name;
         this.exercises = exerciseList;
     }
+
+    public Workout(int id, String name, List<ExerciseItem> exerciseList){
+        this.id = id;
+        this.workoutName = name;
+        this.exercises = exerciseList;
+    }
+
     public Workout(){
     }
 
@@ -31,5 +38,9 @@ public class Workout {
 
     public List<ExerciseItem> getExercises() {
         return exercises;
+    }
+
+    public int getId() {
+        return id;
     }
 }

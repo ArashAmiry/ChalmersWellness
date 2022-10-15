@@ -131,7 +131,7 @@ public class WorkoutModel implements Observable {
     }
 
     public void removeWorkout(Workout workout){
-        //savedWorkouts.remove(workout);
+        workoutService.deleteSavedWorkout(workout);
         notifyObservers();
     }
 

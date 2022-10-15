@@ -28,10 +28,6 @@ class WorkoutTest {
 
     @BeforeAll
     static void setup() {
-        //TODO databaseConnector should probably be created in DbConnecitonService?
-        DatabaseConnector d = new DatabaseConnector();
-
-
         DbConnectionService.createInstance(false);
         UserService.createInstance(new DatabaseUserRepository());
         UserService.getInstance().deleteAllUsers();
@@ -40,8 +36,14 @@ class WorkoutTest {
         User user = userService.getUser("username", "password");
         LoggedInUser.createInstance(user);
         WorkoutService.createInstance(new DatabaseWorkoutRepository());
+    }
 
+    @BeforeEach
+    void setupEach() {
+        DatabaseConnector dbConnector = new DatabaseConnector();
         exerciseSetup();
+
+        model = new WorkoutModel();
     }
 
     private static void exerciseSetup(){
@@ -51,9 +53,13 @@ class WorkoutTest {
         WorkoutService.getInstance().insertExercises(exercises);
     }
 
-    @BeforeEach
-    void setupEach() {
-        model = new WorkoutModel();
+    private Workout SetupBasicWorkout(){
+        List<ExerciseItem> exerciseItems = new ArrayList<>();
+        Exercise exercise = model.getExercises().get(0);
+        ExerciseItem exerciseItem = new ExerciseItem(exercise);
+        exerciseItems.add(exerciseItem);
+        Workout workout = new Workout("WorkoutName", exerciseItems);
+        return workout;
     }
 
     @Test
@@ -61,14 +67,11 @@ class WorkoutTest {
         List<ExerciseItem> completedExercises = model.getTodayCompletedExercises();
         Assertions.assertEquals(true, completedExercises.size() == 0);
 
-
-        int exercisesInitCount = completedExercises.size();
         model.addExerciseToActiveWorkout(model.getExercises().get(0));
         completedExercises = model.getTodayCompletedExercises();
-        Assertions.assertTrue(exercisesInitCount < completedExercises.size());
 
         ExerciseItem exerciseItem = completedExercises.get(0);
-        exerciseItem.getName();
+        Assertions.assertEquals(true, exerciseItem != null);
     }
 
     @Test
@@ -86,18 +89,13 @@ class WorkoutTest {
         model.addExerciseToActiveWorkout(exercise);
         ExerciseItem exerciseItem = model.getTodayCompletedExercises().get(0);
 
-        float weight = 30;
-        int reps = 5;
-
-        ExerciseItemSet set = new ExerciseItemSet(weight, reps);
+        ExerciseItemSet set = new ExerciseItemSet(40, 5);
         exerciseItem.addSet(set);
-        Assertions.assertEquals(weight, exerciseItem.getSets().get(0).getWeight());
-        Assertions.assertEquals(reps, exerciseItem.getSets().get(0).getReps());
+        Assertions.assertEquals(true, exerciseItem.getSets().size() > 0);
 
-        model.updateCompletedExercise(exerciseItem);
+        model.removeSet(exerciseItem, set);
         exerciseItem = model.getTodayCompletedExercises().get(0);
-        List<ExerciseItemSet> exerciseItemSets = exerciseItem.getSets();
-        Assertions.assertEquals(true, exerciseItemSets.size() >= 1);
+        Assertions.assertEquals(true, exerciseItem.getSets().size() == 0);
     }
 
     @Test
@@ -109,45 +107,82 @@ class WorkoutTest {
     @Test
     void TestGetTodayCompletedExercises() {
         List<ExerciseItem> exerciseItems = model.getTodayCompletedExercises();
+        Assertions.assertEquals(true, exerciseItems.size() == 0);
 
-        //TODO check if zero before proceeding
+        Exercise exercise = model.getExercises().get(0);
+        model.addExerciseToActiveWorkout(exercise);
+        exerciseItems = model.getTodayCompletedExercises();
 
+        Assertions.assertEquals(true, exerciseItems.size()>0);
+    }
+
+    @Test
+    void TestRemoveCompletedExercise() {
+        var exerciseItems = model.getTodayCompletedExercises();
+        Assertions.assertEquals(true, exerciseItems.size() == 0);
 
         Exercise exercise = model.getExercises().get(0);
         model.addExerciseToActiveWorkout(exercise);
 
         exerciseItems = model.getTodayCompletedExercises();
-        Assertions.assertEquals(true, exerciseItems.size()>=1);
-    }
+        Assertions.assertEquals(true, exerciseItems.size() > 0);
 
-    @Test
-    void TestRemoveCompletedExercise() {
-        //model.removeCompletedExercise();
+        model.removeCompletedExercise(exerciseItems.get(0));
+        exerciseItems = model.getTodayCompletedExercises();
+
+        Assertions.assertEquals(true, exerciseItems.size() == 0);
     }
 
     @Test
     void TestUpdateCompletedExercise() {
-        //model.updateCompletedExercise();
+        Exercise exercise = model.getExercises().get(0);
+        model.addExerciseToActiveWorkout(exercise);
+        ExerciseItem exerciseItem = model.getTodayCompletedExercises().get(0);
+        Assertions.assertEquals(true, exerciseItem.getSets().size() == 0);
+
+        exerciseItem = model.getTodayCompletedExercises().get(0);
+        exerciseItem.addSet(new ExerciseItemSet(10, 10));
+        model.updateCompletedExercise(exerciseItem);
+
+        Assertions.assertEquals(true, exerciseItem.getSets().size() > 0);
     }
 
     @Test
     void TestAddExercisesFromWorkout() {
-        //model.addExercisesFromWorkout();
+        Workout workout = SetupBasicWorkout();
+        model.addExercisesFromWorkout(workout);
+        List<ExerciseItem> exerciseItems = model.getTodayCompletedExercises();
+        Assertions.assertEquals(true, exerciseItems.size() > 1);
     }
 
     @Test
     void TestRemoveWorkout() {
-        //model.removeWorkout();
+        Workout basicWorkout = SetupBasicWorkout();
+        model.addWorkout(basicWorkout);
+
+        Workout workout = model.getSavedWorkouts().get(0);
+        Assertions.assertEquals(true, workout != null);
+
+        model.removeWorkout(workout);
+        Assertions.assertEquals(true, model.getSavedWorkouts().size() == 0);
     }
 
     @Test
     void TestGetSavedWorkouts() {
-        //model.getSavedWorkouts();
+        Workout basicWorkout = SetupBasicWorkout();
+        model.addWorkout(basicWorkout);
+        List<Workout> workouts = model.getSavedWorkouts();
+        Assertions.assertEquals(true, workouts.size() > 0);
     }
 
     @Test
     void TestAddWorkout() {
-        //model.addWorkout();
+        Workout basicWorkout = SetupBasicWorkout();
+        model.addWorkout(basicWorkout);
+        var workoutName = basicWorkout.getWorkoutName();
+
+        List<Workout> workouts = model.getSavedWorkouts();
+        Assertions.assertEquals(true, workoutName.equals(workouts.get(0).getWorkoutName()));
     }
 }
 
