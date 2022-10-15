@@ -58,6 +58,7 @@ class WorkoutTest {
         Exercise exercise = model.getExercises().get(0);
         ExerciseItem exerciseItem = new ExerciseItem(exercise);
         exerciseItems.add(exerciseItem);
+        exerciseItems.add(exerciseItem);
         Workout workout = new Workout("WorkoutName", exerciseItems);
         return workout;
     }
