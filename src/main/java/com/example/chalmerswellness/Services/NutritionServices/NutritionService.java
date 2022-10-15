@@ -49,7 +49,4 @@ public class NutritionService {
         return repository.getTodaysFat();
     }
 
-    public void deleteNutritionData() {
-        repository.deleteNutritionData();
-    }
 }
