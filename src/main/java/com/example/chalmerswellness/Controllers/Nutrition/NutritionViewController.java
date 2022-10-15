@@ -67,9 +67,9 @@ public class NutritionViewController extends AnchorPane implements Initializable
     }
 
     private void setMacroText() {
-        carbohydrateAmountText.setText(String.valueOf(foodFacade.getConsumedCarbsToday()));
-        proteinAmountText.setText(String.valueOf(foodFacade.getConsumedProteinToday()));
-        fatAmountText.setText(String.valueOf(foodFacade.getConsumedFatToday()));
+        carbohydrateAmountText.setText(String.valueOf(Math.round(foodFacade.getConsumedCarbsToday())));
+        proteinAmountText.setText(String.valueOf(Math.round(foodFacade.getConsumedProteinToday())));
+        fatAmountText.setText(String.valueOf(Math.round(foodFacade.getConsumedFatToday())));
     }
 
     private void setRecommendedCaloriesText() {
