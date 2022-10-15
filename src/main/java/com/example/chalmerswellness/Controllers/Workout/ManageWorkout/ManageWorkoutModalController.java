@@ -1,6 +1,7 @@
 package com.example.chalmerswellness.Controllers.Workout.ManageWorkout;
 
 import com.example.chalmerswellness.Controllers.Workout.CreateWorkout.CreateExerciseItemController;
+import com.example.chalmerswellness.Controllers.Workout.CreateWorkout.CreateWorkoutController;
 import com.example.chalmerswellness.Models.WorkoutModel;
 import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.ObjectModels.ExerciseItem;
@@ -25,13 +26,15 @@ public class ManageWorkoutModalController extends AnchorPane {
 
     private WorkoutModel model;
     private Workout workout;
+    private AnchorPane parentPane;
 
     @FXML Button closeButton, saveButton;
     @FXML ListView exerciseListView;
     @FXML Label workoutNameLabel;
-    public ManageWorkoutModalController(WorkoutModel workoutModel, Workout workout){
+    public ManageWorkoutModalController(WorkoutModel workoutModel, Workout workout, AnchorPane parentPane){
         this.model = workoutModel;
         this.workout = workout;
+        this.parentPane = parentPane;
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/ManageWorkoutModal.fxml"));
         fxmlLoader.setRoot(this);
@@ -46,5 +49,16 @@ public class ManageWorkoutModalController extends AnchorPane {
         workoutNameLabel.textProperty().set(workout.getWorkoutName());
 
     }
+
+    @FXML private void initialize(){
+        List<ExerciseItem> exercises = workout.getExercises();
+        for(ExerciseItem exercise : exercises){
+            CreateExerciseItemController exerciseItemController = new CreateExerciseItemController(exercise, new CreateWorkoutController(model)); //TODO: Remove new controller
+            exercisesList.add(exerciseItemController);
+        }
+        exerciseListView.setItems(exercisesList);
+    }
+
+
 }
 

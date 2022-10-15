@@ -1,5 +1,6 @@
 package com.example.chalmerswellness.Controllers.Workout;
 
+import com.example.chalmerswellness.Controllers.Workout.ManageWorkout.ManageWorkoutController;
 import com.example.chalmerswellness.Models.WorkoutModel;
 import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.ObjectModels.Workout;
@@ -34,6 +35,10 @@ public class WorkoutItemController extends AnchorPane implements Initializable{
         }
     }
 
+    public Workout getWorkout(){
+        return workoutItem;
+    }
+
     @Override
     public void initialize(URL arg0, ResourceBundle arg1){
         workoutNameLabel.textProperty().set(workoutItem.getWorkoutName());
@@ -41,6 +46,7 @@ public class WorkoutItemController extends AnchorPane implements Initializable{
 
     @FXML private void insertToWorkout(){
         model.addExercisesFromWorkout(workoutItem);
+
     }
 
 }
