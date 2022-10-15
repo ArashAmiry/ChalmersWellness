@@ -1,5 +1,6 @@
 package com.example.chalmerswellness;
 
+import com.example.chalmerswellness.Services.DatabaseConnector;
 import com.example.chalmerswellness.Services.DbConnectionService;
 import com.example.chalmerswellness.Services.NutritionServices.DatabaseNutritionRepository;
 import com.example.chalmerswellness.Services.NutritionServices.NutritionService;
@@ -18,22 +19,23 @@ import java.time.LocalDate;
 public class NutritionServiceTest {
 
     private static NutritionService nutritionService;
+    private static UserService userService;
     FoodFacade foodFacade = new FoodFacade();
 
     @BeforeAll
     static void setup() {
         DbConnectionService.createInstance(false);
         UserService.createInstance(new DatabaseUserRepository());
-        UserService.getInstance().deleteAllUsers();
-        UserService.getInstance().insertUser(new User("username", "password", "firstName", "lastName", Gender.Male, "email", LocalDate.now(),1, 1));
-        LoggedInUser.createInstance(UserService.getInstance().getUser("username", "password"));
-        NutritionService.createInstance(new DatabaseNutritionRepository());
-        nutritionService = NutritionService.getInstance();
+        userService = UserService.getInstance();
     }
 
     @BeforeEach
     void setupEach() throws JsonProcessingException {
-        nutritionService.deleteNutritionData();
+        DatabaseConnector dbConnector = new DatabaseConnector();
+        userService.insertUser(new User("username", "password", "firstName", "lastName", Gender.Male, "email", LocalDate.now(),1, 1));
+        LoggedInUser.createInstance(UserService.getInstance().getUser("username", "password"));
+        NutritionService.createInstance(new DatabaseNutritionRepository());
+        nutritionService = NutritionService.getInstance();
         nutritionService.insertNutrition(foodFacade.createFood("Apple"), Meal.BREAKFAST);
     }
 
@@ -49,8 +51,20 @@ public class NutritionServiceTest {
     }
 
     @Test
-    void deleteNutritionDataShouldDeleteNutritionData() {
-        nutritionService.deleteNutritionData();
-        Assertions.assertTrue(nutritionService.getTodaysNutrition(Meal.BREAKFAST).size() == 0);
+    void getTodaysProteinShouldReturnProtein() {
+        Assertions.assertTrue(nutritionService.getTodaysProtein() > 0);
     }
+
+    @Test
+    void getTodaysCarbsShouldReturnCarbs() {
+        Assertions.assertTrue(nutritionService.getTodaysCarbs() > 0);
+    }
+
+    @Test
+    void getTodaysFatShouldReturnFat() {
+        Assertions.assertTrue(nutritionService.getTodaysFat() > 0);
+    }
+
+
+
 }
