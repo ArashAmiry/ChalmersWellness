@@ -6,6 +6,7 @@ import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.ObjectModels.ExerciseItem;
 import com.example.chalmerswellness.ObjectModels.ExerciseItemSet;
 import com.example.chalmerswellness.ObjectModels.Workout;
+import com.example.chalmerswellness.Services.DatabaseConnector;
 import com.example.chalmerswellness.Services.DbConnectionService;
 import com.example.chalmerswellness.Services.UserServices.DatabaseUserRepository;
 import com.example.chalmerswellness.Services.UserServices.UserService;
@@ -27,6 +28,10 @@ class WorkoutTest {
 
     @BeforeAll
     static void setup() {
+        //TODO databaseConnector should probably be created in DbConnecitonService?
+        DatabaseConnector d = new DatabaseConnector();
+
+
         DbConnectionService.createInstance(false);
         UserService.createInstance(new DatabaseUserRepository());
         UserService.getInstance().deleteAllUsers();
@@ -34,8 +39,16 @@ class WorkoutTest {
         userService.insertUser(new User("username", "password", "firstName", "lastName", Gender.Male, "email", LocalDate.now(),1, 1));
         User user = userService.getUser("username", "password");
         LoggedInUser.createInstance(user);
-
         WorkoutService.createInstance(new DatabaseWorkoutRepository());
+
+        exerciseSetup();
+    }
+
+    private static void exerciseSetup(){
+        Exercise exercise = new Exercise(0, "name", "type", "muscle", "equipment", "difficulty", "instructions");
+        List<Exercise> exercises = new ArrayList<>();
+        exercises.add(exercise);
+        WorkoutService.getInstance().insertExercises(exercises);
     }
 
     @BeforeEach
@@ -45,7 +58,10 @@ class WorkoutTest {
 
     @Test
     void TestAddExerciseToActiveWorkout() {
-        var completedExercises = model.getTodayCompletedExercises();
+        List<ExerciseItem> completedExercises = model.getTodayCompletedExercises();
+        Assertions.assertEquals(true, completedExercises.size() == 0);
+
+
         int exercisesInitCount = completedExercises.size();
         model.addExerciseToActiveWorkout(model.getExercises().get(0));
         completedExercises = model.getTodayCompletedExercises();
