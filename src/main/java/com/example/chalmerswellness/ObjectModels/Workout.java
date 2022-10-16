@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Workout {
+    //TODO: ID is never set
     private int id;
     private String workoutName;
     private List<ExerciseItem> exercises = new ArrayList<>();
@@ -16,9 +17,8 @@ public class Workout {
     public Workout(){
     }
 
-    public void addExercise(Exercise exercise){
-        ExerciseItem newExerciseItem = new ExerciseItem(exercise);
-        exercises.add(newExerciseItem);
+    public void addExercise(ExerciseItem exercise){
+        exercises.add(exercise);
     }
 
     public void removeExercise(ExerciseItem exercise){
@@ -28,6 +28,12 @@ public class Workout {
     public String getWorkoutName() {
         return workoutName;
     }
+
+    public int getId() {
+        return id;
+    }
+
+
 
     public List<ExerciseItem> getExercises() {
         return exercises;

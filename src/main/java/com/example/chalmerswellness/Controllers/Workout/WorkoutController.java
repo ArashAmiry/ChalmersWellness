@@ -7,6 +7,7 @@ import com.example.chalmerswellness.Controllers.Workout.SearchPane.ExerciseSearc
 import com.example.chalmerswellness.Controllers.Workout.TodaysWorkout.TodayWorkoutController;
 import com.example.chalmerswellness.Controllers.Workout.TodaysWorkout.WorkoutListController;
 import com.example.chalmerswellness.Models.WorkoutModel;
+import com.example.chalmerswellness.ObjectModels.Workout;
 import com.example.chalmerswellness.Services.DatabaseConnector;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,7 +29,9 @@ public class WorkoutController extends AnchorPane implements Initializable {
     @FXML private AnchorPane mainContent;
     @FXML private Button addedWorkoutsBtn;
 
-    public WorkoutController(){
+    private static final WorkoutController instance = new WorkoutController();
+
+    private WorkoutController(){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/WorkoutView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -61,11 +64,29 @@ public class WorkoutController extends AnchorPane implements Initializable {
         addedWorkoutsBtn.setVisible(true);
     }
 
+    public static WorkoutController getInstance(){
+        return instance;
+    }
 
 
     @FXML void openCreateWorkoutTab(){
         exerciseSearchController.changeController(createWorkoutView);
         setTabTo(createWorkoutView);
+    }
+
+    public void openCreatedWorkout(Workout workout){
+        exerciseSearchController.changeController(createWorkoutView);
+        displaySavedWorkout(workout);
+        setTabTo(createWorkoutView);
+    }
+
+    private void displaySavedWorkout(Workout workout) {
+        createWorkoutView.clearExercises();
+        for (var exercise : workout.getExercises()) {
+            createWorkoutView.addExercise(exercise);
+        }
+        createWorkoutView.setWorkoutName(workout.getWorkoutName());
+        workoutModel.removeWorkout(workout);
     }
 
     @FXML void openManageWorkoutTab(){

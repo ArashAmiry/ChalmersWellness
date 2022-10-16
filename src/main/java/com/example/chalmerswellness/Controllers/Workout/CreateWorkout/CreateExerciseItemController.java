@@ -1,9 +1,6 @@
 package com.example.chalmerswellness.Controllers.Workout.CreateWorkout;
 
-import com.example.chalmerswellness.Models.WorkoutModel;
 import com.example.chalmerswellness.ObjectModels.ExerciseItem;
-import com.example.chalmerswellness.ObjectModels.Workout;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -39,13 +36,14 @@ public class CreateExerciseItemController extends AnchorPane implements Initiali
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
+        setsField.textProperty().set(this.exerciseItem.getSetsCount() + "");
     }
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1){
         setName();
         hideErrorLabel();
-        setsField.textProperty().set(this.exerciseItem.getSetsCount() + "");
+
     }
 
     private void setName(){
@@ -78,7 +76,6 @@ public class CreateExerciseItemController extends AnchorPane implements Initiali
         return exerciseItem;
     }
 
-    //TODO fix sort of bug where letter in setsfield sets to 0
     @FXML
     private void setsListener(KeyEvent e){
         if(!e.getCharacter().equals(KeyCode.BACK_SPACE.getChar())){

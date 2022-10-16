@@ -46,7 +46,11 @@ public class WorkoutItemController extends AnchorPane implements Initializable{
 
     @FXML private void insertToWorkout(){
         model.addExercisesFromWorkout(workoutItem);
+    }
 
+    @FXML private void EditWorkout(){
+        WorkoutController.getInstance().openCreatedWorkout(workoutItem);
+        model.removeWorkout(workoutItem);
     }
 
 }

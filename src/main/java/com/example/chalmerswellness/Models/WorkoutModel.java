@@ -33,9 +33,8 @@ public class WorkoutModel implements Observable {
      * <p>
      * @param  exercise  an exercise that will be used to insert to database
      */
-    public void addExerciseToActiveWorkout(Exercise exercise){
-        ExerciseItem newExerciseItem = new ExerciseItem(exercise);
-        workoutService.insertCompletedExercise(newExerciseItem);
+    public void addExerciseToActiveWorkout(ExerciseItem exercise){
+        workoutService.insertCompletedExercise(exercise);
         notifyObservers();
     }
 
@@ -131,7 +130,7 @@ public class WorkoutModel implements Observable {
     }
 
     public void removeWorkout(Workout workout){
-        //savedWorkouts.remove(workout);
+        workoutService.removeWorkout(workout);
         notifyObservers();
     }
 

@@ -202,6 +202,18 @@ public class DatabaseWorkoutRepository implements IDatabaseWorkoutRepository {
         }
     }
 
+    public void deleteWorkout(Workout workout) {
+        String sql = "DELETE FROM created_workout WHERE id = ?";
+
+        try (Connection conn = DbConnectionService.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, workout.getId());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     private List<ExerciseItemSet> getCompletedSets(int exerciseItemId) {
         String sql = "SELECT * FROM completed_set WHERE completed_exercise_id = ?";
         List<ExerciseItemSet> sets = new ArrayList<>();

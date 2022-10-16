@@ -75,7 +75,6 @@ public class ManageWorkoutController extends AnchorPane implements Observer {
     }
 
 
-    //TODO: Redirect to create workout, create workout button with hidden save workout button
     public void openManageModal(Workout workout){
        mainPane.getChildren().add(new ManageWorkoutModalController(model, workout, mainPane));
     }
@@ -83,8 +82,7 @@ public class ManageWorkoutController extends AnchorPane implements Observer {
     @Override
     public void update(Observable observable) {
         model = (WorkoutModel) observable;
-        //var exercises = model.getAddedExercises();
-        populateWorkoutList();
+        updateWorkoutList(model.getSavedWorkouts());
         //updateExerciseList(exercises);
     }
 }

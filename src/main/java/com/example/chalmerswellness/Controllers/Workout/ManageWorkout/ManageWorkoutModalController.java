@@ -53,8 +53,8 @@ public class ManageWorkoutModalController extends AnchorPane {
     @FXML private void initialize(){
         List<ExerciseItem> exercises = workout.getExercises();
         for(ExerciseItem exercise : exercises){
-            CreateExerciseItemController exerciseItemController = new CreateExerciseItemController(exercise, new CreateWorkoutController(model)); //TODO: Remove new controller
-            exercisesList.add(exerciseItemController);
+           // CreateExerciseItemController exerciseItemController = new CreateExerciseItemController(exercise, new CreateWorkoutController(model)); //TODO: Remove new controller
+          //  exercisesList.add(exerciseItemController);
         }
         exerciseListView.setItems(exercisesList);
     }
