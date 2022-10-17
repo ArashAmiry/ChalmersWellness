@@ -31,10 +31,20 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <ImageView fitHeight="34.0" fitWidth="35.0" layoutX="671.0" layoutY="10.0" onMouseClicked="#removeSet" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="removeSetBtn" fitHeight="34.0" fitWidth="35.0" layoutX="671.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/icons8-trash-48.png" />
          </image>
       </ImageView>
+      <Label fx:id="weightLabel" layoutX="110.0" layoutY="13.0" prefHeight="27.0" prefWidth="69.0" text="120">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="repsLabel" layoutX="241.0" layoutY="13.0" prefHeight="27.0" prefWidth="34.0" text="8">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
    </children>
 </fx:root>

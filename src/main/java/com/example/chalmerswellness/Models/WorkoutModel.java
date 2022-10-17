@@ -53,7 +53,7 @@ public class WorkoutModel implements Observable {
     public List<Exercise> searchExercises(String exerciseName){
         List<Exercise> searchResult = new ArrayList<>();
         for (var exercise: exercises) {
-            if(exercise.getName().toLowerCase().replaceAll("\\s+","").contains(exerciseName))
+            if(exercise.getName().toLowerCase().replaceAll("\\s+","").contains(exerciseName.toLowerCase().replaceAll("\\s+","")))
                 searchResult.add(exercise);
         }
 
@@ -130,7 +130,7 @@ public class WorkoutModel implements Observable {
     }
 
     public void removeWorkout(Workout workout){
-        workoutService.removeWorkout(workout);
+        workoutService.deleteSavedWorkout(workout);
         notifyObservers();
     }
 

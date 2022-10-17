@@ -1,11 +1,11 @@
 package com.example.chalmerswellness;
 
-import com.example.chalmerswellness.Services.FriendService;
+import com.example.chalmerswellness.Services.FriendServices.FriendService;
 
 import java.util.List;
 
 public class FriendSearcher {
-    FriendService friendService = new FriendService();
+    private FriendService friendService = FriendService.getInstance();
 
     public List<User> findFriends(String friendName){
         return friendService.findFriends(friendName);

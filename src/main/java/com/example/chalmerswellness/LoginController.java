@@ -1,8 +1,6 @@
 package com.example.chalmerswellness;
 
-import com.example.chalmerswellness.Controllers.Profile.ProfileController;
-import com.example.chalmerswellness.Services.UserServices.IDatabaseUserRepository;
-import com.example.chalmerswellness.Services.UserServices.DatabaseUserRepository;
+import com.example.chalmerswellness.Services.UserServices.UserService;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
@@ -12,29 +10,19 @@ import javafx.scene.layout.AnchorPane;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class LoginController extends AnchorPane implements Initializable {
+public class LoginController extends AnchorPane {
     @FXML
-    TextField usernameTextField;
+    private TextField usernameTextField;
     @FXML
-    TextField passwordTextField;
+    private TextField passwordTextField;
     @FXML
-    AnchorPane navigationPane;
+    private AnchorPane navigationPane;
     @FXML
-    AnchorPane rootPane;
-    private final IDatabaseUserRepository userService;
-
-
-    public LoginController() {
-        userService = new DatabaseUserRepository();
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
-    }
+    private AnchorPane rootPane;
+    private final UserService userService = UserService.getInstance();
 
     @FXML
-    void login(MouseEvent event) {
+    private void login(MouseEvent event) {
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
         if(userService.checkIfCredentialsAreCorrect(username, password)) {
@@ -48,7 +36,7 @@ public class LoginController extends AnchorPane implements Initializable {
     }
 
     @FXML
-    void createNewAccount(MouseEvent event) {
+    private void createNewAccount(MouseEvent event) {
         rootPane.getChildren().add(new SignUpController(rootPane));
     }
 

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1460.0" type="AnchorPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1460.0" stylesheets="@../css/profile.css" type="AnchorPane" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label fx:id="nameLabel" layoutX="159.0" layoutY="110.0" text="Nils Svanstedt" />
-      <Label fx:id="dateLabel" layoutX="159.0" layoutY="155.0" text="October 22" />
+      <Label fx:id="nameLabel" layoutX="159.0" layoutY="79.0" styleClass="name" text="Nils Svanstedt" />
+      <Label fx:id="dateLabel" layoutX="159.0" layoutY="155.0" styleClass="date" text="October 22" />
       <ScrollPane layoutX="159.0" layoutY="248.0" prefHeight="683.0" prefWidth="1101.0">
          <content>
-            <VBox fx:id="exerciseBox" prefHeight="681.0" prefWidth="1099.0" />
+            <ListView fx:id="exercisesListView" prefHeight="680.0" prefWidth="1100.0" />
          </content>
       </ScrollPane>
    </children>

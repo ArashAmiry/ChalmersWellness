@@ -112,7 +112,7 @@ public class DatabaseWorkoutRepository implements IDatabaseWorkoutRepository {
                 int id = rs.getInt("id");
                 String workoutName = rs.getString("workoutName");
                 List<ExerciseItem> exercises = getWorkoutExercises(id);
-                Workout workout = new Workout(workoutName, exercises);
+                Workout workout = new Workout(id, workoutName, exercises);
                 workouts.add(workout);
             }
         } catch (SQLException e) {
@@ -202,19 +202,6 @@ public class DatabaseWorkoutRepository implements IDatabaseWorkoutRepository {
         }
     }
 
-    public void deleteWorkout(Workout workout) {
-        String sql = "DELETE FROM created_workout WHERE id = ?";
-
-        try (Connection conn = DbConnectionService.connect();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, workout.getId());
-            System.out.println(pstmt.getGeneratedKeys().getInt("id"));
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
     private List<ExerciseItemSet> getCompletedSets(int exerciseItemId) {
         String sql = "SELECT * FROM completed_set WHERE completed_exercise_id = ?";
         List<ExerciseItemSet> sets = new ArrayList<>();
@@ -229,7 +216,7 @@ public class DatabaseWorkoutRepository implements IDatabaseWorkoutRepository {
                 var id = rs.getInt("id");
                 double weight = rs.getDouble("weight");
                 int reps = rs.getInt("reps");
-                ExerciseItemSet set = new ExerciseItemSet(id, weight, reps);
+                ExerciseItemSet set = new ExerciseItemSet(weight, reps);
                 sets.add(set);
             }
         } catch (SQLException e) {
@@ -362,20 +349,16 @@ public class DatabaseWorkoutRepository implements IDatabaseWorkoutRepository {
         }
     }
 
-    /*public void removeWorkout(int workoutId) {
+    public void deleteSavedWorkout(Workout workout) {
         String sql = "DELETE FROM created_workout WHERE id = ?";
-
         try (Connection conn = DbConnectionService.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, workoutId);
-            pstmt.executeUpdate();
-
-            removeExercises(workoutId);
-
+                pstmt.setInt(1, workout.getId());
+                pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-    }*/
+    }
 
 
     /*public Exercise insertWorkoutExercise(Exercise exercise){

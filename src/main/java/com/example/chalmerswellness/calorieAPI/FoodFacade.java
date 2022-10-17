@@ -3,8 +3,7 @@ package com.example.chalmerswellness.calorieAPI;
 import com.example.chalmerswellness.Interfaces.Observable;
 import com.example.chalmerswellness.Interfaces.Observer;
 import com.example.chalmerswellness.LoggedInUser;
-import com.example.chalmerswellness.Services.INutritionDatabaseHandler;
-import com.example.chalmerswellness.Services.NutritionService;
+import com.example.chalmerswellness.Services.NutritionServices.NutritionService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.json.JSONException;
 
@@ -14,11 +13,7 @@ import java.util.List;
 public class FoodFacade implements Observable {
     private final NutritionAPIConnector apiConnector = new NutritionAPIConnector();
     private static List<Observer> observers = new ArrayList<>();
-    private final INutritionDatabaseHandler nutritionService;
-
-    public FoodFacade() {
-        nutritionService = new NutritionService();
-    }
+    private final NutritionService nutritionService = NutritionService.getInstance();
 
     public Food createFood(String foodName) throws JsonProcessingException {
         Food food = getFood(foodName);
@@ -28,6 +23,18 @@ public class FoodFacade implements Observable {
     private Food getFood(String foodName) {
         String nutritionJsonString = apiConnector.getNutritionAsStringFromAPI(foodName);
         return new Food(nutritionJsonString);
+    }
+
+    public double getConsumedProteinToday() {
+        return nutritionService.getTodaysProtein();
+    }
+
+    public double getConsumedCarbsToday() {
+        return nutritionService.getTodaysCarbs();
+    }
+
+    public double getConsumedFatToday() {
+        return nutritionService.getTodaysFat();
     }
 
     public boolean isFoodExisting(String foodName) throws JsonProcessingException {

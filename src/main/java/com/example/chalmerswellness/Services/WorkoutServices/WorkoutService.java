@@ -67,7 +67,11 @@ public class WorkoutService {
         repository.updateCompletedExercise(exerciseItem);
     }
 
-    public void removeWorkout(Workout workout) {
-        repository.deleteWorkout(workout);
+    public void insertExercises(List<Exercise> exercises) {
+        repository.insertExercises(exercises);
+    }
+
+    public void deleteSavedWorkout(Workout workout){
+        repository.deleteSavedWorkout(workout);
     }
 }

@@ -11,8 +11,6 @@ class NutritionAPIConnector {
     private final String urlString = "https://api.api-ninjas.com/v1/nutrition?query=";
 
     String getNutritionAsStringFromAPI(String query){
-        BufferedReader reader;
-        String line;
         StringBuffer responseContent = new StringBuffer();
         try {
             HttpURLConnection connection = connectToApi(query);

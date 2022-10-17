@@ -1,14 +1,34 @@
 package com.example.chalmerswellness.Services;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DatabaseConnector {
-    private static String dbPath = "src/main/resources/ChalmersWellness.db";
+    private static String dbPath;
 
     public DatabaseConnector() {
+        dbPath = FileHandler.getDbUrl(false);
+
+        var t = connect();
+        try {
+            t.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        File file = new File("src/test/TestChalmersWellness.db");
+        file.delete();
+
+        setupDatabases();
+
+        dbPath = FileHandler.getDbUrl(true);
+        setupDatabases();
+    }
+
+    private void setupDatabases(){
         createUsersTable();
         createNutritionTable();
         createExerciseTable();

@@ -11,6 +11,7 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
@@ -22,20 +23,24 @@ public class AddSetsController extends AnchorPane implements Initializable, Obse
     private WorkoutModel model;
     private ExerciseItem exerciseItem;
     private final AnchorPane anchorPane;
+    private boolean editable;
     ObservableList<ExerciseItemSetController> setsList = FXCollections.observableArrayList();
     @FXML private ListView setsListView;
     @FXML private Label addSetsLabel;
+    @FXML private Button addSetBtn;
+    @FXML private Button saveBtn;
 
-    public AddSetsController(WorkoutModel model, ExerciseItem exerciseItem, AnchorPane anchorPane) {
+
+    public AddSetsController(WorkoutModel model, ExerciseItem exerciseItem, AnchorPane anchorPane, boolean editable) {
         this.model = model;
         model.subscribe(this);
-
         this.exerciseItem = exerciseItem;
         this.anchorPane = anchorPane;
+        this.editable = editable;
+
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/AddSetsView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
-
         try {
             fxmlLoader.load();
         } catch (IOException exception) {
@@ -45,7 +50,7 @@ public class AddSetsController extends AnchorPane implements Initializable, Obse
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        setTitle();
+        showEditFunctions();
         updateSets();
     }
 
@@ -55,13 +60,13 @@ public class AddSetsController extends AnchorPane implements Initializable, Obse
         updateSets();
     }
 
-    @FXML private void addSet(){
-        ExerciseItemSet exerciseSet = new ExerciseItemSet(exerciseItem.getExerciseItemId(), 0, 0);
+    private void addSet(){
+        ExerciseItemSet exerciseSet = new ExerciseItemSet(0, 0);
         exerciseItem.addSet(exerciseSet);
         saveExerciseItem();
     }
 
-    @FXML private void saveExerciseItem(){
+    private void saveExerciseItem(){
         model.updateCompletedExercise(exerciseItem);
     }
 
@@ -70,15 +75,11 @@ public class AddSetsController extends AnchorPane implements Initializable, Obse
 
         var sets = exerciseItem.getSets();
         for (ExerciseItemSet set: sets) {
-            ExerciseItemSetController setsController = new ExerciseItemSetController(model, exerciseItem, set);
+            ExerciseItemSetController setsController = new ExerciseItemSetController(model, exerciseItem, set, editable);
             setsList.add(setsController);
         }
 
         setsListView.getItems().setAll(setsList);
-    }
-
-    private void setTitle(){
-        addSetsLabel.textProperty().set("Add Sets To " + exerciseItem.getName());
     }
 
     @FXML private void close(){
@@ -87,5 +88,22 @@ public class AddSetsController extends AnchorPane implements Initializable, Obse
     }
     @FXML private void mouseTrap(Event event){
         event.consume();
+    }
+
+    private void showEditFunctions(){
+        if(editable){
+            addSetBtn.setOnMouseClicked(e -> addSet());
+            saveBtn.setOnMouseClicked(e -> saveExerciseItem());
+            addSetsLabel.textProperty().set("Add Sets To " + exerciseItem.getName());
+            buttonVisibility(true);
+        } else {
+            addSetsLabel.textProperty().set(exerciseItem.getName());
+            buttonVisibility(false);
+        }
+    }
+
+    private void buttonVisibility(boolean isEnabled){
+        addSetBtn.setVisible(isEnabled);
+        saveBtn.setVisible(isEnabled);
     }
 }

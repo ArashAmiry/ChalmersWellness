@@ -15,29 +15,7 @@ public class DbConnectionService {
 
     private DbConnectionService(boolean useActualDb)
     {
-        dbPath = getDbUrl(useActualDb);
-    }
-
-    private String getDbUrl(boolean useActualDb) {
-        Properties p = new Properties();
-        try{
-            InputStream is = new FileInputStream("src/main/resources/dbConfig.txt");
-            p.load(is);
-
-            var dbUrl = p.getProperty("dbUrl");
-            var testDbUrl = p.getProperty("testDbUrl");
-
-            if(useActualDb){
-                return dbUrl;
-            } else {
-                return testDbUrl;
-            }
-
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        dbPath = FileHandler.getDbUrl(useActualDb);
     }
 
     public static void createInstance(boolean useActualDb){
