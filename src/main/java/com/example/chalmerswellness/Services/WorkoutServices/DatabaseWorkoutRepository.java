@@ -208,6 +208,7 @@ public class DatabaseWorkoutRepository implements IDatabaseWorkoutRepository {
         try (Connection conn = DbConnectionService.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, workout.getId());
+            System.out.println(pstmt.getGeneratedKeys().getInt("id"));
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
