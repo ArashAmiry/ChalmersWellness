@@ -9,34 +9,19 @@ public class Food {
     private int id;
     private String name;
     private double calories;
-    @JsonAlias("serving_size_g")
     private double servingSize;
-    @JsonAlias("fat_total_g")
     private double fatTotal;
-    @JsonAlias("fat_saturated_g")
     private double fatSaturated;
-    @JsonAlias("protein_g")
     private double protein;
-    @JsonAlias("sodium_mg")
     private double sodium;
-    @JsonAlias("potassium_mg")
     private double potassium;
-    @JsonAlias("cholesterol_mg")
     private double cholesterol;
-    @JsonAlias("carbohydrates_total_g")
     private double carbohydrates;
-    @JsonAlias("fiber_g")
     private double fiber;
-    @JsonAlias("sugar_g")
     private double sugar;
-
-    public Food(){
-
-    }
 
     public Food(String jsonData){
         populateFieldsWithMapper(jsonData);
-
     }
 
     private void populateFieldsWithMapper(String jsonData) throws JSONException {
@@ -58,7 +43,7 @@ public class Food {
             this.sugar = jsonObj.getDouble("sugar_g");
     }
 
-    public Food(int id, String foodName, double calories){
+     public Food(int id, String foodName, double calories){
         this.id = id;
         this.name = foodName;
         this.calories = calories;

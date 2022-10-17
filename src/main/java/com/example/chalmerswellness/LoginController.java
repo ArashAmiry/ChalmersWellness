@@ -10,29 +10,19 @@ import javafx.scene.layout.AnchorPane;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class LoginController extends AnchorPane implements Initializable {
+public class LoginController extends AnchorPane {
     @FXML
-    TextField usernameTextField;
+    private TextField usernameTextField;
     @FXML
-    TextField passwordTextField;
+    private TextField passwordTextField;
     @FXML
-    AnchorPane navigationPane;
+    private AnchorPane navigationPane;
     @FXML
-    AnchorPane rootPane;
+    private AnchorPane rootPane;
     private final UserService userService = UserService.getInstance();
 
-
-    public LoginController() {
-
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
-    }
-
     @FXML
-    void login(MouseEvent event) {
+    private void login(MouseEvent event) {
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
         if(userService.checkIfCredentialsAreCorrect(username, password)) {
@@ -46,7 +36,7 @@ public class LoginController extends AnchorPane implements Initializable {
     }
 
     @FXML
-    void createNewAccount(MouseEvent event) {
+    private void createNewAccount(MouseEvent event) {
         rootPane.getChildren().add(new SignUpController(rootPane));
     }
 
