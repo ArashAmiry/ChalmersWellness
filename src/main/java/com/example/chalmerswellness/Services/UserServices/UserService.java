@@ -57,7 +57,4 @@ public class UserService {
         repository.setWeightGoal(id, weightGoal);
     }
 
-    public void deleteAllUsers(){
-        repository.deleteAllUsers();
-    }
 }
