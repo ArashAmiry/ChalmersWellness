@@ -156,15 +156,5 @@ public class DatabaseUserRepository implements IDatabaseUserRepository {
         }
     }
 
-    @Override
-    public void deleteAllUsers() {
-        String sql = "DELETE FROM users";
-        try (Connection conn = DbConnectionService.connect();
-             PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
 }
 

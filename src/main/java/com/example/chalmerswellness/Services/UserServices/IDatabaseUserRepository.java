@@ -23,5 +23,4 @@ public interface IDatabaseUserRepository {
 
     void setWeightGoal(int id, double weightGoal);
 
-    void deleteAllUsers();
 }

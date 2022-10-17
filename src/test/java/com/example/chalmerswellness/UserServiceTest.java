@@ -64,10 +64,5 @@ class UserServiceTest {
         Assertions.assertEquals(1000, userService.getUser(user.getId()).getWeightGoal());
     }
 
-    @Test
-    void deleteAllUsersMethodShouldDeleteAllUsers() {
-        userService.deleteAllUsers();
-        Assertions.assertTrue(userService.getUser(user.getId()) == null);
-    }
 }
 
