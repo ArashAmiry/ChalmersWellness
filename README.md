@@ -1,7 +1,7 @@
 # Chalmers Wellness
 
 ## Prerequisites
-Install Maven
+Install [Maven](https://maven.apache.org/install.html)
 
 ## Run the program
 1. Download project zip.
