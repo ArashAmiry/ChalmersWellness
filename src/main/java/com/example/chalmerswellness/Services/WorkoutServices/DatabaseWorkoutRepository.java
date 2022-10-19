@@ -81,13 +81,13 @@ public class DatabaseWorkoutRepository implements IDatabaseWorkoutRepository {
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 var id = rs.getInt("id");
-                var exerciseId = rs.getInt("exercise_id");
-                var isDone = rs.getBoolean("is_done");
-                var planned_Sets = rs.getInt("planned_sets");
+                int exerciseId = rs.getInt("exercise_id");
+                boolean isDone = rs.getBoolean("is_done");
+                int plannedSets = rs.getInt("planned_sets");
 
                 ExerciseItem exerciseItem = new ExerciseItem(id, getExercise(exerciseId), getCompletedSets(id));
                 exerciseItem.setDone(isDone);
-                exerciseItem.setPlannedSetsCount(planned_Sets);
+                exerciseItem.setPlannedSetsCount(plannedSets);
                 exerciseItems.add(exerciseItem);
             }
         } catch (SQLException e) {

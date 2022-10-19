@@ -1,17 +1,12 @@
 package com.example.chalmerswellness.Services;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Properties;
 
 public class DbConnectionService {
     private static String dbPath;
-    private static DbConnectionService single_instance = null;
+    private static DbConnectionService dbConnectionService = null;
 
     private DbConnectionService(boolean useActualDb)
     {
@@ -19,8 +14,8 @@ public class DbConnectionService {
     }
 
     public static void createInstance(boolean useActualDb){
-        if(single_instance == null){
-            single_instance = new DbConnectionService(useActualDb);
+        if(dbConnectionService == null){
+            dbConnectionService = new DbConnectionService(useActualDb);
         } else {
             System.out.println("Already Created Instance!");
         }
@@ -28,8 +23,8 @@ public class DbConnectionService {
 
     public static DbConnectionService getInstance()
     {
-        if (single_instance != null) {
-            return single_instance;
+        if (dbConnectionService != null) {
+            return dbConnectionService;
         } else {
             throw new RuntimeException("No created instance of " + DbConnectionService.class);
         }

@@ -12,17 +12,17 @@ public class UserService {
         repository = repositoryType;
     }
 
-    private static UserService single_instance = null;
+    private static UserService userService = null;
 
     public static void createInstance(IDatabaseUserRepository repositoryType){
-        if(single_instance == null){
-            single_instance = new UserService(repositoryType);
+        if(userService == null){
+            userService = new UserService(repositoryType);
         }
     }
 
     public static UserService getInstance()
     {
-        return single_instance;
+        return userService;
     }
 
     public void insertUser(User user) {

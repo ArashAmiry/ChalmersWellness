@@ -3,18 +3,14 @@ package com.example.chalmerswellness;
 import com.example.chalmerswellness.Services.UserServices.UserService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
-import java.net.URL;
 import java.time.LocalDate;
-import java.util.ResourceBundle;
 
 public class SignUpController extends AnchorPane {
     @FXML
@@ -63,12 +59,12 @@ public class SignUpController extends AnchorPane {
     private void initialize() {
         maleRadioButton.setToggleGroup(genderToggleGroup);
         femaleRadioButton.setToggleGroup(genderToggleGroup);
-        maleRadioButton.setUserData(Gender.Male);
-        femaleRadioButton.setUserData(Gender.Female);
+        maleRadioButton.setUserData(Gender.MALE);
+        femaleRadioButton.setUserData(Gender.FEMALE);
     }
 
     @FXML
-    private void signUp(MouseEvent event) {
+    void signUp() {
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
         Gender gender = (Gender) genderToggleGroup.getSelectedToggle().getUserData();
@@ -82,7 +78,6 @@ public class SignUpController extends AnchorPane {
         User newUser = new User(username, password, firstName, lastName, gender, email, birthDate, height, weight);
 
         if (userService.checkIfUsernameExists(username)) {
-            System.out.println("Username already exists");
             rootpane.getChildren().remove(this);
         } else {
             userService.insertUser(newUser);
@@ -93,7 +88,7 @@ public class SignUpController extends AnchorPane {
     }
 
     @FXML
-    private void openLoginPage(MouseEvent event) {
+    private void openLoginPage() {
         rootpane.getChildren().remove(this);
     }
 

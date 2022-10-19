@@ -75,10 +75,10 @@ public class SettingsViewController extends AnchorPane implements Initializable 
         birthDatePicker.setValue(user.getBirthDate());
         maleRadioButton.setToggleGroup(genderToggleGroup);
         femaleRadioButton.setToggleGroup(genderToggleGroup);
-        maleRadioButton.setUserData(Gender.Male);
-        femaleRadioButton.setUserData(Gender.Female);
+        maleRadioButton.setUserData(Gender.MALE);
+        femaleRadioButton.setUserData(Gender.FEMALE);
 
-        if(user.getGender().equals(Gender.Male)) {
+        if(user.getGender().equals(Gender.MALE)) {
             genderToggleGroup.selectToggle(maleRadioButton);
         } else {
             genderToggleGroup.selectToggle(femaleRadioButton);

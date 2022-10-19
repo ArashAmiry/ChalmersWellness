@@ -32,7 +32,7 @@ class NutritionServiceTest {
     @BeforeEach
     void setupEach() throws JsonProcessingException {
         DatabaseConnector dbConnector = new DatabaseConnector();
-        userService.insertUser(new User("username", "password", "firstName", "lastName", Gender.Male, "email", LocalDate.now(),1, 1));
+        userService.insertUser(new User("username", "password", "firstName", "lastName", Gender.MALE, "email", LocalDate.now(),1, 1));
         LoggedInUser.createInstance(UserService.getInstance().getUser("username", "password"));
         NutritionService.createInstance(new DatabaseNutritionRepository());
         nutritionService = NutritionService.getInstance();

@@ -5,7 +5,7 @@ import com.example.chalmerswellness.User;
 import java.util.List;
 
 public class FriendService {
-    private static FriendService single_instance = null;
+    private static FriendService friendService = null;
     private IDatabaseFriendRepository repository;
     private FriendService(IDatabaseFriendRepository workoutRepository)
     {
@@ -13,14 +13,14 @@ public class FriendService {
     }
 
     public static void createInstance(IDatabaseFriendRepository friendRepository){
-        if(single_instance == null){
-            single_instance = new FriendService(friendRepository);
+        if(friendService == null){
+            friendService = new FriendService(friendRepository);
         }
     }
 
     public static FriendService getInstance()
     {
-        return single_instance;
+        return friendService;
     }
 
     public List<User> findFriends(String friendName) {

@@ -42,8 +42,8 @@ class NutritionAPIConnector {
     }
 
     private HttpURLConnection connectToApi(String query) throws IOException {
-        query = query.replaceAll("\\s+", "+");
-        URL url = new URL(urlString + query);
+        String searchQuery = query.replaceAll("\\s+", "+");
+        URL url = new URL(urlString + searchQuery);
 
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestProperty("x-api-key", "w654GbcWJOO5z0zkEac5sYcuRKqNjRBZ5BjDqI50");
