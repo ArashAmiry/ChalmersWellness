@@ -18,15 +18,12 @@ public class LoginController extends AnchorPane {
 
     @FXML
     private void login() {
-        String username = usernameTextField.getText();
-        String password = passwordTextField.getText();
+        final String username = usernameTextField.getText();
+        final String password = passwordTextField.getText();
         if(userService.checkIfCredentialsAreCorrect(username, password)) {
-            System.out.println("Login successful");
             LoggedInUser.createInstance(userService.getUser(username,password));
             rootPane.getChildren().clear();
             rootPane.getChildren().setAll(new MainView());
-        } else {
-            System.out.println("Login failed");
         }
     }
 

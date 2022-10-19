@@ -26,8 +26,8 @@ public class CalorieCalculator {
      * @return amount of calories needed to sustain weight plus the calorie delta
      */
     public static int calculateCalorieIntake(Gender gender, double kg, double cm, int years, double activityLevel, int calorieDelta) {
-        double basalMetabolicRate = calculateBasalMetabolicRate(gender, kg, cm, years);
-        double activeMetabolicRate = calculateActiveMetabolicRate(basalMetabolicRate, activityLevel);
+        final double basalMetabolicRate = calculateBasalMetabolicRate(gender, kg, cm, years);
+        final double activeMetabolicRate = calculateActiveMetabolicRate(basalMetabolicRate, activityLevel);
         return (int) Math.round(activeMetabolicRate) + calorieDelta;
     }
 }
