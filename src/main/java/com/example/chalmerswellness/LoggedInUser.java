@@ -4,9 +4,11 @@ public class LoggedInUser {
 
     private static User instance = null;
 
-    synchronized public static void createInstance(User user){
-        if(instance == null){
-            instance = user;
+    public static void createInstance(User user){
+        synchronized (LoggedInUser.class) {
+            if (instance == null) {
+                instance = user;
+            }
         }
     }
 

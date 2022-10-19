@@ -14,9 +14,11 @@ public class UserService {
 
     private static UserService userService = null;
 
-    synchronized public static void createInstance(IDatabaseUserRepository repositoryType){
-        if(userService == null){
-            userService = new UserService(repositoryType);
+    public static void createInstance(IDatabaseUserRepository repositoryType){
+        synchronized (UserService.class) {
+            if (userService == null) {
+                userService = new UserService(repositoryType);
+            }
         }
     }
 

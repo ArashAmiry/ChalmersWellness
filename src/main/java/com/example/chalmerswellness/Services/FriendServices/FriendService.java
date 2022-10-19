@@ -12,9 +12,11 @@ public class FriendService {
         repository = workoutRepository;
     }
 
-    synchronized public static void createInstance(IDatabaseFriendRepository friendRepository){
-        if(friendService == null){
-            friendService = new FriendService(friendRepository);
+    public static void createInstance(IDatabaseFriendRepository friendRepository){
+        synchronized (FriendService.class) {
+            if (friendService == null) {
+                friendService = new FriendService(friendRepository);
+            }
         }
     }
 

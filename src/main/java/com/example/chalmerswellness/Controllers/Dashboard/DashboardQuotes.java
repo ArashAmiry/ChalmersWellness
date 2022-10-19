@@ -12,9 +12,11 @@ public class DashboardQuotes {
         this.sportsAndCompetitionQuote = apiConnector.getRandomQuoteAsStringFromAPI("sports&competition");
     }
 
-    synchronized public static DashboardQuotes getInstance() {
-        if (instance == null) {
-            instance = new DashboardQuotes();
+    public static DashboardQuotes getInstance() {
+        synchronized (DashboardQuotes.class) {
+            if (instance == null) {
+                instance = new DashboardQuotes();
+            }
         }
         return instance;
     }
