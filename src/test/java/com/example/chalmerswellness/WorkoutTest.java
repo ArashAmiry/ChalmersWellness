@@ -1,6 +1,5 @@
 package com.example.chalmerswellness;
 
-import com.example.chalmerswellness.Interfaces.Observer;
 import com.example.chalmerswellness.Models.WorkoutModel;
 import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.ObjectModels.ExerciseItem;
@@ -30,7 +29,6 @@ class WorkoutTest {
     static void setup() {
         DbConnectionService.createInstance(false);
         UserService.createInstance(new DatabaseUserRepository());
-        UserService.getInstance().deleteAllUsers();
         userService = UserService.getInstance();
         userService.insertUser(new User("username", "password", "firstName", "lastName", Gender.Male, "email", LocalDate.now(),1, 1));
         User user = userService.getUser("username", "password");
