@@ -2,6 +2,7 @@ package com.example.chalmerswellness.Controllers.Workout.SearchPane;
 
 import com.example.chalmerswellness.Interfaces.IWorkoutController;
 import com.example.chalmerswellness.ObjectModels.Exercise;
+import com.example.chalmerswellness.ObjectModels.ExerciseItem;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -38,7 +39,7 @@ public class ExerciseSearchItemController extends AnchorPane implements Initiali
     }
 
     @FXML public void addToWorkout(){
-        workoutController.addExercise(exercise);
+        workoutController.addExercise(new ExerciseItem(exercise));
     }
 
     private void setExerciseName(){

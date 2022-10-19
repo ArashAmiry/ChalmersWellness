@@ -15,9 +15,6 @@ public class FoodFacade implements Observable {
     private static List<Observer> observers = new ArrayList<>();
     private final NutritionService nutritionService = NutritionService.getInstance();
 
-    public FoodFacade() {
-    }
-
     public Food createFood(String foodName) throws JsonProcessingException {
         Food food = getFood(foodName);
         return food;

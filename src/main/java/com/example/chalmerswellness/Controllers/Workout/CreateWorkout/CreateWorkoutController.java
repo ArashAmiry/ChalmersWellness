@@ -39,14 +39,25 @@ public class CreateWorkoutController extends AnchorPane implements IWorkoutContr
         }
     }
 
+    public void setWorkoutName(String name){
+        workoutNameField.setText(name);
+    }
+
     @Override
-    public void addExercise(Exercise exercise){
+    public void addExercise(ExerciseItem exercise){
         workout.addExercise(exercise);
         update();
     }
 
     public void removeExercise(ExerciseItem exercise){
         workout.removeExercise(exercise);
+        update();
+    }
+
+    public void clearExercises(){
+        for (var exercise : workout.getExercises()) {
+            removeExercise(exercise);
+        }
         update();
     }
 
@@ -89,4 +100,5 @@ public class CreateWorkoutController extends AnchorPane implements IWorkoutContr
         var exercises = workout.getExercises();
         updateExerciseList(exercises);
     }
+
 }

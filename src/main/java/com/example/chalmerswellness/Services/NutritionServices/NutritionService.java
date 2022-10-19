@@ -12,17 +12,17 @@ public class NutritionService {
         repository = repositoryType;
     }
 
-    private static NutritionService single_instance = null;
+    private static NutritionService nutritionService = null;
 
     public static void createInstance(IDatabaseNutritionRepository repositoryType){
-        if(single_instance == null){
-            single_instance = new NutritionService(repositoryType);
+        if(nutritionService == null){
+            nutritionService = new NutritionService(repositoryType);
         }
     }
 
     public static NutritionService getInstance()
     {
-        return single_instance;
+        return nutritionService;
     }
 
     public void insertNutrition(Food nutritionModel, Meal meal) {

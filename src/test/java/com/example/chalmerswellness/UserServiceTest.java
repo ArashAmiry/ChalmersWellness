@@ -25,14 +25,14 @@ class UserServiceTest {
     void setupEach() {
         DatabaseConnector dbConnector = new DatabaseConnector();
         userService = UserService.getInstance();
-        userService.insertUser(new User("username", "password", "firstName", "lastName", Gender.Male, "email", LocalDate.now(),1, 1));
+        userService.insertUser(new User("username", "password", "firstName", "lastName", Gender.MALE, "email", LocalDate.now(),1, 1));
         LoggedInUser.createInstance(userService.getUser("username", "password"));
         user = LoggedInUser.getInstance();
     }
 
     @Test
     void updateUserMethodShouldUpdateUser() {
-        userService.updateUser(user.getId(), "username2", "password", "firstName", "lastName", Gender.Male, "email",  LocalDate.now(), 1, 1);
+        userService.updateUser(user.getId(), "username2", "password", "firstName", "lastName", Gender.MALE, "email",  LocalDate.now(), 1, 1);
         Assertions.assertTrue(userService.checkIfUsernameExists("username2"));
     }
 
@@ -64,10 +64,5 @@ class UserServiceTest {
         Assertions.assertEquals(1000, userService.getUser(user.getId()).getWeightGoal());
     }
 
-    @Test
-    void deleteAllUsersMethodShouldDeleteAllUsers() {
-        userService.deleteAllUsers();
-        Assertions.assertTrue(userService.getUser(user.getId()) == null);
-    }
 }
 

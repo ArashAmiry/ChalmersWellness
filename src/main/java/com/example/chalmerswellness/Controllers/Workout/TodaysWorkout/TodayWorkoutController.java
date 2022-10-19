@@ -38,7 +38,7 @@ public class TodayWorkoutController extends AnchorPane implements Observer, IWor
         }
     }
 
-    public void addExercise(Exercise exercise){
+    public void addExercise(ExerciseItem exercise){
         model.addExerciseToActiveWorkout(exercise);
     }
 

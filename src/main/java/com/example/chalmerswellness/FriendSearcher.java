@@ -5,7 +5,7 @@ import com.example.chalmerswellness.Services.FriendServices.FriendService;
 import java.util.List;
 
 public class FriendSearcher {
-    FriendService friendService = FriendService.getInstance();
+    private FriendService friendService = FriendService.getInstance();
 
     public List<User> findFriends(String friendName){
         return friendService.findFriends(friendName);

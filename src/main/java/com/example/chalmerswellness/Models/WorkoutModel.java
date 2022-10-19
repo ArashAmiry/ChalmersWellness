@@ -33,9 +33,8 @@ public class WorkoutModel implements Observable {
      * <p>
      * @param  exercise  an exercise that will be used to insert to database
      */
-    public void addExerciseToActiveWorkout(Exercise exercise){
-        ExerciseItem newExerciseItem = new ExerciseItem(exercise);
-        workoutService.insertCompletedExercise(newExerciseItem);
+    public void addExerciseToActiveWorkout(ExerciseItem exercise){
+        workoutService.insertCompletedExercise(exercise);
         notifyObservers();
     }
 
@@ -53,7 +52,7 @@ public class WorkoutModel implements Observable {
      */
     public List<Exercise> searchExercises(String exerciseName){
         List<Exercise> searchResult = new ArrayList<>();
-        for (var exercise: exercises) {
+        for (Exercise exercise: exercises) {
             if(exercise.getName().toLowerCase().replaceAll("\\s+","").contains(exerciseName.toLowerCase().replaceAll("\\s+","")))
                 searchResult.add(exercise);
         }

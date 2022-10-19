@@ -6,7 +6,7 @@ import java.util.List;
 public class ExerciseItem extends Exercise{
     private int id;
     private List<ExerciseItemSet> sets = new ArrayList<>();
-    private int sets_count;
+    private int setsCount;
     private boolean isDone = false;
 
     public ExerciseItem(Exercise exercise){
@@ -33,11 +33,11 @@ public class ExerciseItem extends Exercise{
     }
 
     public void setPlannedSetsCount(int setsCount){
-        this.sets_count = setsCount;
+        this.setsCount = setsCount;
     }
 
     public int getSetsCount(){
-        return sets_count;
+        return setsCount;
     }
 
     public void setDone(boolean done) {

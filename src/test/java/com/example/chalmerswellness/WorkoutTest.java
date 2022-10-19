@@ -1,6 +1,5 @@
 package com.example.chalmerswellness;
 
-import com.example.chalmerswellness.Interfaces.Observer;
 import com.example.chalmerswellness.Models.WorkoutModel;
 import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.ObjectModels.ExerciseItem;
@@ -31,7 +30,7 @@ class WorkoutTest {
         DbConnectionService.createInstance(false);
         UserService.createInstance(new DatabaseUserRepository());
         userService = UserService.getInstance();
-        userService.insertUser(new User("username", "password", "firstName", "lastName", Gender.Male, "email", LocalDate.now(),1, 1));
+        userService.insertUser(new User("username", "password", "firstName", "lastName", Gender.MALE, "email", LocalDate.now(),1, 1));
         User user = userService.getUser("username", "password");
         LoggedInUser.createInstance(user);
         WorkoutService.createInstance(new DatabaseWorkoutRepository());
@@ -67,7 +66,7 @@ class WorkoutTest {
         List<ExerciseItem> completedExercises = model.getTodayCompletedExercises();
         Assertions.assertEquals(0, completedExercises.size());
 
-        model.addExerciseToActiveWorkout(model.getExercises().get(0));
+        model.addExerciseToActiveWorkout(new ExerciseItem(model.getExercises().get(0)));
         completedExercises = model.getTodayCompletedExercises();
 
         ExerciseItem exerciseItem = completedExercises.get(0);
@@ -86,7 +85,7 @@ class WorkoutTest {
     @Test
     void TestRemoveSet() {
         Exercise exercise = model.getExercises().get(0);
-        model.addExerciseToActiveWorkout(exercise);
+        model.addExerciseToActiveWorkout(new ExerciseItem(exercise));
         ExerciseItem exerciseItem = model.getTodayCompletedExercises().get(0);
 
         ExerciseItemSet set = new ExerciseItemSet(40, 5);
@@ -110,7 +109,7 @@ class WorkoutTest {
         Assertions.assertEquals(0, exerciseItems.size());
 
         Exercise exercise = model.getExercises().get(0);
-        model.addExerciseToActiveWorkout(exercise);
+        model.addExerciseToActiveWorkout(new ExerciseItem(exercise));
         exerciseItems = model.getTodayCompletedExercises();
 
         Assertions.assertTrue(exerciseItems.size()>0);
@@ -122,7 +121,7 @@ class WorkoutTest {
         Assertions.assertEquals(0, exerciseItems.size());
 
         Exercise exercise = model.getExercises().get(0);
-        model.addExerciseToActiveWorkout(exercise);
+        model.addExerciseToActiveWorkout(new ExerciseItem(exercise));
 
         exerciseItems = model.getTodayCompletedExercises();
         Assertions.assertTrue(exerciseItems.size() > 0);
@@ -136,7 +135,7 @@ class WorkoutTest {
     @Test
     void TestUpdateCompletedExercise() {
         Exercise exercise = model.getExercises().get(0);
-        model.addExerciseToActiveWorkout(exercise);
+        model.addExerciseToActiveWorkout(new ExerciseItem(exercise));
         ExerciseItem exerciseItem = model.getTodayCompletedExercises().get(0);
         Assertions.assertEquals(0, exerciseItem.getSets().size());
 

@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
-public class FriendServiceTest {
+class FriendServiceTest {
 
     private static FriendService friendService;
     private static UserService userService;
@@ -32,8 +32,8 @@ public class FriendServiceTest {
     @BeforeEach
     void setupEach(){
         DatabaseConnector dbConnector = new DatabaseConnector();
-        userService.insertUser(new User("user1", "password", "firstName", "lastName", Gender.Male, "email", LocalDate.now(),1, 1));
-        userService.insertUser(new User("user2", "password", "firstName", "lastName", Gender.Male, "email", LocalDate.now(),1, 1));
+        userService.insertUser(new User("user1", "password", "firstName", "lastName", Gender.MALE, "email", LocalDate.now(),1, 1));
+        userService.insertUser(new User("user2", "password", "firstName", "lastName", Gender.MALE, "email", LocalDate.now(),1, 1));
         user1 = userService.getUser("user1", "password");
         user2 = userService.getUser("user2", "password");
         LoggedInUser.createInstance(user1);
