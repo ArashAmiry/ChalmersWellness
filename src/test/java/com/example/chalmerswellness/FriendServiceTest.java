@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
-public class FriendServiceTest {
+class FriendServiceTest {
 
     private static FriendService friendService;
     private static UserService userService;

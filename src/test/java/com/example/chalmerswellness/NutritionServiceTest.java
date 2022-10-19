@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
-public class NutritionServiceTest {
+class NutritionServiceTest {
 
     private static NutritionService nutritionService;
     private static UserService userService;
