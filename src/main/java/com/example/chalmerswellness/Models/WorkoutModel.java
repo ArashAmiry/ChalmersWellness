@@ -13,7 +13,7 @@ import java.util.List;
 public class WorkoutModel implements Observable {
     private List<Observer> observers = new ArrayList<>();
     private WorkoutService workoutService;
-    private List<Exercise> exercises = new ArrayList<>();
+    private List<Exercise> exercises;
 
     public WorkoutModel(){
         workoutService = WorkoutService.getInstance();
