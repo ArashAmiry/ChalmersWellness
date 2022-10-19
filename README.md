@@ -10,5 +10,5 @@ Install Maven
 4. Run mvn exec:java
 
 ## Troubleshooting
-run mvn clean
-run mvn install
+1. run mvn clean
+2. run mvn install
