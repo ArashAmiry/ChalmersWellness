@@ -23,7 +23,7 @@ class UserServiceTest {
 
     @BeforeEach
     void setupEach() {
-        DatabaseConnector dbConnector = new DatabaseConnector();
+        final DatabaseConnector dbConnector = new DatabaseConnector();
         userService = UserService.getInstance();
         userService.insertUser(new User("username", "password", "firstName", "lastName", Gender.MALE, "email", LocalDate.now(),1, 1));
         LoggedInUser.createInstance(userService.getUser("username", "password"));
@@ -38,8 +38,8 @@ class UserServiceTest {
 
     @Test
     void getUserMethodShouldReturnUser() {
-        Assertions.assertTrue(userService.getUser("username", "password") != null);
-        Assertions.assertTrue(userService.getUser(user.getId()) != null);
+        Assertions.assertNotNull(userService.getUser("username", "password"));
+        Assertions.assertNotNull(userService.getUser(user.getId()));
     }
 
     @Test

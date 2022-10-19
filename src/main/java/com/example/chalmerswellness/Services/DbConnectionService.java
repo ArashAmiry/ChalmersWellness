@@ -13,11 +13,9 @@ public class DbConnectionService {
         dbPath = FileHandler.getDbUrl(useActualDb);
     }
 
-    public static void createInstance(boolean useActualDb){
+    synchronized public static void createInstance(boolean useActualDb){
         if(dbConnectionService == null){
             dbConnectionService = new DbConnectionService(useActualDb);
-        } else {
-            System.out.println("Already Created Instance!");
         }
     }
 

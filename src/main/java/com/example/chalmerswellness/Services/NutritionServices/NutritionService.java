@@ -14,7 +14,7 @@ public class NutritionService {
 
     private static NutritionService nutritionService = null;
 
-    public static void createInstance(IDatabaseNutritionRepository repositoryType){
+    synchronized public static void createInstance(IDatabaseNutritionRepository repositoryType){
         if(nutritionService == null){
             nutritionService = new NutritionService(repositoryType);
         }

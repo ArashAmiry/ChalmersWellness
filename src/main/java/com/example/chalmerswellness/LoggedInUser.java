@@ -4,7 +4,7 @@ public class LoggedInUser {
 
     private static User instance = null;
 
-    public static void createInstance(User user){
+    synchronized public static void createInstance(User user){
         if(instance == null){
             instance = user;
         }
