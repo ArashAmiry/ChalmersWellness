@@ -30,10 +30,6 @@ public class Food {
     @JsonAlias("sugar_g")
     private double sugar;
 
-    public Food(){
-
-    }
-
     public Food(String jsonData){
         populateFieldsWithMapper(jsonData);
 

@@ -11,14 +11,6 @@ public class DatabaseConnector {
 
     public DatabaseConnector() {
         dbPath = FileHandler.getDbUrl(false);
-
-        var t = connect();
-        try {
-            t.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
         File file = new File("src/test/TestChalmersWellness.db");
         file.delete();
 
@@ -151,7 +143,7 @@ public class DatabaseConnector {
         }
     }
 
-    public static void createCompletedExerciseTable() {
+    private static void createCompletedExerciseTable() {
         String sql = "CREATE TABLE IF NOT EXISTS completed_exercise (\n"
                 + "	id INTEGER PRIMARY KEY,\n"
                 + " exercise_id INTEGER,\n"

@@ -14,16 +14,16 @@ import javafx.scene.text.Text;
 import java.io.IOException;
 
 public class MainView extends AnchorPane {
-    @FXML AnchorPane contentRootAnchorPane;
-    @FXML AnchorPane navigationAnchorPane;
-    @FXML AnchorPane templateRootAnchorPane;
-    @FXML Button workoutBtn;
-    @FXML Text firstNameText;
+    @FXML private AnchorPane contentRootAnchorPane;
+    @FXML private AnchorPane navigationAnchorPane;
+    @FXML private AnchorPane templateRootAnchorPane;
+    @FXML private Button workoutBtn;
+    @FXML private Text firstNameText;
 
-    WorkoutController workoutView = new WorkoutController();
-    NutritionViewController nutritionViewController = new NutritionViewController();
-    CalorieIntakeCalculatorController calorieIntakeCalculatorController = new CalorieIntakeCalculatorController();
-    SettingsViewController settingsViewController;
+    private WorkoutController workoutView = new WorkoutController();
+    private NutritionViewController nutritionViewController = new NutritionViewController();
+    private CalorieIntakeCalculatorController calorieIntakeCalculatorController = new CalorieIntakeCalculatorController();
+    private SettingsViewController settingsViewController;
 
     public MainView(){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/MainView.fxml"));

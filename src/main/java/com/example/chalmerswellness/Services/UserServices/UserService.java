@@ -29,6 +29,7 @@ public class UserService {
         repository.insertUser(user);
     }
 
+    //TODO must change!
     public void updateUser(int id, String username, String password, String firstName, String lastName, Gender gender, String email, LocalDate birthDate, int height, double weight) {
         repository.updateUser(id, username, password, firstName, lastName, gender, email, birthDate, height, weight);
     }
@@ -55,9 +56,5 @@ public class UserService {
 
     public void setWeightGoal(int id, double weightGoal)   {
         repository.setWeightGoal(id, weightGoal);
-    }
-
-    public void deleteAllUsers(){
-        repository.deleteAllUsers();
     }
 }

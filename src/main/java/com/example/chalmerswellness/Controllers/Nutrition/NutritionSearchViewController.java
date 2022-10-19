@@ -24,7 +24,7 @@ public class NutritionSearchViewController extends AnchorPane implements Observe
 
     Meal meal;
     FoodFacade foodFacade = new FoodFacade();
-    Food food = new Food();
+    Food food;
     NutritionService nutritionService = NutritionService.getInstance();
     List<Food> foods;
 
