@@ -16,6 +16,11 @@ public class LoginController extends AnchorPane {
     private AnchorPane rootPane;
     private final UserService userService = UserService.getInstance();
 
+
+    public LoginController() {
+
+    }
+
     @FXML
     private void login() {
         final String username = usernameTextField.getText();

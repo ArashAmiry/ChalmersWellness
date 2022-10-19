@@ -50,5 +50,5 @@ public final class NutritionService {
     public double getTodaysFat() {
         return repository.getTodaysFat();
     }
-
+    
 }

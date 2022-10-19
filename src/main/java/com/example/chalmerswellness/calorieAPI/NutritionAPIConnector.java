@@ -10,6 +10,11 @@ class NutritionAPIConnector {
 
     private final String urlString = "https://api.api-ninjas.com/v1/nutrition?query=";
 
+    /**
+     * Gets information about food as a JSON string
+     * @param query name of food or drink to get information about
+     * @return JSON data as string from api
+     */
     String getNutritionAsStringFromAPI(String query){
         StringBuffer responseContent = new StringBuffer();
         try {
