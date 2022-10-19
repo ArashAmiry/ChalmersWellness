@@ -1,6 +1,6 @@
 package com.example.chalmerswellness.Controllers.Dashboard;
 
-public class DashboardQuotes {
+public final class DashboardQuotes {
     private String motivationalQuote;
     private String sportsAndCompetitionQuote;
 

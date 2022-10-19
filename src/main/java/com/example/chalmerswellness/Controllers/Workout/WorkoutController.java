@@ -2,23 +2,22 @@ package com.example.chalmerswellness.Controllers.Workout;
 
 import com.example.chalmerswellness.Controllers.Workout.CreateWorkout.CreateWorkoutController;
 import com.example.chalmerswellness.Controllers.Workout.ManageWorkout.ManageWorkoutController;
-import com.example.chalmerswellness.Controllers.Workout.ManageWorkout.ManageWorkoutModalController;
 import com.example.chalmerswellness.Controllers.Workout.SearchPane.ExerciseSearchController;
 import com.example.chalmerswellness.Controllers.Workout.TodaysWorkout.TodayWorkoutController;
 import com.example.chalmerswellness.Controllers.Workout.TodaysWorkout.WorkoutListController;
 import com.example.chalmerswellness.Models.WorkoutModel;
 import com.example.chalmerswellness.ObjectModels.Workout;
-import com.example.chalmerswellness.Services.DatabaseConnector;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class WorkoutController extends AnchorPane implements Initializable {
+public final class WorkoutController extends AnchorPane implements Initializable {
 
     private WorkoutModel workoutModel;
     private CreateWorkoutController createWorkoutView;

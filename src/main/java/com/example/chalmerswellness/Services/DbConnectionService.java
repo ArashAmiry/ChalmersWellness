@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DbConnectionService {
+public final class DbConnectionService {
     private static String dbPath;
     private static DbConnectionService dbConnectionService = null;
 

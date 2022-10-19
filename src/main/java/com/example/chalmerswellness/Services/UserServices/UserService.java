@@ -5,7 +5,7 @@ import com.example.chalmerswellness.User;
 
 import java.time.LocalDate;
 
-public class UserService {
+public final class UserService {
     private IDatabaseUserRepository repository;
     private UserService(IDatabaseUserRepository repositoryType)
     {
