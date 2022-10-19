@@ -16,6 +16,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
@@ -28,6 +29,7 @@ public class ManageWorkoutController extends AnchorPane implements Observer {
     private WorkoutModel model;
     @FXML public ListView workoutList;
     @FXML public Label noResult;
+    @FXML private AnchorPane mainPane;
 
 
     public ManageWorkoutController(WorkoutModel workoutModel){
@@ -58,10 +60,8 @@ public class ManageWorkoutController extends AnchorPane implements Observer {
         exercisesList.clear();
 
         for (var exercise: exercises) {
-            //ExerciseSearchItemController exerciseController = new ExerciseSearchItemController(exercise, model);
             ExerciseItemController exerciseController = new ExerciseItemController(exercise, model, this);
             exercisesList.add(exerciseController);
-            //exercisesList.add(exerciseController);
         }
         workoutList.getItems().setAll(exercisesList);
     }
@@ -75,11 +75,14 @@ public class ManageWorkoutController extends AnchorPane implements Observer {
     }
 
 
+    public void openManageModal(Workout workout){
+       mainPane.getChildren().add(new ManageWorkoutModalController(model, workout, mainPane));
+    }
+
     @Override
     public void update(Observable observable) {
         model = (WorkoutModel) observable;
-        //var exercises = model.getAddedExercises();
-        populateWorkoutList();
+        updateWorkoutList(model.getSavedWorkouts());
         //updateExerciseList(exercises);
     }
 }

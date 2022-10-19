@@ -350,7 +350,6 @@ public class DatabaseWorkoutRepository implements IDatabaseWorkoutRepository {
     }
 
     public void deleteSavedWorkout(Workout workout) {
-
         String sql = "DELETE FROM created_workout WHERE id = ?";
         try (Connection conn = DbConnectionService.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
