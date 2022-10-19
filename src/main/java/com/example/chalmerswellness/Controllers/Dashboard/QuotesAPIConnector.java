@@ -25,14 +25,14 @@ public class QuotesAPIConnector {
 
             int responseCode = connection.getResponseCode();
 
-            if (responseCode != 200) {
-                throw new RuntimeException("HttpResponseCode: " + responseCode);
-            } else {
+            if (responseCode == 200) {
                 reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 while ((line = reader.readLine()) != null) {
                     responseContent.append(line);
                 }
                 reader.close();
+            } else {
+                throw new RuntimeException("HttpResponseCode: " + responseCode);
             }
             return getQuote(String.valueOf(responseContent));
         } catch (Exception e) {
