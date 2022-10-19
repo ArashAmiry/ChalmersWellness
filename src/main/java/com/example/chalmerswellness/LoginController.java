@@ -7,13 +7,13 @@ import javafx.scene.layout.AnchorPane;
 
 public class LoginController extends AnchorPane {
     @FXML
-    TextField usernameTextField;
+    private TextField usernameTextField;
     @FXML
-    TextField passwordTextField;
+    private TextField passwordTextField;
     @FXML
-    AnchorPane navigationPane;
+    private AnchorPane navigationPane;
     @FXML
-    AnchorPane rootPane;
+    private AnchorPane rootPane;
     private final UserService userService = UserService.getInstance();
 
 
@@ -36,7 +36,7 @@ public class LoginController extends AnchorPane {
     }
 
     @FXML
-    void createNewAccount() {
+    private void createNewAccount() {
         rootPane.getChildren().add(new SignUpController(rootPane));
     }
 

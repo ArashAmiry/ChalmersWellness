@@ -66,7 +66,7 @@ class WorkoutTest {
         List<ExerciseItem> completedExercises = model.getTodayCompletedExercises();
         Assertions.assertEquals(true, completedExercises.size() == 0);
 
-        model.addExerciseToActiveWorkout(model.getExercises().get(0));
+        model.addExerciseToActiveWorkout(new ExerciseItem(model.getExercises().get(0)));
         completedExercises = model.getTodayCompletedExercises();
 
         ExerciseItem exerciseItem = completedExercises.get(0);
@@ -85,7 +85,7 @@ class WorkoutTest {
     @Test
     void TestRemoveSet() {
         Exercise exercise = model.getExercises().get(0);
-        model.addExerciseToActiveWorkout(exercise);
+        model.addExerciseToActiveWorkout(new ExerciseItem(exercise));
         ExerciseItem exerciseItem = model.getTodayCompletedExercises().get(0);
 
         ExerciseItemSet set = new ExerciseItemSet(40, 5);
@@ -109,7 +109,7 @@ class WorkoutTest {
         Assertions.assertEquals(true, exerciseItems.size() == 0);
 
         Exercise exercise = model.getExercises().get(0);
-        model.addExerciseToActiveWorkout(exercise);
+        model.addExerciseToActiveWorkout(new ExerciseItem(exercise));
         exerciseItems = model.getTodayCompletedExercises();
 
         Assertions.assertEquals(true, exerciseItems.size()>0);
@@ -121,7 +121,7 @@ class WorkoutTest {
         Assertions.assertEquals(true, exerciseItems.size() == 0);
 
         Exercise exercise = model.getExercises().get(0);
-        model.addExerciseToActiveWorkout(exercise);
+        model.addExerciseToActiveWorkout(new ExerciseItem(exercise));
 
         exerciseItems = model.getTodayCompletedExercises();
         Assertions.assertEquals(true, exerciseItems.size() > 0);
@@ -135,7 +135,7 @@ class WorkoutTest {
     @Test
     void TestUpdateCompletedExercise() {
         Exercise exercise = model.getExercises().get(0);
-        model.addExerciseToActiveWorkout(exercise);
+        model.addExerciseToActiveWorkout(new ExerciseItem(exercise));
         ExerciseItem exerciseItem = model.getTodayCompletedExercises().get(0);
         Assertions.assertEquals(true, exerciseItem.getSets().size() == 0);
 

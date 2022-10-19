@@ -3,7 +3,6 @@ package com.example.chalmerswellness;
 import com.example.chalmerswellness.Services.UserServices.UserService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
@@ -15,32 +14,33 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
-public class SignUpController extends AnchorPane implements Initializable {
+public class SignUpController extends AnchorPane {
     @FXML
-    TextField usernameTextField;
+    private TextField usernameTextField;
     @FXML
-    TextField passwordTextField;
+    private TextField passwordTextField;
     @FXML
-    TextField firstNameTextField;
+    private TextField firstNameTextField;
     @FXML
-    TextField lastNameTextField;
+    private TextField lastNameTextField;
     @FXML
-    TextField emailTextField;
+    private TextField emailTextField;
     @FXML
-    TextField heightTextField;
+    private TextField heightTextField;
     @FXML
-    TextField weightTextField;
+    private TextField weightTextField;
     @FXML
-    DatePicker birthDatePicker;
+    private DatePicker birthDatePicker;
     @FXML
-    RadioButton maleRadioButton;
+    private RadioButton maleRadioButton;
     @FXML
-    RadioButton femaleRadioButton;
-    @FXML AnchorPane navigationPane;
-    ToggleGroup genderToggleGroup = new ToggleGroup();
+    private RadioButton femaleRadioButton;
+    @FXML
+    private AnchorPane navigationPane;
+    private ToggleGroup genderToggleGroup = new ToggleGroup();
     private final UserService userService = UserService.getInstance();
 
-    AnchorPane rootpane;
+    private AnchorPane rootpane;
 
     public SignUpController(AnchorPane pane) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/SignUpView.fxml"));
@@ -57,8 +57,8 @@ public class SignUpController extends AnchorPane implements Initializable {
         }
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    @FXML
+    private void initialize() {
         maleRadioButton.setToggleGroup(genderToggleGroup);
         femaleRadioButton.setToggleGroup(genderToggleGroup);
         maleRadioButton.setUserData(Gender.Male);
@@ -91,7 +91,7 @@ public class SignUpController extends AnchorPane implements Initializable {
     }
 
     @FXML
-    void openLoginPage() {
+    private void openLoginPage() {
         rootpane.getChildren().remove(this);
     }
 

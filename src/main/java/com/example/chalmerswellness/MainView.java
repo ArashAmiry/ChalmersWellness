@@ -20,7 +20,7 @@ public class MainView extends AnchorPane {
     @FXML Button workoutBtn;
     @FXML Text firstNameText;
 
-    WorkoutController workoutView = new WorkoutController();
+    WorkoutController workoutView = WorkoutController.getInstance();
     NutritionViewController nutritionViewController = new NutritionViewController();
     CalorieIntakeCalculatorController calorieIntakeCalculatorController = new CalorieIntakeCalculatorController();
     SettingsViewController settingsViewController;
