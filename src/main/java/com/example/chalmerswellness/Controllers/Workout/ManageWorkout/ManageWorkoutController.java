@@ -1,13 +1,10 @@
 package com.example.chalmerswellness.Controllers.Workout.ManageWorkout;
 
-import com.example.chalmerswellness.Controllers.Workout.SearchPane.ExerciseSearchItemController;
 import com.example.chalmerswellness.Controllers.Workout.TodaysWorkout.ExerciseItemController;
 import com.example.chalmerswellness.Controllers.Workout.WorkoutItemController;
 import com.example.chalmerswellness.Models.WorkoutModel;
-import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.Interfaces.Observable;
 import com.example.chalmerswellness.Interfaces.Observer;
-import com.example.chalmerswellness.Models.WorkoutModel;
 import com.example.chalmerswellness.ObjectModels.ExerciseItem;
 import com.example.chalmerswellness.ObjectModels.Workout;
 import javafx.collections.FXCollections;
@@ -16,7 +13,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
@@ -45,6 +41,10 @@ public class ManageWorkoutController extends AnchorPane implements Observer {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
+    }
+
+    @FXML
+    public void initialize(){
         populateWorkoutList();
     }
 
@@ -59,8 +59,9 @@ public class ManageWorkoutController extends AnchorPane implements Observer {
     void updateExerciseList(List<ExerciseItem> exercises){
         exercisesList.clear();
 
+        ExerciseItemController exerciseController;
         for (var exercise: exercises) {
-            ExerciseItemController exerciseController = new ExerciseItemController(exercise, model, this);
+            exerciseController = new ExerciseItemController(exercise, model, this);
             exercisesList.add(exerciseController);
         }
         workoutList.getItems().setAll(exercisesList);

@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class WorkoutService {
-    private static WorkoutService single_instance = null;
+    private static WorkoutService workoutService = null;
     private IDatabaseWorkoutRepository repository;
     private WorkoutService(IDatabaseWorkoutRepository workoutRepository)
     {
@@ -15,14 +15,14 @@ public class WorkoutService {
     }
 
     public static void createInstance(IDatabaseWorkoutRepository workoutRepository){
-        if(single_instance == null){
-            single_instance = new WorkoutService(workoutRepository);
+        if(workoutService == null){
+            workoutService = new WorkoutService(workoutRepository);
         }
     }
 
     public static WorkoutService getInstance()
     {
-        return single_instance;
+        return workoutService;
     }
 
     public List<ExerciseItem> getCompletedExercises()

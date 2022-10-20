@@ -1,8 +1,6 @@
 package com.example.chalmerswellness.Controllers.Workout;
 
-import com.example.chalmerswellness.Controllers.Workout.ManageWorkout.ManageWorkoutController;
 import com.example.chalmerswellness.Models.WorkoutModel;
-import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.ObjectModels.Workout;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -48,8 +46,8 @@ public class WorkoutItemController extends AnchorPane implements Initializable{
         model.addExercisesFromWorkout(workoutItem);
     }
 
-    @FXML private void EditWorkout(){
-        WorkoutController.getInstance().openCreatedWorkout(workoutItem);
+    @FXML private void editWorkout(){
+        WorkoutController.getWorkoutController().openCreatedWorkout(workoutItem);
         model.removeWorkout(workoutItem);
     }
 

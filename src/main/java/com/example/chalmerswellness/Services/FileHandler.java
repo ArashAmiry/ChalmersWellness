@@ -4,6 +4,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Properties;
 
 public class FileHandler {
@@ -11,7 +13,7 @@ public class FileHandler {
     public static String getDbUrl(boolean useActualDb) {
         Properties p = new Properties();
         try{
-            InputStream is = new FileInputStream("src/main/resources/dbConfig.txt");
+            InputStream is = Files.newInputStream(Paths.get("src/main/resources/dbConfig.txt"));
             p.load(is);
 
             var dbUrl = p.getProperty("dbUrl");

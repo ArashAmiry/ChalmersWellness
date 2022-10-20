@@ -36,14 +36,13 @@ public class CreateExerciseItemController extends AnchorPane implements Initiali
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
-        setsField.textProperty().set(this.exerciseItem.getSetsCount() + "");
     }
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1){
         setName();
         hideErrorLabel();
-
+        setsField.textProperty().set(String.valueOf(exerciseItem.getSetsCount()));
     }
 
     private void setName(){

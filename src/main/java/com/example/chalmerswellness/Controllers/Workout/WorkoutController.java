@@ -2,13 +2,11 @@ package com.example.chalmerswellness.Controllers.Workout;
 
 import com.example.chalmerswellness.Controllers.Workout.CreateWorkout.CreateWorkoutController;
 import com.example.chalmerswellness.Controllers.Workout.ManageWorkout.ManageWorkoutController;
-import com.example.chalmerswellness.Controllers.Workout.ManageWorkout.ManageWorkoutModalController;
 import com.example.chalmerswellness.Controllers.Workout.SearchPane.ExerciseSearchController;
 import com.example.chalmerswellness.Controllers.Workout.TodaysWorkout.TodayWorkoutController;
 import com.example.chalmerswellness.Controllers.Workout.TodaysWorkout.WorkoutListController;
 import com.example.chalmerswellness.Models.WorkoutModel;
 import com.example.chalmerswellness.ObjectModels.Workout;
-import com.example.chalmerswellness.Services.DatabaseConnector;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -29,7 +27,7 @@ public class WorkoutController extends AnchorPane implements Initializable {
     @FXML private AnchorPane mainContent;
     @FXML private Button addedWorkoutsBtn;
 
-    private static final WorkoutController instance = new WorkoutController();
+    private static final WorkoutController WORKOUTCONTROLLER = new WorkoutController();
 
     private WorkoutController(){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/WorkoutView.fxml"));
@@ -64,8 +62,8 @@ public class WorkoutController extends AnchorPane implements Initializable {
         addedWorkoutsBtn.setVisible(true);
     }
 
-    public static WorkoutController getInstance(){
-        return instance;
+    public static WorkoutController getWorkoutController(){
+        return WORKOUTCONTROLLER;
     }
 
 

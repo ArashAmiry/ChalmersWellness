@@ -15,6 +15,7 @@ import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
+import java.util.logging.Level;
 
 public class CalorieIntakeCalculatorController extends AnchorPane implements Initializable{
     @FXML
@@ -51,6 +52,7 @@ public class CalorieIntakeCalculatorController extends AnchorPane implements Ini
         try {
             fxmlLoader.load();
         } catch (IOException exception) {
+            CodeLogger.log(Level.WARNING, "Fxml could not load", exception);
             throw new RuntimeException(exception);
         }
 

@@ -1,5 +1,6 @@
 package com.example.chalmerswellness.Services.WorkoutServices;
 
+import com.example.chalmerswellness.CodeLogger;
 import com.example.chalmerswellness.LoggedInUser;
 import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.ObjectModels.ExerciseItem;
@@ -11,9 +12,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Level;
 
 public class DatabaseWorkoutRepository implements IDatabaseWorkoutRepository {
-
     public List<Exercise> getExercises() {
         String sql = "SELECT * FROM exercise";
         List<Exercise> exercises = new ArrayList<>();
@@ -35,7 +36,7 @@ public class DatabaseWorkoutRepository implements IDatabaseWorkoutRepository {
                 exercises.add(exercise);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            CodeLogger.log(Level.WARNING, "Could not fetch exercises", e);
         }
 
         return exercises;
@@ -51,18 +52,18 @@ public class DatabaseWorkoutRepository implements IDatabaseWorkoutRepository {
                 pstmt.executeQuery();
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                var id = rs.getInt("id");
-                var exerciseId = rs.getInt("exercise_id");
-                var isDone = rs.getBoolean("is_done");
-                var planned_Sets = rs.getInt("planned_sets");
+                int id = rs.getInt("id");
+                int exerciseId = rs.getInt("exercise_id");
+                boolean isDone = rs.getBoolean("is_done");
+                int plannedSets = rs.getInt("planned_sets");
 
                 ExerciseItem exerciseItem = new ExerciseItem(id, getExercise(exerciseId), getCompletedSets(id));
                 exerciseItem.setDone(isDone);
-                exerciseItem.setPlannedSetsCount(planned_Sets);
+                exerciseItem.setPlannedSetsCount(plannedSets);
                 exerciseItems.add(exerciseItem);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            CodeLogger.log(Level.WARNING, "Could fetch completed exercises", e);
         }
 
         Collections.reverse(exerciseItems);
@@ -91,7 +92,7 @@ public class DatabaseWorkoutRepository implements IDatabaseWorkoutRepository {
                 exerciseItems.add(exerciseItem);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            CodeLogger.log(Level.WARNING, "Could not fetch completed exercises", e);
         }
 
         Collections.reverse(exerciseItems);
@@ -116,7 +117,7 @@ public class DatabaseWorkoutRepository implements IDatabaseWorkoutRepository {
                 workouts.add(workout);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            CodeLogger.log(Level.WARNING, "Could not fetch workouts", e);
         }
 
         return workouts;
@@ -139,7 +140,7 @@ public class DatabaseWorkoutRepository implements IDatabaseWorkoutRepository {
                 generatedKey = rs.getInt(1);
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            CodeLogger.log(Level.WARNING, "Could not insert completed exercise", e);
         }
 
         return new ExerciseItem(generatedKey, exercise);
@@ -168,7 +169,7 @@ public class DatabaseWorkoutRepository implements IDatabaseWorkoutRepository {
 
             insertWorkoutExercises(workout.getExercises(), generatedKey);
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            CodeLogger.log(Level.WARNING, "Could not insert workout", e);
         }
     }
 
@@ -184,7 +185,7 @@ public class DatabaseWorkoutRepository implements IDatabaseWorkoutRepository {
 
                 updateCompletedSets(exerciseItemId, exerciseItem.getSets());
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            CodeLogger.log(Level.WARNING, "Could not update completed exercise", e);
         }
     }
 
@@ -198,7 +199,7 @@ public class DatabaseWorkoutRepository implements IDatabaseWorkoutRepository {
                 pstmt.setInt(1, exercise.getExerciseItemId());
                 pstmt.executeUpdate();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            CodeLogger.log(Level.WARNING, "Could not delete exercise", e);
         }
     }
 
@@ -213,24 +214,23 @@ public class DatabaseWorkoutRepository implements IDatabaseWorkoutRepository {
 
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                var id = rs.getInt("id");
                 double weight = rs.getDouble("weight");
                 int reps = rs.getInt("reps");
                 ExerciseItemSet set = new ExerciseItemSet(weight, reps);
                 sets.add(set);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            CodeLogger.log(Level.WARNING, "Could'nt fetch completed sets'", e);
         }
         return sets;
     }
 
-    private static Exercise getExercise(int exercise_id) throws SQLException {
+    private static Exercise getExercise(int exerciseId) throws SQLException {
         String sql = "SELECT * FROM exercise WHERE id = ?";
 
         try (Connection conn = DbConnectionService.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, exercise_id);
+            pstmt.setInt(1, exerciseId);
 
             ResultSet rs = pstmt.executeQuery();
             Exercise exercise = null;
@@ -242,7 +242,7 @@ public class DatabaseWorkoutRepository implements IDatabaseWorkoutRepository {
                 var difficulty = rs.getString("exerciseDifficulty");
                 var instructions = rs.getString("exerciseInstructions");
 
-                exercise = new Exercise(exercise_id, exerciseName, type, muscle, equipment, difficulty, instructions);
+                exercise = new Exercise(exerciseId, exerciseName, type, muscle, equipment, difficulty, instructions);
             }
             return exercise;
         }
@@ -256,7 +256,7 @@ public class DatabaseWorkoutRepository implements IDatabaseWorkoutRepository {
                 pstmt.setInt(1, exerciseId);
                 pstmt.executeUpdate();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            CodeLogger.log(Level.WARNING, "Could not remove completed sets", e);
         }
     }
 
@@ -274,7 +274,7 @@ public class DatabaseWorkoutRepository implements IDatabaseWorkoutRepository {
                 pstmt.executeUpdate();
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            CodeLogger.log(Level.WARNING, "Could not update completed sets", e);
         }
     }
 
@@ -295,7 +295,7 @@ public class DatabaseWorkoutRepository implements IDatabaseWorkoutRepository {
             }
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            CodeLogger.log(Level.WARNING, "Could not insert exercises", e);
         }
     }
 
@@ -334,18 +334,7 @@ public class DatabaseWorkoutRepository implements IDatabaseWorkoutRepository {
                 pstmt.executeUpdate();
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    public void deleteTodaysCompletedExercises() {
-        String sql = "DELETE FROM completed_exercise WHERE insert_date = CURRENT_DATE";
-
-        try (Connection conn = DbConnectionService.connect();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            CodeLogger.log(Level.WARNING, "Could insert workout exercises", e);
         }
     }
 
@@ -356,31 +345,7 @@ public class DatabaseWorkoutRepository implements IDatabaseWorkoutRepository {
                 pstmt.setInt(1, workout.getId());
                 pstmt.executeUpdate();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            CodeLogger.log(Level.WARNING, "Could not delete saved workout", e);
         }
     }
-
-
-    /*public Exercise insertWorkoutExercise(Exercise exercise){
-        String sql = "INSERT INTO workout_exercise VALUES(?,?,?)";
-            String date = LocalDate.now().toString();
-            int generatedKey = 0;
-
-            try (Connection conn = DbConnectionService.connect();
-                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
-                    pstmt.setInt(2, exercise.getId());
-                    pstmt.setString(3, date);
-                    pstmt.executeUpdate();
-
-                ResultSet rs = pstmt.getGeneratedKeys();
-                if (rs.next()) {
-                    generatedKey = rs.getInt(1);
-                }
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-            }
-
-        return new Exercise(generatedKey, exercise);
-    }
-     */
 }

@@ -7,7 +7,7 @@ public class ExerciseItem extends Exercise{
     private int id;
     private List<ExerciseItemSet> sets = new ArrayList<>();
     private int setsCount;
-    private boolean isDone = false;
+    private boolean isDone;
 
     public ExerciseItem(Exercise exercise){
         super(exercise.getId(), exercise);

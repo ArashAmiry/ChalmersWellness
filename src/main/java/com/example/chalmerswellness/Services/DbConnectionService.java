@@ -1,8 +1,10 @@
 package com.example.chalmerswellness.Services;
 
+import com.example.chalmerswellness.CodeLogger;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.logging.Level;
 
 public class DbConnectionService {
     private static String dbPath;
@@ -17,7 +19,7 @@ public class DbConnectionService {
         if(dbConnectionService == null){
             dbConnectionService = new DbConnectionService(useActualDb);
         } else {
-            System.out.println("Already Created Instance!");
+            CodeLogger.log(Level.WARNING, "Already created instance");
         }
     }
 
@@ -37,7 +39,7 @@ public class DbConnectionService {
             conn = DriverManager.getConnection(url);
             conn.createStatement().execute("PRAGMA foreign_keys = ON");
         } catch (SQLException e) {
-            e.printStackTrace();
+            CodeLogger.log(Level.WARNING, "Could not connect to database", e);
         }
         return conn;
     }
