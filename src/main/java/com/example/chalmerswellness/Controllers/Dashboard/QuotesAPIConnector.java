@@ -19,8 +19,8 @@ public class QuotesAPIConnector {
 
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
-            connection.setConnectTimeout(1000);
-            connection.setReadTimeout(1000);
+            connection.setConnectTimeout(10000);
+            connection.setReadTimeout(10000);
             connection.connect();
 
             int responseCode = connection.getResponseCode();
