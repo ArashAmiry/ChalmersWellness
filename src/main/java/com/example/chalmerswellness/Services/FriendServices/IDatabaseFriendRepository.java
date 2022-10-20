@@ -8,10 +8,10 @@ public interface IDatabaseFriendRepository {
 
     List<User> findFriends(String friendName);
 
-    void insertFollow(int followingID);
+    void insertFollow(int followingId);
 
-    void removeFollow(int following_id);
+    void removeFollow(int followingId);
 
-    boolean alreadyFollowing(int followerID, int followingID);
+    boolean alreadyFollowing(int followerId, int followingId);
 
 }

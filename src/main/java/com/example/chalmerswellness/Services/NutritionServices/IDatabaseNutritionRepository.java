@@ -17,7 +17,4 @@ public interface IDatabaseNutritionRepository {
     double getTodaysFat();
 
     double getTodaysCarbs();
-
-    void deleteNutritionData();
-
 }

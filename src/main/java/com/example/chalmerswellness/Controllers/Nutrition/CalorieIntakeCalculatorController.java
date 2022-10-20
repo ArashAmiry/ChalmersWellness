@@ -14,7 +14,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
@@ -76,7 +75,7 @@ public class CalorieIntakeCalculatorController extends AnchorPane implements Ini
     }
 
     @FXML
-    private void calculateCalorieIntake(MouseEvent mouseEvent) {
+    private void calculateCalorieIntake() {
         User loggedInUser = LoggedInUser.getInstance();
         double weight = loggedInUser.getWeight();
         double height = loggedInUser.getHeight();

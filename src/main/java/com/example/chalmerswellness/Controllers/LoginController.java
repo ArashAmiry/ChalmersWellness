@@ -5,7 +5,6 @@ import com.example.chalmerswellness.MainView;
 import com.example.chalmerswellness.Services.UserServices.UserService;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 public class LoginController extends AnchorPane {
@@ -19,8 +18,13 @@ public class LoginController extends AnchorPane {
     private AnchorPane rootPane;
     private final UserService userService = UserService.getInstance();
 
+
+    public LoginController() {
+
+    }
+
     @FXML
-    private void login(MouseEvent event) {
+    void login() {
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
         if(userService.checkIfCredentialsAreCorrect(username, password)) {
@@ -34,7 +38,7 @@ public class LoginController extends AnchorPane {
     }
 
     @FXML
-    private void createNewAccount(MouseEvent event) {
+    private void createNewAccount() {
         rootPane.getChildren().add(new SignUpController(rootPane));
     }
 

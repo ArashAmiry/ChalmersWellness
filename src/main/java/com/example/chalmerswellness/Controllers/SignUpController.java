@@ -11,7 +11,6 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
@@ -69,7 +68,7 @@ public class SignUpController extends AnchorPane {
     }
 
     @FXML
-    private void signUp(MouseEvent event) {
+    void signUp() {
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
         Gender gender = (Gender) genderToggleGroup.getSelectedToggle().getUserData();
@@ -94,7 +93,7 @@ public class SignUpController extends AnchorPane {
     }
 
     @FXML
-    private void openLoginPage(MouseEvent event) {
+    private void openLoginPage() {
         rootpane.getChildren().remove(this);
     }
 
