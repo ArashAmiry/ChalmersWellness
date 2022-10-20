@@ -1,4 +1,4 @@
-package com.example.chalmerswellness.Models.calorieAPI;
+package com.example.chalmerswellness.Models.FoodModel;
 
 import java.io.BufferedReader;
 import java.io.IOException;

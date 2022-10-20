@@ -1,6 +1,6 @@
 package com.example.chalmerswellness.Models.Services.NutritionServices;
 
-import com.example.chalmerswellness.Models.calorieAPI.Food;
+import com.example.chalmerswellness.Models.FoodModel.Food;
 import com.example.chalmerswellness.Enums.Meal;
 
 import java.util.List;

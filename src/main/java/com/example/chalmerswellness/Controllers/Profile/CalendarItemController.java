@@ -1,6 +1,6 @@
 package com.example.chalmerswellness.Controllers.Profile;
 import com.example.chalmerswellness.Models.ObjectModels.ExerciseItem;
-import com.example.chalmerswellness.Models.ProfileModel;
+import com.example.chalmerswellness.Models.AccountModel.ProfileModel;
 import com.example.chalmerswellness.Models.Services.UserServices.UserService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

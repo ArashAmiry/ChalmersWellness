@@ -1,7 +1,7 @@
 package com.example.chalmerswellness.Controllers.Workout.ManageWorkout;
 
 import com.example.chalmerswellness.Controllers.Workout.CreateWorkout.CreateExerciseItemController;
-import com.example.chalmerswellness.Models.WorkoutModel;
+import com.example.chalmerswellness.Models.WorkoutModel.WorkoutModel;
 import com.example.chalmerswellness.Models.ObjectModels.ExerciseItem;
 import com.example.chalmerswellness.Models.ObjectModels.Workout;
 import javafx.collections.FXCollections;

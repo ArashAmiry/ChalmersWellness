@@ -1,6 +1,6 @@
 package com.example.chalmerswellness.Controllers.Workout.TodaysWorkout;
 
-import com.example.chalmerswellness.Models.WorkoutModel;
+import com.example.chalmerswellness.Models.WorkoutModel.WorkoutModel;
 import com.example.chalmerswellness.Models.ObjectModels.Exercise;
 import com.example.chalmerswellness.Models.ObjectModels.ExerciseItem;
 import javafx.fxml.FXML;

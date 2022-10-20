@@ -2,8 +2,8 @@ package com.example.chalmerswellness.Controllers.Nutrition;
 
 import com.example.chalmerswellness.Enums.Gender;
 import com.example.chalmerswellness.Interfaces.Observer;
-import com.example.chalmerswellness.Models.LoggedInUser;
-import com.example.chalmerswellness.Models.CalorieCalculator;
+import com.example.chalmerswellness.Models.AccountModel.LoggedInUser;
+import com.example.chalmerswellness.Models.FoodModel.CalorieCalculator;
 import com.example.chalmerswellness.Models.ObjectModels.User;
 import com.example.chalmerswellness.Models.Services.UserServices.UserService;
 import javafx.fxml.FXML;

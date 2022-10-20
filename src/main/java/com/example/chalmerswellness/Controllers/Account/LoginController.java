@@ -1,7 +1,7 @@
 package com.example.chalmerswellness.Controllers.Account;
 
 import com.example.chalmerswellness.Controllers.MainView;
-import com.example.chalmerswellness.Models.LoggedInUser;
+import com.example.chalmerswellness.Models.AccountModel.LoggedInUser;
 import com.example.chalmerswellness.Models.Services.UserServices.UserService;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;

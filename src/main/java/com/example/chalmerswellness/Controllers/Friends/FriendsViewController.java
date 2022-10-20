@@ -1,6 +1,6 @@
 package com.example.chalmerswellness.Controllers.Friends;
 
-import com.example.chalmerswellness.Models.FriendSearcher;
+import com.example.chalmerswellness.Models.AccountModel.FriendSearcher;
 import com.example.chalmerswellness.Models.ObjectModels.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

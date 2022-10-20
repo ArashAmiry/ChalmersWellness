@@ -1,4 +1,4 @@
-package com.example.chalmerswellness.Models;
+package com.example.chalmerswellness.Models.AccountModel;
 
 import com.example.chalmerswellness.Models.ObjectModels.User;
 

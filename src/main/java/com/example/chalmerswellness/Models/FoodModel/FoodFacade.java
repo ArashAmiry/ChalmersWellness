@@ -1,9 +1,9 @@
-package com.example.chalmerswellness.Models.calorieAPI;
+package com.example.chalmerswellness.Models.FoodModel;
 
 import com.example.chalmerswellness.Enums.Meal;
 import com.example.chalmerswellness.Interfaces.Observable;
 import com.example.chalmerswellness.Interfaces.Observer;
-import com.example.chalmerswellness.Models.LoggedInUser;
+import com.example.chalmerswellness.Models.AccountModel.LoggedInUser;
 import com.example.chalmerswellness.Models.Services.NutritionServices.NutritionService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.json.JSONException;

@@ -1,4 +1,4 @@
-package com.example.chalmerswellness.Models;
+package com.example.chalmerswellness.Models.FoodModel;
 
 import com.example.chalmerswellness.Enums.Gender;
 

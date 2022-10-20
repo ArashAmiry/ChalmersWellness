@@ -1,4 +1,4 @@
-package com.example.chalmerswellness.Models;
+package com.example.chalmerswellness.Models.WorkoutModel;
 
 import com.example.chalmerswellness.Models.ObjectModels.Exercise;
 import com.example.chalmerswellness.Models.ObjectModels.ExerciseItem;

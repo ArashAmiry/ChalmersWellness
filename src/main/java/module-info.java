@@ -12,8 +12,7 @@ module com.example.chalmerswellness {
 
     opens com.example.chalmerswellness to javafx.fxml;
     exports com.example.chalmerswellness;
-    exports com.example.chalmerswellness.Models;
-    opens com.example.chalmerswellness.Models to javafx.fxml;
+
     exports com.example.chalmerswellness.Models.ObjectModels;
     opens com.example.chalmerswellness.Models.ObjectModels to javafx.fxml;
     exports com.example.chalmerswellness.Controllers.Workout;
@@ -32,8 +31,8 @@ module com.example.chalmerswellness {
     opens com.example.chalmerswellness.Controllers.Dashboard to javafx.fxml;
     exports com.example.chalmerswellness.Controllers.Settings;
     opens com.example.chalmerswellness.Controllers.Settings to javafx.fxml;
-    exports com.example.chalmerswellness.Models.calorieAPI;
-    opens com.example.chalmerswellness.Models.calorieAPI to javafx.fxml;
+    exports com.example.chalmerswellness.Models.FoodModel;
+    opens com.example.chalmerswellness.Models.FoodModel to javafx.fxml;
     exports com.example.chalmerswellness.Controllers.Friends;
     opens com.example.chalmerswellness.Controllers.Friends;
     exports com.example.chalmerswellness.Controllers.Workout.CreateWorkout;
@@ -54,4 +53,8 @@ module com.example.chalmerswellness {
     opens com.example.chalmerswellness.Enums to javafx.fxml;
     exports com.example.chalmerswellness.Controllers.Account;
     opens com.example.chalmerswellness.Controllers.Account to javafx.fxml;
+    exports com.example.chalmerswellness.Models.AccountModel;
+    opens com.example.chalmerswellness.Models.AccountModel to javafx.fxml;
+    exports com.example.chalmerswellness.Models.WorkoutModel;
+    opens com.example.chalmerswellness.Models.WorkoutModel to javafx.fxml;
 }

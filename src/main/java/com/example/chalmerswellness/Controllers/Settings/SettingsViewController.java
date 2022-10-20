@@ -1,7 +1,7 @@
 package com.example.chalmerswellness.Controllers.Settings;
 
 import com.example.chalmerswellness.Enums.Gender;
-import com.example.chalmerswellness.Models.LoggedInUser;
+import com.example.chalmerswellness.Models.AccountModel.LoggedInUser;
 import com.example.chalmerswellness.Models.Services.UserServices.UserService;
 import com.example.chalmerswellness.Models.ObjectModels.User;
 import javafx.fxml.FXML;

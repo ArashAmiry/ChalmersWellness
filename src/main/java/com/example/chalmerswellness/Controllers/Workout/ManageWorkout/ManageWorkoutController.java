@@ -2,7 +2,7 @@ package com.example.chalmerswellness.Controllers.Workout.ManageWorkout;
 
 import com.example.chalmerswellness.Controllers.Workout.TodaysWorkout.ExerciseItemController;
 import com.example.chalmerswellness.Controllers.Workout.WorkoutItemController;
-import com.example.chalmerswellness.Models.WorkoutModel;
+import com.example.chalmerswellness.Models.WorkoutModel.WorkoutModel;
 import com.example.chalmerswellness.Interfaces.Observable;
 import com.example.chalmerswellness.Interfaces.Observer;
 import com.example.chalmerswellness.Models.ObjectModels.ExerciseItem;
