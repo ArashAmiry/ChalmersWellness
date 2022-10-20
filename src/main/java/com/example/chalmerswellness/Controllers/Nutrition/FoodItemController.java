@@ -1,7 +1,7 @@
 package com.example.chalmerswellness.Controllers.Nutrition;
 
-import com.example.chalmerswellness.calorieAPI.Food;
-import com.example.chalmerswellness.calorieAPI.FoodFacade;
+import com.example.chalmerswellness.Models.calorieAPI.Food;
+import com.example.chalmerswellness.Models.calorieAPI.FoodFacade;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;

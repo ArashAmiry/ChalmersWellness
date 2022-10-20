@@ -2,10 +2,10 @@ package com.example.chalmerswellness.Controllers.Nutrition;
 
 import com.example.chalmerswellness.Interfaces.Observable;
 import com.example.chalmerswellness.Interfaces.Observer;
-import com.example.chalmerswellness.Services.NutritionServices.NutritionService;
-import com.example.chalmerswellness.calorieAPI.Food;
-import com.example.chalmerswellness.calorieAPI.FoodFacade;
-import com.example.chalmerswellness.calorieAPI.Meal;
+import com.example.chalmerswellness.Models.Services.NutritionServices.NutritionService;
+import com.example.chalmerswellness.Models.calorieAPI.Food;
+import com.example.chalmerswellness.Models.calorieAPI.FoodFacade;
+import com.example.chalmerswellness.Enums.Meal;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

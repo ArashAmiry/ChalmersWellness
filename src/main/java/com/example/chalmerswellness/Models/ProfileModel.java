@@ -1,7 +1,7 @@
 package com.example.chalmerswellness.Models;
 
-import com.example.chalmerswellness.ObjectModels.ExerciseItem;
-import com.example.chalmerswellness.Services.WorkoutServices.WorkoutService;
+import com.example.chalmerswellness.Models.ObjectModels.ExerciseItem;
+import com.example.chalmerswellness.Models.Services.WorkoutServices.WorkoutService;
 
 import java.time.LocalDate;
 import java.util.List;

@@ -2,9 +2,8 @@ package com.example.chalmerswellness.Controllers;
 
 import com.example.chalmerswellness.Enums.Gender;
 import com.example.chalmerswellness.Models.LoggedInUser;
-import com.example.chalmerswellness.MainView;
-import com.example.chalmerswellness.ObjectModels.User;
-import com.example.chalmerswellness.Services.UserServices.UserService;
+import com.example.chalmerswellness.Models.ObjectModels.User;
+import com.example.chalmerswellness.Models.Services.UserServices.UserService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.DatePicker;

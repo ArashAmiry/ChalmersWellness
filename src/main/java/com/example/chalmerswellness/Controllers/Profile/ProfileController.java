@@ -1,16 +1,12 @@
 package com.example.chalmerswellness.Controllers.Profile;
 
-import com.example.chalmerswellness.Services.UserServices.UserService;
+import com.example.chalmerswellness.Models.Services.UserServices.UserService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.HPos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
+
 import java.io.IOException;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.Locale;
 
 public class ProfileController extends AnchorPane {
 

@@ -1,8 +1,7 @@
 package com.example.chalmerswellness.Controllers;
 
 import com.example.chalmerswellness.Models.LoggedInUser;
-import com.example.chalmerswellness.MainView;
-import com.example.chalmerswellness.Services.UserServices.UserService;
+import com.example.chalmerswellness.Models.Services.UserServices.UserService;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;

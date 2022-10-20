@@ -2,7 +2,7 @@ package com.example.chalmerswellness.Controllers.Workout.TodaysWorkout;
 
 import com.example.chalmerswellness.Controllers.Workout.WorkoutItemController;
 import com.example.chalmerswellness.Models.WorkoutModel;
-import com.example.chalmerswellness.ObjectModels.Workout;
+import com.example.chalmerswellness.Models.ObjectModels.Workout;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;

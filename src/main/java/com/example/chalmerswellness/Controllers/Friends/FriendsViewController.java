@@ -1,7 +1,7 @@
 package com.example.chalmerswellness.Controllers.Friends;
 
 import com.example.chalmerswellness.Models.FriendSearcher;
-import com.example.chalmerswellness.ObjectModels.User;
+import com.example.chalmerswellness.Models.ObjectModels.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextField;

@@ -1,12 +1,12 @@
 package com.example.chalmerswellness.Models;
 
-import com.example.chalmerswellness.ObjectModels.Exercise;
-import com.example.chalmerswellness.ObjectModels.ExerciseItem;
-import com.example.chalmerswellness.ObjectModels.ExerciseItemSet;
-import com.example.chalmerswellness.ObjectModels.Workout;
+import com.example.chalmerswellness.Models.ObjectModels.Exercise;
+import com.example.chalmerswellness.Models.ObjectModels.ExerciseItem;
+import com.example.chalmerswellness.Models.ObjectModels.ExerciseItemSet;
+import com.example.chalmerswellness.Models.ObjectModels.Workout;
 import com.example.chalmerswellness.Interfaces.Observable;
 import com.example.chalmerswellness.Interfaces.Observer;
-import com.example.chalmerswellness.Services.WorkoutServices.WorkoutService;
+import com.example.chalmerswellness.Models.Services.WorkoutServices.WorkoutService;
 import java.util.ArrayList;
 import java.util.List;
 
