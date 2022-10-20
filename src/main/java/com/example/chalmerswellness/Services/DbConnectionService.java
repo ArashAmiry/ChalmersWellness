@@ -12,12 +12,11 @@ public final class DbConnectionService {
     {
         dbPath = FileHandler.getDbUrl(useActualDb);
     }
-
-    synchronized public static void createInstance(boolean useActualDb){
+    public static void createInstance(boolean useActualDb){
         if(dbConnectionService == null){
             dbConnectionService = new DbConnectionService(useActualDb);
         }
-    }
+}
 
     public static DbConnectionService getInstance()
     {

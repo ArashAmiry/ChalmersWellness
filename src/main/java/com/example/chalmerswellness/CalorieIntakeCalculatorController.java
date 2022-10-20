@@ -37,10 +37,7 @@ public class CalorieIntakeCalculatorController extends AnchorPane implements Ini
     private TextField weightGoalTextField;
     @FXML
     private AnchorPane rootPane;
-
-    private ToggleGroup gender = new ToggleGroup();
     private ToggleGroup paceGroup = new ToggleGroup();
-    private static List<Observer> observers = new ArrayList<>();
     private final UserService userService = UserService.getInstance();
 
     public CalorieIntakeCalculatorController() {

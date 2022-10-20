@@ -1,6 +1,5 @@
 package com.example.chalmerswellness.calorieAPI;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

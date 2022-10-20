@@ -4,7 +4,7 @@ public final class DashboardQuotes {
     private String motivationalQuote;
     private String sportsAndCompetitionQuote;
 
-    private static DashboardQuotes instance = new DashboardQuotes();
+    private static DashboardQuotes instance;
 
     private DashboardQuotes() {
         QuotesAPIConnector apiConnector = new QuotesAPIConnector();
@@ -13,10 +13,8 @@ public final class DashboardQuotes {
     }
 
     public static DashboardQuotes getInstance() {
-        synchronized (DashboardQuotes.class) {
-            if (instance == null) {
-                instance = new DashboardQuotes();
-            }
+        if (instance == null) {
+            instance = new DashboardQuotes();
         }
         return instance;
     }

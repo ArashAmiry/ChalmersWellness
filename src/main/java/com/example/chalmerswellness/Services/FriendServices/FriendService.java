@@ -13,10 +13,8 @@ public final class FriendService {
     }
 
     public static void createInstance(IDatabaseFriendRepository friendRepository){
-        synchronized (FriendService.class) {
-            if (friendService == null) {
-                friendService = new FriendService(friendRepository);
-            }
+        if (friendService == null) {
+            friendService = new FriendService(friendRepository);
         }
     }
 
