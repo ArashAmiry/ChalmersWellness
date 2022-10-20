@@ -52,4 +52,6 @@ module com.example.chalmerswellness {
     opens com.example.chalmerswellness.Controllers to javafx.fxml;
     exports com.example.chalmerswellness.Enums;
     opens com.example.chalmerswellness.Enums to javafx.fxml;
+    exports com.example.chalmerswellness.Controllers.Account;
+    opens com.example.chalmerswellness.Controllers.Account to javafx.fxml;
 }
