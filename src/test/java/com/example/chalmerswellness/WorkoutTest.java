@@ -1,10 +1,9 @@
 package com.example.chalmerswellness;
 
+import com.example.chalmerswellness.Enums.Gender;
+import com.example.chalmerswellness.Models.LoggedInUser;
 import com.example.chalmerswellness.Models.WorkoutModel;
-import com.example.chalmerswellness.ObjectModels.Exercise;
-import com.example.chalmerswellness.ObjectModels.ExerciseItem;
-import com.example.chalmerswellness.ObjectModels.ExerciseItemSet;
-import com.example.chalmerswellness.ObjectModels.Workout;
+import com.example.chalmerswellness.ObjectModels.*;
 import com.example.chalmerswellness.Services.DatabaseConnector;
 import com.example.chalmerswellness.Services.DbConnectionService;
 import com.example.chalmerswellness.Services.UserServices.DatabaseUserRepository;

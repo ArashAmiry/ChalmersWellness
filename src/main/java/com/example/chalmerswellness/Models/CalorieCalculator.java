@@ -1,4 +1,6 @@
-package com.example.chalmerswellness;
+package com.example.chalmerswellness.Models;
+
+import com.example.chalmerswellness.Enums.Gender;
 
 public class CalorieCalculator {
     private static double calculateBasalMetabolicRate(Gender gender, double kg, double cm, int years) {

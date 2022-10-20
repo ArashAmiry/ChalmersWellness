@@ -1,10 +1,12 @@
 package com.example.chalmerswellness;
 
+import com.example.chalmerswellness.Controllers.Nutrition.CalorieIntakeCalculatorController;
 import com.example.chalmerswellness.Controllers.Dashboard.DashboardViewController;
 import com.example.chalmerswellness.Controllers.Friends.FriendsViewController;
 import com.example.chalmerswellness.Controllers.Nutrition.NutritionViewController;
 import com.example.chalmerswellness.Controllers.Settings.SettingsViewController;
 import com.example.chalmerswellness.Controllers.Workout.WorkoutController;
+import com.example.chalmerswellness.Models.LoggedInUser;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;

@@ -1,5 +1,9 @@
-package com.example.chalmerswellness;
+package com.example.chalmerswellness.Controllers;
 
+import com.example.chalmerswellness.Enums.Gender;
+import com.example.chalmerswellness.Models.LoggedInUser;
+import com.example.chalmerswellness.MainView;
+import com.example.chalmerswellness.ObjectModels.User;
 import com.example.chalmerswellness.Services.UserServices.UserService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,9 +14,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
-import java.net.URL;
 import java.time.LocalDate;
-import java.util.ResourceBundle;
 
 public class SignUpController extends AnchorPane {
     @FXML

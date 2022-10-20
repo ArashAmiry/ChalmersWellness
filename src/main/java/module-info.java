@@ -48,4 +48,8 @@ module com.example.chalmerswellness {
     opens com.example.chalmerswellness.Services.NutritionServices to javafx.fxml;
     exports com.example.chalmerswellness.Services.FriendServices;
     opens com.example.chalmerswellness.Services.FriendServices to javafx.fxml;
+    exports com.example.chalmerswellness.Controllers;
+    opens com.example.chalmerswellness.Controllers to javafx.fxml;
+    exports com.example.chalmerswellness.Enums;
+    opens com.example.chalmerswellness.Enums to javafx.fxml;
 }

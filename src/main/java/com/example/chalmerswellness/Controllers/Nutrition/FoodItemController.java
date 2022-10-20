@@ -1,4 +1,4 @@
-package com.example.chalmerswellness;
+package com.example.chalmerswellness.Controllers.Nutrition;
 
 import com.example.chalmerswellness.calorieAPI.Food;
 import com.example.chalmerswellness.calorieAPI.FoodFacade;
