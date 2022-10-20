@@ -22,13 +22,15 @@ public class CalorieIntakeCalculatorController extends AnchorPane implements Ini
     private RadioButton radioButtonMediumPace;
     @FXML
     private RadioButton radioButtonFastPace;
-    LinkedHashMap<String, Double> activityLevels  = new LinkedHashMap<>() {{
-        put("Sedentary", 1.2);
-        put("Lightly active", 1.375);
-        put("Moderately active", 1.55);
-        put("Active", 1.725);
-        put("Very active", 1.9);
-    }};
+    LinkedHashMap<String, Double> activityLevels  = new LinkedHashMap<>(); {
+        {
+            activityLevels.put("Sedentary", 1.2);
+            activityLevels.put("Lightly active", 1.375);
+            activityLevels.put("Moderately active", 1.55);
+            activityLevels.put("Active", 1.725);
+            activityLevels.put("Very active", 1.9);
+        }
+    }
     @FXML
     private ComboBox<String> activityComboBox;
     @FXML
