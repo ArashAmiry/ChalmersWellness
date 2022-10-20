@@ -63,8 +63,8 @@ public class SignUpController extends AnchorPane {
     private void initialize() {
         maleRadioButton.setToggleGroup(genderToggleGroup);
         femaleRadioButton.setToggleGroup(genderToggleGroup);
-        maleRadioButton.setUserData(Gender.Male);
-        femaleRadioButton.setUserData(Gender.Female);
+        maleRadioButton.setUserData(Gender.MALE);
+        femaleRadioButton.setUserData(Gender.FEMALE);
     }
 
     @FXML
@@ -82,7 +82,6 @@ public class SignUpController extends AnchorPane {
         User newUser = new User(username, password, firstName, lastName, gender, email, birthDate, height, weight);
 
         if (userService.checkIfUsernameExists(username)) {
-            System.out.println("Username already exists");
             rootpane.getChildren().remove(this);
         } else {
             userService.insertUser(newUser);

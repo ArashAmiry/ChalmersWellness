@@ -7,7 +7,7 @@ import com.example.chalmerswellness.Models.ObjectModels.Workout;
 import java.time.LocalDate;
 import java.util.List;
 
-public class WorkoutService {
+public final class WorkoutService {
     private static WorkoutService single_instance = null;
     private IDatabaseWorkoutRepository repository;
     private WorkoutService(IDatabaseWorkoutRepository workoutRepository)

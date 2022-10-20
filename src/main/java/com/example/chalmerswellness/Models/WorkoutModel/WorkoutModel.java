@@ -13,7 +13,7 @@ import java.util.List;
 public class WorkoutModel implements Observable {
     private List<Observer> observers = new ArrayList<>();
     private WorkoutService workoutService;
-    private List<Exercise> exercises = new ArrayList<>();
+    private List<Exercise> exercises;
 
     public WorkoutModel(){
         workoutService = WorkoutService.getInstance();
@@ -52,7 +52,7 @@ public class WorkoutModel implements Observable {
      */
     public List<Exercise> searchExercises(String exerciseName){
         List<Exercise> searchResult = new ArrayList<>();
-        for (var exercise: exercises) {
+        for (Exercise exercise: exercises) {
             if(exercise.getName().toLowerCase().replaceAll("\\s+","").contains(exerciseName.toLowerCase().replaceAll("\\s+","")))
                 searchResult.add(exercise);
         }

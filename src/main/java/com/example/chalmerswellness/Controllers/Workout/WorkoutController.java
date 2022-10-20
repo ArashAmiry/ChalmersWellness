@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class WorkoutController extends AnchorPane implements Initializable {
+public final class WorkoutController extends AnchorPane implements Initializable {
 
     private WorkoutModel workoutModel;
     private CreateWorkoutController createWorkoutView;

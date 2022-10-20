@@ -5,30 +5,31 @@ import com.example.chalmerswellness.Models.ObjectModels.User;
 
 import java.time.LocalDate;
 
-public class UserService {
+public final class UserService {
     private IDatabaseUserRepository repository;
     private UserService(IDatabaseUserRepository repositoryType)
     {
         repository = repositoryType;
     }
 
-    private static UserService single_instance = null;
+    private static UserService userService = null;
 
     public static void createInstance(IDatabaseUserRepository repositoryType){
-        if(single_instance == null){
-            single_instance = new UserService(repositoryType);
+        if (userService == null) {
+            userService = new UserService(repositoryType);
         }
     }
 
     public static UserService getInstance()
     {
-        return single_instance;
+        return userService;
     }
 
     public void insertUser(User user) {
         repository.insertUser(user);
     }
 
+    //TODO must change!
     public void updateUser(int id, String username, String password, String firstName, String lastName, Gender gender, String email, LocalDate birthDate, int height, double weight) {
         repository.updateUser(id, username, password, firstName, lastName, gender, email, birthDate, height, weight);
     }

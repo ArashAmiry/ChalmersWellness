@@ -8,6 +8,8 @@ module com.example.chalmerswellness {
     requires javafx.fxml;
     requires com.fasterxml.jackson.databind;
     requires org.json;
+    requires com.fasterxml.jackson.annotation;
+    requires com.fasterxml.jackson.core;
 
     opens com.example.chalmerswellness to javafx.fxml;
     exports com.example.chalmerswellness;

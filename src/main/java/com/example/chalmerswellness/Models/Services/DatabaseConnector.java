@@ -11,14 +11,6 @@ public class DatabaseConnector {
 
     public DatabaseConnector() {
         dbPath = FileHandler.getDbUrl(false);
-
-        var t = connect();
-        try {
-            t.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
         File file = new File("src/test/TestChalmersWellness.db");
         file.delete();
 
@@ -46,7 +38,7 @@ public class DatabaseConnector {
             conn = DriverManager.getConnection(url);
             conn.createStatement().execute("PRAGMA foreign_keys = ON");
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
         return conn;
     }
@@ -76,7 +68,7 @@ public class DatabaseConnector {
              Statement stmt = conn.createStatement()) {
             stmt.execute(sql);
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -96,7 +88,7 @@ public class DatabaseConnector {
              Statement stmt = conn.createStatement()) {
             stmt.execute(sql);
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -110,7 +102,7 @@ public class DatabaseConnector {
              Statement stmt = conn.createStatement()) {
             stmt.execute(sql);
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -130,7 +122,7 @@ public class DatabaseConnector {
              Statement stmt = conn.createStatement()) {
             stmt.execute(sql);
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -147,11 +139,11 @@ public class DatabaseConnector {
              Statement stmt = conn.createStatement()) {
             stmt.execute(sql);
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 
-    public static void createCompletedExerciseTable() {
+    private static void createCompletedExerciseTable() {
         String sql = "CREATE TABLE IF NOT EXISTS completed_exercise (\n"
                 + "	id INTEGER PRIMARY KEY,\n"
                 + " exercise_id INTEGER,\n"
@@ -166,7 +158,7 @@ public class DatabaseConnector {
              Statement stmt = conn.createStatement()) {
             stmt.execute(sql);
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -184,7 +176,7 @@ public class DatabaseConnector {
              Statement stmt = conn.createStatement()) {
             stmt.execute(sql);
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -207,7 +199,7 @@ public class DatabaseConnector {
              Statement stmt = conn.createStatement()) {
             stmt.execute(sql);
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 }
