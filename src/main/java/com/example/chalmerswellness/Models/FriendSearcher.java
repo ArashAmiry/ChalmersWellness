@@ -1,6 +1,7 @@
-package com.example.chalmerswellness;
+package com.example.chalmerswellness.Models;
 
 import com.example.chalmerswellness.Services.FriendServices.FriendService;
+import com.example.chalmerswellness.ObjectModels.User;
 
 import java.util.List;
 

@@ -1,4 +1,6 @@
-package com.example.chalmerswellness;
+package com.example.chalmerswellness.ObjectModels;
+
+import com.example.chalmerswellness.Enums.Gender;
 
 import java.time.LocalDate;
 

@@ -1,9 +1,9 @@
 package com.example.chalmerswellness.Controllers.Settings;
 
-import com.example.chalmerswellness.Gender;
-import com.example.chalmerswellness.LoggedInUser;
+import com.example.chalmerswellness.Enums.Gender;
+import com.example.chalmerswellness.Models.LoggedInUser;
 import com.example.chalmerswellness.Services.UserServices.UserService;
-import com.example.chalmerswellness.User;
+import com.example.chalmerswellness.ObjectModels.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;

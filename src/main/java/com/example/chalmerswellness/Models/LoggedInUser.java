@@ -1,4 +1,6 @@
-package com.example.chalmerswellness;
+package com.example.chalmerswellness.Models;
+
+import com.example.chalmerswellness.ObjectModels.User;
 
 public class LoggedInUser {
 

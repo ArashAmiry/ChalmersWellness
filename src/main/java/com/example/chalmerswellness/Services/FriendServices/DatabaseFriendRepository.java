@@ -1,9 +1,9 @@
 package com.example.chalmerswellness.Services.FriendServices;
 
-import com.example.chalmerswellness.Gender;
-import com.example.chalmerswellness.LoggedInUser;
+import com.example.chalmerswellness.Enums.Gender;
+import com.example.chalmerswellness.Models.LoggedInUser;
 import com.example.chalmerswellness.Services.DbConnectionService;
-import com.example.chalmerswellness.User;
+import com.example.chalmerswellness.ObjectModels.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

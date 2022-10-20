@@ -3,7 +3,7 @@ package com.example.chalmerswellness.Controllers.Dashboard;
 import com.example.chalmerswellness.Controllers.Profile.CalendarController;
 import com.example.chalmerswellness.Interfaces.Observable;
 import com.example.chalmerswellness.Interfaces.Observer;
-import com.example.chalmerswellness.LoggedInUser;
+import com.example.chalmerswellness.Models.LoggedInUser;
 import com.example.chalmerswellness.calorieAPI.FoodFacade;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

@@ -1,14 +1,12 @@
-package com.example.chalmerswellness;
+package com.example.chalmerswellness.Controllers;
 
+import com.example.chalmerswellness.Models.LoggedInUser;
+import com.example.chalmerswellness.MainView;
 import com.example.chalmerswellness.Services.UserServices.UserService;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-
-import java.net.URL;
-import java.util.ResourceBundle;
 
 public class LoginController extends AnchorPane {
     @FXML

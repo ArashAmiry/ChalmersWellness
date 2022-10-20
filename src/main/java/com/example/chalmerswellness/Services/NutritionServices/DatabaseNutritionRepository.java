@@ -1,6 +1,6 @@
 package com.example.chalmerswellness.Services.NutritionServices;
 
-import com.example.chalmerswellness.LoggedInUser;
+import com.example.chalmerswellness.Models.LoggedInUser;
 import com.example.chalmerswellness.Services.DbConnectionService;
 import com.example.chalmerswellness.calorieAPI.Food;
 import com.example.chalmerswellness.calorieAPI.Meal;

@@ -1,8 +1,8 @@
 package com.example.chalmerswellness.Services.UserServices;
 
-import com.example.chalmerswellness.Gender;
+import com.example.chalmerswellness.Enums.Gender;
 import com.example.chalmerswellness.Services.DbConnectionService;
-import com.example.chalmerswellness.User;
+import com.example.chalmerswellness.ObjectModels.User;
 
 import java.sql.*;
 import java.time.LocalDate;

@@ -1,6 +1,6 @@
 package com.example.chalmerswellness.Services.WorkoutServices;
 
-import com.example.chalmerswellness.LoggedInUser;
+import com.example.chalmerswellness.Models.LoggedInUser;
 import com.example.chalmerswellness.ObjectModels.Exercise;
 import com.example.chalmerswellness.ObjectModels.ExerciseItem;
 import com.example.chalmerswellness.ObjectModels.ExerciseItemSet;
