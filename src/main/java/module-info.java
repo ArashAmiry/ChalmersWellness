@@ -6,16 +6,16 @@ module com.example.chalmerswellness {
     requires javafx.graphics;
     requires javafx.controls;
     requires javafx.fxml;
+    requires com.fasterxml.jackson.databind;
     requires org.json;
     requires com.fasterxml.jackson.annotation;
     requires com.fasterxml.jackson.core;
 
     opens com.example.chalmerswellness to javafx.fxml;
     exports com.example.chalmerswellness;
-    exports com.example.chalmerswellness.Models;
-    opens com.example.chalmerswellness.Models to javafx.fxml;
-    exports com.example.chalmerswellness.ObjectModels;
-    opens com.example.chalmerswellness.ObjectModels to javafx.fxml;
+
+    exports com.example.chalmerswellness.Models.ObjectModels;
+    opens com.example.chalmerswellness.Models.ObjectModels to javafx.fxml;
     exports com.example.chalmerswellness.Controllers.Workout;
     opens com.example.chalmerswellness.Controllers.Workout to javafx.fxml;
     exports com.example.chalmerswellness.Controllers.Workout.SearchPane;
@@ -24,16 +24,16 @@ module com.example.chalmerswellness {
     opens com.example.chalmerswellness.Controllers.Workout.TodaysWorkout to javafx.fxml;
     exports com.example.chalmerswellness.Controllers.Nutrition;
     opens com.example.chalmerswellness.Controllers.Nutrition to javafx.fxml;
-    exports com.example.chalmerswellness.Services;
-    opens com.example.chalmerswellness.Services to javafx.fxml;
+    exports com.example.chalmerswellness.Models.Services;
+    opens com.example.chalmerswellness.Models.Services to javafx.fxml;
     exports com.example.chalmerswellness.Interfaces;
     opens com.example.chalmerswellness.Interfaces to javafx.fxml;
     exports com.example.chalmerswellness.Controllers.Dashboard;
     opens com.example.chalmerswellness.Controllers.Dashboard to javafx.fxml;
     exports com.example.chalmerswellness.Controllers.Settings;
     opens com.example.chalmerswellness.Controllers.Settings to javafx.fxml;
-    exports com.example.chalmerswellness.calorieAPI;
-    opens com.example.chalmerswellness.calorieAPI to javafx.fxml;
+    exports com.example.chalmerswellness.Models.FoodModel;
+    opens com.example.chalmerswellness.Models.FoodModel to javafx.fxml;
     exports com.example.chalmerswellness.Controllers.Friends;
     opens com.example.chalmerswellness.Controllers.Friends;
     exports com.example.chalmerswellness.Controllers.Workout.CreateWorkout;
@@ -42,10 +42,20 @@ module com.example.chalmerswellness {
     opens com.example.chalmerswellness.Controllers.Workout.ManageWorkout to javafx.fxml;
     exports com.example.chalmerswellness.Controllers.Profile;
     opens com.example.chalmerswellness.Controllers.Profile;
-    exports com.example.chalmerswellness.Services.UserServices;
-    opens com.example.chalmerswellness.Services.UserServices to javafx.fxml;
-    exports com.example.chalmerswellness.Services.NutritionServices;
-    opens com.example.chalmerswellness.Services.NutritionServices to javafx.fxml;
-    exports com.example.chalmerswellness.Services.FriendServices;
-    opens com.example.chalmerswellness.Services.FriendServices to javafx.fxml;
+    exports com.example.chalmerswellness.Models.Services.UserServices;
+    opens com.example.chalmerswellness.Models.Services.UserServices to javafx.fxml;
+    exports com.example.chalmerswellness.Models.Services.NutritionServices;
+    opens com.example.chalmerswellness.Models.Services.NutritionServices to javafx.fxml;
+    exports com.example.chalmerswellness.Models.Services.FriendServices;
+    opens com.example.chalmerswellness.Models.Services.FriendServices to javafx.fxml;
+    exports com.example.chalmerswellness.Controllers;
+    opens com.example.chalmerswellness.Controllers to javafx.fxml;
+    exports com.example.chalmerswellness.Enums;
+    opens com.example.chalmerswellness.Enums to javafx.fxml;
+    exports com.example.chalmerswellness.Controllers.Login;
+    opens com.example.chalmerswellness.Controllers.Login to javafx.fxml;
+    exports com.example.chalmerswellness.Models.AccountModel;
+    opens com.example.chalmerswellness.Models.AccountModel to javafx.fxml;
+    exports com.example.chalmerswellness.Models.WorkoutModel;
+    opens com.example.chalmerswellness.Models.WorkoutModel to javafx.fxml;
 }

@@ -1,8 +1,8 @@
 package com.example.chalmerswellness.Controllers.Nutrition;
 
-import com.example.chalmerswellness.calorieAPI.Food;
-import com.example.chalmerswellness.calorieAPI.FoodFacade;
-import com.example.chalmerswellness.calorieAPI.Meal;
+import com.example.chalmerswellness.Models.FoodModel.Food;
+import com.example.chalmerswellness.Models.FoodModel.FoodFacade;
+import com.example.chalmerswellness.Enums.Meal;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

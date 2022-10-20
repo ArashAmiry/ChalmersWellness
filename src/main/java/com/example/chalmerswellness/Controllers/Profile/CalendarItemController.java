@@ -1,8 +1,7 @@
 package com.example.chalmerswellness.Controllers.Profile;
-import com.example.chalmerswellness.ObjectModels.ExerciseItem;
-import com.example.chalmerswellness.ProfileModel;
-import com.example.chalmerswellness.Services.UserServices.UserService;
-import com.example.chalmerswellness.Services.WorkoutServices.WorkoutService;
+import com.example.chalmerswellness.Models.ObjectModels.ExerciseItem;
+import com.example.chalmerswellness.Models.AccountModel.ProfileModel;
+import com.example.chalmerswellness.Models.Services.UserServices.UserService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -12,8 +11,6 @@ import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 

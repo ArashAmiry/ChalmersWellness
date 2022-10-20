@@ -2,9 +2,9 @@ package com.example.chalmerswellness.Controllers.Workout.TodaysWorkout;
 
 import com.example.chalmerswellness.Interfaces.Observable;
 import com.example.chalmerswellness.Interfaces.Observer;
-import com.example.chalmerswellness.Models.WorkoutModel;
-import com.example.chalmerswellness.ObjectModels.ExerciseItem;
-import com.example.chalmerswellness.ObjectModels.ExerciseItemSet;
+import com.example.chalmerswellness.Models.WorkoutModel.WorkoutModel;
+import com.example.chalmerswellness.Models.ObjectModels.ExerciseItem;
+import com.example.chalmerswellness.Models.ObjectModels.ExerciseItemSet;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.Event;

@@ -6,6 +6,8 @@ import com.example.chalmerswellness.Interfaces.Observer;
 import com.example.chalmerswellness.LoggedInUser;
 import com.example.chalmerswellness.User;
 import com.example.chalmerswellness.calorieAPI.FoodFacade;
+import com.example.chalmerswellness.Models.AccountModel.LoggedInUser;
+import com.example.chalmerswellness.Models.FoodModel.FoodFacade;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -52,7 +54,6 @@ public class DashboardViewController extends AnchorPane implements Initializable
         dashboardQuote2.setText(DashboardQuotes.getInstance().getMotivationalQuote());
         dashboardQuote1.setText(DashboardQuotes.getInstance().getSportsAndCompetitionQuote());
         calorieLeft.setText(foodFacade.getTodaysCalories() + " KCAL");
-
         calendar.getChildren().add(new CalendarController(rootpane, user.getId()));
     }
 

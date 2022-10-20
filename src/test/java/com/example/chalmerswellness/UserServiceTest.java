@@ -1,9 +1,12 @@
 package com.example.chalmerswellness;
 
-import com.example.chalmerswellness.Services.DatabaseConnector;
-import com.example.chalmerswellness.Services.DbConnectionService;
-import com.example.chalmerswellness.Services.UserServices.DatabaseUserRepository;
-import com.example.chalmerswellness.Services.UserServices.UserService;
+import com.example.chalmerswellness.Enums.Gender;
+import com.example.chalmerswellness.Models.AccountModel.LoggedInUser;
+import com.example.chalmerswellness.Models.ObjectModels.User;
+import com.example.chalmerswellness.Models.Services.DatabaseConnector;
+import com.example.chalmerswellness.Models.Services.DbConnectionService;
+import com.example.chalmerswellness.Models.Services.UserServices.DatabaseUserRepository;
+import com.example.chalmerswellness.Models.Services.UserServices.UserService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;

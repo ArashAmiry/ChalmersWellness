@@ -1,8 +1,8 @@
 package com.example.chalmerswellness.Controllers.Workout.SearchPane;
 
 import com.example.chalmerswellness.Interfaces.IWorkoutController;
-import com.example.chalmerswellness.Models.WorkoutModel;
-import com.example.chalmerswellness.ObjectModels.Exercise;
+import com.example.chalmerswellness.Models.WorkoutModel.WorkoutModel;
+import com.example.chalmerswellness.Models.ObjectModels.Exercise;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;

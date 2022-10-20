@@ -1,6 +1,6 @@
 package com.example.chalmerswellness.Controllers.Workout.CreateWorkout;
 
-import com.example.chalmerswellness.ObjectModels.ExerciseItem;
+import com.example.chalmerswellness.Models.ObjectModels.ExerciseItem;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
