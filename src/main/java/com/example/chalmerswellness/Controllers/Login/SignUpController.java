@@ -1,4 +1,4 @@
-package com.example.chalmerswellness.Controllers.Account;
+package com.example.chalmerswellness.Controllers.Login;
 
 import com.example.chalmerswellness.Controllers.MainView;
 import com.example.chalmerswellness.Enums.Gender;
