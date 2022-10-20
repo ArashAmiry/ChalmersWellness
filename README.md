@@ -1,8 +1,8 @@
 # Chalmers Wellness
 
 ## Prerequisites
-Install [Maven](https://maven.apache.org/install.html)
-(Optional) Install [Git](https://git-scm.com/downloads)
+1. Install [Maven](https://maven.apache.org/install.html)
+2. (Optional) Install [Git](https://git-scm.com/downloads)
 
 ## Run the program
 ### Using git
