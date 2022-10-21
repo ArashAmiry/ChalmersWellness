@@ -1,15 +1,15 @@
 package com.example.chalmerswellness;
 
-import com.example.chalmerswellness.Services.DatabaseConnector;
-import com.example.chalmerswellness.Services.DbConnectionService;
-import com.example.chalmerswellness.Services.FriendServices.DatabaseFriendRepository;
-import com.example.chalmerswellness.Services.FriendServices.FriendService;
-import com.example.chalmerswellness.Services.NutritionServices.DatabaseNutritionRepository;
-import com.example.chalmerswellness.Services.NutritionServices.NutritionService;
-import com.example.chalmerswellness.Services.UserServices.DatabaseUserRepository;
-import com.example.chalmerswellness.Services.UserServices.UserService;
-import com.example.chalmerswellness.Services.WorkoutServices.DatabaseWorkoutRepository;
-import com.example.chalmerswellness.Services.WorkoutServices.WorkoutService;
+import com.example.chalmerswellness.Models.Services.DatabaseConnector;
+import com.example.chalmerswellness.Models.Services.DbConnectionService;
+import com.example.chalmerswellness.Models.Services.FriendServices.DatabaseFriendRepository;
+import com.example.chalmerswellness.Models.Services.FriendServices.FriendService;
+import com.example.chalmerswellness.Models.Services.NutritionServices.DatabaseNutritionRepository;
+import com.example.chalmerswellness.Models.Services.NutritionServices.NutritionService;
+import com.example.chalmerswellness.Models.Services.UserServices.DatabaseUserRepository;
+import com.example.chalmerswellness.Models.Services.UserServices.UserService;
+import com.example.chalmerswellness.Models.Services.WorkoutServices.DatabaseWorkoutRepository;
+import com.example.chalmerswellness.Models.Services.WorkoutServices.WorkoutService;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

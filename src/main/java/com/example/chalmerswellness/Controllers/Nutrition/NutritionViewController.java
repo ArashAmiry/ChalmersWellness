@@ -1,11 +1,10 @@
 package com.example.chalmerswellness.Controllers.Nutrition;
 
-import com.example.chalmerswellness.CalorieIntakeCalculatorController;
 import com.example.chalmerswellness.Interfaces.Observable;
 import com.example.chalmerswellness.Interfaces.Observer;
-import com.example.chalmerswellness.LoggedInUser;
-import com.example.chalmerswellness.calorieAPI.FoodFacade;
-import com.example.chalmerswellness.calorieAPI.Meal;
+import com.example.chalmerswellness.Models.AccountModel.LoggedInUser;
+import com.example.chalmerswellness.Models.FoodModel.FoodFacade;
+import com.example.chalmerswellness.Enums.Meal;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;

@@ -1,9 +1,12 @@
 package com.example.chalmerswellness;
 
-import com.example.chalmerswellness.Services.DatabaseConnector;
-import com.example.chalmerswellness.Services.DbConnectionService;
-import com.example.chalmerswellness.Services.UserServices.DatabaseUserRepository;
-import com.example.chalmerswellness.Services.UserServices.UserService;
+import com.example.chalmerswellness.Enums.Gender;
+import com.example.chalmerswellness.Models.AccountModel.LoggedInUser;
+import com.example.chalmerswellness.Models.ObjectModels.User;
+import com.example.chalmerswellness.Models.Services.DatabaseConnector;
+import com.example.chalmerswellness.Models.Services.DbConnectionService;
+import com.example.chalmerswellness.Models.Services.UserServices.DatabaseUserRepository;
+import com.example.chalmerswellness.Models.Services.UserServices.UserService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,7 +26,7 @@ class UserServiceTest {
 
     @BeforeEach
     void setupEach() {
-        DatabaseConnector dbConnector = new DatabaseConnector();
+        final DatabaseConnector dbConnector = new DatabaseConnector();
         userService = UserService.getInstance();
         userService.insertUser(new User("username", "password", "firstName", "lastName", Gender.MALE, "email", LocalDate.now(),1, 1));
         LoggedInUser.createInstance(userService.getUser("username", "password"));
@@ -38,8 +41,8 @@ class UserServiceTest {
 
     @Test
     void getUserMethodShouldReturnUser() {
-        Assertions.assertTrue(userService.getUser("username", "password") != null);
-        Assertions.assertTrue(userService.getUser(user.getId()) != null);
+        Assertions.assertNotNull(userService.getUser("username", "password"));
+        Assertions.assertNotNull(userService.getUser(user.getId()));
     }
 
     @Test

@@ -8,40 +8,41 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class QuotesAPIConnector {
+    private static final int HTTP_OK = 200;
+    private static final int timeout = 1000;
 
-    public String getRandomQuoteAsStringFromAPI(String query){
+    public String getRandomQuoteAsStringFromAPI(final String query){
         BufferedReader reader;
         String line;
-        StringBuilder responseContent = new StringBuilder();
+        final StringBuilder responseContent = new StringBuilder();
         try {
-            String urlString = "https://api.quotable.io/random?maxLength=100&tags=";
-            URL url = new URL(urlString + query);
+            final String urlString = "https://api.quotable.io/random?maxLength=100&tags=";
+            final URL url = new URL(urlString + query);
 
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            final HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
-            connection.setConnectTimeout(1000);
-            connection.setReadTimeout(1000);
+            connection.setConnectTimeout(timeout);
+            connection.setReadTimeout(timeout);
             connection.connect();
 
-            int responseCode = connection.getResponseCode();
+            final int responseCode = connection.getResponseCode();
 
-            if (responseCode != 200) {
-                throw new RuntimeException("HttpResponseCode: " + responseCode);
-            } else {
+            if (responseCode == HTTP_OK) {
                 reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 while ((line = reader.readLine()) != null) {
                     responseContent.append(line);
                 }
                 reader.close();
+            } else {
+                throw new RuntimeException("HttpResponseCode: " + responseCode);
             }
-            return getQuote(String.valueOf(responseContent));
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return getQuote(String.valueOf(responseContent));
     }
-    private static String getQuote(String responseBody) {
-        JSONObject album = new JSONObject(responseBody);
+    private static String getQuote(final String responseBody) {
+        final JSONObject album = new JSONObject(responseBody);
         return album.getString("content");
     }
 

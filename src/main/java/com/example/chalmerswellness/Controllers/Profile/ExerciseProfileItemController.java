@@ -1,15 +1,14 @@
 package com.example.chalmerswellness.Controllers.Profile;
 
 import com.example.chalmerswellness.Controllers.Workout.TodaysWorkout.AddSetsController;
-import com.example.chalmerswellness.Models.WorkoutModel;
-import com.example.chalmerswellness.ObjectModels.Exercise;
-import com.example.chalmerswellness.ObjectModels.ExerciseItem;
+import com.example.chalmerswellness.Models.WorkoutModel.WorkoutModel;
+import com.example.chalmerswellness.Models.ObjectModels.Exercise;
+import com.example.chalmerswellness.Models.ObjectModels.ExerciseItem;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 import java.net.URL;

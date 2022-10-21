@@ -1,5 +1,7 @@
 package com.example.chalmerswellness;
 
+import com.example.chalmerswellness.Enums.Gender;
+import com.example.chalmerswellness.Models.FoodModel.CalorieCalculator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

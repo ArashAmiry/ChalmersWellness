@@ -1,10 +1,10 @@
 package com.example.chalmerswellness.Controllers.Dashboard;
 
-public class DashboardQuotes {
+public final class DashboardQuotes {
     private String motivationalQuote;
     private String sportsAndCompetitionQuote;
 
-    private static DashboardQuotes instance = new DashboardQuotes();
+    private static DashboardQuotes instance;
 
     private DashboardQuotes() {
         QuotesAPIConnector apiConnector = new QuotesAPIConnector();

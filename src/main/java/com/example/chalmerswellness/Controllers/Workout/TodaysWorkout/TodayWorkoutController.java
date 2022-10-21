@@ -1,11 +1,10 @@
 package com.example.chalmerswellness.Controllers.Workout.TodaysWorkout;
 
 import com.example.chalmerswellness.Interfaces.IWorkoutController;
-import com.example.chalmerswellness.Models.WorkoutModel;
+import com.example.chalmerswellness.Models.WorkoutModel.WorkoutModel;
 import com.example.chalmerswellness.Interfaces.Observable;
 import com.example.chalmerswellness.Interfaces.Observer;
-import com.example.chalmerswellness.ObjectModels.Exercise;
-import com.example.chalmerswellness.ObjectModels.ExerciseItem;
+import com.example.chalmerswellness.Models.ObjectModels.ExerciseItem;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
