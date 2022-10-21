@@ -6,7 +6,7 @@ import java.util.List;
 
 public class FriendService {
     private static FriendService friendService = null;
-    private IDatabaseFriendRepository repository;
+    private final IDatabaseFriendRepository repository;
     private FriendService(IDatabaseFriendRepository workoutRepository)
     {
         repository = workoutRepository;

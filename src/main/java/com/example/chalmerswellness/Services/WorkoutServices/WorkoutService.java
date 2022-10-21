@@ -8,7 +8,7 @@ import java.util.List;
 
 public class WorkoutService {
     private static WorkoutService workoutService = null;
-    private IDatabaseWorkoutRepository repository;
+    private final IDatabaseWorkoutRepository repository;
     private WorkoutService(IDatabaseWorkoutRepository workoutRepository)
     {
         repository = workoutRepository;

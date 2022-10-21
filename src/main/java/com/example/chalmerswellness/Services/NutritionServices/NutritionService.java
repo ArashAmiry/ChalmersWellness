@@ -6,7 +6,7 @@ import com.example.chalmerswellness.calorieAPI.Meal;
 import java.util.List;
 
 public class NutritionService {
-    private IDatabaseNutritionRepository repository;
+    private final IDatabaseNutritionRepository repository;
     private NutritionService(IDatabaseNutritionRepository repositoryType)
     {
         repository = repositoryType;

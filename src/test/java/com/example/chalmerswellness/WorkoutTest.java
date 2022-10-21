@@ -175,6 +175,20 @@ class WorkoutTest {
     }
 
     @Test
+    void TestIsDone() {
+        List<ExerciseItem> completedExercises = model.getTodayCompletedExercises();
+        Assertions.assertEquals(0, completedExercises.size());
+
+        ExerciseItem exerciseItem = new ExerciseItem(model.getExercises().get(0));
+        Assertions.assertFalse(exerciseItem.getIsDone());
+        exerciseItem.setDone(true);
+        model.addExerciseToActiveWorkout(exerciseItem);
+        completedExercises = model.getTodayCompletedExercises();
+        exerciseItem = completedExercises.get(0);
+        Assertions.assertTrue(exerciseItem.getIsDone());
+    }
+
+    @Test
     void testAddWorkout() {
         Workout basicWorkout = setupBasicWorkout();
         model.addWorkout(basicWorkout);
