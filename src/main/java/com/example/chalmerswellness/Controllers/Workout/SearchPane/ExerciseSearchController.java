@@ -15,7 +15,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class ExerciseSearchController extends AnchorPane implements Initializable {
+public class ExerciseSearchController extends AnchorPane {
     private final WorkoutModel model;
     private IWorkoutController workoutController;
     @FXML public TextField searchField;
@@ -42,14 +42,9 @@ public class ExerciseSearchController extends AnchorPane implements Initializabl
         searchExercise();
     }
 
-    @Override
-    public void initialize(URL arg0, ResourceBundle arg1){
-        searchExercise();
-    }
-
     private void updateSearchResult(List<Exercise> exercises){
         searchListView.getItems().clear();
-        for (var exercise: exercises) {
+        for (Exercise exercise: exercises) {
             ExerciseSearchItemController exerciseController = new ExerciseSearchItemController(exercise, workoutController);
             searchListView.getItems().add(exerciseController);
         }
@@ -59,7 +54,7 @@ public class ExerciseSearchController extends AnchorPane implements Initializabl
     @FXML
     void searchExercise(){
         String input = searchField.getText();
-        var searchResult = model.searchExercises(input);
+        List<Exercise> searchResult = model.searchExercises(input);
         updateSearchResult(searchResult);
     }
 

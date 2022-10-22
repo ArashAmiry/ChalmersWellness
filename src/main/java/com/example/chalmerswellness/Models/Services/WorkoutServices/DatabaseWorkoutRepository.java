@@ -235,12 +235,12 @@ public class DatabaseWorkoutRepository implements IDatabaseWorkoutRepository {
             ResultSet resultSet = pstmt.executeQuery();
             Exercise exercise = null;
             while (resultSet.next()) {
-                var exerciseName = resultSet.getString("exerciseName");
-                var type = resultSet.getString("exerciseType");
-                var muscle = resultSet.getString("exerciseMuscle");
-                var equipment = resultSet.getString("exerciseEquipment");
-                var difficulty = resultSet.getString("exerciseDifficulty");
-                var instructions = resultSet.getString("exerciseInstructions");
+                String exerciseName = resultSet.getString("exerciseName");
+                String type = resultSet.getString("exerciseType");
+                String muscle = resultSet.getString("exerciseMuscle");
+                String equipment = resultSet.getString("exerciseEquipment");
+                String difficulty = resultSet.getString("exerciseDifficulty");
+                String instructions = resultSet.getString("exerciseInstructions");
 
                 exercise = new Exercise(exerciseId, exerciseName, type, muscle, equipment, difficulty, instructions);
             }
@@ -310,7 +310,7 @@ public class DatabaseWorkoutRepository implements IDatabaseWorkoutRepository {
                 ResultSet resultSet = pstmt.executeQuery();
 
             while (resultSet.next()) {
-                    var exerciseId  = resultSet.getInt("exercise_id");
+                    int exerciseId  = resultSet.getInt("exercise_id");
                     int setCount = resultSet.getInt("sets_count");
 
                     Exercise exercise = getExercise(exerciseId);

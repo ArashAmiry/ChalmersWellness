@@ -54,17 +54,17 @@ public class CreateWorkoutController extends AnchorPane implements IWorkoutContr
     }
 
     public void clearExercises(){
-        for (var exercise : workout.getExercises()) {
-            removeExercise(exercise);
+        for (ExerciseItem exerciseItem : workout.getExercises()) {
+            removeExercise(exerciseItem);
         }
         update();
     }
 
-    void updateExerciseList(List<ExerciseItem> exercises){
+    void updateExerciseList(List<ExerciseItem> exerciseItems){
         exercisesList.clear();
 
-        for (var exercise: exercises) {
-            CreateExerciseItemController exerciseController = new CreateExerciseItemController(exercise, this);
+        for (ExerciseItem exerciseItem: exerciseItems) {
+            CreateExerciseItemController exerciseController = new CreateExerciseItemController(exerciseItem, this);
             exercisesList.add(exerciseController);
         }
         mainContent.getItems().setAll(exercisesList);
@@ -98,7 +98,7 @@ public class CreateWorkoutController extends AnchorPane implements IWorkoutContr
     }
 
     private void update() {
-        var exercises = workout.getExercises();
+        List<ExerciseItem> exercises = workout.getExercises();
         updateExerciseList(exercises);
     }
 

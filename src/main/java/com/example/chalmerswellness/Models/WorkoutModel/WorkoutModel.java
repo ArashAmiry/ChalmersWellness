@@ -17,17 +17,12 @@ public class WorkoutModel implements Observable {
     private List<Exercise> exercises;
 
     public WorkoutModel(){
-        //workoutService = WorkoutService.getInstance();
         exercises = getExercises();
     }
 
     public List<Workout> getSavedWorkouts(){
         return workoutService.getWorkouts();
     }
-
-    /*public List<ExerciseItem> getAddedWorkoutExercises() {
-        return addedWorkoutExercises;
-    }*/
 
     /**
      * This method inserts a exerciseItem to the database.
@@ -144,18 +139,12 @@ public class WorkoutModel implements Observable {
     public void addExercisesFromWorkout(Workout workout){
         List<ExerciseItem> exerciseItems = workout.getExercises();
         workoutService.insertCompletedExercises(exerciseItems);
-        //getTodayCompletedExercises();
         notifyObservers();
     }
 
-    /*public void removeAllWorkoutExercises(){
-        addedWorkoutExercises.clear();
-        notifyObservers();
-    }*/
-
     @Override
     public void notifyObservers() {
-        for (var observer: observers) {
+        for (Observer observer: observers) {
             observer.update(this);
         }
     }

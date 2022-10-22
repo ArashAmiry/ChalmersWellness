@@ -52,11 +52,11 @@ public class TodayWorkoutController extends AnchorPane implements Observer, IWor
         populateExerciseList();
     }
 
-    private void updateExerciseList(List<ExerciseItem> exercises){
+    private void updateExerciseList(List<ExerciseItem> exerciseItems){
         exerciseList.getItems().clear();
 
-        for (var exercise: exercises) {
-            exerciseList.getItems().add(new ExerciseItemController(exercise, model, mainRoot));
+        for (ExerciseItem exerciseItem: exerciseItems) {
+            exerciseList.getItems().add(new ExerciseItemController(exerciseItem, model, mainRoot));
         }
 
         if (isExerciseListEmpty()) {
@@ -75,7 +75,7 @@ public class TodayWorkoutController extends AnchorPane implements Observer, IWor
     }
 
     private void populateExerciseList(){
-        var todaysExercises = model.getTodayCompletedExercises();
+        List<ExerciseItem> todaysExercises = model.getTodayCompletedExercises();
         updateExerciseList(todaysExercises);
     }
 }

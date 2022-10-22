@@ -115,7 +115,7 @@ class WorkoutTest {
 
     @Test
     void testRemoveCompletedExercise() {
-        var exerciseItems = model.getTodayCompletedExercises();
+        List<ExerciseItem> exerciseItems = model.getTodayCompletedExercises();
         Assertions.assertEquals(0, exerciseItems.size());
 
         Exercise exercise = model.getExercises().get(0);

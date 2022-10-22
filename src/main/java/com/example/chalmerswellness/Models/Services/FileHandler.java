@@ -14,8 +14,8 @@ public class FileHandler {
             InputStream is = Files.newInputStream(Paths.get("src/main/resources/dbConfig.txt"));
             properties.load(is);
 
-            var dbUrl = properties.getProperty("dbUrl");
-            var testDbUrl = properties.getProperty("testDbUrl");
+            String dbUrl = properties.getProperty("dbUrl");
+            String testDbUrl = properties.getProperty("testDbUrl");
 
             if(useActualDb){
                 return dbUrl;
