@@ -60,7 +60,6 @@ public final class WorkoutController extends AnchorPane implements Initializable
     @FXML void openWorkoutTab(){
         exerciseSearchController.changeController(todayWorkoutView);
         setTabTo(todayWorkoutView);
-        addedWorkoutsBtn.setVisible(true);
     }
 
     public static WorkoutController getWorkoutController(){
@@ -98,7 +97,6 @@ public final class WorkoutController extends AnchorPane implements Initializable
     }
 
     private void setTabTo(AnchorPane pane){
-        addedWorkoutsBtn.setVisible(false);
         mainContent.getChildren().clear();
         mainContent.getChildren().add(pane);
     }
