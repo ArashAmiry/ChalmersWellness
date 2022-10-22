@@ -5,7 +5,7 @@ import com.example.chalmerswellness.Models.ObjectModels.User;
 import java.util.List;
 
 public final class FriendService {
-    private static FriendService friendService = null;
+    private static FriendService friendService;
     private final IDatabaseFriendRepository repository;
     private FriendService(IDatabaseFriendRepository workoutRepository)
     {
@@ -31,8 +31,8 @@ public final class FriendService {
         repository.insertFollow(followingID);
     }
 
-    public void removeFollow(int following_id) {
-        repository.removeFollow(following_id);
+    public void removeFollow(int followingId) {
+        repository.removeFollow(followingId);
     }
 
     public boolean alreadyFollowing(int followerID, int followingID) {

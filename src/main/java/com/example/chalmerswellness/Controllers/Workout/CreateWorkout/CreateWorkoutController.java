@@ -75,7 +75,9 @@ public class CreateWorkoutController extends AnchorPane implements IWorkoutContr
             saveSets();
             model.addWorkout(new Workout(workoutNameField.getText(), workout.getExercises()));
             clearWorkoutListView();
-        }catch(NumberFormatException nfe){}
+        }catch(NumberFormatException nfe){
+            System.out.println(nfe.getMessage());
+        }
     }
 
     private void saveSets(){
@@ -84,7 +86,7 @@ public class CreateWorkoutController extends AnchorPane implements IWorkoutContr
                 c.setSets();
             }catch (NumberFormatException nfe){
                 c.displayErrorLabel();
-                throw new NumberFormatException();
+                System.out.println(nfe.getMessage());
             }
         }
     }

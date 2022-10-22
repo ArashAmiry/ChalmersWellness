@@ -18,11 +18,11 @@ import java.util.ResourceBundle;
 
 public final class WorkoutController extends AnchorPane implements Initializable {
 
-    private WorkoutModel workoutModel;
-    private CreateWorkoutController createWorkoutView;
-    private TodayWorkoutController todayWorkoutView;
-    private ExerciseSearchController exerciseSearchController;
-    private ManageWorkoutController manageWorkoutView;
+    private final WorkoutModel workoutModel;
+    private final CreateWorkoutController createWorkoutView;
+    private final TodayWorkoutController todayWorkoutView;
+    private final ExerciseSearchController exerciseSearchController;
+    private final ManageWorkoutController manageWorkoutView;
     @FXML private AnchorPane anchorPaneSearch;
     @FXML private AnchorPane mainContent;
     @FXML private Button addedWorkoutsBtn;

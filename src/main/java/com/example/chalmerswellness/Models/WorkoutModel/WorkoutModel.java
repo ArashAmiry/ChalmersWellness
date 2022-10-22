@@ -9,14 +9,15 @@ import com.example.chalmerswellness.Interfaces.Observer;
 import com.example.chalmerswellness.Models.Services.WorkoutServices.WorkoutService;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class WorkoutModel implements Observable {
     private List<Observer> observers = new ArrayList<>();
-    private WorkoutService workoutService;
+    private WorkoutService workoutService = WorkoutService.getInstance();
     private List<Exercise> exercises;
 
     public WorkoutModel(){
-        workoutService = WorkoutService.getInstance();
+        //workoutService = WorkoutService.getInstance();
         exercises = getExercises();
     }
 
@@ -52,8 +53,9 @@ public class WorkoutModel implements Observable {
      */
     public List<Exercise> searchExercises(String exerciseName){
         List<Exercise> searchResult = new ArrayList<>();
+        String searchString = exerciseName.toLowerCase(Locale.ROOT).replaceAll("\\s+","");
         for (Exercise exercise: exercises) {
-            if(exercise.getName().toLowerCase().replaceAll("\\s+","").contains(exerciseName.toLowerCase().replaceAll("\\s+","")))
+            if(exercise.getName().toLowerCase(Locale.ROOT).replaceAll("\\s+","").contains(searchString))
                 searchResult.add(exercise);
         }
 
@@ -102,7 +104,7 @@ public class WorkoutModel implements Observable {
         List<ExerciseItem> completedExercises = new ArrayList<>();
 
         for (ExerciseItem exerciseItem: exerciseItems) {
-            if(exerciseItem.getIsDone()){
+            if(exerciseItem.isDone()){
                 completedExercises.add(0,exerciseItem);
             }else{
                 sortedList.add(0, exerciseItem);

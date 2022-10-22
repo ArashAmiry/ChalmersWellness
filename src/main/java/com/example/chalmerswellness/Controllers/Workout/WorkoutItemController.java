@@ -13,8 +13,8 @@ import java.util.ResourceBundle;
 
 public class WorkoutItemController extends AnchorPane implements Initializable{
 
-    private Workout workoutItem;
-    private WorkoutModel model;
+    private final Workout workoutItem;
+    private final WorkoutModel model;
     @FXML
     Label workoutNameLabel;
 

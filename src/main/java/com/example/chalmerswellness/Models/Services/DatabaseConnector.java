@@ -1,12 +1,10 @@
 package com.example.chalmerswellness.Models.Services;
 
-import com.example.chalmerswellness.CodeLogger;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
 
 public class DatabaseConnector {
     private static String dbPath;
@@ -40,7 +38,7 @@ public class DatabaseConnector {
             conn = DriverManager.getConnection(url);
             conn.createStatement().execute("PRAGMA foreign_keys = ON");
         } catch (SQLException e) {
-            CodeLogger.log(Level.WARNING, "Could not connect to database", e);
+            System.out.println(e);
         }
         return conn;
     }
@@ -70,7 +68,7 @@ public class DatabaseConnector {
              Statement stmt = conn.createStatement()) {
             stmt.execute(sql);
         } catch (SQLException e) {
-            CodeLogger.log(Level.WARNING, "Table was not created", e);
+            System.out.println(e);
         }
     }
 
@@ -90,7 +88,7 @@ public class DatabaseConnector {
              Statement stmt = conn.createStatement()) {
             stmt.execute(sql);
         } catch (SQLException e) {
-            CodeLogger.log(Level.WARNING, "Table was not created", e);
+            System.out.println(e);
         }
     }
 
@@ -104,7 +102,7 @@ public class DatabaseConnector {
              Statement stmt = conn.createStatement()) {
             stmt.execute(sql);
         } catch (SQLException e) {
-            CodeLogger.log(Level.WARNING, "Table was not created", e);
+            System.out.println(e);
         }
     }
 
@@ -124,7 +122,7 @@ public class DatabaseConnector {
              Statement stmt = conn.createStatement()) {
             stmt.execute(sql);
         } catch (SQLException e) {
-            CodeLogger.log(Level.WARNING, "Table was not created", e);
+            System.out.println(e);
         }
     }
 
@@ -141,7 +139,7 @@ public class DatabaseConnector {
              Statement stmt = conn.createStatement()) {
             stmt.execute(sql);
         } catch (SQLException e) {
-            CodeLogger.log(Level.WARNING, "Table was not created", e);
+            System.out.println(e);
         }
     }
 
@@ -160,7 +158,7 @@ public class DatabaseConnector {
              Statement stmt = conn.createStatement()) {
             stmt.execute(sql);
         } catch (SQLException e) {
-            CodeLogger.log(Level.WARNING, "Table was not created", e);
+            System.out.println(e);
         }
     }
 
@@ -178,7 +176,7 @@ public class DatabaseConnector {
              Statement stmt = conn.createStatement()) {
             stmt.execute(sql);
         } catch (SQLException e) {
-            CodeLogger.log(Level.WARNING, "Table was not created", e);
+            System.out.println(e);
         }
     }
 
@@ -201,7 +199,7 @@ public class DatabaseConnector {
              Statement stmt = conn.createStatement()) {
             stmt.execute(sql);
         } catch (SQLException e) {
-            CodeLogger.log(Level.WARNING, "Table was not created", e);
+            System.out.println(e);
         }
     }
 }

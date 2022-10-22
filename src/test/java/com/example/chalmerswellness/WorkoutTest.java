@@ -14,7 +14,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -99,7 +98,7 @@ class WorkoutTest {
     @Test
     void testGetExercises() {
         List<Exercise> exercises = model.getExercises();
-        Assertions.assertTrue(exercises.size() != 0);
+        Assertions.assertFalse(exercises.isEmpty());
     }
 
     @Test
@@ -111,7 +110,7 @@ class WorkoutTest {
         model.addExerciseToActiveWorkout(new ExerciseItem(exercise));
         exerciseItems = model.getTodayCompletedExercises();
 
-        Assertions.assertTrue(exerciseItems.size() != 0);
+        Assertions.assertNotEquals(0, exerciseItems.size());
     }
 
     @Test
@@ -170,28 +169,28 @@ class WorkoutTest {
         Workout basicWorkout = setupBasicWorkout();
         model.addWorkout(basicWorkout);
         List<Workout> workouts = model.getSavedWorkouts();
-        Assertions.assertTrue(workouts.size() != 0);
+        Assertions.assertNotEquals(0, workouts.size());
     }
 
     @Test
-    void TestIsDone() {
+    void testIsDone() {
         List<ExerciseItem> completedExercises = model.getTodayCompletedExercises();
         Assertions.assertEquals(0, completedExercises.size());
 
         ExerciseItem exerciseItem = new ExerciseItem(model.getExercises().get(0));
-        Assertions.assertFalse(exerciseItem.getIsDone());
+        Assertions.assertFalse(exerciseItem.isDone());
         exerciseItem.setDone(true);
         model.addExerciseToActiveWorkout(exerciseItem);
         completedExercises = model.getTodayCompletedExercises();
         exerciseItem = completedExercises.get(0);
-        Assertions.assertTrue(exerciseItem.getIsDone());
+        Assertions.assertTrue(exerciseItem.isDone());
     }
 
     @Test
     void testAddWorkout() {
         Workout basicWorkout = setupBasicWorkout();
         model.addWorkout(basicWorkout);
-        var workoutName = basicWorkout.getWorkoutName();
+        String workoutName = basicWorkout.getWorkoutName();
 
         List<Workout> workouts = model.getSavedWorkouts();
         Assertions.assertEquals(workoutName, workouts.get(0).getWorkoutName());

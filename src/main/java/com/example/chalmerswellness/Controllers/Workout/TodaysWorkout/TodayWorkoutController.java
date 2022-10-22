@@ -18,7 +18,7 @@ import java.util.ResourceBundle;
 
 public class TodayWorkoutController extends AnchorPane implements Observer, IWorkoutController, Initializable {
     private WorkoutModel model;
-    private AnchorPane mainRoot;
+    private final AnchorPane mainRoot;
     @FXML private ListView exerciseList;
     @FXML private Label noResult;
 

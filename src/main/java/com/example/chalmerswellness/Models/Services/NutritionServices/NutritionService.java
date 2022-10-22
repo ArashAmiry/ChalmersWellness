@@ -12,7 +12,7 @@ public final class NutritionService {
         repository = repositoryType;
     }
 
-    private static NutritionService nutritionService = null;
+    private static NutritionService nutritionService;
 
     public static void createInstance(IDatabaseNutritionRepository repositoryType){
         if (nutritionService == null) {

@@ -16,7 +16,7 @@ import java.util.ResourceBundle;
 public class ExerciseItemController extends AnchorPane implements Initializable{
 
     private final WorkoutModel model;
-    private ExerciseItem exerciseItem;
+    private final ExerciseItem exerciseItem;
     private final AnchorPane anchorPane;
     @FXML private Label setsAmount;
     @FXML private Button doneBtn;
@@ -61,7 +61,7 @@ public class ExerciseItemController extends AnchorPane implements Initializable{
     }
 
     private void completedItem(){
-        if(exerciseItem.getIsDone()){
+        if(exerciseItem.isDone()){
             this.setStyle("-fx-background-color: #CBFFB7");
             doneBtn.setVisible(true);
         } else {
@@ -70,7 +70,7 @@ public class ExerciseItemController extends AnchorPane implements Initializable{
     }
 
     @FXML private void markAsDone(){
-        if(!exerciseItem.getIsDone()){
+        if(!exerciseItem.isDone()){
             exerciseItem.setDone(true);
         } else {
             exerciseItem.setDone(false);

@@ -1,7 +1,5 @@
 package com.example.chalmerswellness.Models.Services;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -11,13 +9,13 @@ import java.util.Properties;
 public class FileHandler {
 
     public static String getDbUrl(boolean useActualDb) {
-        Properties p = new Properties();
+        Properties properties = new Properties();
         try{
             InputStream is = Files.newInputStream(Paths.get("src/main/resources/dbConfig.txt"));
-            p.load(is);
+            properties.load(is);
 
-            var dbUrl = p.getProperty("dbUrl");
-            var testDbUrl = p.getProperty("testDbUrl");
+            var dbUrl = properties.getProperty("dbUrl");
+            var testDbUrl = properties.getProperty("testDbUrl");
 
             if(useActualDb){
                 return dbUrl;
@@ -25,8 +23,6 @@ public class FileHandler {
                 return testDbUrl;
             }
 
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

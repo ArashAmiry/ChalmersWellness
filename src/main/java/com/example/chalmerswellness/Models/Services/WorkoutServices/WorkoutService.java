@@ -8,10 +8,9 @@ import java.time.LocalDate;
 import java.util.List;
 
 public final class WorkoutService {
-    private static WorkoutService single_instance = null;
+    private static WorkoutService workoutService;
     private final IDatabaseWorkoutRepository repository;
-    private WorkoutService(IDatabaseWorkoutRepository workoutRepository)
-    {
+    private WorkoutService(IDatabaseWorkoutRepository workoutRepository){
         repository = workoutRepository;
     }
 
@@ -21,32 +20,27 @@ public final class WorkoutService {
         }
     }
 
-    public static WorkoutService getInstance()
-    {
+    public static WorkoutService getInstance(){
         return workoutService;
     }
 
-    public List<ExerciseItem> getCompletedExercises()
-    {
+    public List<ExerciseItem> getCompletedExercises(){
         return repository.getCompletedExercises();
     }
 
-    public List<ExerciseItem> getCompletedExercises(LocalDate date, int userId)
-    {
+    public List<ExerciseItem> getCompletedExercises(LocalDate date, int userId){
         return repository.getCompletedExercises(date, userId);
     }
 
-    public ExerciseItem insertCompletedExercise(ExerciseItem exerciseItem) {
+    public ExerciseItem insertCompletedExercise(ExerciseItem exerciseItem){
         return repository.insertCompletedExercise(exerciseItem);
     }
 
-    public void removeCompletedExercise(ExerciseItem exerciseItem)
-    {
+    public void removeCompletedExercise(ExerciseItem exerciseItem){
         repository.deleteCompletedExercise(exerciseItem);
     }
 
-    public List<Exercise> getExercises()
-    {
+    public List<Exercise> getExercises(){
         return repository.getExercises();
     }
 

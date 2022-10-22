@@ -4,7 +4,6 @@ import com.example.chalmerswellness.Enums.Gender;
 import com.example.chalmerswellness.Models.AccountModel.LoggedInUser;
 import com.example.chalmerswellness.Models.Services.DbConnectionService;
 import com.example.chalmerswellness.Models.ObjectModels.User;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -48,13 +47,13 @@ public class DatabaseFriendRepository implements IDatabaseFriendRepository{
         }
     }
 
-    public void removeFollow(int following_id){
+    public void removeFollow(int followingId){
         String sql = "DELETE FROM friend WHERE follower_id = ? AND following_id = ?";
 
         try (Connection conn = DbConnectionService.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, LoggedInUser.getInstance().getId());
-            pstmt.setInt(2, following_id);
+            pstmt.setInt(2, followingId);
             pstmt.executeUpdate();
 
         } catch (SQLException e) {

@@ -70,7 +70,7 @@ public class DatabaseNutritionRepository implements IDatabaseNutritionRepository
             }
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println(e.getMessage());
         }
 
         return total;
@@ -91,7 +91,7 @@ public class DatabaseNutritionRepository implements IDatabaseNutritionRepository
             }
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println(e.getMessage());
         }
 
         return total;
@@ -112,7 +112,7 @@ public class DatabaseNutritionRepository implements IDatabaseNutritionRepository
             }
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println(e.getMessage());
         }
 
         return total;
@@ -142,7 +142,7 @@ public class DatabaseNutritionRepository implements IDatabaseNutritionRepository
             }
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println(e.getMessage());
         }
 
         return foods;

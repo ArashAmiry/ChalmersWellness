@@ -12,7 +12,7 @@ public final class UserService {
         repository = repositoryType;
     }
 
-    private static UserService userService = null;
+    private static UserService userService;
 
     public static void createInstance(IDatabaseUserRepository repositoryType){
         if(userService == null){
@@ -29,7 +29,6 @@ public final class UserService {
         repository.insertUser(user);
     }
 
-    //TODO must change!
     public void updateUser(int id, String username, String password, String firstName, String lastName, Gender gender, String email, LocalDate birthDate, int height, double weight) {
         repository.updateUser(id, username, password, firstName, lastName, gender, email, birthDate, height, weight);
     }

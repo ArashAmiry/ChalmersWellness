@@ -15,7 +15,7 @@ import java.util.ResourceBundle;
 
 
 public class CreateExerciseItemController extends AnchorPane implements Initializable{
-    private ExerciseItem exerciseItem;
+    private final ExerciseItem exerciseItem;
     @FXML private TextField setsField;
     @FXML
     Label exerciseName, errorLabel;
@@ -53,7 +53,7 @@ public class CreateExerciseItemController extends AnchorPane implements Initiali
         try {
             this.exerciseItem.setPlannedSetsCount(Integer.parseInt(setsField.getText()));
         }catch (NumberFormatException nfe){
-            throw new NumberFormatException();
+            System.out.println(nfe.getMessage());
         }
     }
 

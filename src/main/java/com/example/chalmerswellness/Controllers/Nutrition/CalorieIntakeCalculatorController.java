@@ -1,7 +1,6 @@
 package com.example.chalmerswellness.Controllers.Nutrition;
 
 import com.example.chalmerswellness.Enums.Gender;
-import com.example.chalmerswellness.Interfaces.Observer;
 import com.example.chalmerswellness.Models.AccountModel.LoggedInUser;
 import com.example.chalmerswellness.Models.FoodModel.CalorieCalculator;
 import com.example.chalmerswellness.Models.ObjectModels.User;
@@ -14,11 +13,9 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
-import java.util.logging.Level;
 
 public class CalorieIntakeCalculatorController extends AnchorPane implements Initializable{
     @FXML
@@ -54,7 +51,6 @@ public class CalorieIntakeCalculatorController extends AnchorPane implements Ini
         try {
             fxmlLoader.load();
         } catch (IOException exception) {
-            CodeLogger.log(Level.WARNING, "Fxml could not load", exception);
             throw new RuntimeException(exception);
         }
 
