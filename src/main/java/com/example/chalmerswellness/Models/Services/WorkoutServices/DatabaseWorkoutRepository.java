@@ -339,17 +339,6 @@ public class DatabaseWorkoutRepository implements IDatabaseWorkoutRepository {
         }
     }
 
-    public void deleteTodaysCompletedExercises() {
-        String sql = "DELETE FROM completed_exercise WHERE insert_date = CURRENT_DATE";
-
-        try (Connection conn = DbConnectionService.connect();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
     public void deleteSavedWorkout(Workout workout) {
         String sql = "DELETE FROM created_workout WHERE id = ?";
         try (Connection conn = DbConnectionService.connect();
