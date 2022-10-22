@@ -6,13 +6,13 @@ import com.example.chalmerswellness.Enums.Meal;
 import java.util.List;
 
 public final class NutritionService {
-    private IDatabaseNutritionRepository repository;
+    private final IDatabaseNutritionRepository repository;
     private NutritionService(IDatabaseNutritionRepository repositoryType)
     {
         repository = repositoryType;
     }
 
-    private static NutritionService nutritionService = null;
+    private static NutritionService nutritionService;
 
     public static void createInstance(IDatabaseNutritionRepository repositoryType){
         if (nutritionService == null) {
@@ -48,5 +48,5 @@ public final class NutritionService {
     public double getTodaysFat() {
         return repository.getTodaysFat();
     }
-    
+
 }

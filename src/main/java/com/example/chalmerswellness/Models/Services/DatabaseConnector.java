@@ -38,7 +38,7 @@ public class DatabaseConnector {
             conn = DriverManager.getConnection(url);
             conn.createStatement().execute("PRAGMA foreign_keys = ON");
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e);
         }
         return conn;
     }
@@ -68,7 +68,7 @@ public class DatabaseConnector {
              Statement stmt = conn.createStatement()) {
             stmt.execute(sql);
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e);
         }
     }
 
@@ -88,7 +88,7 @@ public class DatabaseConnector {
              Statement stmt = conn.createStatement()) {
             stmt.execute(sql);
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e);
         }
     }
 
@@ -102,7 +102,7 @@ public class DatabaseConnector {
              Statement stmt = conn.createStatement()) {
             stmt.execute(sql);
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e);
         }
     }
 
@@ -122,7 +122,7 @@ public class DatabaseConnector {
              Statement stmt = conn.createStatement()) {
             stmt.execute(sql);
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e);
         }
     }
 
@@ -139,7 +139,7 @@ public class DatabaseConnector {
              Statement stmt = conn.createStatement()) {
             stmt.execute(sql);
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e);
         }
     }
 
@@ -158,7 +158,7 @@ public class DatabaseConnector {
              Statement stmt = conn.createStatement()) {
             stmt.execute(sql);
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e);
         }
     }
 
@@ -176,7 +176,7 @@ public class DatabaseConnector {
              Statement stmt = conn.createStatement()) {
             stmt.execute(sql);
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e);
         }
     }
 
@@ -199,7 +199,7 @@ public class DatabaseConnector {
              Statement stmt = conn.createStatement()) {
             stmt.execute(sql);
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e);
         }
     }
 }

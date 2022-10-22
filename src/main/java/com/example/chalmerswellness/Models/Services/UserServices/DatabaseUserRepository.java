@@ -56,7 +56,7 @@ public class DatabaseUserRepository implements IDatabaseUserRepository {
             preparedStatement.setInt(10, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println(e.getMessage());
         }
     }
 
@@ -89,11 +89,17 @@ public class DatabaseUserRepository implements IDatabaseUserRepository {
         return user;
     }
 
-    private User getUserFromRow(User user, PreparedStatement preparedStatement) throws SQLException {
-        ResultSet rs = preparedStatement.executeQuery();
-        if (rs.next()) {
-            user = new User(rs.getInt("id"), rs.getString("username"), rs.getString("password"), rs.getString("firstName"), rs.getString("lastName"), Gender.valueOf(rs.getString("gender")), rs.getString("email"), rs.getInt("height"),rs.getDate("birthDate").toLocalDate(), rs.getDouble("weight"), rs.getInt("calorieGoal"), rs.getDouble("weightGoal"));
-        }
+    private User getUserFromRow(User user, PreparedStatement preparedStatement) {
+        try {
+            ResultSet rs = null;
+            rs = preparedStatement.executeQuery();
+
+            if (rs.next()) {
+                user = new User(rs.getInt("id"), rs.getString("username"), rs.getString("password"), rs.getString("firstName"), rs.getString("lastName"), Gender.valueOf(rs.getString("gender")), rs.getString("email"), rs.getInt("height"),rs.getDate("birthDate").toLocalDate(), rs.getDouble("weight"), rs.getInt("calorieGoal"), rs.getDouble("weightGoal"));
+            }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
         return user;
     }
 

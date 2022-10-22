@@ -15,7 +15,7 @@ import java.util.ResourceBundle;
 
 
 public class CreateExerciseItemController extends AnchorPane implements Initializable{
-    private ExerciseItem exerciseItem;
+    private final ExerciseItem exerciseItem;
     @FXML private TextField setsField;
     @FXML
     Label exerciseName, errorLabel;
@@ -36,14 +36,13 @@ public class CreateExerciseItemController extends AnchorPane implements Initiali
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
-        setsField.textProperty().set(this.exerciseItem.getSetsCount() + "");
     }
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1){
         setName();
         hideErrorLabel();
-
+        setsField.textProperty().set(String.valueOf(exerciseItem.getSetsCount()));
     }
 
     private void setName(){
@@ -54,7 +53,7 @@ public class CreateExerciseItemController extends AnchorPane implements Initiali
         try {
             this.exerciseItem.setPlannedSetsCount(Integer.parseInt(setsField.getText()));
         }catch (NumberFormatException nfe){
-            throw new NumberFormatException();
+            System.out.println(nfe.getMessage());
         }
     }
 

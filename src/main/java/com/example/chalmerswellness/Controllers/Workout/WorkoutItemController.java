@@ -13,8 +13,8 @@ import java.util.ResourceBundle;
 
 public class WorkoutItemController extends AnchorPane implements Initializable{
 
-    private Workout workoutItem;
-    private WorkoutModel model;
+    private final Workout workoutItem;
+    private final WorkoutModel model;
     @FXML
     Label workoutNameLabel;
 
@@ -46,8 +46,8 @@ public class WorkoutItemController extends AnchorPane implements Initializable{
         model.addExercisesFromWorkout(workoutItem);
     }
 
-    @FXML private void EditWorkout(){
-        WorkoutController.getInstance().openCreatedWorkout(workoutItem);
+    @FXML private void editWorkout(){
+        WorkoutController.getWorkoutController().openCreatedWorkout(workoutItem);
         model.removeWorkout(workoutItem);
     }
 

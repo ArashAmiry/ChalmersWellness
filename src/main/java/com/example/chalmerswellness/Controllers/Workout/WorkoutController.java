@@ -5,6 +5,7 @@ import com.example.chalmerswellness.Controllers.Workout.ManageWorkout.ManageWork
 import com.example.chalmerswellness.Controllers.Workout.SearchPane.ExerciseSearchController;
 import com.example.chalmerswellness.Controllers.Workout.TodaysWorkout.TodayWorkoutController;
 import com.example.chalmerswellness.Controllers.Workout.TodaysWorkout.WorkoutListController;
+import com.example.chalmerswellness.Models.ObjectModels.ExerciseItem;
 import com.example.chalmerswellness.Models.WorkoutModel.WorkoutModel;
 import com.example.chalmerswellness.Models.ObjectModels.Workout;
 import javafx.fxml.FXML;
@@ -18,16 +19,16 @@ import java.util.ResourceBundle;
 
 public final class WorkoutController extends AnchorPane implements Initializable {
 
-    private WorkoutModel workoutModel;
-    private CreateWorkoutController createWorkoutView;
-    private TodayWorkoutController todayWorkoutView;
-    private ExerciseSearchController exerciseSearchController;
-    private ManageWorkoutController manageWorkoutView;
+    private final WorkoutModel workoutModel;
+    private final CreateWorkoutController createWorkoutView;
+    private final TodayWorkoutController todayWorkoutView;
+    private final ExerciseSearchController exerciseSearchController;
+    private final ManageWorkoutController manageWorkoutView;
     @FXML private AnchorPane anchorPaneSearch;
     @FXML private AnchorPane mainContent;
     @FXML private Button addedWorkoutsBtn;
 
-    private static final WorkoutController instance = new WorkoutController();
+    private static final WorkoutController WORKOUTCONTROLLER = new WorkoutController();
 
     private WorkoutController(){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/WorkoutView.fxml"));
@@ -59,11 +60,10 @@ public final class WorkoutController extends AnchorPane implements Initializable
     @FXML void openWorkoutTab(){
         exerciseSearchController.changeController(todayWorkoutView);
         setTabTo(todayWorkoutView);
-        addedWorkoutsBtn.setVisible(true);
     }
 
-    public static WorkoutController getInstance(){
-        return instance;
+    public static WorkoutController getWorkoutController(){
+        return WORKOUTCONTROLLER;
     }
 
 
@@ -80,8 +80,8 @@ public final class WorkoutController extends AnchorPane implements Initializable
 
     private void displaySavedWorkout(Workout workout) {
         createWorkoutView.clearExercises();
-        for (var exercise : workout.getExercises()) {
-            createWorkoutView.addExercise(exercise);
+        for (ExerciseItem exerciseItem : workout.getExercises()) {
+            createWorkoutView.addExercise(exerciseItem);
         }
         createWorkoutView.setWorkoutName(workout.getWorkoutName());
         workoutModel.removeWorkout(workout);
@@ -97,7 +97,6 @@ public final class WorkoutController extends AnchorPane implements Initializable
     }
 
     private void setTabTo(AnchorPane pane){
-        addedWorkoutsBtn.setVisible(false);
         mainContent.getChildren().clear();
         mainContent.getChildren().add(pane);
     }

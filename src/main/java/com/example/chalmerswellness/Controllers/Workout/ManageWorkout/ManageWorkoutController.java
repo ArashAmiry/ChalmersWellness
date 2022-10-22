@@ -41,22 +41,26 @@ public class ManageWorkoutController extends AnchorPane implements Observer {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
+    }
+
+    @FXML
+    public void initialize(){
         populateWorkoutList();
     }
 
     void populateWorkoutList(){
         workoutsList.clear();
-        for (var workout : model.getSavedWorkouts() ){
+        for (Workout workout : model.getSavedWorkouts() ){
             workoutsList.add(new WorkoutItemController(workout, model));
         }
         workoutList.getItems().setAll(workoutsList);
     }
 
-    void updateExerciseList(List<ExerciseItem> exercises){
+    void updateExerciseList(List<ExerciseItem> exerciseItems){
         exercisesList.clear();
 
-        for (var exercise: exercises) {
-            ExerciseItemController exerciseController = new ExerciseItemController(exercise, model, this);
+        for (ExerciseItem exerciseItem: exerciseItems) {
+            ExerciseItemController exerciseController = new ExerciseItemController(exerciseItem, model, this);
             exercisesList.add(exerciseController);
         }
         workoutList.getItems().setAll(exercisesList);
@@ -64,7 +68,7 @@ public class ManageWorkoutController extends AnchorPane implements Observer {
 
     void updateWorkoutList(List<Workout> workouts){
         workoutsList.clear();
-        for (var workout : workouts){
+        for (Workout workout : workouts){
             workoutsList.add(new WorkoutItemController(workout, model));
         }
         workoutList.getItems().setAll(workoutsList);
@@ -79,6 +83,5 @@ public class ManageWorkoutController extends AnchorPane implements Observer {
     public void update(Observable observable) {
         model = (WorkoutModel) observable;
         updateWorkoutList(model.getSavedWorkouts());
-        //updateExerciseList(exercises);
     }
 }

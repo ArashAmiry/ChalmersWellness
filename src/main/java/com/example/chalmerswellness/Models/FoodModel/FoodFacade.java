@@ -161,7 +161,7 @@ public class FoodFacade implements Observable {
      */
     @Override
     public void notifyObservers() {
-        for (var observer: observers) {
+        for (Observer observer: observers) {
             observer.update(this);
         }
     }

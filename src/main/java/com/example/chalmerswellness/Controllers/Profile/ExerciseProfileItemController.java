@@ -16,13 +16,13 @@ import java.util.ResourceBundle;
 
 public class ExerciseProfileItemController extends AnchorPane implements Initializable{
 
-    private ExerciseItem exerciseItem;
+    private final ExerciseItem exerciseItem;
 
     @FXML private Label setsAmount;
     @FXML private Button doneBtn;
     @FXML private Label exerciseName;
 
-    private AnchorPane parent;
+    private final AnchorPane parent;
 
     public ExerciseProfileItemController(ExerciseItem exerciseItem, AnchorPane parent){
         this.exerciseItem = exerciseItem;

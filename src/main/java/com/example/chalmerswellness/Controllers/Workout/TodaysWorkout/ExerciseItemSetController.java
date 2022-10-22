@@ -16,11 +16,11 @@ import java.util.ResourceBundle;
 
 public class ExerciseItemSetController extends AnchorPane implements Initializable {
 
-    private WorkoutModel model;
-    private ExerciseItemSet exerciseItemSet;
-    private ExerciseItem exerciseItem;
-    private int setNumber;
-    private boolean editable;
+    private final WorkoutModel model;
+    private final ExerciseItemSet exerciseItemSet;
+    private final ExerciseItem exerciseItem;
+    private final int setNumber;
+    private final boolean editable;
     @FXML private Label exerciseName;
     @FXML private Label setLabel;
     @FXML private TextField weightField;

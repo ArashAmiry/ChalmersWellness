@@ -4,9 +4,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<fx:root fx:id="mainRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1460.0" stylesheets="@../css/workout.css" type="AnchorPane" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fx:id="mainRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1460.0" stylesheets="@../css/workout.css" type="AnchorPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button fx:id="addedWorkoutsBtn" layoutX="914.0" layoutY="43.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="178.0" text="Workouts">
+      <Button fx:id="addedWorkoutsBtn" layoutX="152.0" layoutY="43.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="178.0" text="Manage Workouts">
          <font>
             <Font size="18.0" />
          </font>
@@ -22,12 +22,7 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <Button layoutX="160.0" layoutY="43.0" mnemonicParsing="false" onMouseClicked="#openCreateWorkoutTab" prefHeight="51.0" prefWidth="178.0" text="Create Workout">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
-      <Button layoutX="354.0" layoutY="43.0" mnemonicParsing="false" onMouseClicked="#openManageWorkoutTab" prefHeight="51.0" prefWidth="178.0" text="Manage Workouts">
+      <Button layoutX="339.0" layoutY="43.0" mnemonicParsing="false" onMouseClicked="#openCreateWorkoutTab" prefHeight="51.0" prefWidth="178.0" text="Create Workout">
          <font>
             <Font size="18.0" />
          </font>

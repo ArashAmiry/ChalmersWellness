@@ -1,9 +1,7 @@
 package com.example.chalmerswellness.Models.AccountModel;
 
-import com.example.chalmerswellness.Models.AccountModel.LoggedInUser;
 import com.example.chalmerswellness.Models.Services.FriendServices.FriendService;
 import com.example.chalmerswellness.Models.ObjectModels.User;
-
 import java.util.List;
 
 public class FriendSearcher {

@@ -9,7 +9,7 @@ import java.net.URL;
 
 public class QuotesAPIConnector {
     private static final int HTTP_OK = 200;
-    private static final int timeout = 1000;
+    private static final int TIMEOUT = 1000;
 
     public String getRandomQuoteAsStringFromAPI(final String query){
         BufferedReader reader;
@@ -21,8 +21,8 @@ public class QuotesAPIConnector {
 
             final HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
-            connection.setConnectTimeout(timeout);
-            connection.setReadTimeout(timeout);
+            connection.setConnectTimeout(TIMEOUT);
+            connection.setReadTimeout(TIMEOUT);
             connection.connect();
 
             final int responseCode = connection.getResponseCode();

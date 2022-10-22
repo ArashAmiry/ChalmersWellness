@@ -6,16 +6,16 @@ import com.example.chalmerswellness.Models.ObjectModels.User;
 import java.time.LocalDate;
 
 public final class UserService {
-    private IDatabaseUserRepository repository;
+    private final IDatabaseUserRepository repository;
     private UserService(IDatabaseUserRepository repositoryType)
     {
         repository = repositoryType;
     }
 
-    private static UserService userService = null;
+    private static UserService userService;
 
     public static void createInstance(IDatabaseUserRepository repositoryType){
-        if (userService == null) {
+        if(userService == null){
             userService = new UserService(repositoryType);
         }
     }
@@ -29,7 +29,6 @@ public final class UserService {
         repository.insertUser(user);
     }
 
-    //TODO must change!
     public void updateUser(int id, String username, String password, String firstName, String lastName, Gender gender, String email, LocalDate birthDate, int height, double weight) {
         repository.updateUser(id, username, password, firstName, lastName, gender, email, birthDate, height, weight);
     }

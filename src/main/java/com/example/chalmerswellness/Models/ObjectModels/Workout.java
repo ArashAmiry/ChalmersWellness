@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Workout {
-    //TODO: ID is never set
     private int id;
     private String workoutName;
     private List<ExerciseItem> exercises = new ArrayList<>();

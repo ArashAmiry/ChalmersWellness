@@ -17,6 +17,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class AddSetsController extends AnchorPane implements Initializable, Observer {
@@ -73,7 +74,7 @@ public class AddSetsController extends AnchorPane implements Initializable, Obse
     private void updateSets(){
         setsList.clear();
 
-        var sets = exerciseItem.getSets();
+        List<ExerciseItemSet> sets = exerciseItem.getSets();
         for (ExerciseItemSet set: sets) {
             ExerciseItemSetController setsController = new ExerciseItemSetController(model, exerciseItem, set, editable);
             setsList.add(setsController);
