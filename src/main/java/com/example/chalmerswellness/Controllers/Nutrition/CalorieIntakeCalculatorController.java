@@ -13,6 +13,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.LinkedHashMap;
@@ -68,8 +69,7 @@ public class CalorieIntakeCalculatorController extends AnchorPane implements Ini
         radioButtonFastPace.setUserData(1000);
 
         for (Map.Entry<String, Double> entry : activityLevels.entrySet()) {
-            String key = entry.getKey();
-            activityComboBox.getItems().add(key);
+            activityComboBox.getItems().add(entry.getKey());
         }
     }
 

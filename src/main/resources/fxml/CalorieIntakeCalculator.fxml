@@ -55,6 +55,6 @@
             <Font size="30.0" />
          </font>
       </RadioButton>
-      <ComboBox fx:id="activityComboBox" layoutX="388.0" layoutY="344.0" prefHeight="40.0" prefWidth="302.0" />
+      <ComboBox fx:id="activityComboBox" layoutX="388.0" layoutY="344.0" prefHeight="40.0" prefWidth="302.0" styleClass="activityComboBox" />
    </children>
 </fx:root>

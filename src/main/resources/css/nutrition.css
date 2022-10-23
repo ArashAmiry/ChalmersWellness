@@ -38,3 +38,7 @@
 .nutritionFact{
     -fx-font-family: Koulen;
 }
+
+.activityComboBox {
+    -fx-font-size: 25px;
+}
