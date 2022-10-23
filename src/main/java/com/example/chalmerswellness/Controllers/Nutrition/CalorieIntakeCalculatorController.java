@@ -15,7 +15,9 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 import java.net.URL;
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.ResourceBundle;
 
 public class CalorieIntakeCalculatorController extends AnchorPane implements Initializable{
     @FXML
@@ -33,13 +35,14 @@ public class CalorieIntakeCalculatorController extends AnchorPane implements Ini
             activityLevels.put("Very active", 1.9);
         }
     }
+
     @FXML
     private ComboBox<String> activityComboBox;
     @FXML
     private TextField weightGoalTextField;
     @FXML
     private AnchorPane rootPane;
-    private ToggleGroup paceGroup = new ToggleGroup();
+    private final ToggleGroup paceGroup = new ToggleGroup();
     private final UserService userService = UserService.getInstance();
 
     public CalorieIntakeCalculatorController() {
