@@ -145,6 +145,12 @@ class WorkoutTest {
     }
 
     @Test
+    void testDbConnectionGetInstance() {
+        DbConnectionService dbConnectionService = DbConnectionService.getInstance();
+        Assertions.assertNotNull(dbConnectionService);
+    }
+
+    @Test
     void testAddExercisesFromWorkout() {
         Workout workout = setupBasicWorkout();
         model.addExercisesFromWorkout(workout);
