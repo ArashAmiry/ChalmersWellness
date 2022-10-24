@@ -65,7 +65,7 @@ public class FoodFacade implements Observable {
     public boolean isFoodExisting(String foodName) throws JsonProcessingException {
         try {
             Food food = getFood(foodName);
-            return food.getName().equals(foodName);
+            return food.getName().equals(foodName.toLowerCase());
         }catch (JSONException e){
             return false;
         }
