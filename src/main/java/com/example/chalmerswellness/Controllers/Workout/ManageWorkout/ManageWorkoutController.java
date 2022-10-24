@@ -74,11 +74,6 @@ public class ManageWorkoutController extends AnchorPane implements Observer {
         workoutList.getItems().setAll(workoutsList);
     }
 
-
-    public void openManageModal(Workout workout){
-       mainPane.getChildren().add(new ManageWorkoutModalController(model, workout, mainPane));
-    }
-
     @Override
     public void update(Observable observable) {
         model = (WorkoutModel) observable;

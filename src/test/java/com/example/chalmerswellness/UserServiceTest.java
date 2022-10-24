@@ -17,7 +17,7 @@ import java.time.LocalDate;
 class UserServiceTest {
 
     private static UserService userService;
-    private User user;
+    private static User user;
     @BeforeAll
     static void setup() {
         DbConnectionService.createInstance(false);
@@ -26,7 +26,7 @@ class UserServiceTest {
 
     @BeforeEach
     void setupEach() {
-        final DatabaseConnector dbConnector = new DatabaseConnector();
+        DatabaseConnector dbConnector = new DatabaseConnector();
         userService = UserService.getInstance();
         userService.insertUser(new User("username", "password", "firstName", "lastName", Gender.MALE, "email", LocalDate.now(),1, 1));
         LoggedInUser.createInstance(userService.getUser("username", "password"));
