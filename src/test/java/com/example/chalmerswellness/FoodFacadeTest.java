@@ -69,6 +69,12 @@ class FoodFacadeTest {
     }
 
     @Test
+    void addFoodEatenShouldAddFoodToDatabase() throws JsonProcessingException {
+        foodFacade.addFoodEaten(String.valueOf(100), "Apple", Meal.BREAKFAST);
+        Assertions.assertTrue(foodFacade.getConsumedProteinToday() > 0);
+    }
+
+    @Test
     void removeFoodShouldRemoveFoodFromDatabase() throws JsonProcessingException {
         int appleId = nutritionService.getTodaysNutrition(Meal.BREAKFAST).get(0).getId();
         foodFacade.removeFood(appleId);
