@@ -49,17 +49,17 @@ class FoodFacadeTest {
     }
 
     @Test
-    void getConsumedProteinTodayShouldReturnProteinConsumedToday() throws JsonProcessingException {
+    void getConsumedProteinTodayShouldReturnProteinConsumedToday() {
         Assertions.assertTrue(foodFacade.getConsumedProteinToday() > 0);
     }
 
     @Test
-    void getConsumedCarbsTodayShouldReturnCarbsConsumedToday() throws JsonProcessingException {
+    void getConsumedCarbsTodayShouldReturnCarbsConsumedToday() {
         Assertions.assertTrue(foodFacade.getConsumedCarbsToday() > 0);
     }
 
     @Test
-    void getConsumedFatTodayShouldReturnFatConsumedToday() throws JsonProcessingException {
+    void getConsumedFatTodayShouldReturnFatConsumedToday() {
         Assertions.assertTrue(foodFacade.getConsumedFatToday() > 0);
     }
 
@@ -75,7 +75,7 @@ class FoodFacadeTest {
     }
 
     @Test
-    void removeFoodShouldRemoveFoodFromDatabase() throws JsonProcessingException {
+    void removeFoodShouldRemoveFoodFromDatabase() {
         int appleId = nutritionService.getTodaysNutrition(Meal.BREAKFAST).get(0).getId();
         foodFacade.removeFood(appleId);
         Assertions.assertEquals(0, nutritionService.getTodaysNutrition(Meal.BREAKFAST).size());
@@ -92,12 +92,12 @@ class FoodFacadeTest {
     }
 
     @Test
-    void getTodaysCaloriesShouldReturnCaloriesConsumedToday() throws JsonProcessingException {
+    void getTodaysCaloriesShouldReturnCaloriesConsumedToday() {
         Assertions.assertTrue(foodFacade.getTodaysCalories() > 0);
     }
 
     @Test
-    void caloriesLeftTodayShouldReturnCaloriesLeftToday() throws JsonProcessingException {
+    void caloriesLeftTodayShouldReturnCaloriesLeftToday() {
         nutritionService.removeNutrition(nutritionService.getTodaysNutrition(Meal.BREAKFAST).get(0).getId());
         userService.setCalorieGoal(loggedInUser.getId(), 1000);
         LoggedInUser.updateInstance(userService.getUser(loggedInUser.getId()));
@@ -105,14 +105,14 @@ class FoodFacadeTest {
     }
 
     @Test
-    void caloriesLeftTodayShouldReturnZeroIfCaloriesLeftIsNegative() throws JsonProcessingException {
+    void caloriesLeftTodayShouldReturnZeroIfCaloriesLeftIsNegative() {
         userService.setCalorieGoal(loggedInUser.getId(), 1);
         LoggedInUser.updateInstance(userService.getUser(loggedInUser.getId()));
         Assertions.assertEquals(0, foodFacade.caloriesLeftToday());
     }
 
     @Test
-    void caloriesEatenInPercentageShouldReturnPercentageOfCaloriesEaten() throws JsonProcessingException {
+    void caloriesEatenInPercentageShouldReturnPercentageOfCaloriesEaten() {
         userService.setCalorieGoal(loggedInUser.getId(), 1000);
         LoggedInUser.updateInstance(userService.getUser(loggedInUser.getId()));
         Assertions.assertTrue(foodFacade.caloriesEatenInPercentage() > 0);
