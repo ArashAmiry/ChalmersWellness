@@ -8,6 +8,12 @@ import java.util.Properties;
 
 public class FileHandler {
 
+    /**
+     * This method fetches the path to the database through a config file "dbConfig.txt".
+     * <p>
+     * @param useActualDb This decides if an actual database will be used or a test database.
+     * @return String This returns an url to the database
+     */
     public static String getDbUrl(boolean useActualDb) {
         Properties properties = new Properties();
         try{

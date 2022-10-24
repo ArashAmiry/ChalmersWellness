@@ -8,11 +8,21 @@ public final class DbConnectionService {
     private static String dbPath;
     private static DbConnectionService dbConnectionService;
 
+    /**
+     * This constructor fetches the url to the database.
+     * <p>
+     * @param useActualDb This decides if an actual database will be used or a test database.
+     */
     private DbConnectionService(boolean useActualDb)
     {
         dbPath = FileHandler.getDbUrl(useActualDb);
     }
 
+    /**
+     * This method creates an instance of the DbConnectionService.
+     * <p>
+     * @param useActualDb This decides if an actual database will be used or a test database.
+     */
     public static void createInstance(boolean useActualDb){
         if(dbConnectionService == null){
             dbConnectionService = new DbConnectionService(useActualDb);
@@ -21,6 +31,11 @@ public final class DbConnectionService {
         }
     }
 
+    /**
+     * This method fetches a created instance of the DbConnectionService
+     * <p>
+     * @return DbConnectionService the created DbConnectionService
+     */
     public static DbConnectionService getInstance() {
         if (dbConnectionService != null) {
             return dbConnectionService;
@@ -29,6 +44,11 @@ public final class DbConnectionService {
         }
     }
 
+    /**
+     * This method connects to the database through dbPath.
+     * <p>
+     * @return Connection the connection to the database
+     */
     public static Connection connect() {
         String url = "jdbc:sqlite:" + dbPath;
         Connection conn = null;
