@@ -20,6 +20,11 @@ public class WorkoutModel implements Observable {
         exercises = getExercises();
     }
 
+    /**
+     * This method gets all the saved workouts from the service.
+     * <p>
+     * @return This returns a list of saved workouts.
+     */
     public List<Workout> getSavedWorkouts(){
         return workoutService.getWorkouts();
     }
@@ -27,24 +32,18 @@ public class WorkoutModel implements Observable {
     /**
      * This method inserts a exerciseItem to the database.
      * <p>
-     * @param  exercise  an exercise that will be used to insert to database
+     * @param exercise an exercise that will be used to insert to database
      */
     public void addExerciseToActiveWorkout(ExerciseItem exercise){
         workoutService.insertCompletedExercise(exercise);
         notifyObservers();
     }
 
-    /*public void addExerciseToWorkout(Exercise exercise){
-        ExerciseItem newExerciseItem = new ExerciseItem(exercise);
-        addedWorkoutExercises.add(newExerciseItem);
-        notifyObservers();
-    }*/
-
     /**
      * This method searches through a list of exercises to find matching exercises with similar names.
      * <p>
-     * @param exerciseName
-     * @return List<Exercise> This returns a list of exercises
+     * @param exerciseName This is the name the method will try to find in the exercises list.
+     * @return searchResult This returns a list of exercises
      */
     public List<Exercise> searchExercises(String exerciseName){
         List<Exercise> searchResult = new ArrayList<>();
@@ -57,11 +56,22 @@ public class WorkoutModel implements Observable {
         return searchResult;
     }
 
+    /**
+     * This method updates an exerciseItem in the service with the new data.
+     * <p>
+     * @param exerciseItem This is the item that will be updated in the service.
+     */
     public void updateCompletedExercise(ExerciseItem exerciseItem){
         workoutService.updateCompletedExercise(exerciseItem);
         notifyObservers();
     }
 
+    /**
+     * This method removes an exerciseItemSet from the exerciseItem and updates the exerciseItem in the service.
+     * <p>
+     * @param exerciseItem the item that will be updated.
+     * @param set the item that will be removed from the exerciseItem.
+     */
     public void removeSet(ExerciseItem exerciseItem, ExerciseItemSet set){
         exerciseItem.getSets().remove(set);
         updateCompletedExercise(exerciseItem);
@@ -71,7 +81,7 @@ public class WorkoutModel implements Observable {
     /**
      * This method is used to get all the exercises that is stored in the workoutService repository.
      * <p>
-     * @return List<Exercise> This returns a list of all exercises from the service.
+     * @return This returns a list of all exercises from the service.
      */
     public List<Exercise> getExercises(){
         return workoutService.getExercises();
@@ -80,7 +90,7 @@ public class WorkoutModel implements Observable {
     /**
      * This method is used to get all the completed exercises for the day in a sorted list.
      * <p>
-     * @return List<ExerciseItem> This returns a list of sorted exerciseItems for the day.
+     * @return This returns a list of sorted exerciseItems for the day.
      */
     public List<ExerciseItem> getTodayCompletedExercises(){
         List<ExerciseItem> completedExercises = workoutService.getCompletedExercises();
@@ -120,12 +130,21 @@ public class WorkoutModel implements Observable {
         notifyObservers();
     }
 
+    /**
+     * This method adds a workout to be stored.
+     * <p>
+     * @param workout the object that is saved.
+     */
     public void addWorkout(Workout workout){
-        //addedWorkoutExercises.clear();
         workoutService.insertWorkout(workout);
         notifyObservers();
     }
 
+    /**
+     * This method removes a workout from the service.
+     * <p>
+     * @param workout the object to be removed
+     */
     public void removeWorkout(Workout workout){
         workoutService.deleteSavedWorkout(workout);
         notifyObservers();
@@ -142,6 +161,10 @@ public class WorkoutModel implements Observable {
         notifyObservers();
     }
 
+    /**
+     * This method notifies all observers that a change has occurred.
+     * <p>
+     */
     @Override
     public void notifyObservers() {
         for (Observer observer: observers) {
@@ -149,6 +172,10 @@ public class WorkoutModel implements Observable {
         }
     }
 
+    /**
+     * This method adds an observer to be subscribed to the model.
+     * <p>
+     */
     @Override
     public void subscribe(Observer observer) {
         observers.add(observer);

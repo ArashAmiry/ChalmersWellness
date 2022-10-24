@@ -14,6 +14,10 @@ import java.util.List;
 
 public class DatabaseWorkoutRepository implements IDatabaseWorkoutRepository {
 
+    /**
+     * This method fetches all the exercises in the database.
+     * @return all the exercises in the database.
+     */
     public List<Exercise> getExercises() {
         String sql = "SELECT * FROM exercise";
         List<Exercise> exercises = new ArrayList<>();
@@ -41,6 +45,10 @@ public class DatabaseWorkoutRepository implements IDatabaseWorkoutRepository {
         return exercises;
     }
 
+    /**
+     * This method fetches all the completed exercises in the database.
+     * @return a list of all the exerciseItems in the database.
+     */
     public List<ExerciseItem> getCompletedExercises() {
         String sql = "SELECT * FROM completed_exercise WHERE insert_date = CURRENT_DATE AND user_id = ?";
         List<ExerciseItem> exerciseItems = new ArrayList<>();
@@ -69,6 +77,12 @@ public class DatabaseWorkoutRepository implements IDatabaseWorkoutRepository {
         return exerciseItems;
     }
 
+    /**
+     * This method fetches all the completed exercises in the database for a certain date and user
+     * @param date is when the exercise was completed
+     * @param userId id of the user
+     * @return a list of all the exerciseItems in the database for a certain date.
+     */
     public List<ExerciseItem> getCompletedExercises(LocalDate date, int userId) {
         String sql = "SELECT * FROM completed_exercise WHERE insert_date = ? AND user_id = ?";
         List<ExerciseItem> exerciseItems = new ArrayList<>();
@@ -99,6 +113,10 @@ public class DatabaseWorkoutRepository implements IDatabaseWorkoutRepository {
         return exerciseItems;
     }
 
+    /**
+     * This method fetches all the created workouts.
+     * @return a list of all the created workouts in the database.
+     */
     public List<Workout> getWorkouts(){
         String sql = "SELECT * FROM created_workout WHERE user_id = ?";
         List<Workout> workouts = new ArrayList<>();
@@ -123,6 +141,10 @@ public class DatabaseWorkoutRepository implements IDatabaseWorkoutRepository {
         return workouts;
     }
 
+    /**
+     * This method inserts a exerciseItem as a completed exercise.
+     * @return ExerciseItem that was just inserted
+     */
     public ExerciseItem insertCompletedExercise(ExerciseItem exercise){
         String sql = "INSERT INTO completed_exercise(exercise_id, user_id, is_done, planned_sets) VALUES(?,?,?,?)";
         int generatedKey = 0;
@@ -146,12 +168,20 @@ public class DatabaseWorkoutRepository implements IDatabaseWorkoutRepository {
         return new ExerciseItem(generatedKey, exercise);
     }
 
+    /**
+     * This method inserts a list of exerciseItems that was completed.
+     * @param exercises the exerciseItems that will be inserted into the database
+     */
     public void insertCompletedExercises(List<ExerciseItem> exercises){
         for (ExerciseItem exerciseItem: exercises) {
             insertCompletedExercise(exerciseItem);
         }
     }
 
+    /**
+     * This method inserts a workout to the database.
+     * @param workout is inserted to the database
+     */
     public void insertWorkout(Workout workout) {
         String sql = "INSERT INTO created_workout(workoutName, user_id) VALUES(?,?)";
 
@@ -173,6 +203,10 @@ public class DatabaseWorkoutRepository implements IDatabaseWorkoutRepository {
         }
     }
 
+    /**
+     * This method updates an exerciseItem
+     * @param exerciseItem is the item that will be updated in the database.
+     */
     public void updateCompletedExercise(ExerciseItem exerciseItem){
         String sql = "UPDATE completed_exercise SET is_done = ? WHERE id = ?";
         int exerciseItemId = exerciseItem.getExerciseItemId();
@@ -189,8 +223,10 @@ public class DatabaseWorkoutRepository implements IDatabaseWorkoutRepository {
         }
     }
 
-
-
+    /**
+     * This method deletes an exerciseItem from the database
+     * @param exercise is the exerciseItem that will be removed.
+     */
     public void deleteCompletedExercise(ExerciseItem exercise) {
         String sql = "DELETE FROM completed_exercise WHERE id = ?";
 
@@ -203,6 +239,12 @@ public class DatabaseWorkoutRepository implements IDatabaseWorkoutRepository {
         }
     }
 
+    /**
+     * This method fetches all the completed sets from a specific exerciseItem by id.
+     * <p>
+     * @param exerciseItemId is the id where the sets are associated with.
+     * @return List<ExerciseItemSet>
+     */
     private List<ExerciseItemSet> getCompletedSets(int exerciseItemId) {
         String sql = "SELECT * FROM completed_set WHERE completed_exercise_id = ?";
         List<ExerciseItemSet> sets = new ArrayList<>();
@@ -225,6 +267,12 @@ public class DatabaseWorkoutRepository implements IDatabaseWorkoutRepository {
         return sets;
     }
 
+    /**
+     * This method fetches an exercise by id.
+     * <p>
+     * @param exerciseId is the id of the exercise.
+     * @return Exercise
+     */
     private static Exercise getExercise(int exerciseId) throws SQLException {
         String sql = "SELECT * FROM exercise WHERE id = ?";
 
@@ -248,6 +296,11 @@ public class DatabaseWorkoutRepository implements IDatabaseWorkoutRepository {
         }
     }
 
+    /**
+     * This method removes all the completed sets for a specific exercise by id.
+     * <p>
+     * @param exerciseId is the id of the exercise.
+     */
     private static void removeCompletedSets(int exerciseId){
         String sql = "DELETE FROM completed_set WHERE completed_exercise_id = ?";
 
@@ -260,6 +313,12 @@ public class DatabaseWorkoutRepository implements IDatabaseWorkoutRepository {
         }
     }
 
+    /**
+     * This method updates an exercise with the list of sets.
+     * <p>
+     * @param exerciseId is the id of the exercise.
+     * @param sets is the list of sets that will be used to update the exercise.
+     */
     private void updateCompletedSets(int exerciseId, List<ExerciseItemSet> sets){
         String sql = "INSERT INTO completed_set VALUES(?,?,?,?)";
         removeCompletedSets(exerciseId);
@@ -278,6 +337,10 @@ public class DatabaseWorkoutRepository implements IDatabaseWorkoutRepository {
         }
     }
 
+    /**
+     * This method inserts a list of exercises to the database.
+     * @param exercises is the list of all the exercises that will be added to the database.
+     */
     public void insertExercises(List<Exercise> exercises) {
         String sql = "INSERT INTO exercise(exerciseName, exerciseType, exerciseMuscle, exerciseEquipment, exerciseDifficulty, exerciseInstructions) VALUES(?,?,?,?,?,?)";
 
@@ -299,6 +362,12 @@ public class DatabaseWorkoutRepository implements IDatabaseWorkoutRepository {
         }
     }
 
+    /**
+     * This method fetches all the exerciseItems that is associated with that workout id.
+     * <p>
+     * @param workoutId is the id of the workout.
+     * @return List<ExerciseItem> the exerciseItems on the workout.
+     */
     private List<ExerciseItem> getWorkoutExercises(int workoutId) throws SQLException {
         String sql = "SELECT * FROM workout_exercise WHERE workout_id = ?";
 
@@ -323,6 +392,12 @@ public class DatabaseWorkoutRepository implements IDatabaseWorkoutRepository {
         return exercises;
     }
 
+    /**
+     * This method inserts exerciseItems into a workout with a specific id.
+     * <p>
+     * @param exercises is the exerciseItems that will be added to the workout.
+     * @param id of the workout.
+     */
     private void insertWorkoutExercises(List<ExerciseItem> exercises, int id) {
         String sql = "INSERT INTO workout_exercise(exercise_id, workout_id, sets_count) VALUES(?,?,?)";
         try (Connection conn = DbConnectionService.connect();
@@ -339,6 +414,10 @@ public class DatabaseWorkoutRepository implements IDatabaseWorkoutRepository {
         }
     }
 
+    /**
+     * This method removes a workout from the database.
+     * @param workout is to be removed.
+     */
     public void deleteSavedWorkout(Workout workout) {
         String sql = "DELETE FROM created_workout WHERE id = ?";
         try (Connection conn = DbConnectionService.connect();
